@@ -1,5 +1,5 @@
-# Your Project's Title...
-Your project's description...
+# Blue Shield of California
+Microsites for BSC
 
 ## Environments
 - Preview: https://main--blueshieldca--aemsites.aem.page/
