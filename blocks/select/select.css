@@ -1,0 +1,28 @@
+main .select-container select {
+  height: 3rem;
+  min-width: 3rem;
+  padding: 0 1rem;
+  margin: 0;
+  width: 100%;
+  border: 2px solid var(--link-color);
+  background-color: var(--bakcground-color);
+  border-radius: 4px;
+  font-size: var(--body-font-size-s);
+  display: block;
+}
+
+main .select-container .select-wrapper {
+  width: fit-content;
+  position: relative;
+}
+
+.select .select-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 9px;
+  height: 7px;
+  background: url("/icons/down-arrow.png") no-repeat;
+  background-size: contain;
+}

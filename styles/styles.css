@@ -16,8 +16,8 @@
   --light-color: #f8f8f8;
   --dark-color: #505050;
   --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --link-color: #0071bc;
+  --link-hover-color: #003456;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
@@ -25,7 +25,7 @@
 
   /* body sizes */
   --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
+  --body-font-size-s: 1.25rem;
   --body-font-size-xs: 17px;
 
   /* heading sizes */

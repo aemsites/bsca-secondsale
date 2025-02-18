@@ -3,35 +3,39 @@
   padding: 0;
 }
 
-.hero {
-  position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+.hero.block {
+  max-width: 100%;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+.hero.block > div > div {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
 }
 
-.hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+.hero.block h1 {
+  width: 50%;
+  margin: 0;
+  font-size: var(--heading-font-size-m);
 }
 
-.hero img {
-  object-fit: cover;
+.hero.block picture {
+  width: 50%;
+}
+
+.hero.block img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 @media (width >= 900px) {
   .hero {
     padding: 40px 32px;
+  }
+
+  .hero.block h1 {
+    font-size: var(--heading-font-size-xl);
   }
 }

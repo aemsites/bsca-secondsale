@@ -1,9 +1,11 @@
 /* header and nav layout */
+
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
-  z-index: 2;
-  position: fixed;
+  box-shadow: 0 0 7px rgb(0 0 0 / 40%);
+  position: relative; /* Ensures the shadow shows over content below */
+  z-index: 100;
 }
 
 header nav {
