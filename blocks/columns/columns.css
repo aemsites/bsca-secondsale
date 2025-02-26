@@ -19,7 +19,19 @@
   display: block;
 }
 
-@media (width >= 900px) {
+.columns.columns-2-cols > div > .columns-img-col img {
+  border-radius: var(--border-radius-xl);
+}
+
+.columns.columns-2-cols > div p {
+  font-size: var(--body-font-size-s);
+}
+
+.columns.columns-2-cols > div p strong {
+  font-size: var(--body-font-size-m);
+}
+
+@media (width >= 768px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;

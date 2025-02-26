@@ -1,1 +1,20 @@
-/* stylelint-disable no-empty-source */
+@media (min-width: 768px) {
+  .fragment-wrapper .two-col {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .fragment-wrapper .two-col > div {
+    padding-left: var(--spacing-m);
+    padding-right: var(--spacing-m);
+    padding-bottom: var(--spacing-l);
+  }
+
+  .fragment-wrapper > .two-col > div:first-child {
+    width: 67%;
+  }
+
+  .fragment-wrapper > .two-col > div:nth-child(2) {
+    width: 33%;
+  }
+}

@@ -7,9 +7,19 @@ export default function decorate(block) {
     const li = document.createElement('li');
     while (row.firstElementChild) li.append(row.firstElementChild);
     [...li.children].forEach((div) => {
+      const link = div.querySelector('a[href]');
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
+      else if (div.children.length === 1 && div.querySelector('p')) div.className = 'cards-card-title';
       else div.className = 'cards-card-body';
+      if (link) {
+        const a = document.createElement('a');
+        a.href = link.href;
+        link.parentNode.remove();
+        a.append(div);
+        li.append(a);
+      }
     });
+
     ul.append(li);
   });
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
