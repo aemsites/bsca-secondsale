@@ -1,0 +1,18 @@
+.banner-wrapper {
+  max-width: unset!important;
+  border-bottom: 1px solid #ededed;
+  text-align: center;
+}
+
+.banner.block h5 {
+  margin-top: var(--spacing-s);
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--body-font-size-l);
+  font-weight: 700;
+}
+
+.banner.block p {
+  margin-top: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--body-font-size-s);
+}

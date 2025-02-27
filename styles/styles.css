@@ -56,6 +56,7 @@
   --border-radius-xl: 24px;
 
   /* spacing */
+  --spacing-xs: .25rem;
   --spacing-s: .5rem;
   --spacing-m: .75rem;
   --spacing-l: 1rem;
