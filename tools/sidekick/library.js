@@ -1,6 +1,6 @@
 const library = document.createElement('sidekick-library');
 library.config = {
-  base: '/block-library/library.json',
+  base: '/tools/sidekick/library.json',
   plugins: {
     blocks: {
       viewPorts: [

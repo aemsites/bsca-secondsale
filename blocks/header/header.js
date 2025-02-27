@@ -149,20 +149,18 @@ export default async function decorate(block) {
   }
 
   // hamburger for mobile
-  if (navSections) {
-    const hamburger = document.createElement('div');
-    hamburger.classList.add('nav-hamburger');
-    if (navSections.children.length) {
-      hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-        <span class="nav-hamburger-icon"></span>
-      </button>`;
-    }
-    hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-    nav.append(hamburger);
-    nav.setAttribute('aria-expanded', 'false');
-    // prevent mobile nav behavior on window resize
-    toggleMenu(nav, navSections, isDesktop.matches);
+  const hamburger = document.createElement('div');
+  hamburger.classList.add('nav-hamburger');
+  if (navSections.children.length) {
+    hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+      <span class="nav-hamburger-icon"></span>
+    </button>`;
   }
+  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
+  nav.append(hamburger);
+  nav.setAttribute('aria-expanded', 'false');
+  // prevent mobile nav behavior on window resize
+  toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
   const navWrapper = document.createElement('div');

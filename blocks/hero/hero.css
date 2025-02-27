@@ -1,5 +1,5 @@
 .hero-container .hero-wrapper {
-  max-width: unset;
+  max-width: 1200px;
   padding: 0;
 }
 
@@ -30,11 +30,13 @@
   object-fit: cover;
 }
 
-@media (width >= 900px) {
-  .hero {
-    padding: 40px 32px;
+@media (min-width: 768px) {
+  .hero.block h1 {
+    font-size: var(--heading-font-size-l);
   }
+}
 
+@media (min-width: 992px) {
   .hero.block h1 {
     font-size: var(--heading-font-size-xl);
   }

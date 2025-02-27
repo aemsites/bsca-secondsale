@@ -4,7 +4,7 @@ header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
   box-shadow: 0 0 7px rgb(0 0 0 / 40%);
-  position: relative; /* Ensures the shadow shows over content below */
+  position: relative;
   z-index: 100;
 }
 
@@ -16,10 +16,10 @@ header nav {
     'sections sections sections' 1fr / auto 1fr auto;
   align-items: center;
   gap: 0 24px;
-  margin: auto;
+  /* margin: auto; */
   max-width: 1248px;
   height: var(--nav-height);
-  padding: 0 24px;
+  padding: 0 24px 0 0;
   font-family: var(--body-font-family);
 }
 
@@ -38,7 +38,7 @@ header nav[aria-expanded='true'] {
     justify-content: space-between;
     gap: 0 32px;
     max-width: 1264px;
-    padding: 0 32px;
+    padding: 0 32px 0 0;
   }
 
   header nav[aria-expanded='true'] {
@@ -146,9 +146,22 @@ header .nav-brand {
   line-height: 1;
 }
 
-header nav .nav-brand img {
+
+header nav .nav-brand picture img {
+  width: 164px;
+  height: auto;
+}
+
+header nav .nav-brand .icon img {
   width: 128px;
   height: auto;
+  padding-left: 100px;
+}
+
+header .nav-brand div:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 /* sections */
@@ -184,6 +197,14 @@ header nav .nav-sections ul > li > ul > li {
 }
 
 @media (width >= 900px) {
+  header nav .nav-brand picture img {
+    width: 219px;
+  }
+
+  header nav .nav-brand .icon img {
+    padding-left: 124px;
+  }
+
   header nav .nav-sections {
     display: block;
     visibility: visible;

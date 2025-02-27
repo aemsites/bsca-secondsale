@@ -1,0 +1,32 @@
+// Add slider styles
+.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-color);
+  width: 100%;
+  height: auto;
+}
+
+.slider > div {
+  border: 1px solid var(--dark-color);
+  padding: 0 var(--spacing-m);
+  width: auto;
+  min-height: 250px;
+  height: auto;
+  display: none;
+}
+
+.slider > div:first-of-type {
+  display: block;
+}
+
+.slider > div > a {
+  text-decoration: none;
+  color: var(--body-font-color);
+}
+
+.slider > span.slider-arrow {
+  float: right;
+  padding: var(--spacing-s);
+}

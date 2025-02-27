@@ -1,3 +1,17 @@
+.fragment-wrapper .shaded {
+  background-color: var(--shade-color);
+  padding: var(--spacing-m);
+  margin-bottom: 12px;
+  min-width: 250px;
+}
+
+.fragment-wrapper .shadow-box {
+  box-shadow: 0 0 10px rgba(0 0 0 / 10%);
+  padding: var(--spacing-m);
+  margin-bottom: 12px;
+  min-width: 250px;
+}
+
 @media (min-width: 768px) {
   .fragment-wrapper .two-col {
     display: flex;
@@ -16,5 +30,21 @@
 
   .fragment-wrapper > .two-col > div:nth-child(2) {
     width: 33%;
+  }
+}
+
+@media (min-width: 900px) {
+  .fragment-wrapper:has(.three-col) {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-m);
+  }
+
+  .fragment-wrapper > .three-col {
+    width: 40%;
+  }
+
+  .fragment-wrapper > .three-col:nth-child(2) {
+    width: 20%;
   }
 }

@@ -2,7 +2,7 @@ main .select-container select {
   height: 3rem;
   min-width: 3rem;
   padding: 0 1rem;
-  margin: 0;
+  margin: 1rem 0;
   width: 100%;
   border: 2px solid var(--link-color);
   background-color: var(--bakcground-color);
