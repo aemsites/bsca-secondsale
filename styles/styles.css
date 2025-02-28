@@ -22,8 +22,8 @@
   --grey-color: #6a6a6a;
 
   /* fonts */
-  --body-font-family: fieldwork_geo_light, roboto-fallback, sans-serif;
-  --heading-font-family: fieldwork_geo_light, roboto-condensed-fallback, sans-serif;
+  --body-font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif;
+  --heading-font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif;
 
   /* body sizes */
   --body-font-size-xl: 1.6rem;
@@ -64,13 +64,7 @@
 
 /* fallback fonts */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: roboto-fallback;
+  font-family: fieldwork-geo-light-fallback;
   size-adjust: 99.529%;
   src: local('Arial');
 }

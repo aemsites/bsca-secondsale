@@ -29,4 +29,5 @@
 .slider > span.slider-arrow {
   float: right;
   padding: var(--spacing-s);
+  cursor: pointer;
 }

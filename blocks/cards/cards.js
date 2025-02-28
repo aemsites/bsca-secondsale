@@ -7,14 +7,18 @@ export default function decorate(block) {
     const li = document.createElement('li');
     while (row.firstElementChild) li.append(row.firstElementChild);
     [...li.children].forEach((div) => {
-      const link = div.querySelector('a[href]');
+      const link = div.querySelectorAll('a[href]');
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
       else if (div.children.length === 1 && div.querySelector('p')) div.className = 'cards-card-title';
       else div.className = 'cards-card-body';
-      if (link) {
+      if (link.length > 1) {
+        link.forEach((a) => {
+
+        });
+      } else if (link) {
         const a = document.createElement('a');
-        a.href = link.href;
-        link.parentNode.remove();
+        a.href = link[0].href;
+        link[0].parentNode.remove();
         a.append(div);
         li.append(a);
       }
