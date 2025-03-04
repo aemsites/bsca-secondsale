@@ -22,7 +22,6 @@ export default async function decorate(block) {
   });
   let currentSlide = 0;
 
-
   const rightArrow = document.createElement('span');
   rightArrow.textContent = '→';
   rightArrow.classList.add('slider-arrow');
