@@ -13,7 +13,11 @@ export default function decorate(block) {
       else div.className = 'cards-card-body';
       if (link.length > 1) {
         link.forEach((a) => {
-
+          const divClone = div.cloneNode(true);
+          a.append(divClone);
+          const liClone = li.cloneNode(true);
+          liClone.append(a);
+          ul.append(liClone);
         });
       } else if (link) {
         const a = document.createElement('a');
