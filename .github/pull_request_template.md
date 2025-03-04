@@ -3,5 +3,5 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main--blueshieldca--aemsites.aem.live/
-- After: https://<branch>--blueshieldca--aemsites.aem.live/
+- Before: https://main--blueshieldca--aemsites.aem.live/group/
+- After: https://<branch>--blueshieldca--aemsites.aem.live/group/
