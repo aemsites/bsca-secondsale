@@ -30,6 +30,9 @@
   overflow: auto;
   transition: background-color 0.2s;
   background-color: var(--shade-color);
+  font-size: var(--heading-font-size-s);
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
 }
 
 .accordion details[open] summary {
