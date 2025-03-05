@@ -1,9 +1,9 @@
 # Blue Shield of California
-Microsites for BSC
+Second Sale Microsites for BSCA
 
 ## Environments
-- Preview: https://main--blueshieldca--aemsites.aem.page/
-- Live: https://main--blueshieldca--aemsites.aem.live/
+- Preview: https://main--bsca-secondsale--aemsites.aem.page/group/
+- Live: https://main--bsca-secondsale--aemsites.aem.live/group/
 
 ## Documentation
 
