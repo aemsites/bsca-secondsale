@@ -224,7 +224,7 @@ a.button.secondary,
 button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
-  color: var(--text-color);
+  color: var(--link-color);
 }
 
 .square-button a.button {
