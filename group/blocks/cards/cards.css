@@ -37,8 +37,22 @@
   color: var(--text-color);
 }
 
+.cards.icons > ul > li > a {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
 .cards.three-cards > ul > li > a:hover {
   text-decoration: none;
+}
+
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 .cards.three-cards > ul > li > img {
@@ -68,14 +82,6 @@
   display: flex;
   cursor: pointer;
   margin-bottom: var(--spacing-s);
-}
-
-.cards.icons > ul > li > a {
-  display: block;
-  width: 100%;
-  padding: 16px;
-  color: var(--text-color);
-  text-decoration: none;
 }
 
 .cards.icons > ul > li > a:hover {
@@ -109,12 +115,6 @@
   display: inline-block;
   width: 48px;
   height: 48px;}
-
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
 
 .cards.icons .icon img {
   object-fit: contain;
