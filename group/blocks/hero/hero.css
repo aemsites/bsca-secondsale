@@ -30,13 +30,13 @@
   object-fit: cover;
 }
 
-@media (min-width: 768px) {
+@media (width >= 600px) {
   .hero.block h1 {
     font-size: var(--heading-font-size-l);
   }
 }
 
-@media (min-width: 992px) {
+@media (width >= 900px) {
   .hero.block h1 {
     font-size: var(--heading-font-size-xl);
   }

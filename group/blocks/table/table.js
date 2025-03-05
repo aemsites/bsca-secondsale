@@ -5,6 +5,7 @@
  */
 
 function buildCell(rowIndex, double) {
+  // eslint-disable-next-line no-param-reassign
   if (double && rowIndex === 1) rowIndex = 0;
   const cell = rowIndex ? document.createElement('td') : document.createElement('th');
   if (!rowIndex) cell.setAttribute('scope', 'col');

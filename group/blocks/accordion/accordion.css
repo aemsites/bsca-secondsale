@@ -3,15 +3,8 @@
 }
 
 .accordion details {
-  border-top-width:1px;
-  border-top-color:#1f688c;
-  border-bottom-width:1px;
-  border-bottom-color:#1f688c;
-  border-top-style:solid;
-  border-bottom-style:solid
-}
-
-.accordion details {
+  border-top: 1px solid #1f688c;
+  border-bottom: 1px solid #1f688c;
   margin-bottom: var(--spacing-xl);
   margin-top: var(--spacing-xl);
   padding: 1px 0;
