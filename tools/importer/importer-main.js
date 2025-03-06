@@ -232,11 +232,16 @@ function importPlanOptions(main, document) {
       sectionParent = section[1].parentNode.parentNode;
       heading = sectionParent.previousElementSibling;
     }
-    const cells = [['Columns (title, 4-5-3)']];
+    const cells = [['Columns (title, cols-4-5-2, bsc-plans)']];
     section.forEach((el) => {
       const costs = el.querySelector('.kgo-col:first-child .kgoui_html');
       costs.removeAttribute('class');
       costs.removeAttribute('id');
+      const planHeader = costs.querySelector('h2');
+      const newPlanHeader = document.createElement('h5');
+      newPlanHeader.append(planHeader.textContent);
+      planHeader.replaceWith(newPlanHeader);
+
       const highlights = el.querySelector('.kgo-col:nth-child(2) .kgoui_html');
       if (highlights) {
         highlights.removeAttribute('class');
@@ -257,7 +262,9 @@ function importPlanOptions(main, document) {
             linkDiv.append(bTag);
             newDiv.append(linkDiv);
           } else {
-            linkDiv.append(link.cloneNode(true));
+            const h6Button = document.createElement('h6');
+            h6Button.append(link.cloneNode(true));
+            linkDiv.append(h6Button);
             newDiv.append(linkDiv);
           }
           link.remove();
@@ -290,25 +297,31 @@ function importPharmacy(main, document) {
   if (section.length > 0) {
     sectionParent = section[0].parentNode.parentNode;
     heading = sectionParent.previousElementSibling;
-    const cells = [['Columns (3-6-3)']];
+    const cells = [['Columns (cols-3-6-3)']];
     section.forEach((el) => {
       const image = el.querySelector('.kgo-col:first-child img');
       const benefits = el.querySelector('.kgo-col:nth-child(2) .kgoui_html');
       benefits.removeAttribute('class');
       benefits.removeAttribute('id');
+      const benefitsHeader = benefits.querySelector('h2');
+      const newBenefitsHeader = document.createElement('h5');
+      newBenefitsHeader.append(benefitsHeader.textContent);
+      benefitsHeader.replaceWith(newBenefitsHeader);
+
       const ctas = el.querySelector('.kgo-col:nth-child(3)');
       if (ctas) {
         const links = ctas.querySelectorAll('a');
         const newDiv = document.createElement('div');
 
         links.forEach((link) => {
+
           link.removeAttribute('class');
           link.removeAttribute('id');
           const linkDiv = document.createElement('div');
           if (link.getAttribute('role') === 'button') {
-            const bTag = document.createElement('b');
-            bTag.append(link.cloneNode(true));
-            linkDiv.append(bTag);
+            const emTag = document.createElement('em');
+            emTag.append(link.cloneNode(true));
+            linkDiv.append(emTag);
             newDiv.append(linkDiv);
           } else {
             linkDiv.append(link.cloneNode(true));
