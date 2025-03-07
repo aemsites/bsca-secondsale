@@ -20,6 +20,17 @@
   display: block;
 }
 
+.columns.shaded > div {
+  align-items: stretch;
+}
+
+.columns.shaded > div > div {
+  background-color: var(--shade-color);
+  margin: var(--spacing-xl) var(--spacing-m);
+  padding: 0 var(--spacing-l) var(--spacing-l);
+  /* font-size: var(--body-font-size-l); */
+}
+
 .columns.columns-2-cols > div > .columns-img-col img {
   border-radius: var(--border-radius-xl);
 }
