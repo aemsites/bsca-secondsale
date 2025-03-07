@@ -85,7 +85,7 @@ function importList(main, document) {
       });
 
       // header isn't a h1 heading. instead prepending the div with the heading
-      const block = packageSection({}, cells);
+      const block = packageSection({}, cells, 'plan-updates');
       block.prepend(newHeader);
       el.replaceWith(block);
 

@@ -1,3 +1,7 @@
+.plan-updates .default-content-wrapper {
+    text-align: center;
+}
+
 .list.bsc-links {
     background-color: var(--shade-color);
     /* padding: 0 var(--spacing-l); */
