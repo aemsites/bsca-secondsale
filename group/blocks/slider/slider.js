@@ -22,14 +22,7 @@ export default async function decorate(block) {
   });
   let currentSlide = 0;
 
-  const rightArrow = document.createElement('span');
-  rightArrow.textContent = '→';
-  rightArrow.classList.add('slider-arrow');
-  rightArrow.addEventListener('click', () => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    updateSlider(slides, currentSlide);
-  });
-  block.appendChild(rightArrow);
+  const controls = document.createElement('span');
 
   const leftArrow = document.createElement('span');
   leftArrow.textContent = '←';
@@ -38,7 +31,18 @@ export default async function decorate(block) {
     currentSlide = (currentSlide - 1 + slides.length) % slides.length;
     updateSlider(slides, currentSlide);
   });
-  block.appendChild(leftArrow);
+  controls.appendChild(leftArrow);
+  block.appendChild(controls);
+
+  controls.classList.add('slider-controls');
+  const rightArrow = document.createElement('span');
+  rightArrow.textContent = '→';
+  rightArrow.classList.add('slider-arrow');
+  rightArrow.addEventListener('click', () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlider(slides, currentSlide);
+  });
+  controls.appendChild(rightArrow);
 
   updateSlider(slides, currentSlide);
 }
