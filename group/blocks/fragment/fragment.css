@@ -25,11 +25,11 @@
   }
 
   .fragment-wrapper > .two-col > div:first-child {
-    width: 67%;
+    width: 60%;
   }
 
   .fragment-wrapper > .two-col > div:nth-child(2) {
-    width: 33%;
+    width: 40%;
   }
 }
 
