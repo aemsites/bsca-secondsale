@@ -1,10 +1,22 @@
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
+  const colControls = [];
   block.classList.add(`columns-${cols.length}-cols`);
+  block.classList.forEach((className) => {
+    if (className.startsWith('cols-')) {
+      const columns = className.substring(5);
+      columns.split('-').forEach((col) => {
+        colControls.push(col);
+      });
+    }
+  });
 
   // setup image columns
   [...block.children].forEach((row) => {
+    let index = 0;
     [...row.children].forEach((col) => {
+      col.classList.add(`flex-${colControls[index]}`);
+      index += 1;
       const pic = col.querySelector('picture');
       if (pic) {
         const picWrapper = pic.closest('div');
