@@ -1,18 +1,27 @@
+/* Wrapper to arrange the slider and controls */
+.slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the arrows below */
+  width: 100%;
+}
+
 .slider {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--light-color);
   width: 100%;
   height: auto;
+  position: relative;
 }
 
 .slider > div {
   border: 1px solid var(--dark-color);
-  padding: 0 var(--spacing-m);
+  padding: var(--spacing-m);
   width: auto;
   min-height: 250px;
-  height: auto;
   display: none;
 }
 
@@ -25,8 +34,19 @@
   color: var(--body-font-color);
 }
 
-.slider > span.slider-arrow {
-  float: right;
+.slider > div:hover {
+ color: var(--link-color);
+}
+
+/* New styles for arrows below the slider */
+.slider > .slider-controls {
+  display: flex;
+  gap: var(--spacing-s);
+  margin-top: var(--spacing-m);
+}
+
+.slider .slider-controls .slider-arrow {
   padding: var(--spacing-s);
   cursor: pointer;
+  font-size: 1.5rem;
 }
