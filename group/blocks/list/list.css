@@ -4,7 +4,6 @@
 
 .list.bsc-links {
     background-color: var(--shade-color);
-    /* padding: 0 var(--spacing-l); */
     border-radius: var(--border-radius-l);
     border: 1px solid #1f688c;
     margin-bottom: var(--spacing-xxl);
@@ -20,12 +19,30 @@
     padding: var(--spacing-l) var(--spacing-l) 0;
 }
 
-.list.bsc-links > div > div > ul > li:not(:last-child) {
-    border-bottom: 1px solid #1f688c;
+.list.bsc-links ul:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list.bsc-links ul:nth-child(2) .icon{
+    width: 20px;
 }
 
 .list.bsc-links > div > div > ul > li:not(:first-child) {
     margin-top: var(--spacing-l);
+    border-bottom: 1px solid #1f688c;
+}
+
+.list.bsc-links > div > div > ul > li:hover {
+    color: var(--link-color);
+}
+
+.list.bsc-links ul:nth-child(2) li:nth-child(2){
+    margin-top: -1rem;
+}
+
+.list.bsc-links > div:not(:last-child) {
+    border-bottom: 1px solid #1f688c;
 }
 
 .list.bsc-links > div > div > ul > li > a {
@@ -38,10 +55,6 @@
     z-index: 1;
     color: var(--text-color);
     padding-left: var(--spacing-l)
-}
-
-.list.bsc-links > div > div > ul > li:hover {
-    color: var(--link-color);
 }
 
 .list.bsc-links > div > div > ul > li > a:hover {

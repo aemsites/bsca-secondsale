@@ -40,10 +40,8 @@ function packageSection(heading, cells, _style) {
 }
 
 function importList(main, document) {
-  const section = [...document.querySelectorAll('.kgoui_container_multicolumn > .kgo-container > .kgo-row')].filter((row) => {
-    const list = row.querySelectorAll('.kgoui_list');
-    return list.length > 0;
-  });
+  const section = [...document.querySelectorAll('.kgoui_container_multicolumn > .kgo-container > .kgo-row')]
+    .filter(row => row.textContent.trim() && row.querySelector('.kgoui_list'));
 
   if (section.length > 0) {
     
@@ -75,6 +73,18 @@ function importList(main, document) {
         const linkDesc = link.querySelector('.kgo-description');
         subItems.textContent = linkDesc.textContent;
         subList.append(subItems);
+        
+        const icon = link.querySelector('.kgo-action-icon');
+        if (icon) {
+          const linkIcon = document.createElement('li');
+          if(icon.classList.contains('kgo-action-icon-drilldown')) {
+            linkIcon.textContent = ':arrow:';
+          } else if (icon.classList.contains('kgo-action-icon-external')) {
+            linkIcon.textContent = ':new-tab:';
+          }
+          subList.append(linkIcon);
+        }
+        
         li.append(subList);
         link.replaceWith(newLink);
 
@@ -97,7 +107,6 @@ function importList(main, document) {
 }
 
 function importColumns(main, document) {
-
   let sectionDivs = document.querySelectorAll('.kgoui_container_multicolumn > .kgo-container > .kgo-row');
   if (sectionDivs.length === 0) {
     sectionDivs = document.querySelectorAll('.kgoui_container_responsive_column > .kgo-container > .kgo-row');
@@ -105,7 +114,7 @@ function importColumns(main, document) {
 
   const section = [...sectionDivs].filter((row) => {
     const list = row.querySelectorAll('.kgoui_list');
-    return list.length === 0;
+    return row.textContent.trim() && list.length === 0;
   });
 
   let sectionParent;
@@ -113,22 +122,32 @@ function importColumns(main, document) {
 
   if (section.length > 0) {
     sectionParent = section[0].parentNode.parentNode;
-    heading = sectionParent.previousElementSibling;
+    const previousElementSibling = sectionParent.previousElementSibling;
+    const header = previousElementSibling.querySelector('.kgo-hero-heading');
+    if (header && header.length > 0) {
+      heading = previousElementSibling;
+    }
     const cells = [['Columns (shaded)']];
     section.forEach((el) => {
       const colContents = el.querySelectorAll(".kgo-col-contents");
       colContents.forEach((col) => {
         const colTitle = col.querySelector('.kgo-title');
-        const updatedTitle = document.createElement('h4');
-        updatedTitle.textContent = colTitle.textContent;
-        colTitle.replaceWith(updatedTitle);
+        if (colTitle) {
+          const updatedTitle = document.createElement('h4');
+          updatedTitle.textContent = colTitle.textContent;
+          colTitle.replaceWith(updatedTitle);
+        }
       
       });
       cells.push(colContents);
     });
-
-    const block = packageSection(heading, cells);
-    heading.remove();
+    let block;
+    if (heading) {
+      block = packageSection(heading, cells);
+      heading.remove();
+    } else {
+      block = packageSection({}, cells);
+    }
     sectionParent.replaceWith(block);
   }
 }
