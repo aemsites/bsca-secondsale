@@ -56,3 +56,31 @@
 .tabs .tabs-panel[aria-hidden='true'] {
   display: none;
 }
+
+.tabs .tabs-panel ul {
+  background-color: var(--shade-color);
+  border-radius: var(--border-radius-l);
+  border: 1px solid var(--secondary-color);
+  margin-bottom: var(--spacing-xxl);
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.tabs .tabs-panel ul li {
+  position: relative;
+  padding: var(--spacing-l) var(--spacing-l);
+  cursor: pointer;
+}
+
+.tabs .tabs-panel ul > li:not(:last-child) {
+  border-bottom: 1px solid #1f688c;
+}
+
+.tabs .tabs-panel ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.tabs .tabs-panel ul li:hover a {
+  color: var(--link-color);
+}

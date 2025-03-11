@@ -310,3 +310,30 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+.icon svg,
+.icon img {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentcolor;
+  color: currentcolor;
+  vertical-align: unset;
+}
+
+a .icon-new-tab {
+  margin-inline-start: 1ch;
+}
+
+/* screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
