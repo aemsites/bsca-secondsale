@@ -232,7 +232,7 @@ function importPlanOptions(main, document) {
       sectionParent = section[1].parentNode.parentNode;
       heading = sectionParent.previousElementSibling;
     }
-    const cells = [['Columns (title, cols-4-5-2, bsc-plans)']];
+    const cells = [['Columns (title, cols-4-5-2, striped-rows)']];
     section.forEach((el) => {
       const costs = el.querySelector('.kgo-col:first-child .kgoui_html');
       costs.removeAttribute('class');

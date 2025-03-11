@@ -2,62 +2,63 @@
     text-align: center;
 }
 
-.list.bsc-links {
+.list.border {
     background-color: var(--shade-color);
     border-radius: var(--border-radius-l);
     border: 1px solid #1f688c;
     margin-bottom: var(--spacing-xxl);
 }
 
-.list.bsc-links ul {
+.list.border ul {
     list-style: none;
     padding-inline-start: 0;
 }
 
-.list.bsc-links > div > div > ul > li {
+.list.border > div > div > ul > li {
     position: relative;
     padding: var(--spacing-l) var(--spacing-l) 0;
 }
 
-.list.bsc-links ul:nth-child(2) {
+.list.border ul:nth-child(2) {
     display: flex;
     justify-content: space-between;
+    margin-top: var(--spacing-xxl);
 }
 
-.list.bsc-links ul:nth-child(2) .icon{
+.list.border ul:nth-child(2) .icon{
     width: 20px;
 }
 
-.list.bsc-links > div > div > ul > li:not(:first-child) {
+.list.border > div > div > ul > li:not(:first-child) {
     margin-top: var(--spacing-l);
     border-bottom: 1px solid #1f688c;
 }
 
-.list.bsc-links > div > div > ul > li:hover {
+.list.border > div > div > ul > li:has(a):hover {
     color: var(--link-color);
 }
 
-.list.bsc-links ul:nth-child(2) li:nth-child(2){
+.list.border ul:nth-child(2) li:nth-child(2){
     margin-top: -1rem;
 }
 
-.list.bsc-links > div:not(:last-child) {
+.list.border > div:not(:last-child) {
     border-bottom: 1px solid #1f688c;
 }
 
-.list.bsc-links > div > div > ul > li > a {
+.list.border > div > div > ul > li > a {
     font-weight: var(--font-weight-bold);
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: fit-content;
     height: 100%;
     z-index: 1;
     color: var(--text-color);
-    padding-left: var(--spacing-l)
+    padding-left: var(--spacing-l);
 }
 
-.list.bsc-links > div > div > ul > li > a:hover {
+.list.border > div > div > ul > li > a:hover {
     text-decoration: none;
     color: var(--link-color);
 }

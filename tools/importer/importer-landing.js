@@ -60,7 +60,7 @@ function importList(main, document) {
       header.replaceWith(newHeader);
 
       const listItems = list.querySelectorAll('li');
-      const cells = [['List (bsc-links)']];
+      const cells = [['List (border)']];
       listItems.forEach((li) => {
         const link = li.querySelector('a');
         const newLink = document.createElement('a');

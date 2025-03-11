@@ -39,18 +39,18 @@
   font-size: var(--body-font-size-m);
 }
 
-.columns.bsc-plans > div {
+.columns.striped-rows > div {
   position: relative;
 }
 
-.columns.bsc-plans > div > div > h6 > a {
+.columns.striped-rows > div > div > h6 > a {
   font-size: var(--body-font-size-s);
   font-weight: var(--font-weight-regular);
   margin-left: var(--spacing-s);
   text-decoration: underline
 }
 
-.columns.bsc-plans > div:nth-of-type(odd)::before {
+.columns.striped-rows > div:nth-of-type(odd)::before {
   content: "";
   position: absolute;
   top: 0;
@@ -105,7 +105,7 @@
     flex: 6;
   }
 
-  .columns.bsc-plans > div {
+  .columns.striped-rows > div {
     align-items: flex-end;
     margin: 0 -350px;
     padding: var(--spacing-s) 350px;
