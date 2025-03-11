@@ -262,9 +262,9 @@ function importPlanOptions(main, document) {
             linkDiv.append(bTag);
             newDiv.append(linkDiv);
           } else {
-            const h6Button = document.createElement('h6');
-            h6Button.append(link.cloneNode(true));
-            linkDiv.append(h6Button);
+            const h5Button = document.createElement('h5');
+            h5Button.append(link.cloneNode(true));
+            linkDiv.append(h5Button);
             newDiv.append(linkDiv);
           }
           link.remove();
