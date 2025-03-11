@@ -95,7 +95,7 @@ export function isExternalLink(url) {
   } else if (!url.hostname.includes('localhost') && !knownDomains.some((host) => url.hostname.includes(host))) {
     isExternal = true;
   } else if (url.hostname === window.location.hostname || url.hostname === 'www.blueshieldcs.com') {
-    isExternal = true;
+    isExternal = false;
   }
   return isExternal;
 }

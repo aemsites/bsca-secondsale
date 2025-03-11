@@ -323,6 +323,7 @@ main .section.highlight {
 
 a .icon-new-tab {
   margin-inline-start: 1ch;
+  vertical-align: middle;
 }
 
 /* screen reader only */
