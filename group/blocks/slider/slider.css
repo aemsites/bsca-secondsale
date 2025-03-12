@@ -43,6 +43,9 @@
   display: flex;
   gap: var(--spacing-s);
   margin-top: var(--spacing-m);
+  position: absolute;
+  bottom: 0;
+  right: 8px;
 }
 
 .slider .slider-controls .slider-arrow {

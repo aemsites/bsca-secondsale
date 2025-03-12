@@ -12,7 +12,7 @@ header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'hamburger brand tools' var(--nav-height)
+    'brand tools hamburger' var(--nav-height)
     'sections sections sections' 1fr / auto 1fr auto;
   align-items: center;
   gap: 0 24px;
