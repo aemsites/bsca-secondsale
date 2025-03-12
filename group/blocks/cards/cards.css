@@ -4,7 +4,7 @@
 
 .cards > ul {
   list-style: none;
-  margin: var(--spacing-xl);
+  margin: var(--spacing-xl) 0;
   padding: 0;
   display: flex;
   gap: var(--spacing-xl);

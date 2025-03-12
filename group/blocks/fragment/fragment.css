@@ -33,11 +33,11 @@
   }
 
   .fragment-wrapper > .two-col > div:first-child {
-    width: 60%;
+    width: 66.667%;
   }
 
   .fragment-wrapper > .two-col > div:nth-child(2) {
-    width: 40%;
+    width: 33.333%;
   }
 }
 

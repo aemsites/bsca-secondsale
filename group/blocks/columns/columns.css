@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: var(--spacing-xl);
+  margin-top: var(--spacing-xxl);
 }
 
 .columns img {
@@ -32,7 +33,7 @@
 
 .columns.columns-2-cols > div p {
   font-size: var(--body-font-size-s);
-  
+
 }
 
 .columns.columns-2-cols > div p strong {
@@ -109,6 +110,6 @@
     align-items: flex-end;
     margin: 0 -350px;
     padding: var(--spacing-s) 350px;
-  
+
   }
 }
