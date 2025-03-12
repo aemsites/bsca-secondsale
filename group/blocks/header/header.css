@@ -199,6 +199,10 @@ header nav .nav-sections ul > li {
   font-weight: var(--font-weight-medium);
 }
 
+header nav .nav-sections ul > li > ul > li {
+  font-weight: var(--font-weight-regular);
+}
+
 header nav[aria-expanded='true'] .nav-sections ul > li {
   font-weight: var(--font-weight-bold);
   padding: 0 0 var(--spacing-xl);
@@ -206,10 +210,6 @@ header nav[aria-expanded='true'] .nav-sections ul > li {
 
 header nav .nav-sections ul > li > ul {
   margin-top: 0;
-}
-
-header nav .nav-sections ul > li > ul > li {
-  font-weight: var(--font-weight-regular);
 }
 
 header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
