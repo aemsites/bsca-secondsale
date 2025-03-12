@@ -5,7 +5,7 @@
 .list.border {
     background-color: var(--shade-color);
     border-radius: var(--border-radius-l);
-    border: 1px solid #1f688c;
+    border: 1px solid var(--secondary-color);
     margin-bottom: var(--spacing-xxl);
 }
 
@@ -25,13 +25,19 @@
     margin-top: var(--spacing-xxl);
 }
 
+@media (width >= 900px) {
+    .list.border ul:nth-child(2) {
+        margin-top: var(--spacing-m);
+    }   
+}
+
 .list.border ul:nth-child(2) .icon{
     width: 20px;
 }
 
 .list.border > div > div > ul > li:not(:first-child) {
     margin-top: var(--spacing-l);
-    border-bottom: 1px solid #1f688c;
+    border-bottom: 1px solid var(--secondary-color);
 }
 
 .list.border > div > div > ul > li:has(a):hover {
@@ -43,7 +49,7 @@
 }
 
 .list.border > div:not(:last-child) {
-    border-bottom: 1px solid #1f688c;
+    border-bottom: 1px solid var(--secondary-color);
 }
 
 .list.border > div > div > ul > li > a {
@@ -56,6 +62,12 @@
     z-index: 1;
     color: var(--text-color);
     padding-left: var(--spacing-l);
+}
+
+@media (width >= 900px) {
+    .list.border > div > div > ul > li > a {
+        width: 100%;
+    }  
 }
 
 .list.border > div > div > ul > li > a:hover {
