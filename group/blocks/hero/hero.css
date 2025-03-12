@@ -32,12 +32,12 @@
 
 @media (width >= 600px) {
   .hero.block h1 {
-    font-size: var(--heading-font-size-l);
+    font-size: var(--heading-font-size-xl);
   }
 }
 
 @media (width >= 900px) {
   .hero.block h1 {
-    font-size: var(--heading-font-size-xl);
+    font-size: var(--heading-font-size-xxl);
   }
 }
