@@ -1,0 +1,76 @@
+.plan-updates .default-content-wrapper {
+    text-align: center;
+}
+
+.list.border {
+    background-color: var(--shade-color);
+    border-radius: var(--border-radius-l);
+    border: 1px solid var(--secondary-color);
+    margin-bottom: var(--spacing-xxl);
+}
+
+.list.border ul {
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+.list.border > div > div > ul > li {
+    position: relative;
+    padding: var(--spacing-l) var(--spacing-l) 0;
+}
+
+.list.border ul:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-xxl);
+}
+
+@media (width >= 900px) {
+    .list.border ul:nth-child(2) {
+        margin-top: var(--spacing-m);
+    }   
+}
+
+.list.border ul:nth-child(2) .icon{
+    width: 20px;
+}
+
+.list.border > div > div > ul > li:not(:first-child) {
+    margin-top: var(--spacing-l);
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.list.border > div > div > ul > li:has(a):hover {
+    color: var(--link-color);
+}
+
+.list.border ul:nth-child(2) li:nth-child(2){
+    margin-top: -1rem;
+}
+
+.list.border > div:not(:last-child) {
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.list.border > div > div > ul > li > a {
+    font-weight: var(--font-weight-bold);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    height: 100%;
+    z-index: 1;
+    color: var(--text-color);
+    padding-left: var(--spacing-l);
+}
+
+@media (width >= 900px) {
+    .list.border > div > div > ul > li > a {
+        width: 100%;
+    }  
+}
+
+.list.border > div > div > ul > li > a:hover {
+    text-decoration: none;
+    color: var(--link-color);
+}

@@ -62,6 +62,7 @@
   --spacing-m: 0.75rem;
   --spacing-l: 1rem;
   --spacing-xl: 1.5rem;
+  --spacing-xxl: 2rem;
 }
 
 /* fallback fonts */
@@ -225,7 +226,7 @@ a.button.secondary,
 button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
-  color: var(--text-color);
+  color: var(--link-color);
 }
 
 .square-button a.button {
