@@ -243,7 +243,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
 
   header nav[aria-expanded='true'] .nav-sections ul > li {
     font-weight: unset;
-    padding: 0 16px;
+    padding: 0 var(--spacing-m);
   }
 
   header nav .nav-sections .nav-drop {
@@ -329,7 +329,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li:hover {
-    background-color: rgba(255,255,255,.05);
+    background-color: #FFFFFF0D; 
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a:hover {
