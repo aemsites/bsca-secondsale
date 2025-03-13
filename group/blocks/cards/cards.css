@@ -133,7 +133,7 @@
 }
 
 @media (width >= 600px) {
-  .cards > ul {
+  .cards.three-cards > ul {
     flex-direction: row;
   }
 
