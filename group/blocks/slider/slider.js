@@ -27,6 +27,7 @@ export default async function decorate(block) {
   const leftArrow = document.createElement('span');
   leftArrow.textContent = '←';
   leftArrow.classList.add('slider-arrow');
+  leftArrow.setAttribute('aria-label', 'Previous slide');
   leftArrow.addEventListener('click', () => {
     currentSlide = (currentSlide - 1 + slides.length) % slides.length;
     updateSlider(slides, currentSlide);
@@ -38,6 +39,7 @@ export default async function decorate(block) {
   const rightArrow = document.createElement('span');
   rightArrow.textContent = '→';
   rightArrow.classList.add('slider-arrow');
+  rightArrow.setAttribute('aria-label', 'Next slide');
   rightArrow.addEventListener('click', () => {
     currentSlide = (currentSlide + 1) % slides.length;
     updateSlider(slides, currentSlide);

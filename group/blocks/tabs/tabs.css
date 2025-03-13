@@ -1,9 +1,15 @@
+.tabs-container > .default-content-wrapper {
+  margin: 0 auto;
+  text-align: center;
+}
+
 .tabs .tabs-list {
   display: flex;
-  gap: 0.5ch;
-  max-width: 100%;
   font-size: var(--body-font-size-xs);
   overflow-x: auto;
+  border-bottom: 1px solid var(--secondary-color);
+  justify-content: space-between;
+  margin: 0 24px;
 }
 
 @media (width >= 600px) {
@@ -21,11 +27,10 @@
 .tabs .tabs-list button {
   flex: 0 0 max-content;
   margin: 0;
-  border: 1px solid #dadada;
   border-radius: 0;
   padding: 0.5em;
-  background-color: var(--light-color);
-  color: initial;
+  background-color: var(--background-color);
+  color: var(--link-color);
   font-weight: bold;
   line-height: unset;
   text-align: initial;
@@ -41,7 +46,7 @@
 
 
 .tabs .tabs-list button[aria-selected='true'] {
-  border-bottom: 1px solid var(--background-color);
+  border-bottom: 3px solid var(--dark-color);
   background-color: var(--background-color);
   cursor: initial;
 }
@@ -49,10 +54,44 @@
 .tabs .tabs-panel {
   margin-top: -1px;
   padding: 24px;
-  border: 1px solid #dadada;
   overflow: auto;
 }
 
 .tabs .tabs-panel[aria-hidden='true'] {
   display: none;
+}
+
+.tabs .tabs-panel > div > h5 {
+  text-align: center;
+}
+
+.tabs .tabs-panel ul {
+  background-color: var(--shade-color);
+  border-radius: var(--border-radius-l);
+  border: 1px solid var(--secondary-color);
+  margin-bottom: var(--spacing-xxl);
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.tabs .tabs-panel ul li {
+  position: relative;
+  padding: var(--spacing-l) var(--spacing-l);
+  cursor: pointer;
+}
+
+.tabs .tabs-panel ul > li:not(:last-child) {
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.tabs .tabs-panel ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.tabs .tabs-panel ul li:hover a {
+  color: var(--link-color);
 }

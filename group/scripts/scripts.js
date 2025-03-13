@@ -13,6 +13,118 @@ import {
   loadCSS,
 } from './aem.js';
 
+export function getTimeoutSignal(timeout) {
+  if (AbortSignal && typeof AbortSignal.timeout === 'function') {
+    return AbortSignal.timeout(timeout);
+  }
+
+  const aborter = new AbortController();
+  setTimeout(() => aborter.abort('operation timed out'), timeout);
+  return aborter.signal;
+}
+
+const iconLoadingPromises = {};
+async function loadIconSvg(icon, doc = document) {
+  if (!icon) return;
+
+  let svgSprite = doc.getElementById('svg-sprite');
+  if (!svgSprite) {
+    const div = document.createElement('div');
+    div.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" id="svg-sprite" style="display: none"></svg>';
+    svgSprite = div.firstElementChild;
+    doc.body.append(svgSprite);
+  }
+
+  const { iconName } = icon.dataset;
+  if (!iconLoadingPromises[iconName]) {
+    iconLoadingPromises[iconName] = (async () => {
+      const resp = await fetch(icon.src, {
+        signal: getTimeoutSignal(5000),
+      });
+      const temp = document.createElement('div');
+      temp.innerHTML = await resp.text();
+      const svg = temp.querySelector('svg');
+
+      const symbol = document.createElementNS('http://www.w3.org/2000/svg', 'symbol');
+      symbol.id = `icons-sprite-${iconName}`;
+      symbol.setAttribute('viewBox', svg.getAttribute('viewBox'));
+      while (svg.firstElementChild) symbol.append(svg.firstElementChild);
+      svgSprite.append(symbol);
+    })();
+  }
+  await iconLoadingPromises[iconName];
+
+  const temp = document.createElement('div');
+  temp.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg"><use href="#icons-sprite-${iconName}"/></svg>`;
+  icon.replaceWith(temp.firstElementChild);
+}
+
+/**
+ * Observes an icon span and loads the SVG when it becomes visible
+ * @param {Element} iconSpan the span element for the given icon
+ */
+export async function useSvgForIcon(iconSpan) {
+  const img = iconSpan.querySelector('img');
+  if (img && img.loading === 'eager') {
+    await loadIconSvg(img);
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          loadIconSvg(entry.target.querySelector('img'));
+          observer.disconnect();
+        }
+      });
+    }, {
+      rootMargin: '250px',
+    });
+    observer.observe(iconSpan);
+  }
+}
+
+export function isExternalLink(url) {
+  const knownDomains = [
+    'www.blueshieldca.com',
+    'aem.page', 'aem.live',
+    window.location.hostname,
+  ];
+
+  let isExternal = false;
+  const pdfDetectionRegex = /\.pdf($|\?|#)|[?&][^=&]*=([^&]*\.pdf)($|&)/i;
+  if (pdfDetectionRegex.test(url)) {
+    isExternal = true;
+  } else if (!url.hostname.includes('localhost') && !knownDomains.some((host) => url.hostname.includes(host))) {
+    isExternal = true;
+  } else if (url.hostname === window.location.hostname || url.hostname === 'www.blueshieldcs.com') {
+    isExternal = false;
+  }
+  return isExternal;
+}
+
+export function decorateLinks(main) {
+  main.querySelectorAll('a[href]').forEach((a) => {
+    const url = new URL(a.href);
+    // protect against maito: links or other weirdness
+    const isHttp = url.protocol === 'https:' || url.protocol === 'http:';
+    if (!isHttp) return;
+
+    if (isExternalLink(url)) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+
+      const newWindowIcon = document.createElement('span');
+      newWindowIcon.className = 'icon icon-new-tab';
+      a.append(newWindowIcon);
+      const srOnlySpan = document.createElement('span');
+      srOnlySpan.className = 'sr-only';
+      srOnlySpan.textContent = 'Open the link in a new window';
+      a.append(srOnlySpan);
+      a.classList.add('external-link');
+      useSvgForIcon(newWindowIcon);
+    }
+  });
+}
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -61,10 +173,11 @@ function buildAutoBlocks(main) {
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
-  decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateLinks(main);
+  decorateIcons(main);
 }
 
 /**

@@ -12,6 +12,14 @@
   min-width: 250px;
 }
 
+.fragment-wrapper .border {
+  border-radius: var(--border-radius-l);
+  border: 1px solid currentcolor;
+  padding: var(--spacing-l);
+  width: 75%;
+  margin: 0 auto;
+}
+
 @media (width >= 600px) {
   .fragment-wrapper .two-col {
     display: flex;
@@ -25,11 +33,11 @@
   }
 
   .fragment-wrapper > .two-col > div:first-child {
-    width: 60%;
+    width: 66.667%;
   }
 
   .fragment-wrapper > .two-col > div:nth-child(2) {
-    width: 40%;
+    width: 33.333%;
   }
 }
 

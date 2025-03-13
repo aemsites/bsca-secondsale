@@ -1,6 +1,8 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  margin-bottom: var(--spacing-xl);
+  margin-top: var(--spacing-xxl);
 }
 
 .columns img {
@@ -23,13 +25,54 @@
   border-radius: var(--border-radius-xl);
 }
 
+.columns.columns-3-cols > div > .columns-img-col img {
+  border-radius: var(--border-radius-l);
+  width: fit-content;
+  margin: auto;
+}
+
 .columns.columns-2-cols > div p {
   font-size: var(--body-font-size-s);
+
 }
 
 .columns.columns-2-cols > div p strong {
   font-size: var(--body-font-size-m);
 }
+
+.columns.striped-rows > div {
+  position: relative;
+}
+
+.columns.striped-rows > div > div > h5 > a {
+  font-size: var(--body-font-size-s);
+  font-weight: var(--font-weight-regular);
+  margin-left: var(--spacing-s);
+  text-decoration: underline
+}
+
+.columns.striped-rows > div:nth-of-type(odd)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: var(--shade-color);
+  z-index: -1;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.columns.shaded > div {
+  align-items: stretch;
+}
+
+.columns.shaded > div > div {
+  background-color: var(--shade-color);
+  margin: var(--spacing-xl) var(--spacing-m);
+  padding: 0 var(--spacing-l) var(--spacing-l);
+}
+
 
 @media (width >= 768px) {
   .columns > div {
@@ -41,5 +84,32 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  .columns > div > .flex-2 {
+    flex: 2;
+  }
+
+  .columns > div > .flex-3 {
+    flex: 3;
+  }
+
+  .columns > div > .flex-4 {
+    flex: 4;
+  }
+
+  .columns > div > .flex-5 {
+    flex: 5;
+  }
+
+  .columns > div > .flex-6 {
+    flex: 6;
+  }
+
+  .columns.striped-rows > div {
+    align-items: flex-end;
+    margin: 0 -350px;
+    padding: var(--spacing-s) 350px;
+
   }
 }
