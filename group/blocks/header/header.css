@@ -93,10 +93,8 @@ header nav .nav-hamburger-icon::after {
 }
 
 header nav[aria-expanded='true'] .nav-hamburger{
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 24px;
+  justify-content: center;
+  padding-right: var(--spacing-l);
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon,
