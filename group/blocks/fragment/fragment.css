@@ -1,5 +1,15 @@
-.fragment-wrapper .full-width {
-  margin: 0 -100%;
+.fragment-wrapper:has(.full-width) {
+  padding: 0;
+  margin: 0;
+}
+
+.fragment-wrapper:has(.full-width) .full-width {
+  width: 100dvw;
+}
+
+.fragment-wrapper div:not(.full-width) {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .fragment-wrapper .shaded {
@@ -41,7 +51,7 @@
 }
 
 .fragment-wrapper .indent {
-  padding: 0 70px;
+  padding: 0 10%;
 }
 
 .fragment-wrapper .indent p {

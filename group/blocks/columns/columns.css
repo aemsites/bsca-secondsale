@@ -108,8 +108,7 @@
 
   .columns.striped-rows > div {
     align-items: flex-end;
-    margin: 0 -350px;
-    padding: var(--spacing-s) 350px;
+    padding: var(--spacing-s);
 
   }
 }
