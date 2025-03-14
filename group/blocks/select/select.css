@@ -1,28 +1,72 @@
-main .select-container select {
-  height: 3rem;
-  min-width: 3rem;
-  padding: 0 1rem;
-  margin: 1rem 0;
-  width: 100%;
-  border: 2px solid var(--link-color);
-  background-color: var(--bakcground-color);
-  border-radius: 4px;
-  font-size: var(--body-font-size-s);
-  display: block;
-}
-
-main .select-container .select-wrapper {
-  width: fit-content;
+.select {
   position: relative;
+  width: 300px;
+  font-family: Arial, sans-serif;
+  margin-top: var(--spacing-l);
 }
 
-.select .select-wrapper::after {
-  content: "";
+.select > div > div > p {
+  background: #fff;
+  border: 1px solid var(--link-color);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0;
+}
+
+.select > div > div > p:hover {
+  background: #f1eeee;
+  color: var(--link-color);
+}
+
+.chevron {
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+  transition: transform 0.3s ease;
+  display: inline-block;
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 9px;
-  height: 7px;
-  background: url("/icons/down-arrow.png") no-repeat;
-  background-size: contain;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.select.open .chevron {
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.select ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--link-color);
+  border-radius: 4px;
+  display: none;
+  box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
+}
+
+.select ul li {
+  padding: 10px;
+  border-bottom: 1px solid var(--link-color);
+}
+
+.select ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.select ul li:last-child {
+  border-bottom: none;
+}
+
+.select ul li:hover {
+  background: #f1eeee;
+}
+
+.select.open ul {
+  display: block;
 }

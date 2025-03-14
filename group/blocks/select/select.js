@@ -1,53 +1,25 @@
-export function addDropdown(contentBox) {
-  if (contentBox == null || contentBox.querySelector('ul') == null) {
-    return;
-  }
-
-  const selectElWrapper = document.createElement('div');
-  selectElWrapper.classList.add('select-wrapper');
-  const selectEl = document.createElement('select');
-
-  const ul = contentBox.querySelector('ul');
-  ul.querySelectorAll('li').forEach((liElement) => {
-    const t = liElement.querySelector('a');
-
-    const optionElement = document.createElement('option');
-    optionElement.text = liElement.textContent;
-    if (t) {
-      optionElement.value = t.href;
-    }
-    selectEl.appendChild(optionElement);
-  });
-  contentBox.querySelector('ul').remove();
-  selectElWrapper.appendChild(selectEl);
-  contentBox.append(selectElWrapper);
-
-  selectEl.addEventListener('change', () => {
-    const selectedOption = selectEl.value;
-    if (selectedOption) {
-      window.location.href = selectedOption;
-    }
-  });
-}
-
-export function removeEmptyPTags(element) {
-  element.querySelectorAll('p').forEach((p) => {
-    // get rid of empty p tags
-    if (p.textContent.trim() === '') {
-      p.remove();
-    }
-  });
-}
+import { span } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
-  const elementContainer = block.querySelector(':scope > div > div');
-  const selectList = document.createElement('div');
-  selectList.classList.add('select-content-container');
-  selectList.append(...elementContainer.children);
+  const selected = block.querySelector('p');
+  const dropdown = block;
+  const options = block.querySelectorAll('ul li a');
+  const icon = span({ class: 'chevron' });
+  selected.append(icon);
 
-  addDropdown(selectList);
+  selected.addEventListener('click', (event) => {
+    event.stopPropagation();
+    dropdown.classList.toggle('open');
+  });
 
-  block.prepend(selectList);
-  elementContainer.parentElement.remove();
-  removeEmptyPTags(block);
+  options.forEach((option) => {
+    option.addEventListener('click', () => {
+      selected.textContent = option.textContent;
+      dropdown.classList.remove('open');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    dropdown.classList.remove('open');
+  });
 }

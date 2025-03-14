@@ -20,6 +20,22 @@
   margin: 0 auto;
 }
 
+.fragment-wrapper .square-button .button-container {
+  text-align: center;
+}
+
+.fragment-wrapper .square-button .button-container a {
+  color: var(--body-font-color);
+  font-size: var(--heading-font-size-m);
+  font-weight: var(--font-weight-medium);
+  background-color: var(--background-color);
+}
+
+.fragment-wrapper .square-button .button-container a:hover {
+  color: var(--link-color);
+  background-color: #f1eeee;
+}
+
 @media (width >= 600px) {
   .fragment-wrapper .two-col {
     display: flex;
