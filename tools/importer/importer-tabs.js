@@ -11,7 +11,7 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
-const newhost = 'https://main--blueshieldca--aemsites.hlx.page';
+const newhost = 'https://main--bsca-secondsale--aemsites.aem.page';
 
 function cleanUpHtml(main, document) {
   for (const el of main.querySelectorAll('a, b, em, i, small, span, strong')) {

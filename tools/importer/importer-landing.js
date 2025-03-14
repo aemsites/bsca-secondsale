@@ -11,7 +11,7 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
-const newhost = 'https://main--blueshieldca--aemsites.hlx.page';
+const newhost = 'https://main--bsca-secondsale--aemsites.aem.page';
 
 function updateLocalLinks(main, document) {
   const links = main.querySelectorAll('a');
@@ -44,14 +44,14 @@ function importList(main, document) {
     .filter(row => row.textContent.trim() && row.querySelector('.kgoui_list'));
 
   if (section.length > 0) {
-    
+
     const sectionParent = section[0].parentNode.parentNode;
     const heading = sectionParent.previousElementSibling;
 
     // insert hr after heading
     let hrElement = document.createElement("hr");
     heading.insertAdjacentElement("afterend", hrElement);
-    
+
     section.forEach((el) => {
       const list = el.querySelector('.kgoui_list');
       const header = el.querySelector('.kgo-block-heading-header');
@@ -73,7 +73,7 @@ function importList(main, document) {
         const linkDesc = link.querySelector('.kgo-description');
         subItems.textContent = linkDesc.textContent;
         subList.append(subItems);
-        
+
         const icon = link.querySelector('.kgo-action-icon');
         if (icon) {
           const linkIcon = document.createElement('li');
@@ -84,7 +84,7 @@ function importList(main, document) {
           }
           subList.append(linkIcon);
         }
-        
+
         li.append(subList);
         link.replaceWith(newLink);
 
@@ -100,7 +100,7 @@ function importList(main, document) {
       el.replaceWith(block);
 
     });
-  
+
   }
 
 
@@ -137,7 +137,7 @@ function importColumns(main, document) {
           updatedTitle.textContent = colTitle.textContent;
           colTitle.replaceWith(updatedTitle);
         }
-      
+
       });
       cells.push(colContents);
     });

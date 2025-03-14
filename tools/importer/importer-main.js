@@ -11,8 +11,7 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
-
-const newhost = 'https://main--blueshieldca--aemsites.hlx.page';
+const newhost = 'https://main--bsca-secondsale--aemsites.aem.page';
 
 function moveWhitespaceOutsideTag(main, document) {
   // move whitespace outside strong/b/em etc.
