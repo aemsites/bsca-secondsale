@@ -129,7 +129,7 @@ export function decorateLinks(main) {
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
-function buildHeroBlock(main) {
+/* function buildHeroBlock(main) {
   const h1 = main.querySelector('h1');
   const picture = main.querySelector('picture');
   // eslint-disable-next-line no-bitwise
@@ -138,7 +138,7 @@ function buildHeroBlock(main) {
     section.append(buildBlock('hero', { elems: [h1, picture] }));
     main.prepend(section);
   }
-}
+} */
 
 /**
  * load fonts.css and set a session storage flag
