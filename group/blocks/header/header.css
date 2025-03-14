@@ -255,7 +255,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
     display: inline-block;
     position: absolute;
     top: var(--spacing-xl);
-    right: var(--spacing-l);
+    right: var(--spacing-m);
     transform: rotate(135deg);
     width: 6px;
     height: 6px;
@@ -294,7 +294,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
     font-weight: var(--font-weight-regular);
     height: 100%;
     align-content: center;
-    padding: 0 var(--spacing-xxl);
+    padding: 0 var(--spacing-xl);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
@@ -303,7 +303,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] {
-    padding: 0 var(--spacing-xxl);
+    padding: 0 var(--spacing-xl);
     background-color: var(--link-color);
     color: white;
     min-width: unset;
@@ -323,7 +323,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: var(--spacing-m) var(--spacing-xxl);
+    padding: var(--spacing-m) var(--spacing-xl);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li:hover {

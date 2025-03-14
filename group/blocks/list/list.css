@@ -61,6 +61,14 @@
     height: 100%;
     z-index: 1;
     color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    /* padding-left: var(--spacing-l); */
+}
+
+
+.list.border > div > div > ul > li > a:nth-child(1) {
+    /* width: 100%; */
     padding-left: var(--spacing-l);
 }
 
