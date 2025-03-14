@@ -28,7 +28,7 @@
 @media (width >= 900px) {
     .list.border ul:nth-child(2) {
         margin-top: var(--spacing-m);
-    }   
+    }
 }
 
 .list.border ul:nth-child(2) .icon{
@@ -62,15 +62,26 @@
     z-index: 1;
     color: var(--text-color);
     padding-left: var(--spacing-l);
+    text-decoration: none;
 }
 
 @media (width >= 900px) {
     .list.border > div > div > ul > li > a {
         width: 100%;
-    }  
+    }
 }
 
 .list.border > div > div > ul > li > a:hover {
     text-decoration: none;
     color: var(--link-color);
+}
+
+.list.border > div > div > ul > li > a.external-link {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list.border > div > div > ul > li > a .icon-new-tab {
+    flex-shrink: 0;
+    margin-right: var(--spacing-m);
 }

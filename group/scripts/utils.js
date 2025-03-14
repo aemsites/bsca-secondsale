@@ -28,22 +28,3 @@ export function wrapTextInLinks(container) {
     }
   });
 }
-
-/**
- * Handles external links and PDFs to be opened in a new tab/window
- * @param {Element} main The main element
- */
-export function decorateExternalLinks(main) {
-  main.querySelectorAll('a').forEach((a) => {
-    const href = a.getAttribute('href');
-    if (href) {
-      const extension = href.split('.').pop().trim();
-      if (!href.startsWith('/')
-        && !href.startsWith('#')) {
-        if (!href.includes('blueshieldca.com/group') || (extension === 'pdf')) {
-          a.setAttribute('target', '_blank');
-        }
-      }
-    }
-  });
-}

@@ -84,7 +84,7 @@ export async function useSvgForIcon(iconSpan) {
 
 export function isExternalLink(url) {
   const knownDomains = [
-    'www.blueshieldca.com',
+    'www.blueshieldca.com/group/',
     'aem.page', 'aem.live',
     window.location.hostname,
   ];
