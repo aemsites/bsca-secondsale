@@ -53,6 +53,7 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
 }
 
 /* hamburger */
@@ -254,7 +255,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
     content: '';
     display: inline-block;
     position: absolute;
-    top: var(--spacing-xl);
+    top: 1.7rem;
     right: var(--spacing-m);
     transform: rotate(135deg);
     width: 6px;
@@ -327,7 +328,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li:hover {
-    background-color: #FFFFFF0D; 
+    background-color: #FFFFFF0D;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a:hover {

@@ -175,7 +175,6 @@ button {
 /* links */
 a:any-link {
   color: var(--link-color);
-  text-decoration: none;
   word-break: break-word;
 }
 
@@ -323,8 +322,8 @@ main .section.highlight {
 }
 
 a .icon-new-tab {
-  margin-inline-start: 1ch;
-  vertical-align: middle;
+  vertical-align: sub;
+  padding: 0 4px;
 }
 
 /* screen reader only */
