@@ -18,7 +18,7 @@ footer .footer .default-content-wrapper ul {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--spacing-s) var(--spacing-l);
-  max-width: 320px;
+  max-width: 400px;
   padding: var(--spacing-s);
   list-style: none;
   margin: 0 auto;
