@@ -24,7 +24,7 @@
 }
 
 .cards > ul > li > div:hover {
-  border: 2px solid var(--dark-color);
+  border: 1px solid var(--dark-color);
 }
 
 .cards > ul > li a {
@@ -135,6 +135,11 @@
 @media (width >= 600px) {
   .cards > ul {
     flex-direction: row;
+  }
+
+  .cards > ul > li {
+    display: flex;
+    flex: 1;
   }
 
   .cards.secondary > ul {
