@@ -163,6 +163,10 @@ header nav .nav-brand .icon img {
   padding-left: 100px;
 }
 
+header nav .nav-brand .icon.icon-multi-state-logo img {
+  width: 260px;
+}
+
 header .nav-brand div:first-of-type {
   display: flex;
   align-items: center;
