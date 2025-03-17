@@ -1,5 +1,5 @@
 import {
-  buildBlock,
+  // buildBlock,
   loadHeader,
   loadFooter,
   decorateButtons,
@@ -156,14 +156,14 @@ async function loadFonts() {
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
-function buildAutoBlocks(main) {
+/* function buildAutoBlocks(main) {
   try {
     // buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
   }
-}
+} */
 
 /**
  * Decorates the main element.
@@ -173,7 +173,7 @@ function buildAutoBlocks(main) {
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
-  buildAutoBlocks(main);
+  // buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
   decorateLinks(main);
