@@ -1,7 +1,3 @@
-main .section > .fragment-wrapper {
-  margin: auto;
-}
-
 .fragment-wrapper:has(.full-width) {
   padding: 0;
   margin: 0;
@@ -9,6 +5,10 @@ main .section > .fragment-wrapper {
 
 .fragment-wrapper:has(.full-width) .full-width {
   width: 100dvw;
+}
+
+main .section > .fragment-wrapper {
+  margin: auto;
 }
 
 .fragment-wrapper div:not(.full-width) {
