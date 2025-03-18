@@ -1,3 +1,7 @@
+.columns:not(.striped-rows) {
+  padding: var(--spacing-xl) 0;
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -60,6 +64,14 @@
   z-index: -1;
   transform: translateX(-50%);
   left: 50%;
+}
+
+.columns.striped-rows p.button-container a {
+  margin: 0;
+} 
+
+.columns.striped-rows p:not(.button-container) a {
+  padding-left: 1.2rem;
 }
 
 .columns.shaded > div {
