@@ -64,7 +64,6 @@
 }
 
 @media (width >= 600px) {
-
   .fragment-wrapper .two-col {
     display: flex;
     flex-direction: row-reverse;
