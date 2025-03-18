@@ -8,7 +8,7 @@
 }
 
 main .section > .fragment-wrapper {
-  margin: auto;
+  margin: 0 var(--spacing-m);
 }
 
 .fragment-wrapper div:not(.full-width) {
@@ -68,6 +68,10 @@ main .section > .fragment-wrapper {
 }
 
 @media (width >= 600px) {
+  main .section > .fragment-wrapper {
+    margin: auto;
+  }
+
   .fragment-wrapper .two-col {
     display: flex;
     flex-direction: row-reverse;
