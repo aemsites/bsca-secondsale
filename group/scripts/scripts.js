@@ -112,15 +112,15 @@ export function decorateLinks(main) {
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
 
-      const newWindowIcon = document.createElement('span');
-      newWindowIcon.className = 'icon icon-new-tab';
-      a.append(newWindowIcon);
+      // const newWindowIcon = document.createElement('span');
+      // newWindowIcon.className = 'icon icon-new-tab';
+      // a.append(newWindowIcon);
       const srOnlySpan = document.createElement('span');
       srOnlySpan.className = 'sr-only';
       srOnlySpan.textContent = 'Open the link in a new window';
       a.append(srOnlySpan);
       a.classList.add('external-link');
-      useSvgForIcon(newWindowIcon);
+      // useSvgForIcon(newWindowIcon);
     }
   });
 }
