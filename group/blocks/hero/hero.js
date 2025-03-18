@@ -7,7 +7,7 @@ export default function decorate(block) {
   pics.forEach((img, i) => {
     const width = widths[Math.min(i, widths.length - 1)];
     img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, true, [{ width }])
+      createOptimizedPicture(img.src, img.alt, true, [{ width }]),
     );
   });
 }
