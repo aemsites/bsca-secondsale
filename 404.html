@@ -33,17 +33,19 @@
   <link rel="stylesheet" href="/group/styles/styles.css">
   <style>
     main.error {
-      min-height: calc(100vh - var(--nav-height));
       display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
     }
-
-    main.error .error-number {
-      width: 100%;
+    main.error .section:has(div > div) {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 1rem 0;
     }
-
-    main.error .error-number text {
-      font-family: monospace;
+    main.error .section > div h3 {
+      margin: 0;
     }
   </style>
   <link rel="stylesheet" href="/group/styles/lazy-styles.css">
@@ -53,13 +55,29 @@
   <header></header>
   <main class="error">
     <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
-      </svg>
-      <h2 class="error-message">Page Not Found</h2>
+      <h1 class="error-message">Page not found</h1>
+      <h3>We're sorry, but this page or document is unavailable or no longer exists.</h3>
+    </div>
+    <div class="section">
       <p class="button-container">
-        <a href="/group/" class="button secondary error-button-home">Go home</a>
+        <a href="/group/" class="button primary">Go to the homepage</a>
       </p>
+    </div>
+    <div class="section">
+      <div>
+        <h3>Browser compatibility</h3>
+        <p>Sometimes, outdated browsers can be at fault.</p>
+        <p class="button-container">
+          <a href="https://www.blueshieldca.com/en/home/site-help/compatible-browsers" class="button secondary">Find your browser</a>
+        </p>
+      </div>
+      <div>
+        <h3>Contact us</h3>
+        <p>Need help with a technical issue or any other related items?</p>
+        <p class="button-container">
+          <a href="https://www.blueshieldca.com/en/home/contact-us" class="button secondary">Reach out to us</a>
+        </p>
+      </div>
     </div>
   </main>
   <footer></footer>
