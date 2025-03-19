@@ -1,5 +1,11 @@
 /* header and nav layout */
 
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
