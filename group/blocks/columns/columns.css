@@ -43,9 +43,6 @@
 }
 
 .columns.striped-rows > div > div > h5 > a {
-  /* font-size: var(--body-font-size-s);
-  font-weight: var(--font-weight-regular);
-  margin-left: var(--spacing-s); */
   text-decoration: underline
 }
 
@@ -71,6 +68,9 @@
   padding: 0 var(--spacing-l) var(--spacing-l);
 }
 
+.columns .button-container a.secondary{
+  margin: var(--spacing-xs) 0;
+}
 
 @media (width >= 768px) {
   .columns > div {

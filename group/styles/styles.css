@@ -227,6 +227,12 @@ button.secondary {
   color: var(--link-color);
 }
 
+a.button.secondary:hover,
+button.secondary:hover {
+  background-color: var(--link-color);
+  color: white;
+}
+
 .square-button a.button {
   border-radius: 4px;
   border: 1px solid var(--link-color);
