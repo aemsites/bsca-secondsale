@@ -238,7 +238,7 @@ function importPlanOptions(main, document) {
       costs.removeAttribute('id');
       const planHeader = costs.querySelector('h2');
       const newPlanHeader = document.createElement('h5');
-      newPlanHeader.append(planHeader.textContent);
+      newPlanHeader.innerHTML = planHeader.innerHTML;
       planHeader.replaceWith(newPlanHeader);
 
       const highlights = el.querySelector('.kgo-col:nth-child(2) .kgoui_html');
@@ -261,9 +261,9 @@ function importPlanOptions(main, document) {
             linkDiv.append(bTag);
             newDiv.append(linkDiv);
           } else {
-            const h5Button = document.createElement('h5');
-            h5Button.append(link.cloneNode(true));
-            linkDiv.append(h5Button);
+            const plainLink = document.createElement('p');
+            plainLink.append(link.cloneNode(true));
+            linkDiv.append(plainLink);
             newDiv.append(linkDiv);
           }
           link.remove();
