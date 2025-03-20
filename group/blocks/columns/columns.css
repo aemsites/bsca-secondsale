@@ -1,6 +1,11 @@
+.columns:not(.striped-rows) {
+  padding: var(--spacing-xl) 0;
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
+  margin: 0 var(--spacing-xl);
 }
 
 .columns img {
@@ -61,6 +66,14 @@
   left: 50%;
 }
 
+.columns.striped-rows p.button-container a {
+  margin: 0;
+} 
+
+.columns.striped-rows p:not(.button-container) a {
+  padding-left: 1.2rem;
+}
+
 .columns.shaded > div {
   align-items: stretch;
 }
@@ -72,7 +85,7 @@
 }
 
 
-@media (width >= 768px) {
+@media (width >= 900px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;

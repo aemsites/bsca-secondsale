@@ -1,5 +1,11 @@
 /* header and nav layout */
 
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
@@ -12,10 +18,8 @@ header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'brand hamburger' var(--nav-height)
-    'sections sections' 1fr / 1fr;
+    'brand hamburger' var(--nav-height) / 70% 30% 0;
   align-items: center;
-  gap: 0 24px;
   max-width: 1248px;
   height: var(--nav-height);
   padding: 0 24px 0 0;
@@ -26,7 +30,7 @@ header nav {
 header nav[aria-expanded='true'] {
   grid-template:
     'brand hamburger' var(--nav-height)
-    'sections sections' 1fr;
+    'sections sections' 1fr / 70% 30%;
   overflow-y: auto;
   min-height: 100dvh;
 }
@@ -37,7 +41,7 @@ header nav[aria-expanded='true'] {
     justify-content: space-between;
     gap: 0 32px;
     max-width: unset;
-    padding: 0 32px 0 0;
+    padding: 0;
   }
 
   header nav[aria-expanded='true'] {
@@ -62,6 +66,7 @@ header nav .nav-hamburger {
   height: 22px;
   display: flex;
   align-items: center;
+  justify-content: end;
 }
 
 header nav .nav-hamburger button {
@@ -91,11 +96,6 @@ header nav .nav-hamburger-icon::after {
   content: '';
   position: absolute;
   background: currentcolor;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger{
-  justify-content: center;
-  padding-right: var(--spacing-l);
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon,
@@ -160,7 +160,6 @@ header nav .nav-brand picture img {
 header nav .nav-brand .icon img {
   width: 128px;
   height: auto;
-  padding-left: 100px;
 }
 
 header nav .nav-brand .icon.icon-multi-state-logo img {
@@ -225,10 +224,6 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
     width: 219px;
   }
 
-  header nav .nav-brand .icon img {
-    padding-left: 124px;
-  }
-
   header nav .nav-sections {
     display: block;
     visibility: visible;
@@ -241,7 +236,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
     width: unset;
     background-color: unset;
     color:unset;
-    padding: unset;
+    padding: 0 0 0 var(--spacing-xxl);
   }
 
   header nav[aria-expanded='true'] .nav-sections ul > li {
@@ -259,8 +254,8 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
     content: '';
     display: inline-block;
     position: absolute;
-    top: 1.7rem;
-    right: var(--spacing-m);
+    top: 1.5rem;
+    right: var(--spacing-s);
     transform: rotate(135deg);
     width: 6px;
     height: 6px;
