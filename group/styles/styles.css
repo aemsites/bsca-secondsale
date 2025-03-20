@@ -225,6 +225,7 @@ button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--link-color);
+  padding: 0.5em;
 }
 
 a.button.secondary:hover,
