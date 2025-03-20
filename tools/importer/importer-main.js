@@ -43,7 +43,7 @@ function updateLocalLinks(main, document) {
 }
 
 function packageSection(heading, cells, _style) {
-  const headingText = document.createElement('h1');
+  const headingText = document.createElement('h2');
   headingText.textContent = heading.textContent;
   const newBlock = WebImporter.DOMUtils.createTable(cells, document);
   const newDiv = document.createElement('div');
