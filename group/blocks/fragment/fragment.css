@@ -75,7 +75,7 @@
   font-size: var(--body-font-size-l);
 }
 
-@media (width >= 600px) {
+@media (width >= 900px) {
   .fragment-wrapper .two-col {
     display: flex;
     flex-direction: row-reverse;

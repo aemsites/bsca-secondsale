@@ -1,7 +1,7 @@
 .cards > ul {
   list-style: none;
   margin: 0;
-  padding: 24px 0;
+  padding: 24px 0 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -9,7 +9,6 @@
 
 .cards.secondary > ul {
   gap: var(--spacing-m);
-  margin: 0 var(--spacing-xxl);
 }
 
 .cards > ul > li {
@@ -58,16 +57,36 @@
   box-shadow: none;
 }
 
-.cards.secondary > ul > li > .cards-card-body > p:first-of-type {
-  font-size: var(--heading-font-size-m);
-  margin: 0;
+.cards.secondary > ul > li > .cards-card-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 4px 15px;
 }
 
-.cards.secondary > ul > li > .cards-card-body {
+.cards.secondary > ul > li > .cards-card-body p:first-child {
+  grid-row: 1 / span 2;
   display: flex;
   align-items: center;
-  gap: var(--spacing-m);
-  padding: var(--spacing-s);
+  margin: 16px;
+  font-size: var(--body-font-size-l);
+}
+
+.cards.secondary > ul > li:first-of-type > .cards-card-body > p {
+  margin: 0.8rem 0 0;
+}
+
+.cards.secondary > ul > li > .cards-card-body p:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 24px 24px 0 0;
+  font-size: var(--body-font-size-m);
+}
+
+.cards.secondary > ul > li > .cards-card-body p:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  margin: 0 24px 24px 0;
   font-size: var(--body-font-size-s);
 }
 
@@ -101,6 +120,10 @@
     justify-content: space-between;
   }
 
+  .cards.secondary > ul {
+    flex-direction: column;
+  }
+
   .cards.list > ul {
     padding: 24px;
     flex-direction: column;
@@ -110,20 +133,20 @@
     width: calc(50% - 12px);
   }
 
-  .cards.list > ul > li {
+  .cards.secondary > ul > li {
     width: 100%;
   }
 
-  .cards.secondary > ul {
-    flex-direction: column;
-  }
-
-  .cards.secondary > ul > li {
+  .cards.list > ul > li {
     width: 100%;
   }
 }
 
 @media (width >= 900px) {
+  .cards.secondary > ul {
+    padding-top: 0;
+  }
+
   .cards > ul > li {
     width: calc(33.333% - 12px);
   }
@@ -135,6 +158,6 @@
   }
 
   .cards.list > ul > li {
-    width: calc(50% - 12px);
+    width: calc(50% - 3px);
   }
 }
