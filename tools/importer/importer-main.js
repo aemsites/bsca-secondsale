@@ -154,20 +154,45 @@ function importTopBanner(main, document) {
   }
 }
 
-/* function importSelectPlan(main, document) {
+function importSelectPlan(main, document) {
   const section = [...document.querySelectorAll('.kgoui_container_simple3_column > .kgo-container > .kgo-row')].filter((row) => {
     const { children } = row;
     const colsMatch = children.length === 3
       && children[0].classList.contains('col-lg-4')
       && children[1].classList.contains('col-lg-4')
       && children[2].classList.contains('col-lg-4');
-    return colsMatch;
+    const cards = row.querySelectorAll('.kgo-card-set');
+    return colsMatch && cards.length == 0 && row.textContent.trim().length > 0;
   });
 
+  let sectionParent;
+  let heading;
   if (section.length > 0) {
-
+    sectionParent = section[0].parentNode.parentNode;
+    heading = sectionParent.previousElementSibling;
+    const cells = [['Columns (cols-4-4-4)']];
+    section.forEach((el) => {
+      const cols = el.querySelectorAll('.kgo-col');
+      const planHelpCols = [];
+      cols.forEach((col) => {
+        col.removeAttribute('class');
+        col.removeAttribute('id');
+        const colHeader = col.querySelector('.kgoui_html h2');
+        if (colHeader) {
+          const newColHeader = document.createElement('h5');
+          newColHeader.innerHTML = colHeader.innerHTML;
+          colHeader.replaceWith(newColHeader);
+        }
+        planHelpCols.push(col);
+      });
+      cells.push(planHelpCols);
+      el.parentNode.remove();
+    });
+    const block = packageSection(heading, cells);
+    heading.remove();
+    sectionParent.replaceWith(block);
   }
-} */
+}
 
 function importPrograms(main) {
   const section = main.querySelectorAll('.kgoui_container_simple3_column .kgo-container .kgo-row .kgo-card-set ul a');
@@ -250,15 +275,21 @@ function importPlanOptions(main, document) {
       if (ctas) {
         const links = ctas.querySelectorAll('a');
         const newDiv = document.createElement('div');
-
+        const linkCount = links.length;
         links.forEach((link) => {
           link.removeAttribute('class');
           link.removeAttribute('id');
           const linkDiv = document.createElement('div');
           if (link.getAttribute('role') === 'button') {
+            if (linkCount > 2) {
             const bTag = document.createElement('b');
             bTag.append(link.cloneNode(true));
             linkDiv.append(bTag);
+            } else {
+              const emTag = document.createElement('em');
+              emTag.append(link.cloneNode(true));
+              linkDiv.append(emTag);
+            }
             newDiv.append(linkDiv);
           } else {
             const plainLink = document.createElement('p');
@@ -478,6 +509,7 @@ export default {
     importTopBanner(main, document);
     importNetwork(main, document);
     importPrograms(main, document);
+    importSelectPlan(main, document);
     importPlanOptions(main, document);
     importPharmacy(main, document);
     importServices(main, document);
