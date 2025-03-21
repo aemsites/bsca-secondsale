@@ -11,7 +11,13 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
-const newhost = 'https://main--bsca-secondsale--aemsites.aem.page';
+
+/**
+ * Use on:
+ * Document pages
+ */
+
+const newhost = 'https://main--bsca-secondsale--aemsites.aem.page/group';
 
 function cleanUpHtml(main, document) {
   for (const el of main.querySelectorAll('a, b, em, i, small, span, strong')) {
@@ -41,7 +47,7 @@ function updateLocalLinks(main, document) {
 }
 
 function packageSection(heading, cells, _style) {
-  const headingText = document.createElement('h1');
+  const headingText = document.createElement('h3');
   headingText.textContent = heading.textContent;
   const newBlock = WebImporter.DOMUtils.createTable(cells, document);
   const newDiv = document.createElement('div');
@@ -57,7 +63,7 @@ function packageSection(heading, cells, _style) {
 
 function importHeading(main, document) {
   const currentHeading = main.querySelector('#kgoui_Rcontent_I0');
-  const headingText = document.createElement('h1');
+  const headingText = document.createElement('h2');
   headingText.textContent = currentHeading.textContent;
   main.prepend(headingText);
   currentHeading.remove();
@@ -91,6 +97,12 @@ function importTabs(main, document) {
           span.forEach((s) => {
             s.remove();
           });
+        }
+        const h2 = tabContent[count].querySelector('h2');
+        if (h2) {
+          const h5 = document.createElement('h5');
+          h5.textContent = h2.textContent;
+          h2.replaceWith(h5);
         }
         content.append(tabContent[count]);
         cells.push([tabLabel, content]);
@@ -157,7 +169,7 @@ export default {
       element: main,
       path: newPath,
       report: {
-        previewUrl: `https://main--blueshieldca--aemsites.hlx.page${newPath}`,
+        previewUrl: `https://main--blueshieldca--aemsites.aem.page/group${newPath}`,
       },
     }];
     transformationResult.push(...params.pdfsToDownload);
