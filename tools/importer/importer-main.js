@@ -43,7 +43,7 @@ function updateLocalLinks(main, document) {
 }
 
 function packageSection(heading, cells, _style) {
-  const headingText = document.createElement('h1');
+  const headingText = document.createElement('h2');
   headingText.textContent = heading.textContent;
   const newBlock = WebImporter.DOMUtils.createTable(cells, document);
   const newDiv = document.createElement('div');
@@ -154,20 +154,45 @@ function importTopBanner(main, document) {
   }
 }
 
-/* function importSelectPlan(main, document) {
+function importSelectPlan(main, document) {
   const section = [...document.querySelectorAll('.kgoui_container_simple3_column > .kgo-container > .kgo-row')].filter((row) => {
     const { children } = row;
     const colsMatch = children.length === 3
       && children[0].classList.contains('col-lg-4')
       && children[1].classList.contains('col-lg-4')
       && children[2].classList.contains('col-lg-4');
-    return colsMatch;
+    const cards = row.querySelectorAll('.kgo-card-set');
+    return colsMatch && cards.length == 0 && row.textContent.trim().length > 0;
   });
 
+  let sectionParent;
+  let heading;
   if (section.length > 0) {
-
+    sectionParent = section[0].parentNode.parentNode;
+    heading = sectionParent.previousElementSibling;
+    const cells = [['Columns (cols-4-4-4)']];
+    section.forEach((el) => {
+      const cols = el.querySelectorAll('.kgo-col');
+      const planHelpCols = [];
+      cols.forEach((col) => {
+        col.removeAttribute('class');
+        col.removeAttribute('id');
+        const colHeader = col.querySelector('.kgoui_html h2');
+        if (colHeader) {
+          const newColHeader = document.createElement('h5');
+          newColHeader.innerHTML = colHeader.innerHTML;
+          colHeader.replaceWith(newColHeader);
+        }
+        planHelpCols.push(col);
+      });
+      cells.push(planHelpCols);
+      el.parentNode.remove();
+    });
+    const block = packageSection(heading, cells);
+    heading.remove();
+    sectionParent.replaceWith(block);
   }
-} */
+}
 
 function importPrograms(main) {
   const section = main.querySelectorAll('.kgoui_container_simple3_column .kgo-container .kgo-row .kgo-card-set ul a');
@@ -238,7 +263,7 @@ function importPlanOptions(main, document) {
       costs.removeAttribute('id');
       const planHeader = costs.querySelector('h2');
       const newPlanHeader = document.createElement('h5');
-      newPlanHeader.append(planHeader.textContent);
+      newPlanHeader.innerHTML = planHeader.innerHTML;
       planHeader.replaceWith(newPlanHeader);
 
       const highlights = el.querySelector('.kgo-col:nth-child(2) .kgoui_html');
@@ -250,20 +275,26 @@ function importPlanOptions(main, document) {
       if (ctas) {
         const links = ctas.querySelectorAll('a');
         const newDiv = document.createElement('div');
-
+        const linkCount = links.length;
         links.forEach((link) => {
           link.removeAttribute('class');
           link.removeAttribute('id');
           const linkDiv = document.createElement('div');
           if (link.getAttribute('role') === 'button') {
-            const bTag = document.createElement('b');
-            bTag.append(link.cloneNode(true));
-            linkDiv.append(bTag);
+            if (linkCount > 2) {
+              const bTag = document.createElement('b');
+              bTag.append(link.cloneNode(true));
+              linkDiv.append(bTag);
+            } else {
+              const emTag = document.createElement('em');
+              emTag.append(link.cloneNode(true));
+              linkDiv.append(emTag);
+            }
             newDiv.append(linkDiv);
           } else {
-            const h5Button = document.createElement('h5');
-            h5Button.append(link.cloneNode(true));
-            linkDiv.append(h5Button);
+            const plainLink = document.createElement('p');
+            plainLink.append(link.cloneNode(true));
+            linkDiv.append(plainLink);
             newDiv.append(linkDiv);
           }
           link.remove();
@@ -478,6 +509,7 @@ export default {
     importTopBanner(main, document);
     importNetwork(main, document);
     importPrograms(main, document);
+    importSelectPlan(main, document);
     importPlanOptions(main, document);
     importPharmacy(main, document);
     importServices(main, document);
