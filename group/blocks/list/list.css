@@ -9,6 +9,10 @@
     margin-bottom: var(--spacing-xxl);
 }
 
+.list.border > div > div {
+    padding: 0 var(--spacing-l);
+}
+
 .list.border ul {
     list-style: none;
     padding-inline-start: 0;
@@ -16,7 +20,7 @@
 
 .list.border > div > div > ul > li {
     position: relative;
-    padding: var(--spacing-l) var(--spacing-l) 0;
+    padding: var(--spacing-l) 0 0;
 }
 
 .list.border ul:nth-child(2) {
@@ -61,7 +65,6 @@
     height: 100%;
     z-index: 1;
     color: var(--text-color);
-    padding-left: var(--spacing-l);
     text-decoration: none;
 }
 
