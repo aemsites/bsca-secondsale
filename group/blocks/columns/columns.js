@@ -31,7 +31,7 @@ export default function decorate(block) {
         const buttonWrapper = button.closest('p');
         if (buttonWrapper && buttonWrapper.children.length === 1) {
           buttonWrapper.classList.add('button-container');
-        }      
+        }
       });
     });
   });
