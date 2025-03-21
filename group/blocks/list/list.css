@@ -61,7 +61,6 @@
     height: 100%;
     z-index: 1;
     color: var(--link-color);
-    padding-left: var(--spacing-l);
 }
 
 @media (width >= 900px) {
