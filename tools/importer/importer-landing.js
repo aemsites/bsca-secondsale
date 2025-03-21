@@ -77,19 +77,20 @@ function importList(main, document) {
       const cells = [['List (border)']];
       listItems.forEach((li) => {
         const link = li.querySelector('a');
-        const newLink = document.createElement('a');
-        const linkTitle = link.querySelector('.kgo-title');
-        newLink.textContent = linkTitle.textContent;
-        newLink.href = link.href;
+        if (link) {
+          const newLink = document.createElement('a');
+          const linkTitle = link.querySelector('.kgo-title');
+          newLink.textContent = linkTitle.textContent;
+          newLink.href = link.href;
 
-        const subList = document.createElement('ul');
-        const subItems = document.createElement('li');
-        const linkDesc = link.querySelector('.kgo-description');
-        subItems.textContent = linkDesc.textContent;
-        subList.append(subItems);
+          const subList = document.createElement('ul');
+          const subItems = document.createElement('li');
+          const linkDesc = link.querySelector('.kgo-description');
+          subItems.textContent = linkDesc.textContent;
+          subList.append(subItems);
 
+        
         /*  Don't need to add icons to the list
-
         const icon = link.querySelector('.kgo-action-icon');
         if (icon) {
           const linkIcon = document.createElement('li');
@@ -101,13 +102,16 @@ function importList(main, document) {
           subList.append(linkIcon);
         } */
 
-        li.append(subList);
-        link.replaceWith(newLink);
-
-        const rootList = document.createElement('ul');
-        rootList.append(li);
-
-        cells.push([rootList]);
+          li.append(subList);
+          link.replaceWith(newLink);
+          const rootList = document.createElement('ul');
+          rootList.append(li);
+          cells.push([rootList]);
+        } else {
+          const listContent = document.createElement('div');
+          listContent.innerHTML = li.innerHTML;
+          cells.push([listContent]);
+        }
       });
 
       // header isn't a h1 heading. instead prepending the div with the heading
