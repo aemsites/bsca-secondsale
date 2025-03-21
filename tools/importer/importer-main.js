@@ -282,9 +282,9 @@ function importPlanOptions(main, document) {
           const linkDiv = document.createElement('div');
           if (link.getAttribute('role') === 'button') {
             if (linkCount > 2) {
-            const bTag = document.createElement('b');
-            bTag.append(link.cloneNode(true));
-            linkDiv.append(bTag);
+              const bTag = document.createElement('b');
+              bTag.append(link.cloneNode(true));
+              linkDiv.append(bTag);
             } else {
               const emTag = document.createElement('em');
               emTag.append(link.cloneNode(true));
