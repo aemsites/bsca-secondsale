@@ -25,6 +25,14 @@ export default function decorate(block) {
           picWrapper.classList.add('columns-img-col');
         }
       }
+      const buttons = col.querySelectorAll('p:not(.button-container) em a');
+      buttons.forEach((button) => {
+        button.classList.add('button', 'secondary');
+        const buttonWrapper = button.closest('p');
+        if (buttonWrapper && buttonWrapper.children.length === 1) {
+          buttonWrapper.classList.add('button-container');
+        }
+      });
     });
   });
 }
