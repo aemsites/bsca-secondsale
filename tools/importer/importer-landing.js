@@ -11,7 +11,13 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
-const newhost = 'https://main--bsca-secondsale--aemsites.aem.page';
+/**
+ * Use on:
+ * Langing pages
+ * New plan pages
+ */
+
+const newhost = 'https://main--bsca-secondsale--aemsites.aem.page/group';
 
 function updateLocalLinks(main, document) {
   const links = main.querySelectorAll('a');
@@ -37,6 +43,14 @@ function packageSection(heading, cells, _style) {
   }
   newDiv.append(document.createElement('hr'));
   return newDiv;
+}
+
+function importHeading(main, document) {
+  const currentHeading = main.querySelector('#kgoui_Rcontent_I0');
+  const headingText = document.createElement('h2');
+  headingText.textContent = currentHeading.textContent;
+  main.prepend(headingText);
+  currentHeading.remove();
 }
 
 function importList(main, document) {
@@ -75,16 +89,18 @@ function importList(main, document) {
           subItems.textContent = linkDesc.textContent;
           subList.append(subItems);
 
-          // const icon = link.querySelector('.kgo-action-icon');
-          // if (icon) {
-          //   const linkIcon = document.createElement('li');
-          //   if(icon.classList.contains('kgo-action-icon-drilldown')) {
-          //     linkIcon.textContent = ':arrow:';
-          //   } else if (icon.classList.contains('kgo-action-icon-external')) {
-          //     linkIcon.textContent = ':new-tab:';
-          //   }
-          //   subList.append(linkIcon);
-          // }
+        
+        /*  Don't need to add icons to the list
+        const icon = link.querySelector('.kgo-action-icon');
+        if (icon) {
+          const linkIcon = document.createElement('li');
+          if(icon.classList.contains('kgo-action-icon-drilldown')) {
+            linkIcon.textContent = ':arrow:';
+          } else if (icon.classList.contains('kgo-action-icon-external')) {
+            linkIcon.textContent = ':new-tab:';
+          }
+          subList.append(linkIcon);
+        } */
 
           li.append(subList);
           link.replaceWith(newLink);
@@ -166,7 +182,7 @@ function importDisclaimer(main) {
     const parts = section.innerHTML.split(/<br\s*\/?>\s*<br\s*\/?>/i).filter((part) => part.trim().length > 0);
     parts.forEach((p) => {
       const div = document.createElement('div');
-      const em = document.createElement('em');
+      const em = document.createElement('sub');
       em.append(p);
       div.append(em);
       newDiv.append(div);
@@ -206,6 +222,7 @@ export default {
     ]);
 
     updateLocalLinks(main, document);
+    importHeading(main, document);
     importDisclaimer(main);
     importColumns(main, document);
     importList(main, document);
@@ -219,7 +236,7 @@ export default {
       element: main,
       path: newPath,
       report: {
-        previewUrl: `https://main--blueshieldca--aemsites.hlx.page${newPath}`,
+        previewUrl: `https://main--blueshieldca--aemsites.aem.page/group${newPath}`,
       },
     }];
     transformationResult.push(...params.pdfsToDownload);
