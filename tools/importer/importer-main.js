@@ -391,34 +391,45 @@ function importServices(main, document) {
   if (section.length > 0) {
     sectionParent = section[0].parentNode.parentNode;
     heading = sectionParent.previousElementSibling;
-    const cells = [['Cards (icons)']];
+    const cells = [['Cards (list)']];
     section.forEach((el) => {
       const content = el.querySelectorAll('ul');
       content.forEach((ul) => {
         ul.removeAttribute('class');
         ul.removeAttribute('id');
         const items = ul.querySelectorAll('li');
+        const cardDiv = document.createElement('div');
         items.forEach((li) => {
-          const newLi = document.createElement('li');
           const link = li.querySelector('a');
           const icon = li.querySelector('img');
           const title = li.querySelector('.kgo-textblock .kgo-title');
           const description = li.querySelector('.kgo-textblock .kgo-description');
           if (link) {
+            const descText = description.textContent;
             link.append(title);
-            link.append(description);
-            newLi.append(link);
+            description.remove();
+            cardDiv.append(link);
+            cardDiv.append(descText);
           } else if (icon) {
-            newLi.append(icon);
-            newLi.append(title);
+            const imgSpan = document.createElement('span');
+            const imgPath = icon.getAttribute('src');
+            const imgFileName = imgPath.substring(imgPath.lastIndexOf('/') + 1); // Extract file name
+            const imgFileNameWithoutExt = imgFileName.substring(0, imgFileName.lastIndexOf('.')); // Remove extension
+            const decodedFileName = decodeURIComponent(imgFileNameWithoutExt); // Decode URL-encoded characters
+            const formattedFileName = decodedFileName
+              .toLowerCase()
+              .replace(/\(\d+\)/g, '').trim(); // Remove any string in the format "(number)"
+            imgSpan.textContent = ':'+formattedFileName+': ';
+            cardDiv.append(imgSpan);
+            cardDiv.append(title.textContent);
           } else {
-            newLi.append(title);
-            newLi.append(description);
+            cardDiv.append(title);
+            cardDiv.append(description);
           }
-          ul.append(newLi);
           li.remove();
         });
-        cells.push([ul]);
+        ul.remove();
+        cells.push([cardDiv]);
       });
       el.remove();
     });
