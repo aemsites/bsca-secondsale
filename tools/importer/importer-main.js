@@ -205,22 +205,30 @@ function importPrograms(main) {
       heading = sectionParent.previousElementSibling;
       const cells = [['Cards']];
       section.forEach((el) => {
-        const content = document.createElement('div');
+        const cardCols = [];
         const image = el.querySelector('img');
+        const imgElement = document.createElement('div');
+        imgElement.append(image);
+        cardCols.push(imgElement);
+
+
+        const content = document.createElement('div');
         const title = el.querySelector('.kgo-title');
         title.removeAttribute('class');
-        const description = el.querySelector('.kgo-description');
-        description.removeAttribute('class');
         const card = document.createElement('a');
         card.href = el.href;
-        card.append(image);
         card.append(title);
-        card.append(description);
         content.append(card);
-        cells.push([content]);
+        const description = el.querySelector('.kgo-description');
+        description.removeAttribute('class');
+        content.append(description);
+
+        cardCols.push(content);
+        cells.push(cardCols);
+        
       });
 
-      const block = packageSection(heading, cells, 'three-cards');
+      const block = packageSection(heading, cells);
       heading.remove();
       sectionParent.replaceWith(block);
     }
