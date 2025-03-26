@@ -32,6 +32,19 @@ function transformJson(response) {
 }
 
 export default function decorate(block) {
+  const textRow = block.querySelector('div');
+
+  let col1 = block;
+  let col2;
+  if (textRow) {
+    const cols = textRow.querySelectorAll('div');
+    if (cols.length === 2) {
+      [col1, col2] = cols;
+      col1.classList.add('col-left');
+      col2.classList.add('col-right');
+    }
+  }
+
   const path = window.location.pathname.split('/').slice(0, -1).join('/');
   fetch(`${path}/eva.json`)
     .then((response) => response.json())
@@ -44,7 +57,7 @@ export default function decorate(block) {
       iframe.width = '100%';
       iframe.height = '400';
       iframe.style = 'border: none;';
-      block.append(iframe);
+      col1.append(iframe);
     })
     .catch((error) => {
       // eslint-disable-next-line no-console

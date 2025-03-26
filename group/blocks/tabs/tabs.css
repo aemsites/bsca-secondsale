@@ -9,7 +9,7 @@
   overflow-x: auto;
   border-bottom: 1px solid var(--secondary-color);
   justify-content: space-between;
-  margin: 0 24px;
+  margin: 24px;
 }
 
 @media (width >= 600px) {
