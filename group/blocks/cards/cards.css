@@ -11,7 +11,7 @@
   gap: var(--spacing-m);
 }
 
-.cards > ul > li {
+.cards > ul > li:not(.no-border) {
   border: 1px solid #dadada;
   background-color: var(--background-color);
   border-radius: .5rem;
@@ -114,6 +114,10 @@
   object-fit: contain;
 }
 
+.cards .no-border .button-container em a {
+  margin: 0;
+}
+
 @media (width >= 600px) {
   .cards > ul {
     flex-direction: row;
@@ -159,5 +163,10 @@
 
   .cards.list > ul > li {
     width: calc(50% - 3px);
+  }
+
+  .two-cards .cards ul {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

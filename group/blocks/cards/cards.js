@@ -12,7 +12,20 @@ export default function decorate(block) {
     while (row.firstElementChild) li.append(row.firstElementChild);
     [...li.children].forEach((div) => {
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
+      else {
+        div.className = 'cards-card-body';
+        if (block.classList.contains('buttons')) {
+          // Check if the div contains only elements with links
+          const allLinks = [...div.children].every((child) => child.classList.contains('button-container'));
+          if (allLinks) {
+            // Add the 'buttons' class to all <a> tags
+            div.querySelectorAll('a').forEach((link) => {
+              link.classList.add('button');
+            });
+            div.parentElement.classList.add('no-border');
+          }
+        }
+      }
     });
     ul.append(li);
   });
