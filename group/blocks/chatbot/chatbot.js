@@ -46,7 +46,7 @@ export default function decorate(block) {
   }
 
   const path = window.location.pathname.split('/').slice(0, -1).join('/');
-  fetch(`${path}/eva.json`)
+  fetch(`${path}/chatbot.json`)
     .then((response) => response.json())
     .then((config) => {
       const qparam = JSON.stringify(transformJson(config));
