@@ -48,7 +48,9 @@ function updateLocalLinks(main, document) {
 
 function packageSection(heading, cells, _style) {
   const headingText = document.createElement('h3');
-  headingText.textContent = heading.textContent;
+  if (heading) {
+    headingText.textContent = heading.textContent;
+  }
   const newBlock = WebImporter.DOMUtils.createTable(cells, document);
   const newDiv = document.createElement('div');
   newDiv.append(headingText);
@@ -72,8 +74,9 @@ function importHeading(main, document) {
 function importTabs(main, document) {
   const section = [...main.querySelectorAll('.kgoui_container_multicolumn > .kgo-container > .kgo-row')].filter((row) => {
     const { children } = row;
+    const tabs = row.querySelectorAll('.kgoui_tabs');
     const colsMatch = children.length === 1
-      && children[0].classList.contains('col-lg-10');
+      && tabs.length > 0;
 
     return colsMatch;
   });
