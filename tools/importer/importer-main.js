@@ -205,22 +205,30 @@ function importPrograms(main) {
       heading = sectionParent.previousElementSibling;
       const cells = [['Cards']];
       section.forEach((el) => {
-        const content = document.createElement('div');
+        const cardCols = [];
         const image = el.querySelector('img');
+        const imgElement = document.createElement('div');
+        imgElement.append(image);
+        cardCols.push(imgElement);
+
+
+        const content = document.createElement('div');
         const title = el.querySelector('.kgo-title');
         title.removeAttribute('class');
-        const description = el.querySelector('.kgo-description');
-        description.removeAttribute('class');
         const card = document.createElement('a');
         card.href = el.href;
-        card.append(image);
         card.append(title);
-        card.append(description);
         content.append(card);
-        cells.push([content]);
+        const description = el.querySelector('.kgo-description');
+        description.removeAttribute('class');
+        content.append(description);
+
+        cardCols.push(content);
+        cells.push(cardCols);
+        
       });
 
-      const block = packageSection(heading, cells, 'three-cards');
+      const block = packageSection(heading, cells);
       heading.remove();
       sectionParent.replaceWith(block);
     }
@@ -383,34 +391,45 @@ function importServices(main, document) {
   if (section.length > 0) {
     sectionParent = section[0].parentNode.parentNode;
     heading = sectionParent.previousElementSibling;
-    const cells = [['Cards (icons)']];
+    const cells = [['Cards (list)']];
     section.forEach((el) => {
       const content = el.querySelectorAll('ul');
       content.forEach((ul) => {
         ul.removeAttribute('class');
         ul.removeAttribute('id');
         const items = ul.querySelectorAll('li');
+        const cardDiv = document.createElement('div');
         items.forEach((li) => {
-          const newLi = document.createElement('li');
           const link = li.querySelector('a');
           const icon = li.querySelector('img');
           const title = li.querySelector('.kgo-textblock .kgo-title');
           const description = li.querySelector('.kgo-textblock .kgo-description');
           if (link) {
+            const descText = description.textContent;
             link.append(title);
-            link.append(description);
-            newLi.append(link);
+            description.remove();
+            cardDiv.append(link);
+            cardDiv.append(descText);
           } else if (icon) {
-            newLi.append(icon);
-            newLi.append(title);
+            const imgSpan = document.createElement('span');
+            const imgPath = icon.getAttribute('src');
+            const imgFileName = imgPath.substring(imgPath.lastIndexOf('/') + 1); // Extract file name
+            const imgFileNameWithoutExt = imgFileName.substring(0, imgFileName.lastIndexOf('.')); // Remove extension
+            const decodedFileName = decodeURIComponent(imgFileNameWithoutExt); // Decode URL-encoded characters
+            const formattedFileName = decodedFileName
+              .toLowerCase()
+              .replace(/\(\d+\)/g, '').trim(); // Remove any string in the format "(number)"
+            imgSpan.textContent = ':'+formattedFileName+': ';
+            cardDiv.append(imgSpan);
+            cardDiv.append(title.textContent);
           } else {
-            newLi.append(title);
-            newLi.append(description);
+            cardDiv.append(title);
+            cardDiv.append(description);
           }
-          ul.append(newLi);
           li.remove();
         });
-        cells.push([ul]);
+        ul.remove();
+        cells.push([cardDiv]);
       });
       el.remove();
     });
