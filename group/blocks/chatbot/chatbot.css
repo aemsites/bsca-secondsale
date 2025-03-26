@@ -1,1 +1,40 @@
-/* empty */
+
+.chatbot > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbot > div > .col-right > p:first-child {
+    margin-top: var(--spacing-xxl);
+    border-bottom: 1px solid var(--dark-color);
+    padding-bottom: var(--spacing-l);
+}
+
+@media (width >= 600px) {
+    .chatbot > div {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: var(--spacing-xxl);
+    }
+
+   .fragment-wrapper .chatbot > div > div {
+        margin: 0;
+    }
+
+    .chatbot:not(.cols-equal) > div > .col-left {
+        flex: 3;
+    }
+
+    .chatbot:not(.cols-equal) > div > .col-right {
+        flex: 1;
+    }
+
+    .chatbot.cols-equal > div > .col-left {
+        flex: 1;
+    }
+
+    .chatbot.cols-equal > div > .col-right {
+        flex: 1;
+    }
+}
+

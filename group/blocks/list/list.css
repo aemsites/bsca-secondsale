@@ -45,7 +45,7 @@
 }
 
 .list.border > div > div > ul > li:has(a):hover {
-    color: var(--link-color);
+    color: var(--link-hover-color);
 }
 
 .list.border ul:nth-child(2) li:nth-child(2){
@@ -64,8 +64,7 @@
     width: fit-content;
     height: 100%;
     z-index: 1;
-    color: var(--text-color);
-    text-decoration: none;
+    color: var(--link-color);
 }
 
 @media (width >= 900px) {
@@ -75,8 +74,7 @@
 }
 
 .list.border > div > div > ul > li > a:hover {
-    text-decoration: none;
-    color: var(--link-color);
+    color: var(--link-hover-color);
 }
 
 .list.border > div > div > ul > li > a.external-link {
