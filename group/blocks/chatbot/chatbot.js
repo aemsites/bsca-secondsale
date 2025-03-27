@@ -11,7 +11,15 @@ function transformJson(response) {
   const result = {};
   const { mentalhealthexternalurl, altcareexternalurl } = placeholders;
   response.data.forEach((item) => {
-    const { key, name, network_id: networkId, mentalHealthExternalUrl, altCareExternalUrl, acupuncture_enabled, chiropractor_enabled } = item;
+    const {
+      key,
+      name,
+      network_id: networkId,
+      mentalHealthExternalUrl,
+      altCareExternalUrl,
+      acupuncture_enabled: acupunctureEnabled,
+      chiropractor_enabled: chiropractorEnabled,
+    } = item;
     if (key === 'plans' || key === 'dental_plans' || key === 'vision_plans') {
       if (!result[key]) {
         result[key] = [];
@@ -27,11 +35,11 @@ function transformJson(response) {
       }
       result[key].push({
         name,
-        'network_id': networkIdArray,
+        network_id: networkIdArray,
         mentalHealthExternalUrl: mentalHealthExternalUrl ? mentalhealthexternalurl : '',
         altCareExternalUrl: altCareExternalUrl ? altcareexternalurl : '',
-        acupuncture_enabled,
-        chiropractor_enabled,
+        acupuncture_enabled: acupunctureEnabled,
+        chiropractor_enabled: chiropractorEnabled,
       });
     } else {
       result[key] = name;

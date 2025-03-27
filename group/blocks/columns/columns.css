@@ -128,8 +128,15 @@
 
   .columns.striped-rows > div {
     align-items: flex-end;
-    padding: var(--spacing-s);
+    padding: 0 var(--spacing-s) var(--spacing-l);
+  }
 
+  .columns.striped-rows > div:has(> div:only-child) {
+    padding: var(--spacing-l) var(--spacing-s) 0;
+  }
+
+  .columns.striped-rows > div > div:last-child {
+    align-self: center;
   }
 
   .columns.columns-2-cols > div p {
