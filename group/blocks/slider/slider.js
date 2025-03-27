@@ -10,15 +10,15 @@ export default async function decorate(block) {
   const slides = block.querySelectorAll(':scope > div');
   slides.forEach((slide) => {
     const link = slide.querySelector('a');
-    const lParent = link.parentElement;
     const content = slide.querySelector('div');
     if (link) {
       link.classList.remove('button');
       slide.prepend(link);
-      link.replaceChildren(...content.childNodes);
+      const heading = content.querySelector('h2, h3, h4');
+      if (heading) {
+        link.replaceChildren(heading);
+      }
     }
-    lParent.remove();
-    content.remove();
   });
   let currentSlide = 0;
 
