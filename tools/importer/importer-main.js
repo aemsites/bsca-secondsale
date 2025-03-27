@@ -183,6 +183,19 @@ function importSelectPlan(main, document) {
           newColHeader.innerHTML = colHeader.innerHTML;
           colHeader.replaceWith(newColHeader);
         }
+        const iconCards = col.querySelectorAll('.kgoui_list_items .kgoui_object.kgo-list-item');
+        iconCards.forEach((iconCard) => {
+          const icon = iconCard.querySelector('img');
+          const iconLink = iconCard.querySelector('a');
+          const iconCardNew = document.createElement('div');
+          const newLink = document.createElement('a');
+          newLink.href = iconLink.href;
+          newLink.textContent = iconLink.textContent;
+          iconCardNew.append(icon);
+          iconCardNew.append(newLink);
+          col.append(iconCardNew);
+          iconCard.remove();
+        });
         planHelpCols.push(col);
       });
       cells.push(planHelpCols);
