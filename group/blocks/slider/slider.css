@@ -29,13 +29,13 @@
   display: block;
 }
 
-.slider > div > a {
+.slider > div > a > p {
   text-decoration: none;
-  color: var(--body-font-color);
+  color: var(--text-color);
 }
 
-.slider > div:hover {
- color: var(--link-color);
+.slider > div:hover > a > h4 {
+ color: var(--link-hover-color);
 }
 
 /* New styles for arrows below the slider */

@@ -42,10 +42,6 @@
   margin: 0 auto;
 }
 
-.fragment-wrapper .square-button .button-container {
-  text-align: center;
-}
-
 .fragment-wrapper .square-button .button-container a {
   color: var(--body-font-color);
   font-size: var(--heading-font-size-m);

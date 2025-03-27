@@ -36,10 +36,9 @@
 
 .columns.columns-2-cols > div p {
   font-size: var(--body-font-size-s);
-
 }
 
-.columns.columns-2-cols > div p strong {
+.columns.columns-2-cols > div p:first-of-type {
   font-size: var(--body-font-size-m);
 }
 
@@ -65,7 +64,7 @@
 
 .columns.striped-rows p.button-container a {
   margin: 0;
-} 
+}
 
 .columns.striped-rows p:not(.button-container) a {
   padding-left: 1.2rem;
@@ -83,6 +82,16 @@
 
 .columns .button-container a.secondary{
   margin: var(--spacing-xs) 0;
+}
+
+@media (width >= 600px) {
+  .columns.columns-2-cols > div p {
+    font-size: var(--body-font-size-m);
+  }
+
+  .columns.columns-2-cols > div p:first-of-type {
+    font-size: var(--body-font-size-l);
+  }
 }
 
 @media (width >= 900px) {
@@ -128,5 +137,13 @@
 
   .columns.striped-rows > div > div:last-child {
     align-self: center;
+  }
+
+  .columns.columns-2-cols > div p {
+    font-size: var(--body-font-size-m);
+  }
+
+  .columns.columns-2-cols > div p:first-of-type {
+    font-size: var(--body-font-size-l);
   }
 }

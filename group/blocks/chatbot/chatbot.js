@@ -1,3 +1,7 @@
+import { fetchPlaceholders } from '../../scripts/aem.js';
+
+const placeholders = await fetchPlaceholders();
+
 /**
  * Transforms the API response JSON into the required format
  * @param {Object} response - The original JSON response from the API
@@ -5,8 +9,9 @@
  */
 function transformJson(response) {
   const result = {};
+  const { mentalhealthexternalurl, altcareexternalurl } = placeholders;
   response.data.forEach((item) => {
-    const { key, name, network_id: networkId } = item;
+    const { key, name, network_id: networkId, mentalHealthExternalUrl, altCareExternalUrl, acupuncture_enabled, chiropractor_enabled } = item;
     if (key === 'plans' || key === 'dental_plans' || key === 'vision_plans') {
       if (!result[key]) {
         result[key] = [];
@@ -22,7 +27,11 @@ function transformJson(response) {
       }
       result[key].push({
         name,
-        networkId: networkIdArray,
+        'network_id': networkIdArray,
+        mentalHealthExternalUrl: mentalHealthExternalUrl ? mentalhealthexternalurl : '',
+        altCareExternalUrl: altCareExternalUrl ? altcareexternalurl : '',
+        acupuncture_enabled,
+        chiropractor_enabled,
       });
     } else {
       result[key] = name;
@@ -46,7 +55,7 @@ export default function decorate(block) {
   }
 
   const path = window.location.pathname.split('/').slice(0, -1).join('/');
-  fetch(`${path}/eva.json`)
+  fetch(`${path}/chatbot.json`)
     .then((response) => response.json())
     .then((config) => {
       const qparam = JSON.stringify(transformJson(config));
