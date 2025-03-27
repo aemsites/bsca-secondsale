@@ -85,8 +85,6 @@
 }
 
 .tabs .tabs-panel ul li a {
-  color: var(--text-color);
-  text-decoration: none;
   display: flex;
   justify-content: space-between;
   width: 100%;
