@@ -57,7 +57,7 @@ function importNav(main, document) {
     main.querySelector('.tpl-title').remove();
     main.querySelector('.tpl-user-menu').remove();
     main.querySelector('.tpl-nav-menu').remove();
-    main.querySelector('#tpl_message_center_link').remove();
+    main.querySelectorAll('.tpl-navbar-link').forEach((link) => link.remove());
     const navElements = main.querySelectorAll('.tpl-menu.kgo-is-section-menu');
     const mainNav = document.createElement('ul');
     navElements.forEach((navEl) => {
