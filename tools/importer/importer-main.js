@@ -248,9 +248,14 @@ function importPlanOptions(main, document) {
     // Check for the second condition: 1 child that is col-lg-12 and does NOT contain a <sup>
     const colsMatch2 = children.length === 1
       && children[0].classList.contains('col-lg-12')
-      && !children[0].querySelector('sup');
+      && !children[0].querySelector('sup') && !children[0].querySelector('.kgo-collapsible');
 
-    return colsMatch || colsMatch2;
+    const colsMatch3 = children.length === 3
+      && children[0].classList.contains('col-lg-4')
+      && children[1].classList.contains('col-lg-6')
+      && children[2].classList.contains('col-lg-2');
+
+    return colsMatch || colsMatch2 || colsMatch3;
   });
 
   let sectionParent;
