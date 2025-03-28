@@ -62,6 +62,23 @@ export default function decorate(block) {
     }
   }
 
+  // Split <p> tags based on two or more <br> tags
+  const paragraphs = block.querySelectorAll('p');
+  paragraphs.forEach((p) => {
+    if (p.innerHTML.includes('<br>')) {
+      // Use a regular expression to split on two or more <br> tags
+      const parts = p.innerHTML.split(/(?:<br\s*\/?>\s*){2,}/gi);
+      parts.forEach((part, index) => {
+        if (index === 0) {
+          p.innerHTML = part.trim();
+        } else {
+          const newP = document.createElement('p');
+          newP.innerHTML = part.trim();
+          p.after(newP);
+        }
+      });
+    }
+  });
   const path = window.location.pathname.split('/').slice(0, -1).join('/');
   fetch(`${path}/chatbot.json`)
     .then((response) => response.json())
