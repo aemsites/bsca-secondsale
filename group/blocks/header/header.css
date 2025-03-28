@@ -214,6 +214,10 @@ header nav .nav-sections ul > li > ul {
   margin-top: 0;
 }
 
+header nav .nav-sections ul > li > ul > li sub{
+  display: block;
+}
+
 header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
   font-weight: var(--font-weight-regular);
   padding: var(--spacing-s) 0 0;
