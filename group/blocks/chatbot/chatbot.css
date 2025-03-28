@@ -5,9 +5,12 @@
 }
 
 .chatbot > div > .col-right > p:first-child {
-    margin-top: var(--spacing-xxl);
-    border-bottom: 1px solid var(--dark-color);
-    padding-bottom: var(--spacing-l);
+    margin-top: var(--spacing-xxl);  
+}
+
+.chatbot > div > .col-right > p:not(:first-child) {
+    border-top: 1px solid var(--dark-color);
+    padding-top: var(--spacing-l);
 }
 
 @media (width >= 600px) {

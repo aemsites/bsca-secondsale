@@ -84,6 +84,25 @@
   margin: var(--spacing-xs) 0;
 }
 
+.columns > div .card-link {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--shade-color);
+  padding: var(--spacing-m);
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  align-items: center;
+  margin: var(--spacing-xl) 0;
+}
+
+.columns > div .card-link .col-card-icon {
+  width: 15%;
+}
+
+.columns > div .card-link .col-card-link {
+  width: 80%;
+}
+
 @media (width >= 600px) {
   .columns.columns-2-cols > div p {
     font-size: var(--body-font-size-m);
