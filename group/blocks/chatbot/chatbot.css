@@ -5,7 +5,7 @@
 }
 
 .chatbot > div > .col-right > p:first-child {
-    margin-top: var(--spacing-xxl);
+    margin-top: var(--spacing-l);
 }
 
 .chatbot > div > .col-right > p:not(:first-child) {
