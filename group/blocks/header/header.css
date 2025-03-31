@@ -39,7 +39,6 @@ header nav[aria-expanded='true'] {
   header nav {
     display: flex;
     justify-content: space-between;
-    gap: 0 32px;
     max-width: unset;
     padding: 0;
   }
@@ -187,7 +186,7 @@ header nav[aria-expanded='true'] .nav-sections {
   width: 100vw;
   background-color: var(--link-color);
   color:var(--background-color);
-  padding: 0 var(--spacing-xl);
+  padding: var(--spacing-xl);
 }
 
 header nav .nav-sections ul {
@@ -245,7 +244,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
     width: unset;
     background-color: unset;
     color:unset;
-    padding: 0 0 0 var(--spacing-xxl);
+    padding: 0;
   }
 
   header nav[aria-expanded='true'] .nav-sections ul > li {

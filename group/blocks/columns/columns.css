@@ -38,6 +38,7 @@
   border-radius: var(--border-radius-l);
   width: fit-content;
   margin: auto;
+  border: 1px solid var(--link-color);
 }
 
 .columns.columns-2-cols > div p {
@@ -167,7 +168,7 @@
   }
 
   .columns.striped-rows > div > div:last-child {
-    margin-top: 78px;
+    margin-top: 70px;
     margin-bottom: auto;
   }
 
