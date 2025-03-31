@@ -45,7 +45,7 @@
 }
 
 .hero.block .group-logo img {
-  max-height: 150px;
+  max-height: 50px;
 }
 
 @media (width >= 600px) {
