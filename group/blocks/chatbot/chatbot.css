@@ -5,7 +5,7 @@
 }
 
 .chatbot > div > .col-right > p:first-child {
-    margin-top: var(--spacing-xxl);  
+    margin-top: var(--spacing-xxl);
 }
 
 .chatbot > div > .col-right > p:not(:first-child) {
@@ -20,7 +20,11 @@
         gap: var(--spacing-xxl);
     }
 
-   .fragment-wrapper .chatbot > div > div {
+    .chatbot > div > .col-right > p:first-child {
+        margin-top: 2.5rem;
+   }
+
+    .fragment-wrapper .chatbot > div > div {
         margin: 0;
     }
 
