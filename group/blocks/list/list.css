@@ -2,15 +2,24 @@
     text-align: center;
 }
 
+.list-container.center-title h1,
+.list-container.center-title h2,
+.list-container.center-title h3,
+.list-container.center-title h4,
+.list-container.center-title h5,
+.list-container.center-title h6 {
+    text-align: center;
+}
+
 .list.border {
     background-color: var(--shade-color);
     border-radius: var(--border-radius-l);
     border: 1px solid var(--secondary-color);
-    margin-bottom: var(--spacing-xxl);
+    margin: var(--spacing-xxl);
 }
 
 .list.border > div > div {
-    padding: 0 var(--spacing-l);
+    padding: var(--spacing-s) var(--spacing-l);
 }
 
 .list.border ul {

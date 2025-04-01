@@ -114,4 +114,15 @@
   .fragment-wrapper > .three-col:nth-child(2) {
     width: 20%;
   }
+
+  .fragment-container.two-col > .fragment-wrapper {
+    display: flex;
+    gap: var(--spacing-xxl);
+
+  }
+
+  .fragment-container.two-col > .fragment-wrapper > div {
+    flex: 1;
+    max-width: 50%;
+  }
 }
