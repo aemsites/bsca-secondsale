@@ -20,9 +20,33 @@ export default function decorate(block) {
       const pic = col.querySelector('picture');
       if (pic) {
         const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
+        if (picWrapper && picWrapper.children.length === 1
+          && pic.parentNode.children.length === 1) {
           // picture is only content in column
           picWrapper.classList.add('columns-img-col');
+        } else if (picWrapper && picWrapper.children.length === 2) {
+          const picParentNextSibling = picWrapper.nextElementSibling;
+          if (picParentNextSibling) {
+            const link = picParentNextSibling.querySelector('a');
+            if (link) {
+              const linkWrapper = document.createElement('a');
+              linkWrapper.href = link.href;
+              linkWrapper.appendChild(pic);
+              picWrapper.replaceWith(linkWrapper);
+              linkWrapper.classList.add('columns-img-col');
+            }
+          }
+        } else if (picWrapper) {
+          // check if an icon and a link are present in the same line.
+          const images = picWrapper.querySelectorAll('picture');
+          images.forEach((img) => {
+            const nextSibling = img.nextElementSibling;
+            if (nextSibling && nextSibling.tagName === 'A') {
+              img.classList.add('col-card-icon');
+              nextSibling.classList.add('col-card-link');
+              img.parentNode.classList.add('card-link');
+            }
+          });
         }
       }
       const buttons = col.querySelectorAll('p:not(.button-container) em a');

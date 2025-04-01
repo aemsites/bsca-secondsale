@@ -8,6 +8,12 @@
   margin: 0 var(--spacing-xl);
 }
 
+.columns ul {
+  margin-inline-start: 0;
+  margin-block-start: 0;
+  padding-inline-start: 24px;
+}
+
 .columns img {
   width: 100%;
 }
@@ -32,6 +38,7 @@
   border-radius: var(--border-radius-l);
   width: fit-content;
   margin: auto;
+  border: 1px solid var(--link-color);
 }
 
 .columns.columns-2-cols > div p {
@@ -80,8 +87,31 @@
   padding: 0 var(--spacing-l) var(--spacing-l);
 }
 
+.columns.striped-rows > div > div:last-child {
+  margin-top: 0;
+}
+
 .columns .button-container a.secondary{
   margin: var(--spacing-xs) 0;
+}
+
+.columns > div .card-link {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--shade-color);
+  padding: var(--spacing-m);
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  align-items: center;
+  margin: var(--spacing-xl) 0;
+}
+
+.columns > div .card-link .col-card-icon {
+  width: 15%;
+}
+
+.columns > div .card-link .col-card-link {
+  width: 80%;
 }
 
 @media (width >= 600px) {
@@ -116,10 +146,12 @@
 
   .columns > div > .flex-4 {
     flex: 4;
+    margin-bottom: auto;
   }
 
   .columns > div > .flex-5 {
     flex: 5;
+    margin-top: 47px;
   }
 
   .columns > div > .flex-6 {
@@ -136,7 +168,8 @@
   }
 
   .columns.striped-rows > div > div:last-child {
-    align-self: center;
+    margin-top: 40px;
+    margin-bottom: auto;
   }
 
   .columns.columns-2-cols > div p {

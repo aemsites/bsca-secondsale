@@ -1,6 +1,18 @@
 // eslint-disable-next-line import/no-unresolved
 import { toClassName } from '../../scripts/aem.js';
 
+function activateTabFromURL() {
+  const { hash } = window.location;
+  if (hash) {
+    const tab = document.querySelector(`button[id="${hash.replace('#', '')}"]`);
+    if (tab) {
+      tab.click();
+    }
+  }
+}
+
+window.addEventListener('load', activateTabFromURL);
+
 export default async function decorate(block) {
   // build tablist
   const tablist = document.createElement('div');

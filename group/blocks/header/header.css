@@ -39,7 +39,6 @@ header nav[aria-expanded='true'] {
   header nav {
     display: flex;
     justify-content: space-between;
-    gap: 0 32px;
     max-width: unset;
     padding: 0;
   }
@@ -145,10 +144,10 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 /* brand */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
+  padding: 1rem;
 }
 
 
@@ -163,7 +162,7 @@ header nav .nav-brand .icon img {
 }
 
 header nav .nav-brand .icon.icon-multi-state-logo img {
-  width: 260px;
+  width: 200px;
 }
 
 header .nav-brand div:first-of-type {
@@ -187,7 +186,7 @@ header nav[aria-expanded='true'] .nav-sections {
   width: 100vw;
   background-color: var(--link-color);
   color:var(--background-color);
-  padding: 0 var(--spacing-xl);
+  padding: var(--spacing-xl);
 }
 
 header nav .nav-sections ul {
@@ -214,12 +213,21 @@ header nav .nav-sections ul > li > ul {
   margin-top: 0;
 }
 
+header nav .nav-sections ul > li > ul > li sub{
+  display: block;
+}
+
 header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
   font-weight: var(--font-weight-regular);
   padding: var(--spacing-s) 0 0;
 }
 
 @media (width >= 900px) {
+  header .nav-brand {
+    padding: 0 2.5rem;
+    margin: 0 auto;
+  }
+
   header nav .nav-brand picture img {
     width: 219px;
   }
@@ -236,7 +244,7 @@ header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
     width: unset;
     background-color: unset;
     color:unset;
-    padding: 0 0 0 var(--spacing-xxl);
+    padding: 0;
   }
 
   header nav[aria-expanded='true'] .nav-sections ul > li {
