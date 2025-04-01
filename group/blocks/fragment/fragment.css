@@ -123,5 +123,6 @@
 
   .fragment-container.two-col > .fragment-wrapper > div {
     flex: 1;
+    max-width: 50%;
   }
 }
