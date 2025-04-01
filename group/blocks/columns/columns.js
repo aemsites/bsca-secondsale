@@ -25,7 +25,7 @@ export default function decorate(block) {
           // picture is only content in column
           picWrapper.classList.add('columns-img-col');
         } else if (picWrapper && picWrapper.children.length === 2) {
-          const picParentNextSibling = picWrapper.nextElementSibling;
+          const picParentNextSibling = picWrapper.previousElementSibling;
           if (picParentNextSibling) {
             const link = picParentNextSibling.querySelector('a');
             if (link) {

@@ -3,6 +3,7 @@
   width: 300px;
   font-family: Arial, sans-serif;
   margin: var(--spacing-l) 0!important;
+  font-size: var(--heading-font-size-m);
 }
 
 .select > div > div > p {

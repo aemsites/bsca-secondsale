@@ -238,7 +238,7 @@ function importPrograms(main) {
 
         cardCols.push(content);
         cells.push(cardCols);
-        
+
       });
 
       const block = packageSection(heading, cells);
@@ -503,7 +503,7 @@ function importDisclaimer(main) {
     const parts = section.innerHTML.split(/<br\s*\/?>\s*<br\s*\/?>/i).filter((part) => part.trim().length > 0);
     parts.forEach((p) => {
       const div = document.createElement('div');
-      const em = document.createElement('em');
+      const em = document.createElement('sub');
       em.append(p);
       div.append(em);
       newDiv.append(div);
