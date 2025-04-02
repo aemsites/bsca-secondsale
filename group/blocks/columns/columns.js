@@ -36,17 +36,6 @@ export default function decorate(block) {
               linkWrapper.classList.add('columns-img-col');
             }
           }
-        } else if (picWrapper) {
-          // check if an icon and a link are present in the same line.
-          const images = picWrapper.querySelectorAll('picture');
-          images.forEach((img) => {
-            const nextSibling = img.nextElementSibling;
-            if (nextSibling && nextSibling.tagName === 'A') {
-              img.classList.add('col-card-icon');
-              nextSibling.classList.add('col-card-link');
-              img.parentNode.classList.add('card-link');
-            }
-          });
         }
       }
       const buttons = col.querySelectorAll('p:not(.button-container) em a');
@@ -55,6 +44,32 @@ export default function decorate(block) {
         const buttonWrapper = button.closest('p');
         if (buttonWrapper && buttonWrapper.children.length === 1) {
           buttonWrapper.classList.add('button-container');
+        }
+      });
+
+      const icons = col.querySelectorAll('.icon');
+      icons.forEach((icon) => {
+        const nextSibling = icon.nextElementSibling;
+        if (nextSibling && nextSibling.tagName === 'A') {
+          const parentElement = icon.parentNode;
+          parentElement.classList.add('card-link');
+        } else {
+          const parentContainer = icon.closest('p');
+          const iconTitle = parentContainer.nextElementSibling;
+          if (iconTitle && iconTitle.tagName === 'H4') {
+            const newContainer = document.createElement('div');
+            newContainer.classList.add('icon-container');
+            newContainer.appendChild(icon);
+            const newTitleContainer = document.createElement('div');
+            newTitleContainer.classList.add('icon-title');
+            const subTitle = iconTitle.nextElementSibling;
+            newTitleContainer.appendChild(iconTitle);
+            if (subTitle && subTitle.tagName === 'P' && subTitle.querySelector('EM')) {
+              newTitleContainer.appendChild(subTitle);
+            }
+            newContainer.appendChild(newTitleContainer);
+            parentContainer.replaceWith(newContainer);
+          }
         }
       });
     });

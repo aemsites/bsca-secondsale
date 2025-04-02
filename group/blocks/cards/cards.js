@@ -1,10 +1,12 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  const links = block.querySelectorAll('a');
-  links.forEach((tag) => {
-    tag.classList.remove('button');
-  });
+  if (!block.classList.contains('buttons')) {
+    const links = block.querySelectorAll('a');
+    links.forEach((tag) => {
+      tag.classList.remove('button');
+    });
+  }
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -18,10 +20,6 @@ export default function decorate(block) {
           // Check if the div contains only elements with links
           const allLinks = [...div.children].every((child) => child.classList.contains('button-container'));
           if (allLinks) {
-            // Add the 'buttons' class to all <a> tags
-            div.querySelectorAll('a').forEach((link) => {
-              link.classList.add('button');
-            });
             div.parentElement.classList.add('no-border');
           }
         }
