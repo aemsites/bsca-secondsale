@@ -72,23 +72,35 @@
 }
 
 @media (width >= 900px) {
-  .fragment-wrapper .two-col {
+
+  .fragment-container.three-col > .fragment-wrapper {
     display: flex;
+    flex-direction: row;
+    gap: var(--spacing-m);
+  }
+
+  .fragment-container.two-col > .fragment-wrapper {
+    display: flex;
+    gap: var(--spacing-xxl);
+
+  }
+
+  .fragment-container.two-col.display-reverse > .fragment-wrapper {
     flex-direction: row-reverse;
   }
 
-  .fragment-wrapper .two-col > div {
+  .fragment-container.two-col .fragment-wrapper .section > div {
     padding-left: var(--spacing-m);
     padding-right: var(--spacing-m);
     padding-bottom: var(--spacing-l);
   }
 
-  .fragment-wrapper > .two-col > div:first-child {
-    width: 66.667%;
+  .fragment-container.two-col.width-70-30 .fragment-wrapper > div:first-child {
+     max-width: 70%;
   }
 
-  .fragment-wrapper > .two-col > div:nth-child(2) {
-    width: 33.333%;
+  .fragment-container.two-col.width-70-30 .fragment-wrapper > div:nth-child(2) {
+    max-width: 30%;
   }
 
   .fragment-wrapper div.section:not(.full-width) {
@@ -97,28 +109,6 @@
 
   .fragment-wrapper .indent .default-content-wrapper {
     padding-left: var(--spacing-xxl);
-  }
-}
-
-@media (width >= 900px) {
-  .fragment-wrapper:has(.three-col) {
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-m);
-  }
-
-  .fragment-wrapper > .three-col {
-    width: 40%;
-  }
-
-  .fragment-wrapper > .three-col:nth-child(2) {
-    width: 20%;
-  }
-
-  .fragment-container.two-col > .fragment-wrapper {
-    display: flex;
-    gap: var(--spacing-xxl);
-
   }
 
   .fragment-container.two-col > .fragment-wrapper > div {
