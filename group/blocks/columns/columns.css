@@ -2,6 +2,10 @@
   padding: var(--spacing-xl) 0;
 }
 
+.columns.shaded-rows {
+  padding: 0;
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -53,8 +57,28 @@
   position: relative;
 }
 
+.columns.shaded-rows > div {
+  position: relative;
+}
+
+.columns > div .card-link a {
+  width: 80%;
+}
+
 .columns.striped-rows > div > div > h5 > a {
   text-decoration: underline
+}
+
+.columns.shaded-rows > div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: var(--shade-color);
+  z-index: -1;
+  transform: translateX(-50%);
+  left: 50%;
 }
 
 .columns.striped-rows > div:nth-of-type(odd)::before {
@@ -106,12 +130,37 @@
   margin: var(--spacing-xl) 0;
 }
 
-.columns > div .card-link .col-card-icon {
+.columns > div .card-link .icon {
   width: 15%;
+  height: auto;
 }
 
-.columns > div .card-link .col-card-link {
-  width: 80%;
+.columns > div .card-link .icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.columns .icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.columns > div .icon-container .icon {
+  width: 100px;
+  height: fit-content;
+  max-width: 100px;
+  padding: 0 var(--spacing-s);
+  flex: 1;
+}
+
+.columns > div .icon-container .icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.columns .icon-container .icon-title {
+  padding: 0 var(--spacing-s);
+  flex: 4;
 }
 
 @media (width >= 600px) {
