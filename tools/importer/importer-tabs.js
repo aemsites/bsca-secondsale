@@ -71,6 +71,67 @@ function importHeading(main, document) {
   currentHeading.remove();
 }
 
+function importAccordion(main, document) {
+  const section = [...main.querySelectorAll('.kgoui_container_multicolumn > .kgo-container > .kgo-row')].filter((row) => {
+    const { children } = row;
+    const accordions = row.querySelectorAll('.kgo-collapsible');
+    const colsMatch = children.length >= 1
+      && accordions.length > 0;
+
+    return colsMatch;
+  });
+
+  let sectionParent;
+
+  if (section.length > 0) {
+    section.forEach((el) => {
+      const cells = [['Accordion(lists)']];
+      sectionParent = el.parentNode.parentNode;
+      
+      // const tabsHeading = el.querySelector('.kgo-block-heading-header');
+      const accordions = el.querySelectorAll('.kgo-collapsible');
+      // const tabContent = el.querySelectorAll('.kgo-tab-content');
+      let count = 0;
+      accordions.forEach((accordion) => {
+        const accordionLabel = accordion.querySelector('.kgo-collapsible-heading-content .kgo-title');
+        const label = document.createElement('div');
+        label.append(accordionLabel.innerText);
+        
+        const content = document.createElement('div');
+        
+        const button = accordion.querySelector('.kgo-collapsible-content > a[role="button"]');
+
+        if (button) {
+          const buttonWrapper = document.createElement('em');
+          buttonWrapper.append(button);
+          content.append(buttonWrapper);
+        }
+
+        const lists = accordion.querySelectorAll('.kgo-collapsible-content .kgoui_list > ul');
+        lists.forEach((list) => {
+          const listWrapper = document.createElement('div');
+          const listIcons = list.querySelectorAll('li .kgo-action-icon');
+          listIcons.forEach(icon => icon.remove());
+          listWrapper.append(list);
+          content.append(listWrapper);
+    
+          content.append(document.createElement('br'));
+          content.append(document.createElement('br'));
+          content.append(document.createElement('br'));
+          const emptyDiv = document.createElement('h5');
+          emptyDiv.innerHTML = '&nbsp;';
+          content.append(emptyDiv);
+          
+
+        });
+        cells.push([label, content]);
+      });
+      const block = packageSection('', cells);
+      sectionParent.replaceWith(block);
+    });
+  }
+}
+
 function importTabs(main, document) {
   const section = [...main.querySelectorAll('.kgoui_container_multicolumn > .kgo-container > .kgo-row')].filter((row) => {
     const { children } = row;
@@ -161,6 +222,7 @@ export default {
     updateLocalLinks(main, document);
     importHeading(main, document);
     importTabs(main, document);
+    importAccordion(main, document);
     createFragment('glossary', main, document);
 
     WebImporter.rules.createMetadata(main, document);

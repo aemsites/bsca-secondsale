@@ -68,3 +68,28 @@
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
 }
+
+.accordion.lists .button {
+  padding: var(--spacing-s) var(--spacing-s);
+  border-radius: var(--border-radius-l);
+}
+
+.accordion.lists ul {
+  background-color: var(--shade-color);
+  border-radius: var(--border-radius-l);
+  border: 1px solid var(--secondary-color);
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.accordion.lists ul > li {
+  padding: var(--spacing-l) var(--spacing-l);
+}
+
+.accordion.lists ul > li > strong {
+  font-size: var(--heading-font-size-m);
+}
+
+.accordion.lists ul > li:not(:last-child) {
+  border-bottom: 1px solid var(--secondary-color);
+}
