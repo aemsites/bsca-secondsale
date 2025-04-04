@@ -2,6 +2,12 @@
   max-width: unset!important;
   border-bottom: 1px solid #ededed;
   text-align: center;
+  padding: 0;
+}
+
+.banner.shaded {
+  padding: var(--spacing-xxl);
+  background-color: var(--shade-color);
 }
 
 .banner.block h5 {
