@@ -38,6 +38,7 @@
   overflow: unset;
   white-space: unset;
   transition: background-color 0.2s;
+  max-width: 300px;
 }
 
 .tabs .tabs-list button p {

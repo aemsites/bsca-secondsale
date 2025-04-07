@@ -1,5 +1,9 @@
+.section.columns-container {
+  margin: 0;
+}
+
 .columns:not(.striped-rows) {
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-l) 0 0 0;
 }
 
 .columns.shaded-rows {
@@ -51,6 +55,10 @@
 
 .columns.columns-2-cols > div p:first-of-type {
   font-size: var(--body-font-size-m);
+}
+
+.columns.columns-3-cols > div > div h5:first-child {
+  margin-top: 0;
 }
 
 .columns.striped-rows > div {
@@ -121,18 +129,19 @@
 
 .columns > div .card-link {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: var(--shade-color);
   padding: var(--spacing-m);
   border: 1px solid var(--secondary-color);
   border-radius: var(--border-radius);
   align-items: center;
-  margin: var(--spacing-xl) 0;
+  margin: var(--spacing-l) 0;
 }
 
 .columns > div .card-link .icon {
-  width: 15%;
+  width: 10%;
   height: auto;
+  margin-top: auto;
 }
 
 .columns > div .card-link .icon img {
@@ -213,11 +222,11 @@
   }
 
   .columns.striped-rows > div:has(> div:only-child) {
-    padding: var(--spacing-l) var(--spacing-s) 0;
+    padding: var(--spacing-m) var(--spacing-s) 0;
   }
 
   .columns.striped-rows > div > div:last-child {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: auto;
   }
 
@@ -227,5 +236,13 @@
 
   .columns.columns-2-cols > div p:first-of-type {
     font-size: var(--body-font-size-l);
+  }
+
+  .columns > div .card-link:first-child {
+    margin-top: 0;
+  }
+  
+  .columns > div .card-link:last-child {
+    margin-bottom: 0;
   }
 }
