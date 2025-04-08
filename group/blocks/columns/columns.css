@@ -63,6 +63,7 @@
 
 .columns.striped-rows > div {
   position: relative;
+  padding-top: var(--spacing-m);
 }
 
 .columns.shaded-rows > div {
@@ -218,11 +219,11 @@
 
   .columns.striped-rows > div {
     align-items: flex-end;
-    padding: 0 var(--spacing-s) var(--spacing-l);
+    padding: var(--spacing-m) var(--spacing-s) var(--spacing-l);
   }
 
   .columns.striped-rows > div:has(> div:only-child) {
-    padding: var(--spacing-m) var(--spacing-s) 0;
+    padding: 0 var(--spacing-s);
   }
 
   .columns.striped-rows > div > div:last-child {
