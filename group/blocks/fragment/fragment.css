@@ -34,7 +34,7 @@
   min-width: 250px;
 }
 
-.fragment-wrapper .border {
+.fragment-wrapper .border:not(.list, .fragment-container) {
   border-radius: var(--border-radius-l);
   border: 1px solid currentcolor;
   padding: var(--spacing-l);
@@ -52,6 +52,17 @@
 .fragment-wrapper .square-button .button-container a:hover {
   color: var(--link-color);
   background-color: #f1eeee;
+}
+
+.fragment-wrapper .rounded-border {
+  align-self: flex-end;
+}
+
+.fragment-wrapper .rounded-border img {
+  border-radius: var(--border-radius-l);
+  max-width: 80%;
+  display: block;
+  margin: 0 auto;
 }
 
 .fragment-wrapper .indent {
@@ -81,7 +92,7 @@
   .fragment-container.two-col > .fragment-wrapper {
     display: flex;
     gap: var(--spacing-xxl);
-
+    margin: var(--spacing-m) auto 0;
   }
 
   .fragment-container.two-col.display-reverse > .fragment-wrapper {
@@ -93,19 +104,31 @@
     max-width: 50%;
   }
 
+  .fragment-container.two-col > .fragment-wrapper > div h5 {
+    margin-top: 0;
+  }
+
   .fragment-container.two-col .fragment-wrapper .section > div {
     padding-left: var(--spacing-m);
     padding-right: var(--spacing-m);
     padding-bottom: var(--spacing-l);
   }
 
-  .fragment-container.two-col.width-70-30 .fragment-wrapper > div:first-child {
+  .fragment-container.two-col.width-70-30 > .fragment-wrapper > div:first-child {
      max-width: 70%;
   }
 
-  .fragment-container.two-col.width-70-30 .fragment-wrapper > div:nth-child(2) {
+  .fragment-container.two-col.width-70-30 > .fragment-wrapper > div:nth-child(2) {
     max-width: 30%;
   }
+
+  .fragment-container.two-col.width-60-40 > .fragment-wrapper > div:first-child {
+    max-width: 60%;
+ }
+
+ .fragment-container.two-col.width-60-40 > .fragment-wrapper > div:nth-child(2) {
+   max-width: 40%;
+ }
 
   .fragment-wrapper div.section:not(.full-width) {
     margin: 0 auto;

@@ -1,4 +1,4 @@
-.banner-wrapper {
+.banner-container > div.banner-wrapper {
   max-width: unset!important;
   border-bottom: 1px solid #ededed;
   text-align: center;
@@ -6,8 +6,16 @@
 }
 
 .banner.shaded {
-  padding: var(--spacing-xxl);
   background-color: var(--shade-color);
+}
+
+.banner.shaded h2,
+.banner.shaded h3,
+.banner.shaded h4,
+.banner.shaded h5,
+.banner.shaded h6 {
+  margin: 0;
+  padding: var(--spacing-xxl) 0;
 }
 
 .banner.block h5 {
