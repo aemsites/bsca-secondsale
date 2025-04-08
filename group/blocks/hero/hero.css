@@ -61,6 +61,11 @@
     font-size: var(--heading-font-size-m);
   }
 
+  .hero.block h4 {
+    font-size: var(--heading-font-size-m);
+    font-weight: var(--font-weight-regular);
+  }
+
   .hero.block > div {
     grid-template-columns: 1fr 1fr;
   }
@@ -77,6 +82,11 @@
 
   .hero.block h3 {
     font-size: var(--heading-font-size-m);
+  }
+
+  .hero.block h4 {
+    font-size: var(--heading-font-size-m);
+    font-weight: var(--font-weight-regular);
   }
 
   .hero.block > div > div:last-of-type {
