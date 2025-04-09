@@ -329,6 +329,10 @@ a .icon-new-tab {
   padding: 0 4px;
 }
 
+.section > div > p:has(sub) {
+  margin: 0 24px;
+}
+
 /* screen reader only */
 .sr-only {
   position: absolute;

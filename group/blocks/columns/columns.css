@@ -210,7 +210,7 @@
 
   .columns > div > .flex-5 {
     flex: 5;
-    margin-top: 47px;
+    margin-top: 32px;
   }
 
   .columns > div > .flex-6 {
@@ -242,7 +242,7 @@
   .columns > div .card-link:first-child {
     margin-top: 0;
   }
-  
+
   .columns > div .card-link:last-child {
     margin-bottom: 0;
   }
