@@ -32,8 +32,9 @@ export default function decorate(block) {
               const linkWrapper = document.createElement('a');
               linkWrapper.href = link.href;
               linkWrapper.appendChild(pic);
-              picWrapper.replaceWith(linkWrapper);
-              linkWrapper.classList.add('columns-img-col');
+              picWrapper.innerHTML = '';
+              picWrapper.appendChild(linkWrapper);
+              picWrapper.classList.add('columns-img-col');
             }
           }
         }
