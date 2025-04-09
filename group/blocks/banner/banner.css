@@ -9,6 +9,10 @@
   background-color: var(--shade-color);
 }
 
+.banner.shaded p {
+  padding: var(--spacing-m) 0;
+}
+
 .banner.shaded h2,
 .banner.shaded h3,
 .banner.shaded h4,

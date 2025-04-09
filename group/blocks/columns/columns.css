@@ -61,6 +61,10 @@
   margin-top: 0;
 }
 
+.columns.columns-3-cols > div > div a.button.secondary {
+  margin: var(--spacing-xs) 0;
+}
+
 .columns.striped-rows > div {
   position: relative;
   padding-top: var(--spacing-m);
@@ -142,12 +146,14 @@
 .columns > div .card-link .icon {
   width: 10%;
   height: auto;
-  margin-top: auto;
+  display: flex;
+  align-items: center;
 }
 
 .columns > div .card-link .icon img {
   width: 100%;
   height: 100%;
+  max-width: 36px;
 }
 
 .columns .icon-container {
