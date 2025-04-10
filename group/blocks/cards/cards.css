@@ -132,7 +132,6 @@
   }
 
   .cards.list > ul {
-    padding: 24px;
     flex-direction: column;
   }
 
@@ -176,7 +175,7 @@
   .cards.secondary > ul > li > .cards-card-body p:nth-child(3) {
     font-size: var(--body-font-size-m);
   }
-  
+
   .three-cards .cards ul {
     flex-wrap: wrap;
     justify-content: center;
