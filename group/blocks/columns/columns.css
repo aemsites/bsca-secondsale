@@ -7,7 +7,7 @@
 }
 
 .columns.shaded-rows {
-  padding: 0;
+  padding: var(--spacing-m) 0;
 }
 
 .columns > div {
@@ -51,6 +51,11 @@
 
 .columns.columns-2-cols > div p {
   font-size: var(--body-font-size-s);
+}
+
+.columns .icon-container .icon-title p,
+.columns .icon-container .icon-title h4 {
+  margin: 0;
 }
 
 .columns.columns-2-cols > div p:first-of-type {
