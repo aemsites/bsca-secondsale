@@ -7,7 +7,7 @@
 }
 
 .columns.shaded-rows {
-  padding: 0;
+  padding: var(--spacing-m) 0;
 }
 
 .columns > div {
@@ -177,6 +177,11 @@
 .columns .icon-container .icon-title {
   padding: 0 var(--spacing-s);
   flex: 4;
+}
+
+.columns .icon-container .icon-title p,
+.columns .icon-container .icon-title h4 {
+  margin: 0;
 }
 
 @media (width >= 600px) {

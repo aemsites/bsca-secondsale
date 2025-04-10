@@ -64,6 +64,10 @@
   margin: 0 auto;
 }
 
+.fragment-wrapper .centered-image p:has( > picture) {
+  text-align: center;
+}
+
 .fragment-wrapper .indent {
   padding: 0 10%;
 }
@@ -86,6 +90,15 @@
     display: flex;
     flex-direction: row;
     gap: var(--spacing-m);
+  }
+
+  .fragment-container.three-col.spacing-l > .fragment-wrapper {
+    margin-top: var(--spacing-xxl);
+    gap: var(--spacing-xxl);
+  }
+
+  .fragment-container.three-col.spacing-l > .fragment-wrapper > div {
+    max-width: 300px;
   }
 
   .fragment-container.two-col > .fragment-wrapper {

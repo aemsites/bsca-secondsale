@@ -181,4 +181,18 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+
+  .two-cards .cards.list > ul {
+    justify-content: flex-start;
+  }
+
+  .three-cards .cards ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .three-cards .cards > ul > li {
+    max-width: 300px;
+    margin: var(--spacing-xl);
+  }
 }
