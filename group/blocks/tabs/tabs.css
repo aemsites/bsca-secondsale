@@ -85,11 +85,6 @@
   border-bottom: 1px solid var(--secondary-color);
 }
 
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
 .tabs .tabs-panel ul li:hover a {
   color: var(--link-color);
 }
