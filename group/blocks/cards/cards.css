@@ -176,6 +176,11 @@
   .cards.secondary > ul > li > .cards-card-body p:nth-child(3) {
     font-size: var(--body-font-size-m);
   }
+  
+  .three-cards .cards ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
   .two-cards .cards ul {
     flex-wrap: wrap;
@@ -184,11 +189,6 @@
 
   .two-cards .cards.list > ul {
     justify-content: flex-start;
-  }
-
-  .three-cards .cards ul {
-    flex-wrap: wrap;
-    justify-content: center;
   }
 
   .three-cards .cards > ul > li {
