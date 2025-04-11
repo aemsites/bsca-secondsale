@@ -312,6 +312,16 @@ main > .section:first-of-type .default-content-wrapper > h1 {
   margin: 0;
 }
 
+.icon svg,
+.icon img {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentcolor;
+  color: currentcolor;
+  vertical-align: unset;
+}
+
 .section.two-col.width-70-30 > div img {
   border-radius: var(--border-radius-xl);
 }
@@ -378,16 +388,6 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
-}
-
-.icon svg,
-.icon img {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  fill: currentcolor;
-  color: currentcolor;
-  vertical-align: unset;
 }
 
 a .icon-new-tab {
