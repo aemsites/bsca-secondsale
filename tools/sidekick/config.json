@@ -1,6 +1,6 @@
 {
   "project": "blueshieldcalifornia",
-  "host": "https://myoptions.blueshieldca.com",
+  "host": "https://www.blueshieldca.com",
   "plugins": [
     {
       "id": "library",
