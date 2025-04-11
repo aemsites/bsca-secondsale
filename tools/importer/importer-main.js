@@ -285,12 +285,12 @@ function importPlanOptions(main, document) {
     const cells = [['Columns (title, cols-4-5-2, striped-rows)']];
     section.forEach((el) => {
       const costs = el.querySelector('.kgo-col:first-child .kgoui_html');
-      costs.removeAttribute('class');
-      costs.removeAttribute('id');
-      const planHeader = costs.querySelector('h2');
+      costs?.removeAttribute('class');
+      costs?.removeAttribute('id');
+      const planHeader = costs?.querySelector('h2');
       const newPlanHeader = document.createElement('h5');
-      newPlanHeader.innerHTML = planHeader.innerHTML;
-      planHeader.replaceWith(newPlanHeader);
+      newPlanHeader.innerHTML = planHeader?.innerHTML;
+      planHeader?.replaceWith(newPlanHeader);
 
       const highlights = el.querySelector('.kgo-col:nth-child(2) .kgoui_html');
       if (highlights) {
@@ -331,6 +331,29 @@ function importPlanOptions(main, document) {
       }
       el.parentNode.remove();
     });
+    const block = packageSection(heading, cells);
+    heading.remove();
+    sectionParent.replaceWith(block);
+  }
+}
+
+function importChatbot(main, document) {
+  const section = main.querySelector('.kgoui_container_responsive_asymmetric2_column > .kgo-container > .kgo-row:has(iframe)');
+  if (section) {
+    const sectionParent = section.parentNode.parentNode;
+    const heading = sectionParent.previousElementSibling;
+    const cells = [['Chatbot']];
+    const leftStr = section.querySelector('h2');
+    const colLeft = document.createElement('div');
+    colLeft.classList.add('col-left');
+    const textLeft = document.createElement('h6');
+    textLeft.append(leftStr.textContent);
+    colLeft.append(textLeft);
+    const textRight = section.querySelector('.col-lg-4 .kgoui_html');
+    const colRight = document.createElement('div');
+    colRight.classList.add('col-right');
+    colRight.innerHTML = textRight.innerHTML;
+    cells.push([colLeft, colRight]);
     const block = packageSection(heading, cells);
     heading.remove();
     sectionParent.replaceWith(block);
@@ -548,6 +571,7 @@ export default {
     importPrograms(main, document);
     importSelectPlan(main, document);
     importPlanOptions(main, document);
+    importChatbot(main, document);
     importPharmacy(main, document);
     importServices(main, document);
     importDisclaimer(main);
