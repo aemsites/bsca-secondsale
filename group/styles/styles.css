@@ -351,6 +351,10 @@ main > .section:first-of-type .default-content-wrapper > h1 {
     padding: 0 2.5rem;
   }
 
+  .section.two-col.display-reverse {
+    flex-direction: row-reverse;
+  }
+
   /* list-wrapper */
   .section.two-col.width-60-40 > div:first-child {
     flex: 0 0 60%;
