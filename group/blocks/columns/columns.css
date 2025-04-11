@@ -16,7 +16,7 @@
   margin: 0 var(--spacing-xl);
 }
 
-.columns ul {
+.columns:not(.align-top) ul {
   margin-inline-start: 0;
   margin-block-start: 0;
   padding-inline-start: 24px;
@@ -62,7 +62,7 @@
   font-size: var(--body-font-size-m);
 }
 
-.columns.columns-3-cols > div > div h5:first-child {
+.columns.columns-3-cols:not(.align-top) > div > div h5:first-child {
   margin-top: 0;
 }
 
@@ -240,6 +240,10 @@
   .columns.striped-rows > div > div:last-child {
     margin-top: 20px;
     margin-bottom: auto;
+  }
+
+  .columns.striped-rows.align-top > div > div {
+    margin-top: 0;
   }
 
   .columns.columns-2-cols > div p {
