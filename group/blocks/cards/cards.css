@@ -38,7 +38,7 @@
   font-size: var(--body-font-size-l);
 }
 
-.cards.list .cards-card-body p:not(.button-container) {
+.cards.list .cards-card-body p:not(.button-container):not(:has( > strong)) {
   margin: 0 0 var(--spacing-xxl);
 }
 
