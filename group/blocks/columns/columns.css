@@ -233,6 +233,10 @@
     padding: var(--spacing-m) var(--spacing-s) var(--spacing-l);
   }
 
+  .columns.striped-rows.align-top > div {
+    align-items: flex-start;
+  }
+
   .columns.striped-rows > div:has(> div:only-child) {
     padding: 0 var(--spacing-s);
   }
