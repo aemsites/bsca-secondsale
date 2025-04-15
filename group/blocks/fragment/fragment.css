@@ -44,6 +44,7 @@
 
 .fragment-wrapper .square-button .button-container a {
   color: var(--body-font-color);
+  font-size: var(--body-font-size-m);
   font-weight: var(--font-weight-medium);
   background-color: var(--background-color);
 }
@@ -90,7 +91,7 @@
     display: flex;
     flex-direction: row;
     gap: var(--spacing-m);
-  } 
+  }
 
   .fragment-container.two-col > .fragment-wrapper {
     display: flex;
@@ -104,7 +105,8 @@
 
   .fragment-container.two-col > .fragment-wrapper > div {
     flex: 1;
-    max-width: 50%;
+
+    /* max-width: 50%; */
   }
 
   .fragment-container.two-col > .fragment-wrapper > div h5 {
@@ -126,9 +128,9 @@
     max-width: 300px;
   }
 
-  .fragment-container.two-col.width-70-30 > .fragment-wrapper > div:first-child {
+/*   .fragment-container.two-col.width-70-30 > .fragment-wrapper > div:first-child {
      max-width: 70%;
-  }
+  } */
 
   .fragment-container.two-col.width-70-30 > .fragment-wrapper > div:nth-child(2) {
     max-width: 30%;
