@@ -91,6 +91,7 @@ export default function decorate(block) {
       iframe.width = '100%';
       iframe.height = '400';
       iframe.style = 'border: none;';
+      iframe.title = 'Chatbot';
       col1.append(iframe);
     })
     .catch((error) => {
