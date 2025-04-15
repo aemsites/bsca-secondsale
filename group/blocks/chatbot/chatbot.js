@@ -63,7 +63,15 @@ export default function decorate(block) {
   }
 
   // Split <p> tags based on two or more <br> tags
-  const paragraphs = block.querySelectorAll('p');
+  let paragraphs = block.querySelectorAll('p');
+  paragraphs.forEach((p) => {
+    if (p.nextElementSibling && p.nextElementSibling.tagName === 'P') {
+      p.innerHTML += `<br>${p.nextElementSibling.innerHTML}`;
+      p.nextElementSibling.remove();
+    }
+  });
+  paragraphs = block.querySelectorAll('p');
+
   paragraphs.forEach((p) => {
     if (p.innerHTML.includes('<br>')) {
       // Use a regular expression to split on two or more <br> tags
