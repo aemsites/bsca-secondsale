@@ -90,7 +90,7 @@ export function isExternalLink(url) {
   ];
 
   let isExternal = false;
-  const pdfDetectionRegex = /\.pdf($|\?|#)|[?&][^=&]*=([^&]*\.pdf)($|&)/i;
+  const pdfDetectionRegex = /\.pdf($|\?|#)|[?&][^=&]*=([^&]*\.pdf)($|&)|#newtab/i;
   if (pdfDetectionRegex.test(url)) {
     isExternal = true;
   } else if (!url.hostname.includes('localhost') && !knownDomains.some((host) => url.hostname.includes(host))) {
