@@ -1,8 +1,7 @@
 .select.block {
   position: relative;
   width: 75%;
-  font-family: Arial, sans-serif;
-  font-size: var(--body-font-size-m);
+  font-size: var(--heading-font-size-s);
   margin: var(--spacing-l) 0!important;
 }
 
