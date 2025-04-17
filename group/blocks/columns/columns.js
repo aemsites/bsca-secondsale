@@ -31,6 +31,7 @@ export default function decorate(block) {
             if (link) {
               const linkWrapper = document.createElement('a');
               linkWrapper.href = link.href;
+              linkWrapper.target = link.target;
               linkWrapper.appendChild(pic);
               picWrapper.innerHTML = '';
               picWrapper.appendChild(linkWrapper);
