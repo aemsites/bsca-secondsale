@@ -38,7 +38,7 @@ async function getSidekick() {
       document.addEventListener(
         'sidekick-ready',
         () => resolve(document.querySelector('aem-sidekick')),
-        { once: true }
+        { once: true },
       );
     }
   });
@@ -85,7 +85,7 @@ async function initScheduling() {
   if (!pluginActionBar) {
     throw new Error('Plugin action bar not found in sidekick.');
   }
-  
+
   // Wait for the "Plugins Container" to load dynamically
   const pluginsContainer = await waitForShadowElement(pluginActionBar.shadowRoot, '.plugins-container');
   if (!pluginsContainer) {
@@ -95,7 +95,7 @@ async function initScheduling() {
   // Wait for the "Preview with Date" button
   const previewWithDateButton = await waitForElement(
     pluginsContainer,
-    'sk-action-button.date-preview'
+    'sk-action-button.date-preview',
   );
 
   // Get the current date or the previously selected date
