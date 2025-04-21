@@ -17,7 +17,7 @@ import {
  * Returns the current timestamp used for scheduling content.
  */
 export function getTimestamp() {
-  if ((window.location.hostname === 'localhost' || window.location.hostname.endsWith('.hlx.page')) && window.sessionStorage.getItem('preview-date')) {
+  if ((window.location.hostname === 'localhost' || window.location.hostname.endsWith('.aem.page')) && window.sessionStorage.getItem('preview-date')) {
     return Date.parse(window.sessionStorage.getItem('preview-date'));
   }
   return Date.now();
