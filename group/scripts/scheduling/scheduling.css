@@ -1,0 +1,18 @@
+.date-preview input.date-selection {
+    color-scheme: dark;
+    background-color: transparent;
+    border: solid 1px #707070;;
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    line-height: 1;
+    font-family: arial, helvetica, sans-serif;
+    font-weight: 500;
+    padding: 0px 8px;
+    cursor: pointer;
+    outline: none;
+    min-width: 28px;
+    min-height: 26px;
+    max-height: 26px;
+    margin: 0 8px 0 0;
+}
