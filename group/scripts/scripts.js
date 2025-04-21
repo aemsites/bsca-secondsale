@@ -289,7 +289,7 @@ async function loadLazy(doc) {
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
 
-  if (window.location.hostname === 'localhost' || window.location.hostname.endsWith('.hlx.page')) {
+  if (window.location.hostname === 'localhost' || window.location.hostname.endsWith('.aem.page')) {
     // Load scheduling sidekick extension
     import('./scheduling/scheduling.js');
   }

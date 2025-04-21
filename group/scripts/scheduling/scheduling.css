@@ -1,13 +1,13 @@
-div.hlx-sk .date-preview > input {
+.date-preview input.date-selection {
     color-scheme: dark;
     background-color: transparent;
-    border: var(--hlx-sk-button-border);
-    border-radius: var(--hlx-sk-button-border-radius);
-    color: var(--hlx-sk-button-color);
-    font-size: var(--hlx-sk-button-font-size);
-    line-height: var(--hlx-sk-button-line-height);
-    font-family: var(--hlx-sk-font-family);
-    font-weight: var(--hlx-sk-button-font-weight);
+    border: solid 1px #707070;;
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    line-height: 1;
+    font-family: arial, helvetica, sans-serif;
+    font-weight: 500;
     padding: 0px 8px;
     cursor: pointer;
     outline: none;
