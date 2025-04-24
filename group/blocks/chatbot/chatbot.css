@@ -14,10 +14,19 @@
 }
 
 @media (width >= 600px) {
+    .fragment-wrapper .section.chatbot-container:not(.full-width) {
+        max-width: 1360px;
+    }
+
+    
     .chatbot > div {
         flex-direction: row;
         justify-content: space-between;
         gap: var(--spacing-xxl);
+    }
+
+    .fragment-wrapper .chatbot-container div {
+        max-width: none;
     }
 
    .fragment-wrapper .chatbot > div > div {
