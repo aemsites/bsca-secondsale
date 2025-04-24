@@ -40,6 +40,14 @@
   height: 152px;
 }
 
+.cards.list .cards-card-body p:not(.button-container,:has( > strong),:has( + h5)) {
+  margin: 0 0 var(--spacing-xxl);
+}
+
+.cards.list .cards-card-body p:has( > .icon) ~ h5 {
+  margin: 0 0 var(--spacing-xxl);
+}
+
 .cards.secondary > ul > li > div {
   border: none;
   box-shadow: none;
