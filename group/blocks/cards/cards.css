@@ -25,9 +25,12 @@
 
 .cards.list .cards-card-body p:has( > span) {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: var(--spacing-m);
-  font-size: var(--body-font-size-l);
+  font-size: var(--body-font-size-m);
+  font-weight: var(--font-weight-bold);
+  flex-direction: column;
+  line-height: 1rem;
 }
 
 .cards .cards-card-image {
@@ -101,6 +104,11 @@
   border-radius: .5rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   overflow: hidden;
+}
+
+.cards.list > ul > li:not(.no-border) {
+  border: none;
+  box-shadow: none;
 }
 
 .cards.secondary > ul > li:first-of-type {
