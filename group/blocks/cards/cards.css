@@ -106,7 +106,7 @@
   overflow: hidden;
 }
 
-.cards.list > ul > li:not(.no-border) {
+.cards.list:not(.border) > ul > li {
   border: none;
   box-shadow: none;
 }
