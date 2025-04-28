@@ -118,6 +118,15 @@ export default async function decorate(block) {
 
   // decorate nav DOM
   block.textContent = '';
+
+  const utilityNav = fragment.firstElementChild;
+  const utilityNavWrapper = document.createElement('div');
+  if (utilityNav) {
+    utilityNavWrapper.className = 'utility-nav-wrapper';
+    utilityNav.querySelector('.default-content-wrapper').classList.add('utility-nav');
+    utilityNavWrapper.append(utilityNav);
+  }
+
   const nav = document.createElement('nav');
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
@@ -169,6 +178,8 @@ export default async function decorate(block) {
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
+  navWrapper.append(utilityNavWrapper);
+  console.log('navWrapper', navWrapper);
   navWrapper.append(nav);
   block.append(navWrapper);
 }

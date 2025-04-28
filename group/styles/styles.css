@@ -51,6 +51,7 @@
 
   /* nav height */
   --nav-height: 64px;
+  --header-height: 114px;
 
   /* border radius */
   --border-radius: 8px;
@@ -110,7 +111,7 @@ body.appear {
 }
 
 header {
-  height: var(--nav-height);
+  height: var(--header-height);
 }
 
 header .header,
