@@ -90,6 +90,8 @@ footer .footer .default-content-wrapper li a {
   z-index: -1;
   transform: translateX(-50%);
   left: 50%;
+  border-top-left-radius: 42px;
+  border-top-right-radius: 42px;
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section {
