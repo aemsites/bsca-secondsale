@@ -1,6 +1,6 @@
 footer .footer > div {
   margin: auto;
-  padding: 40px 24px 24px;
+  padding: 40px 16px 16px;
 }
 
 footer .footer p {
@@ -77,21 +77,9 @@ footer .footer .default-content-wrapper li a {
 .footer .footer-top-section {
   position: relative;
   z-index: 1;
-  padding: var(--spacing-l) var(--spacing-m);
-}
-
-.footer .footer-top-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 100%;
+  padding: var(--spacing-l) var(--spacing-xl);
   background-color: var(--shade-color);
-  z-index: -1;
-  transform: translateX(-50%);
-  left: 50%;
-  border-top-left-radius: 42px;
-  border-top-right-radius: 42px;
+  border-radius: 45px;
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section {
@@ -173,7 +161,7 @@ footer .footer .default-content-wrapper li a {
 
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 24px 32px;
+    padding: 24px 16px;
   }
 
   footer .footer .footer-top-section {
