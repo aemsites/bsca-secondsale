@@ -63,6 +63,14 @@ function toggleAllNavSections(sections, expanded = false) {
   });
 }
 
+function enableKeyboardAccessibility(nav) {
+  const navDrops = nav.querySelectorAll('.nav-drop');
+  navDrops.forEach((drop) => {
+    drop.setAttribute('tabindex', 0);
+    drop.addEventListener('focus', focusNavSection);
+  });
+}
+
 /**
  * Toggles the entire nav
  * @param {Element} nav The container element
@@ -77,15 +85,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   if (button) {
     button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   }
-  // enable nav dropdown keyboard accessibility
-  const navDrops = navSections.querySelectorAll('.nav-drop');
-  // if (isDesktop.matches) {
-    navDrops.forEach((drop) => {
-      if (!drop.hasAttribute('tabindex')) {
-        drop.setAttribute('tabindex', 0);
-        drop.addEventListener('focus', focusNavSection);
-      }
-    });
+  
+  enableKeyboardAccessibility(document);
 
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
@@ -169,6 +170,13 @@ export default async function decorate(block) {
   nav.append(hamburger);
   nav.setAttribute('aria-expanded', 'false');
 
+  enableKeyboardAccessibility(nav);
+  if (isDesktop.matches) {
+     // collapse menu on escape press
+     window.addEventListener('keydown', closeOnEscape);
+     // collapse menu on focus lost
+     nav.addEventListener('focusout', closeOnFocusLost);
+  }
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(utilityNavWrapper);
