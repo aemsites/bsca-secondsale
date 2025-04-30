@@ -85,7 +85,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   if (button) {
     button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   }
-  
+
   enableKeyboardAccessibility(document);
 
   // enable menu collapse on escape keypress
@@ -172,15 +172,15 @@ export default async function decorate(block) {
 
   enableKeyboardAccessibility(nav);
   if (isDesktop.matches) {
-     // collapse menu on escape press
-     window.addEventListener('keydown', closeOnEscape);
-     // collapse menu on focus lost
-     nav.addEventListener('focusout', closeOnFocusLost);
+    // collapse menu on escape press
+    window.addEventListener('keydown', closeOnEscape);
+    // collapse menu on focus lost
+    nav.addEventListener('focusout', closeOnFocusLost);
   }
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(utilityNavWrapper);
   navWrapper.append(nav);
-  
+
   block.append(navWrapper);
 }
