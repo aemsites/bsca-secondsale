@@ -74,25 +74,18 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   if (button) {
     button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   }
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
-  if (isDesktop.matches) {
+  // if (isDesktop.matches) {
     navDrops.forEach((drop) => {
       if (!drop.hasAttribute('tabindex')) {
         drop.setAttribute('tabindex', 0);
         drop.addEventListener('focus', focusNavSection);
       }
     });
-  } else {
-    navDrops.forEach((drop) => {
-      drop.removeAttribute('tabindex');
-      drop.removeEventListener('focus', focusNavSection);
-    });
-  }
 
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
@@ -156,6 +149,9 @@ export default async function decorate(block) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else {
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
     });
@@ -172,14 +168,11 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.append(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
-  toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(utilityNavWrapper);
-  console.log('navWrapper', navWrapper);
   navWrapper.append(nav);
+  
   block.append(navWrapper);
 }
