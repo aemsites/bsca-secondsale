@@ -79,7 +79,9 @@ footer .footer .default-content-wrapper li a {
   z-index: 1;
   padding: var(--spacing-l) var(--spacing-xl);
   background-color: var(--shade-color);
-  border-radius: 45px;
+  border-top-left-radius: 42px;
+  border-top-right-radius: 42px;
+  margin: 72px 16px 0;
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section {
