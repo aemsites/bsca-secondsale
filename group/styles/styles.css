@@ -21,6 +21,7 @@
   --link-color: #0071bc;
   --link-hover-color: #003456;
   --grey-color: #6a6a6a;
+  --light-blue: #b3f8ff;
 
   /* fonts */
   --body-font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif;
@@ -50,7 +51,7 @@
   --font-weight-bold: 700;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 72px;
   --header-height: 114px;
 
   /* border radius */
