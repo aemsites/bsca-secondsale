@@ -2,6 +2,7 @@
 function updateSlider(slides, currentSlide) {
   slides.forEach((slide, index) => {
     slide.style.display = index === currentSlide ? 'block' : 'none';
+    slide.style.visibility = index === currentSlide ? 'visible' : 'hidden';
   });
 }
 

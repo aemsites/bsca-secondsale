@@ -93,24 +93,8 @@
     gap: var(--spacing-m);
   }
 
-  .fragment-container.two-col > .fragment-wrapper {
-    display: flex;
-    gap: var(--spacing-xxl);
-    margin: var(--spacing-m) auto 0;
-  }
-
-  .fragment-container.two-col.display-reverse > .fragment-wrapper {
-    flex-direction: row-reverse;
-  }
-
   .fragment-container.two-col > .fragment-wrapper > div {
     flex: 1;
-
-    /* max-width: 50%; */
-  }
-
-  .fragment-container.two-col > .fragment-wrapper > div h5 {
-    margin-top: 0;
   }
 
   .fragment-container.two-col .fragment-wrapper .section > div {
@@ -119,18 +103,9 @@
     padding-bottom: var(--spacing-l);
   }
 
-  .fragment-container.three-col.spacing-l > .fragment-wrapper {
-    margin-top: var(--spacing-xxl);
-    gap: var(--spacing-xxl);
-  }
-
   .fragment-container.three-col.spacing-l > .fragment-wrapper > div {
     max-width: 300px;
   }
-
-/*   .fragment-container.two-col.width-70-30 > .fragment-wrapper > div:first-child {
-     max-width: 70%;
-  } */
 
   .fragment-container.two-col.width-70-30 > .fragment-wrapper > div:nth-child(2) {
     max-width: 30%;
@@ -143,6 +118,42 @@
  .fragment-container.two-col.width-60-40 > .fragment-wrapper > div:nth-child(2) {
    max-width: 40%;
  }
+
+  /* Trader Joes landing page */
+  .fragment-container.three-col.select-container.shaded > .fragment-wrapper > div:nth-child(1) {
+    flex: 1 1 40%;
+  }
+
+  .fragment-container.three-col.select-container.shaded > .fragment-wrapper > div:nth-child(2) {
+    flex: 1 1 20%;
+  }
+
+  .fragment-container.three-col.select-container.shaded > .fragment-wrapper > div:nth-child(3) {
+    flex: 1 1 40%;
+  }
+
+  /* End Trader Joes landing page */
+
+  .fragment-container.two-col > .fragment-wrapper {
+    display: flex;
+    gap: var(--spacing-xxl);
+    margin: var(--spacing-m) auto 0;
+  }
+
+  .fragment-container.two-col.display-reverse > .fragment-wrapper {
+    flex-direction: row-reverse;
+  }
+
+
+
+  .fragment-container.two-col > .fragment-wrapper > div h5 {
+    margin-top: 0;
+  }
+
+  .fragment-container.three-col.spacing-l > .fragment-wrapper {
+    margin-top: var(--spacing-xxl);
+    gap: var(--spacing-xxl);
+  }
 
   .fragment-wrapper div.section:not(.full-width) {
     margin: 0 auto;
