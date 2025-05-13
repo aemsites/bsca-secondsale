@@ -193,10 +193,11 @@ header nav[aria-expanded='true'] .nav-sections {
   position: absolute;
   top: 90px;
   width: -webkit-fill-available;
-  background-color: var(--shade-color);
+  background-color: var(--background-color);
+  box-shadow: 0 0 5px rgb(0 0 0 / 40%);
+  border-radius: 40px;
   margin: 30px 8px 0 6px;
   padding: 1rem;
-  border-radius: 45px;
 }
 
 header nav .nav-sections ul {
