@@ -1,6 +1,6 @@
 import { fetchPlaceholders } from '../../scripts/aem.js';
 
-const placeholders = await fetchPlaceholders();
+let placeholders = [];
 
 /**
  * Transforms the API response JSON into the required format
@@ -48,7 +48,8 @@ function transformJson(response) {
   return result;
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  placeholders = await fetchPlaceholders();
   const textRow = block.querySelector('div');
 
   let col1 = block;
