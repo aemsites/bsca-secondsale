@@ -1,14 +1,13 @@
 import { fetchPlaceholders } from '../../scripts/aem.js';
 
-const placeholders = await fetchPlaceholders();
-
 /**
  * Transforms the API response JSON into the required format
  * @param {Object} response - The original JSON response from the API
  * @return {Object} - Transformed JSON in the required format
  */
-function transformJson(response) {
+async function transformJson(response) {
   const result = {};
+  const placeholders = await fetchPlaceholders();
   const { mentalhealthexternalurl, altcareexternalurl } = placeholders;
   response.data.forEach((item) => {
     const {
