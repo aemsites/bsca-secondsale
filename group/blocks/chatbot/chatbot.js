@@ -49,7 +49,7 @@ function transformJson(response) {
 }
 
 export default async function decorate(block) {
-  placeholders = await fetchPlaceholders('group');
+  placeholders = await fetchPlaceholders('/group');
   const textRow = block.querySelector('div');
 
   let col1 = block;
