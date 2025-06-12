@@ -63,6 +63,14 @@ function toggleAllNavSections(sections, expanded = false) {
   });
 }
 
+function enableKeyboardAccessibility(nav) {
+  const navDrops = nav.querySelectorAll('.nav-drop');
+  navDrops.forEach((drop) => {
+    drop.setAttribute('tabindex', 0);
+    drop.addEventListener('focus', focusNavSection);
+  });
+}
+
 /**
  * Toggles the entire nav
  * @param {Element} nav The container element
@@ -74,25 +82,11 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   if (button) {
     button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   }
-  // enable nav dropdown keyboard accessibility
-  const navDrops = navSections.querySelectorAll('.nav-drop');
-  if (isDesktop.matches) {
-    navDrops.forEach((drop) => {
-      if (!drop.hasAttribute('tabindex')) {
-        drop.setAttribute('tabindex', 0);
-        drop.addEventListener('focus', focusNavSection);
-      }
-    });
-  } else {
-    navDrops.forEach((drop) => {
-      drop.removeAttribute('tabindex');
-      drop.removeEventListener('focus', focusNavSection);
-    });
-  }
+
+  enableKeyboardAccessibility(document);
 
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
@@ -118,6 +112,15 @@ export default async function decorate(block) {
 
   // decorate nav DOM
   block.textContent = '';
+
+  const utilityNav = fragment.firstElementChild;
+  const utilityNavWrapper = document.createElement('div');
+  if (utilityNav) {
+    utilityNavWrapper.className = 'utility-nav-wrapper';
+    utilityNav.querySelector('.default-content-wrapper').classList.add('utility-nav');
+    utilityNavWrapper.append(utilityNav);
+  }
+
   const nav = document.createElement('nav');
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
@@ -147,6 +150,9 @@ export default async function decorate(block) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else {
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
     });
@@ -163,12 +169,18 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.append(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
-  toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  enableKeyboardAccessibility(nav);
+  if (isDesktop.matches) {
+    // collapse menu on escape press
+    window.addEventListener('keydown', closeOnEscape);
+    // collapse menu on focus lost
+    nav.addEventListener('focusout', closeOnFocusLost);
+  }
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
+  navWrapper.append(utilityNavWrapper);
   navWrapper.append(nav);
+
   block.append(navWrapper);
 }
