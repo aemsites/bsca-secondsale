@@ -1,7 +1,3 @@
-import { fetchPlaceholders } from '../../scripts/aem.js';
-
-let placeholders = [];
-
 /**
  * Transforms the API response JSON into the required format
  * @param {Object} response - The original JSON response from the API
@@ -9,7 +5,6 @@ let placeholders = [];
  */
 function transformJson(response) {
   const result = {};
-  const { mentalhealthexternalurl, altcareexternalurl } = placeholders;
   response.data.forEach((item) => {
     const {
       key,
@@ -36,8 +31,8 @@ function transformJson(response) {
       result[key].push({
         name,
         network_id: networkIdArray,
-        mentalHealthExternalUrl: mentalHealthExternalUrl ? mentalhealthexternalurl : '',
-        altCareExternalUrl: altCareExternalUrl ? altcareexternalurl : '',
+        mentalHealthExternalUrl,
+        altCareExternalUrl,
         acupuncture_enabled: acupunctureEnabled,
         chiropractor_enabled: chiropractorEnabled,
       });
@@ -49,7 +44,6 @@ function transformJson(response) {
 }
 
 export default async function decorate(block) {
-  placeholders = await fetchPlaceholders('/group');
   const textRow = block.querySelector('div');
 
   let col1 = block;
