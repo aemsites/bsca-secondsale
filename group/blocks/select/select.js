@@ -16,8 +16,8 @@ export default function decorate(block) {
     option.addEventListener('click', () => {
       // Strip out hidden screen reader text (.sr-only) when copying the label
       const visibleText = Array.from(option.childNodes)
-        .filter(n => n.nodeType === Node.TEXT_NODE)
-        .map(n => n.textContent.trim())
+        .filter((n) => n.nodeType === Node.TEXT_NODE)
+        .map((n) => n.textContent.trim())
         .join(' ');
 
       selected.textContent = visibleText;
