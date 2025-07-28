@@ -29,4 +29,3 @@ export default function decorate(block) {
     dropdown.classList.remove('open');
   });
 }
-
