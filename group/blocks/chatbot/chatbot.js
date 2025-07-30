@@ -82,7 +82,12 @@ export default async function decorate(block) {
       });
     }
   });
-  const path = window.location.pathname.split('/').slice(0, -1).join('/');
+  let path = window.location.pathname;
+
+  // Check if path ends with "/" or "index"
+  if (path.endsWith('/') || path.endsWith('index')) {
+    path = path.replace(/\/[^/]*$/, '');
+  }
   fetch(`${path}/chatbot.json`)
     .then((response) => response.json())
     .then((config) => {
