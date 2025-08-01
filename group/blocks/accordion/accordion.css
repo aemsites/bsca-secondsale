@@ -93,3 +93,22 @@
 .accordion.lists ul > li:not(:last-child) {
   border-bottom: 1px solid var(--secondary-color);
 }
+
+/* Custom nested Accordion + Cards combo */
+.accordion.custom-nested {
+  background: #f8f8f8; /* optional styling */
+  padding: 16px;
+}
+
+.accordion.custom-nested .cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.accordion.custom-nested .cards > div {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 6px;
+}
