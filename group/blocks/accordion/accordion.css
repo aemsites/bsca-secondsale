@@ -94,15 +94,17 @@
   border-bottom: 1px solid var(--secondary-color);
 }
 
-/* Custom nested Accordion + Cards combo */
+/* Custom nested Accordion + Cards combo - optional styling */
+/*
 .accordion.custom-nested {
-  background: #f8f8f8; /* optional styling */
+  background: #f8f8f8;
   padding: 16px;
 }
+*/
 
 .accordion.custom-nested .cards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
 }
 
@@ -111,4 +113,5 @@
   border: 1px solid #ddd;
   padding: 12px;
   border-radius: 6px;
+  box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
 }
