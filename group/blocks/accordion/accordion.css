@@ -28,39 +28,6 @@
   font-style: normal;
 }
 
-/* 5-up grid inside accordion bodies */
-.accordion .accordion-item-body table {
-  border-collapse: separate;
-  border-spacing: 12px 12px; /* space between cards */
-  width: 100%;
-}
-
-/* hide the first marker row */
-.accordion .accordion-item-body table tr:first-child { display: none; }
-
-/* make each cell look like a card */
-.accordion .accordion-item-body table tr:not(:first-child) td {
-  border: 1px solid #dadada;
-  border-radius: .5rem;
-  box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
-  background: var(--background-color);
-  padding: var(--spacing-l);
-  vertical-align: top;
-  width: 20%; /* 5 per row */
-}
-
-/* optional: typography tidy */
-.accordion .accordion-item-body table tr:not(:first-child) td p {
-  margin: 0 0 var(--spacing-xs);
-  line-height: 1.5rem;
-}
-
-@media (width >= 900px) {
-  .accordion .accordion-item-body table tr:not(:first-child) td {
-    padding: var(--spacing-xxl);
-  }
-}
-
 .accordion details[open] summary {
   background-color: var(--light-color);
 }
@@ -166,4 +133,3 @@
     padding: var(--spacing-xxl);
   }
 }
-
