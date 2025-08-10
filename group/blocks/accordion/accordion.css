@@ -131,7 +131,7 @@
 /* Responsive bump for larger screens */
 @media (width >= 900px) {
   .accordion .accordion-item-body table tr:not(:first-child) td {
-    padding: var(--spacing-xxl);
+    padding: var(--spacing-m);
   }
 }
 
