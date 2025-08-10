@@ -95,8 +95,7 @@
 }
 
 /* NEW ACCORDION CODE */
-
-/* Only affect accordions in sections labeled Style=accordion-card-grid */
+/* Only affect accordions inside containers labeled Style=accordion-card-grid */
 .accordion-card-grid .accordion .accordion-item-body table {
   border-collapse: separate;
   border-spacing: 12px 12px; /* gaps between cards */
