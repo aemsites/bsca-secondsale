@@ -95,22 +95,24 @@
 }
 
 /* NEW ACCORDION CODE */
-/* Only affect accordions inside containers labeled Style=accordion-card-grid */
-.accordion-card-grid .accordion .accordion-item-body table {
+
+/* --- 5-up grid layout for accordion cards --- */
+.accordion .accordion-item-body table {
   border-collapse: separate;
   border-spacing: 12px 12px; /* gaps between cards */
   width: 100%;
 }
 
-/* Hide the marker row (first row in each inner table) */
-.accordion-card-grid .accordion .accordion-item-body table tr:first-child {
+/* Hide the marker row */
+.accordion .accordion-item-body table tr:first-child {
   display: none;
 }
 
-/* Grid cards: 5 per row */
-.accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
+/* Cards in grid cells */
+.accordion .accordion-item-body table tr:not(:first-child) td {
   display: table-cell;
-  width: 20%;
+  margin: 0;
+  width: 20%; /* 5 per row */
   vertical-align: top;
 
   /* card look */
@@ -121,9 +123,8 @@
   padding: var(--spacing-l);
 }
 
-/* Larger padding on wide screens */
 @media (width >= 900px) {
-  .accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
+  .accordion .accordion-item-body table tr:not(:first-child) td {
     padding: var(--spacing-xxl);
   }
 }
