@@ -93,3 +93,45 @@
 .accordion.lists ul > li:not(:last-child) {
   border-bottom: 1px solid var(--secondary-color);
 }
+
+/* NEW ACCORDION CODE */
+
+/* --- Accordion-friendly "card list" (for v5 Word doc) --- */
+
+/* Scope to accordion bodies only */
+.accordion .accordion-item-body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: var(--spacing-l) 0;
+}
+
+/* Hide the first row used as a marker ("accordion-card-list") */
+.accordion .accordion-item-body table tr:first-child {
+  display: none;
+}
+
+/* Style every subsequent row like a card */
+.accordion .accordion-item-body table tr:not(:first-child) td {
+  border: 1px solid #dadada;
+  border-radius: .5rem;
+  box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
+  background: var(--background-color);
+  padding: var(--spacing-l);
+  display: block;          /* make each row behave like a card */
+  margin: var(--spacing-m) 0;
+}
+
+/* Optional: tighten typography inside the card cell */
+.accordion .accordion-item-body table tr:not(:first-child) td p {
+  margin: 0 0 var(--spacing-xs);
+  line-height: 1.5rem;
+}
+
+/* Responsive bump for larger screens */
+@media (width >= 900px) {
+  .accordion .accordion-item-body table tr:not(:first-child) td {
+    padding: var(--spacing-xxl);
+  }
+}
+
