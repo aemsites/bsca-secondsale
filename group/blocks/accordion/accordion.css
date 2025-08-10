@@ -96,27 +96,35 @@
 
 /* NEW ACCORDION CODE */
 
-/* Only affect accordions inside sections labeled with Style=accordion-card-grid */
-.section.accordion-card-grid .accordion .accordion-item-body table {
+/* Only affect accordions in sections labeled Style=accordion-card-grid */
+.accordion-card-grid .accordion .accordion-item-body table {
   border-collapse: separate;
-  border-spacing: 12px 12px;
+  border-spacing: 12px 12px; /* gaps between cards */
   width: 100%;
 }
-.section.accordion-card-grid .accordion .accordion-item-body table tr:first-child {
-  display: none; /* hide marker row */
+
+/* Hide the marker row (first row in each inner table) */
+.accordion-card-grid .accordion .accordion-item-body table tr:first-child {
+  display: none;
 }
-.section.accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
-  display: table-cell;      /* 5 per row grid cells */
+
+/* Grid cards: 5 per row */
+.accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
+  display: table-cell;
   width: 20%;
   vertical-align: top;
+
+  /* card look */
   border: 1px solid #dadada;
   border-radius: .5rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   background: var(--background-color);
   padding: var(--spacing-l);
 }
+
+/* Larger padding on wide screens */
 @media (width >= 900px) {
-  .section.accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
-    padding: var(--spacing-l);
+  .accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
+    padding: var(--spacing-xxl);
   }
 }
