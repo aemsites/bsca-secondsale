@@ -96,35 +96,27 @@
 
 /* NEW ACCORDION CODE */
 
-/* --- 5-up grid layout for accordion cards --- */
-.accordion .accordion-item-body table {
+/* Only affect accordions inside sections labeled with Style=accordion-card-grid */
+.section.accordion-card-grid .accordion .accordion-item-body table {
   border-collapse: separate;
-  border-spacing: 12px 12px; /* gaps between cards */
+  border-spacing: 12px 12px;
   width: 100%;
 }
-
-/* Hide the marker row */
-.accordion .accordion-item-body table tr:first-child {
-  display: none;
+.section.accordion-card-grid .accordion .accordion-item-body table tr:first-child {
+  display: none; /* hide marker row */
 }
-
-/* Cards in grid cells */
-.accordion .accordion-item-body table tr:not(:first-child) td {
-  display: table-cell;
-  margin: 0;
-  width: 20%; /* 5 per row */
+.section.accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
+  display: table-cell;      /* 5 per row grid cells */
+  width: 20%;
   vertical-align: top;
-
-  /* card look */
   border: 1px solid #dadada;
   border-radius: .5rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   background: var(--background-color);
   padding: var(--spacing-l);
 }
-
 @media (width >= 900px) {
-  .accordion .accordion-item-body table tr:not(:first-child) td {
-    padding: var(--spacing-xxl);
+  .section.accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
+    padding: var(--spacing-l);
   }
 }
