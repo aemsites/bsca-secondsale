@@ -96,42 +96,35 @@
 
 /* NEW ACCORDION CODE */
 
-/* --- Accordion-friendly "card list" (for v5 Word doc) --- */
-
-/* Scope to accordion bodies only */
+/* --- 5-up grid layout for accordion cards --- */
 .accordion .accordion-item-body table {
-  width: 100%;
   border-collapse: separate;
-  border-spacing: 0;
-  margin: var(--spacing-l) 0;
+  border-spacing: 12px 12px; /* gaps between cards */
+  width: 100%;
 }
 
-/* Hide the first row used as a marker ("accordion-card-list") */
+/* Hide the marker row */
 .accordion .accordion-item-body table tr:first-child {
   display: none;
 }
 
-/* Style every subsequent row like a card */
+/* Cards in grid cells */
 .accordion .accordion-item-body table tr:not(:first-child) td {
+  display: table-cell;
+  margin: 0;
+  width: 20%; /* 5 per row */
+  vertical-align: top;
+
+  /* card look */
   border: 1px solid #dadada;
   border-radius: .5rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   background: var(--background-color);
   padding: var(--spacing-l);
-  display: block;          /* make each row behave like a card */
-  margin: var(--spacing-m) 0;
 }
 
-/* Optional: tighten typography inside the card cell */
-.accordion .accordion-item-body table tr:not(:first-child) td p {
-  margin: 0 0 var(--spacing-xs);
-  line-height: 1.5rem;
-}
-
-/* Responsive bump for larger screens */
 @media (width >= 900px) {
   .accordion .accordion-item-body table tr:not(:first-child) td {
-    padding: var(--spacing-m);
+    padding: var(--spacing-xxl);
   }
 }
-
