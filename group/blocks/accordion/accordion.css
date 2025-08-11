@@ -95,38 +95,42 @@
 }
 
 /* NEW ACCORDION CODE */
-
-/* ---- Calendar accordion (scoped) ---- */
-/* Applies ONLY to accordion blocks with Block Metadata: Style=accordion-card-grid */
-.accordion.accordion-card-grid .accordion-item-body table {
+/* === Calendar accordion grid (scoped) === */
+/* Scope to either: 
+   1) an accordion block tagged via Block Metadata: Style=accordion-card-grid, or
+   2) a section tagged via Section Metadata: Style=accordion-card-grid */
+.accordion.accordion-card-grid .accordion-item-body table,
+.section.accordion-card-grid .accordion .accordion-item-body table {
   border-collapse: separate;
   border-spacing: 12px 12px; /* gaps between cards */
   width: 100%;
 }
 
-/* Hide the marker row (the first row in each inner table) */
-.accordion.accordion-card-grid .accordion-item-body table tr:first-child {
+/* Hide the marker row (first row in each inner table) */
+.accordion.accordion-card-grid .accordion-item-body table tr:first-child,
+.section.accordion-card-grid .accordion .accordion-item-body table tr:first-child {
   display: none;
 }
 
 /* Cards in grid cells (5 per row) */
-.accordion.accordion-card-grid .accordion-item-body table tr:not(:first-child) td {
+.accordion.accordion-card-grid .accordion-item-body table tr:not(:first-child) td,
+.section.accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
   display: table-cell;      /* side-by-side cards */
   width: 20%;               /* 5 across */
   vertical-align: top;
 
-  /* card look — identical to your current style */
+  /* card look (same as before) */
   border: 1px solid #dadada;
   border-radius: .5rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   background: var(--background-color);
   padding: var(--spacing-l);
-  margin: 0;                /* ensure no extra gaps from older rules */
+  margin: 0;
 }
 
-/* Larger padding on wide screens (same as before) */
 @media (width >= 900px) {
-  .accordion.accordion-card-grid .accordion-item-body table tr:not(:first-child) td {
+  .accordion.accordion-card-grid .accordion-item-body table tr:not(:first-child) td,
+  .section.accordion-card-grid .accordion .accordion-item-body table tr:not(:first-child) td {
     padding: var(--spacing-xxl);
   }
 }
