@@ -148,5 +148,5 @@
 }
 /* ≥1200px keeps --cols: 5 (default) */
 @media (min-width: 1200px) {
-  .accordion .accordion-item-body table td { padding: var(--spacing-xxl); }
+  .accordion .accordion-item-body table td { padding: var(--spacing-l); }
 }
