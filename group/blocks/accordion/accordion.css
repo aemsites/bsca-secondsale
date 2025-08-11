@@ -96,20 +96,20 @@
 
 /* NEW ACCORDION CODE */
 
-/* --- 5-up grid layout for accordion card lists --- */
-.accordion .accordion-item-body table:first-of-type:has(tr:first-child td:contains("accordion-card-list")) {
+/* --- 5-up grid layout for accordion cards --- */
+.accordion .accordion-item-body table {
   border-collapse: separate;
   border-spacing: 12px 12px; /* gaps between cards */
   width: 100%;
 }
 
 /* Hide the marker row */
-.accordion .accordion-item-body table:first-of-type:has(tr:first-child td:contains("accordion-card-list")) tr:first-child {
+.accordion .accordion-item-body table tr:first-child {
   display: none;
 }
 
 /* Cards in grid cells */
-.accordion .accordion-item-body table:first-of-type:has(tr:first-child td:contains("accordion-card-list")) tr:not(:first-child) td {
+.accordion .accordion-item-body table tr:not(:first-child) td {
   display: table-cell;
   margin: 0;
   width: 20%; /* 5 per row */
@@ -121,6 +121,12 @@
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   background: var(--background-color);
   padding: var(--spacing-l);
+}
+
+@media (width >= 900px) {
+  .accordion .accordion-item-body table tr:not(:first-child) td {
+    padding: var(--spacing-xxl);
+  }
 }
 
 @media (width >= 900px) {
