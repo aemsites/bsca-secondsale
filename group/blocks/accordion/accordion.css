@@ -137,11 +137,6 @@
   line-height: 1.5rem;
 }
 
-.accordion .accordion-item-body table tr:not(:first-child) td p:first-child img {
-  width: 48px;   /* icon width */
-  height: auto;  /* keep aspect ratio */
-}
-
 /* Resize the calendar icon inside accordion cards */
 .accordion .accordion-item-body table td .icon.icon-calendar img {
   width: 36px;   /* tweak as needed */
