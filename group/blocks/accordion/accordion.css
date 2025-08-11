@@ -108,7 +108,7 @@
 
 /* Each data row becomes a flex container */
 .accordion .accordion-item-body table tr {
-  --g: 12px;                  /* gap */
+  --g: 24px;                  /* gap */
   --cols: 5;                  /* default columns on wide screens */
   display: flex;
   flex-wrap: wrap;
