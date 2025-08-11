@@ -94,36 +94,55 @@
   border-bottom: 1px solid var(--secondary-color);
 }
 
-/* NEW ACCORDION CODE */
-/* 5-up grid inside accordion bodies */
+/* NEW ACCORDION CODE — Responsive grid inside accordion bodies */
+/* Turn the inner table into a responsive grid */
 .accordion .accordion-item-body table {
-  border-collapse: separate;
-  border-spacing: 12px 12px; /* space between cards */
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr)); /* default: 5-up */
+  gap: 12px;                                        /* space between cards */
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-/* hide the first marker row */
-.accordion .accordion-item-body table tr:first-child { display: none; }
+/* Hide the marker row (first row) */
+.accordion .accordion-item-body table tr:first-child {
+  display: none;
+}
 
-/* make each cell look like a card */
-.accordion .accordion-item-body table tr:not(:first-child) td {
+/* Flatten table rows so each TD becomes a grid item */
+.accordion .accordion-item-body table tr {
+  display: contents;
+}
+
+/* Card look */
+.accordion .accordion-item-body table td {
+  display: block; /* ensure a block card */
   border: 1px solid #dadada;
   border-radius: .5rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   background: var(--background-color);
   padding: var(--spacing-l);
   vertical-align: top;
-  width: 20%; /* 5 per row */
 }
 
-/* optional: typography tidy */
-.accordion .accordion-item-body table tr:not(:first-child) td p {
+/* Optional: tidy typography */
+.accordion .accordion-item-body table td p {
   margin: 0 0 var(--spacing-xs);
   line-height: 1.5rem;
 }
 
+/* Breakpoints */
+@media (width < 600px) {
+  .accordion .accordion-item-body table { grid-template-columns: 1fr; }            /* 1 per row */
+}
+@media (600px <= width < 900px) {
+  .accordion .accordion-item-body table { grid-template-columns: repeat(2, 1fr); } /* 2 per row */
+}
+@media (900px <= width < 1200px) {
+  .accordion .accordion-item-body table { grid-template-columns: repeat(3, 1fr); } /* 3 per row */
+}
+/* ≥ 1200px uses the default 5-up */
 @media (width >= 900px) {
-  .accordion .accordion-item-body table tr:not(:first-child) td {
-    padding: var(--spacing-l);
-  }
+  .accordion .accordion-item-body table td { padding: var(--spacing-xxl); }
 }
