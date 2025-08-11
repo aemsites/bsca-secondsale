@@ -142,6 +142,12 @@
   height: auto;  /* keep aspect ratio */
 }
 
+/* Resize the calendar icon inside accordion cards */
+.accordion .accordion-item-body table td .icon.icon-calendar img {
+  width: 36px;   /* tweak as needed */
+  height: auto;  /* keep aspect ratio */
+}
+
 /* Breakpoints – just change the column count */
 @media (max-width: 599px)  { .accordion .accordion-item-body table tbody { --cols: 1; } }
 @media (min-width: 600px) and (max-width: 899px)  { .accordion .accordion-item-body table tbody { --cols: 2; } }
