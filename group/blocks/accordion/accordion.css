@@ -95,57 +95,59 @@
 }
 
 /* NEW ACCORDION CODE — Responsive (Flexbox) */
-
-/* NEW ACCORDION CODE — Responsive Flex with exact math */
+/* Responsive Flex grid driven by the TBODY (more efficient) */
 .accordion .accordion-item-body table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0;          /* important: no extra spacing when using gap */
+  border-spacing: 0; /* let gap handle spacing */
 }
 
-/* Hide the first marker row */
+/* Hide the marker row */
 .accordion .accordion-item-body table tr:first-child { display: none; }
 
-/* Each data row becomes a flex container */
-.accordion .accordion-item-body table tr {
-  --g: 24px;                  /* gap */
-  --cols: 5;                  /* default columns on wide screens */
+/* Make TBODY the single flex container */
+.accordion .accordion-item-body table tbody {
+  --g: 24px;   /* gap */
+  --cols: 5;   /* desktop columns */
   display: flex;
   flex-wrap: wrap;
   gap: var(--g);
 }
 
-/* Cards (td) as flex items with exact width accounting for gaps */
-.accordion .accordion-item-body table td {
-  box-sizing: border-box;     /* include padding/border in width math */
-  flex: 1 1 calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
-  max-width: calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
+/* Flatten all remaining TRs so TDs become the flex items */
+.accordion .accordion-item-body table tbody > tr { display: contents; }
 
+/* Cards */
+.accordion .accordion-item-body table td {
+  box-sizing: border-box;
+  flex: 0 1 calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
+  max-width: calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
+  display: block;
   border: 1px solid #dadada;
   border-radius: .5rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   background: var(--background-color);
   padding: var(--spacing-l);
   vertical-align: top;
-  display: block;
 }
 
-/* Optional: tidy typography */
+/* Optional typography tidy */
 .accordion .accordion-item-body table td p {
   margin: 0 0 var(--spacing-xs);
   line-height: 1.5rem;
 }
 
-/* Breakpoints: just change --cols; the math stays correct */
-@media (max-width: 599px) {
-  .accordion .accordion-item-body table tr { --cols: 1; }
+/* Breakpoints – just change the column count */
+@media (max-width: 599px)  { .accordion .accordion-item-body table tbody { --cols: 1; } }
+@media (min-width: 600px) and (max-width: 899px)  { .accordion .accordion-item-body table tbody { --cols: 2; } }
+@media (min-width: 900px) and (max-width: 1199px) { .accordion .accordion-item-body table tbody { --cols: 3; } }
+/* ≥1200px keeps --cols: 5 */
+
+/* Larger padding on wide screens (optional) */
+@media (min-width: 1200px) {
+  .accordion .accordion-item-body table td { padding: var(--spacing-xxl); }
 }
-@media (min-width: 600px) and (max-width: 899px) {
-  .accordion .accordion-item-body table tr { --cols: 2; }
-}
-@media (min-width: 900px) and (max-width: 1199px) {
-  .accordion .accordion-item-body table tr { --cols: 3; }
-}
+
 /* ≥1200px keeps --cols: 5 (default) */
 @media (min-width: 1200px) {
   .accordion .accordion-item-body table td { padding: var(--spacing-l); }
