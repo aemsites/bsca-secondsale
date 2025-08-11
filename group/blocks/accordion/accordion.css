@@ -94,30 +94,31 @@
   border-bottom: 1px solid var(--secondary-color);
 }
 
-/* NEW ACCORDION CODE — Responsive grid inside accordion bodies */
-/* Turn the inner table into a responsive grid */
+/* NEW ACCORDION CODE — Responsive (Flexbox) */
+
+/* Base table styling */
 .accordion .accordion-item-body table {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr)); /* default: 5-up */
-  gap: 12px;                                        /* space between cards */
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0;
+  border-spacing: 12px 12px; /* gaps between cards */
 }
 
-/* Hide the marker row (first row) */
+/* Hide the first marker row */
 .accordion .accordion-item-body table tr:first-child {
   display: none;
 }
 
-/* Flatten table rows so each TD becomes a grid item */
+/* Each data row becomes a flex container */
 .accordion .accordion-item-body table tr {
-  display: contents;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-/* Card look */
+/* Cards (td) */
 .accordion .accordion-item-body table td {
-  display: block; /* ensure a block card */
+  /* flex-basis controls how many per row */
+  flex: 1 1 calc(20% - 12px); /* default: 5 per row on wide screens */
   border: 1px solid #dadada;
   border-radius: .5rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
@@ -132,17 +133,21 @@
   line-height: 1.5rem;
 }
 
-/* Breakpoints */
-@media (width < 600px) {
-  .accordion .accordion-item-body table { grid-template-columns: 1fr; }            /* 1 per row */
+/* Breakpoints (using classic min/max syntax for widest support) */
+@media (max-width: 599px) {
+  .accordion .accordion-item-body table td { flex-basis: 100%; }          /* 1 per row */
 }
-@media (600px <= width < 900px) {
-  .accordion .accordion-item-body table { grid-template-columns: repeat(2, 1fr); } /* 2 per row */
+@media (min-width: 600px) and (max-width: 899px) {
+  .accordion .accordion-item-body table td { flex-basis: calc(50% - 12px); } /* 2 per row */
 }
-@media (900px <= width < 1200px) {
-  .accordion .accordion-item-body table { grid-template-columns: repeat(3, 1fr); } /* 3 per row */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .accordion .accordion-item-body table td { flex-basis: calc(33.333% - 12px); } /* 3 per row */
 }
-/* ≥ 1200px uses the default 5-up */
-@media (width >= 900px) {
-  .accordion .accordion-item-body table td { padding: var(--spacing-xxl); }
+/* ≥1200px keeps the default 5 per row */
+@media (min-width: 1200px) {
+  .accordion .accordion-item-body table td { flex-basis: calc(20% - 12px); }
 }
+
+/* If you previously had `display: table-cell` somewhere, this ensures block-level cards */
+.accordion .accordion-item-body table td { display: block; }
+
