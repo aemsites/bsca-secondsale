@@ -137,6 +137,11 @@
   line-height: 1.5rem;
 }
 
+.accordion .accordion-item-body table tr:not(:first-child) td img {
+  width: 48px;   /* change size here */
+  height: auto;  /* keep aspect ratio */
+}
+
 /* Breakpoints – just change the column count */
 @media (max-width: 599px)  { .accordion .accordion-item-body table tbody { --cols: 1; } }
 @media (min-width: 600px) and (max-width: 899px)  { .accordion .accordion-item-body table tbody { --cols: 2; } }
