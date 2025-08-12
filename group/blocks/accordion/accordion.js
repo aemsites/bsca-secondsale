@@ -3,41 +3,48 @@
  * Recreate an accordion
  * https://www.hlx.live/developer/block-collection/accordion
  *
- * Enhancement: Support a `[open]` token in the label cell to set initial state.
- * Example in Word: ":calendar: January [open]" => that accordion starts open.
+ * Enhancements:
+ *  - Support a `[open]` token in the label cell to set initial state.
+ *  - Auto-scope: if any inner table has a first-row marker containing
+ *    "accordion-card-list", add 'accordion-card-grid' to the block.
  */
 
 export default function decorate(block) {
+  // Transform each row into <details><summary>...</summary><div class="accordion-item-body">...</div></details>
   [...block.children].forEach((row) => {
-    // 1) Grab cells
     const label = row.children[0];
     const body = row.children[1];
 
-    // 2) Detect the [open] token before moving nodes
+    // Detect [open] token before we move nodes
     const rawLabelText = label?.textContent || '';
     const hasOpenToken = /\[\s*open\s*\]/i.test(rawLabelText);
 
-    // 3) Build the <summary> from label content
+    // Build summary from label content
     const summary = document.createElement('summary');
     summary.className = 'accordion-item-label';
     summary.append(...label.childNodes);
-
-    // Remove the [open] token from the visible label (preserve any markup)
+    // Remove the [open] token from the visible label
     summary.innerHTML = summary.innerHTML.replace(/\s*\[\s*open\s*\]\s*/gi, ' ').trim();
 
-    // 4) Decorate body
+    // Decorate body
     body.className = 'accordion-item-body';
 
-    // 5) Wrap in <details>
+    // Wrap in details
     const details = document.createElement('details');
     details.className = 'accordion-item';
-
-    // If the label had [open], start this item open
-    if (hasOpenToken) {
-      details.setAttribute('open', '');
-    }
+    if (hasOpenToken) details.setAttribute('open', '');
 
     details.append(summary, body);
     row.replaceWith(details);
   });
+
+  // Auto-scope: if this accordion contains a calendar grid (marker row),
+  // add a class so CSS can target only these accordions.
+  const hasCalendarGrid = [...block.querySelectorAll('.accordion-item-body table')].some((table) => {
+    const firstRow = table.querySelector('tr:first-child');
+    return firstRow && /accordion-card-list/i.test(firstRow.textContent || '');
+  });
+  if (hasCalendarGrid) {
+    block.classList.add('accordion-card-grid');
+  }
 }
