@@ -70,3 +70,17 @@
   transform: translate(-50%, -50%);
 }
 
+.video > div {
+  border: 2px solid #ccc;             /* customize */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  overflow: hidden;                   /* ensures rounded corners clip the iframe */
+  background: #fff;                   /* optional: subtle card feel */
+  /* DO NOT set display/width/height here */
+}
+
+/* Keep the iframe unconstrained; it’s absolutely positioned by the block’s own CSS */
+.video iframe {
+  border: 0;                          /* no border on the iframe itself */
+}
+
