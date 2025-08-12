@@ -110,8 +110,7 @@
   gap: var(--g);
 }
 
-/* Flatten all remaining TRs so TDs become the flex items
-   (must come BEFORE the :first-child rule for stylelint) */
+/* Flatten all remaining TRs so TDs become the flex items */
 .accordion.accordion-card-grid .accordion-item-body table tbody > tr {
   display: contents;
 }
@@ -122,8 +121,7 @@
 }
 
 /* Cards */
-.accordion.accordion-card-grid .accordion-item-body table td {
-    
+.accordion.accordion-card-grid .accordion-item-body table td { 
   box-sizing: border-box;
   flex: 0 1 calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
   max-width: calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
@@ -164,4 +162,3 @@
 @media (width >= 1200px) {
   .accordion.accordion-card-grid .accordion-item-body table td { padding: var(--spacing-l); }
 }
-
