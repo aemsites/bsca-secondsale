@@ -10,7 +10,7 @@
  */
 
 export default function decorate(block) {
-  // Transform each row into <details><summary>...</summary><div class="accordion-item-body">...</div></details>
+  // Transform each row into <details><summary>...</summary> and an .accordion-item-body div
   [...block.children].forEach((row) => {
     const label = row.children[0];
     const body = row.children[1];
