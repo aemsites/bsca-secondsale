@@ -101,9 +101,6 @@
   border-spacing: 0; /* let gap handle spacing */
 }
 
-/* Hide the marker row */
-.accordion.accordion-card-grid .accordion-item-body table tr:first-child { display: none; }
-
 /* Make TBODY the single flex container */
 .accordion.accordion-card-grid .accordion-item-body table tbody {
   --g: 24px;   /* gap */
@@ -113,8 +110,16 @@
   gap: var(--g);
 }
 
-/* Flatten all remaining TRs so TDs become the flex items */
-.accordion.accordion-card-grid .accordion-item-body table tbody > tr { display: contents; }
+/* Flatten all remaining TRs so TDs become the flex items
+   (must come BEFORE the :first-child rule for stylelint) */
+.accordion.accordion-card-grid .accordion-item-body table tbody > tr {
+  display: contents;
+}
+
+/* Hide the marker row */
+.accordion.accordion-card-grid .accordion-item-body table tr:first-child {
+  display: none;
+}
 
 /* Cards */
 .accordion.accordion-card-grid .accordion-item-body table td {
@@ -136,24 +141,26 @@
   line-height: 1.5rem;
 }
 
-/* Calendar icon size (if you keep it) */
+/* Calendar icon size (optional) */
 .accordion.accordion-card-grid .accordion-item-body table td .icon.icon-calendar img {
   width: 36px;
   height: auto;
 }
 
-/* Breakpoints – just change the column count */
-@media (max-width: 599px)  { .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 1; } }
-@media (min-width: 600px) and (max-width: 899px)  { .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 2; } }
-@media (min-width: 900px) and (max-width: 1199px) { .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 3; } }
-/* ≥1200px keeps --cols: 5 */
-
-/* Larger padding on wide screens (optional) */
-@media (min-width: 1200px) {
-  .accordion.accordion-card-grid .accordion-item-body table td { padding: var(--spacing-xxl); }
+/* Breakpoints – range notation to satisfy stylelint */
+@media (width <= 599px) {
+  .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 1; }
 }
 
-/* (If you prefer the smaller padding, keep only one of these two blocks) */
-@media (min-width: 1200px) {
+@media (600px <= width <= 899px) {
+  .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 2; }
+}
+
+@media (900px <= width <= 1199px) {
+  .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 3; }
+}
+
+@media (width >= 1200px) {
   .accordion.accordion-card-grid .accordion-item-body table td { padding: var(--spacing-l); }
 }
+
