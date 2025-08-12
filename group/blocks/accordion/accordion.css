@@ -123,6 +123,7 @@
 
 /* Cards */
 .accordion.accordion-card-grid .accordion-item-body table td {
+    
   box-sizing: border-box;
   flex: 0 1 calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
   max-width: calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
