@@ -94,19 +94,18 @@
   border-bottom: 1px solid var(--secondary-color);
 }
 
-/* NEW ACCORDION CODE — Responsive (Flexbox) */
-/* Responsive Flex grid driven by the TBODY (more efficient) */
-.accordion .accordion-item-body table {
+/* NEW ACCORDION CODE — Responsive (Flexbox), SCOPED to calendar accordions */
+.accordion.accordion-card-grid .accordion-item-body table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0; /* let gap handle spacing */
 }
 
 /* Hide the marker row */
-.accordion .accordion-item-body table tr:first-child { display: none; }
+.accordion.accordion-card-grid .accordion-item-body table tr:first-child { display: none; }
 
 /* Make TBODY the single flex container */
-.accordion .accordion-item-body table tbody {
+.accordion.accordion-card-grid .accordion-item-body table tbody {
   --g: 24px;   /* gap */
   --cols: 5;   /* desktop columns */
   display: flex;
@@ -115,10 +114,10 @@
 }
 
 /* Flatten all remaining TRs so TDs become the flex items */
-.accordion .accordion-item-body table tbody > tr { display: contents; }
+.accordion.accordion-card-grid .accordion-item-body table tbody > tr { display: contents; }
 
 /* Cards */
-.accordion .accordion-item-body table td {
+.accordion.accordion-card-grid .accordion-item-body table td {
   box-sizing: border-box;
   flex: 0 1 calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
   max-width: calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
@@ -132,29 +131,29 @@
 }
 
 /* Optional typography tidy */
-.accordion .accordion-item-body table td p {
+.accordion.accordion-card-grid .accordion-item-body table td p {
   margin: 0 0 var(--spacing-xs);
   line-height: 1.5rem;
 }
 
-/* Resize the calendar icon inside accordion cards */
-.accordion .accordion-item-body table td .icon.icon-calendar img {
-  width: 36px;   /* tweak as needed */
-  height: auto;  /* keep aspect ratio */
+/* Calendar icon size (if you keep it) */
+.accordion.accordion-card-grid .accordion-item-body table td .icon.icon-calendar img {
+  width: 36px;
+  height: auto;
 }
 
 /* Breakpoints – just change the column count */
-@media (max-width: 599px)  { .accordion .accordion-item-body table tbody { --cols: 1; } }
-@media (min-width: 600px) and (max-width: 899px)  { .accordion .accordion-item-body table tbody { --cols: 2; } }
-@media (min-width: 900px) and (max-width: 1199px) { .accordion .accordion-item-body table tbody { --cols: 3; } }
+@media (max-width: 599px)  { .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 1; } }
+@media (min-width: 600px) and (max-width: 899px)  { .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 2; } }
+@media (min-width: 900px) and (max-width: 1199px) { .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 3; } }
 /* ≥1200px keeps --cols: 5 */
 
 /* Larger padding on wide screens (optional) */
 @media (min-width: 1200px) {
-  .accordion .accordion-item-body table td { padding: var(--spacing-xxl); }
+  .accordion.accordion-card-grid .accordion-item-body table td { padding: var(--spacing-xxl); }
 }
 
-/* ≥1200px keeps --cols: 5 (default) */
+/* (If you prefer the smaller padding, keep only one of these two blocks) */
 @media (min-width: 1200px) {
-  .accordion .accordion-item-body table td { padding: var(--spacing-l); }
+  .accordion.accordion-card-grid .accordion-item-body table td { padding: var(--spacing-l); }
 }
