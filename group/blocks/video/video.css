@@ -69,3 +69,17 @@
   left: calc(50% + 2px);
   transform: translate(-50%, -50%);
 }
+
+/* Add border + styling to standalone video block */
+.video iframe {
+  border: 4px solid #ccc; /* adjust width & color */
+  border-radius: 8px;     /* rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* subtle drop shadow */
+}
+
+/* Optional: space & background for the whole block */
+.video {
+  padding: 8px;
+  background: white;
+  display: inline-block; /* shrink wrap to content */
+}
