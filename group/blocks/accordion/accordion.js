@@ -1,12 +1,12 @@
 /*
  * Accordion Block
  * Recreate an accordion
- * https://www.hlx.live/developer/block-collection/accordion
+ * Docs: hlx.live/developer/block-collection/accordion
  *
  * Enhancements:
- *  - Support a `[open]` token in the label cell to set initial state.
- *  - Auto-scope: if any inner table has a first-row marker containing
- *    "accordion-card-list", add 'accordion-card-grid' to the block.
+ *  - [open] token in label sets initial state.
+ *  - Auto-scope: detect "accordion-card-list" marker
+ *    and add 'accordion-card-grid' to the block.
  */
 
 export default function decorate(block) {
