@@ -93,3 +93,73 @@
 .accordion.lists ul > li:not(:last-child) {
   border-bottom: 1px solid var(--secondary-color);
 }
+
+/* NEW ACCORDION CODE — Responsive (Flexbox), SCOPED to calendar accordions */
+.accordion.accordion-card-grid .accordion-item-body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0; /* let gap handle spacing */
+}
+
+/* Make TBODY the single flex container */
+.accordion.accordion-card-grid .accordion-item-body table tbody {
+  --g: 24px;   /* gap */
+  --cols: 5;   /* desktop columns */
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--g);
+}
+
+/* Flatten all remaining TRs so TDs become the flex items */
+.accordion.accordion-card-grid .accordion-item-body table tbody > tr {
+  display: contents;
+}
+
+/* Hide the marker row */
+.accordion.accordion-card-grid .accordion-item-body table tr:first-child {
+  display: none;
+}
+
+/* Cards */
+.accordion.accordion-card-grid .accordion-item-body table td { 
+  box-sizing: border-box;
+  flex: 0 1 calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
+  max-width: calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols));
+  display: block;
+  border: 1px solid #dadada;
+  border-radius: .5rem;
+  box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
+  background: var(--background-color);
+  padding: var(--spacing-l);
+  vertical-align: top;
+}
+
+/* Optional typography tidy */
+.accordion.accordion-card-grid .accordion-item-body table td p {
+  margin: 0 0 var(--spacing-xs);
+  line-height: 1.5rem;
+}
+
+/* Calendar icon size (optional) */
+.accordion.accordion-card-grid .accordion-item-body table td .icon.icon-calendar img {
+  width: 36px;
+  height: auto;
+}
+
+/* Breakpoints – range notation to satisfy stylelint */
+@media (width <= 599px) {
+  .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 1; }
+}
+
+@media (600px <= width <= 899px) {
+  .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 2; }
+}
+
+@media (900px <= width <= 1199px) {
+  .accordion.accordion-card-grid .accordion-item-body table tbody { --cols: 3; }
+}
+
+@media (width >= 1200px) {
+  .accordion.accordion-card-grid .accordion-item-body table td { padding: var(--spacing-l); }
+}
