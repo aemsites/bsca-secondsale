@@ -105,6 +105,7 @@
 .accordion.accordion-card-grid .accordion-item-body table tbody {
   --g: 24px;   /* gap */
   --cols: 5;   /* desktop columns */
+
   display: flex;
   flex-wrap: wrap;
   gap: var(--g);
