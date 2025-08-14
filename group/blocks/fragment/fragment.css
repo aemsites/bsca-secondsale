@@ -174,7 +174,7 @@
 #ccpoa-active-plan ~ .button-container:last-of-type { margin-right: 0; }
 
 /* Mobile: stack */
-@media (max-width: 640px) {
+@media (width <= 640px) {
   #ccpoa-active-plan ~ .button-container {
     display: block;
     width: 100%;
