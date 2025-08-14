@@ -163,3 +163,21 @@
     padding-left: var(--spacing-xxl);
   }
 }
+
+/* Only the two buttons under the "CCPOA Active plan" section */
+#ccpoa-active-plan ~ .button-container {
+  display: inline-block;
+  vertical-align: top;
+  width: calc(50% - 8px);
+  margin-right: 16px;
+}
+#ccpoa-active-plan ~ .button-container:last-of-type { margin-right: 0; }
+
+/* Mobile: stack */
+@media (max-width: 640px) {
+  #ccpoa-active-plan ~ .button-container {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+}
