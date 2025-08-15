@@ -168,8 +168,7 @@
 #ccpoa-active-plan ~ .button-container {
   display: inline-block;
   vertical-align: top;
-  width: calc(50% - 8px);
-  margin-right: 16px;
+  margin-right: 32px;
 }
 #ccpoa-active-plan ~ .button-container:last-of-type { margin-right: 0; }
 
