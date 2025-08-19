@@ -100,8 +100,8 @@
 
     // Only intercept plain left-clicks
     if (
-      e.defaultPrevented || e.button !== 0 ||
-      e.metaKey || e.ctrlKey || e.shiftKey || e.altKey
+      e.defaultPrevented || e.button !== 0
+      || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey
     ) return;
 
     const src = buildPlayerSrc(a.href);
