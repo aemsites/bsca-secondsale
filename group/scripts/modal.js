@@ -75,16 +75,16 @@
     const closeBtn = overlay.querySelector('.video-modal-close');
     closeBtn.focus();
 
-    // define close FIRST so eslint is happy
+    // define onKey first
+    const onKey = (e) => {
+      if (e.key === 'Escape') close();
+    };
+
     const close = () => {
       overlay.remove();
       document.documentElement.style.overflow = prevOverflow;
       if (trigger) trigger.focus();
       document.removeEventListener('keydown', onKey);
-    };
-
-    const onKey = (e) => {
-      if (e.key === 'Escape') close();
     };
 
     overlay.addEventListener('click', (e) => {
