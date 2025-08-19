@@ -39,7 +39,9 @@
           '?autoplay=1&mute=1&rel=0&playsinline=1',
         ].join('');
       }
-    } catch (e) { /* ignore bad URLs */ }
+    } catch (e) {
+      /* ignore bad URLs */
+    }
     return href;
   }
 
@@ -75,7 +77,9 @@
     const closeBtn = overlay.querySelector('.video-modal-close');
     closeBtn.focus();
 
-    // --- define functions as declarations (hoisted) ---
+    // Declare the handler first so it's not "used before defined"
+    let onKey;
+
     function close() {
       overlay.remove();
       document.documentElement.style.overflow = prevOverflow;
@@ -83,10 +87,9 @@
       document.removeEventListener('keydown', onKey);
     }
 
-    function onKey(e) {
+    onKey = (e) => {
       if (e.key === 'Escape') close();
-    }
-    // --------------------------------------------------
+    };
 
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) close();
