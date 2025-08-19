@@ -1,9 +1,6 @@
 // group/scripts/modal.js
-// Turns Vimeo/YouTube links into a modal player inside sections opted-in via Metadata:
-//   Section Metadata:
-//     style | use-video-modal
-// Works with plain links and linked images.
-// Fallback: if JS fails, the link still opens on Vimeo/YouTube.
+// Upgrade Vimeo/YouTube links to a modal player, but only inside sections
+// that have Section Metadata: style | use-video-modal.
 
 (() => {
   const SECTION_SELECTOR = '.section.use-video-modal';
@@ -13,21 +10,15 @@
     `${SECTION_SELECTOR} a[href*="youtu.be"]`,
   ].join(', ');
 
-  function isNumericId(id) {
-    return !Number.isNaN(Number(id));
-  }
-
-  function buildPlayerSrc(href) {
+  const buildPlayerSrc = (href) => {
     try {
       const u = new URL(href);
 
       // Vimeo
       if (u.hostname.includes('vimeo.com')) {
-        // Accept /123456 or /video/123456
         const parts = u.pathname.split('/').filter(Boolean);
         const id = parts.pop();
-        if (!id || !isNumericId(id)) return href;
-
+        if (!id || Number.isNaN(Number(id))) return href;
         return [
           'https://player.vimeo.com/video/',
           id,
@@ -42,20 +33,17 @@
           vid = u.pathname.replace('/', '');
         }
         if (!vid) return href;
-
         return [
           'https://www.youtube.com/embed/',
           vid,
           '?autoplay=1&mute=1&rel=0&playsinline=1',
         ].join('');
       }
-    } catch (e) {
-      // ignore bad URLs
-    }
+    } catch (e) { /* ignore bad URLs */ }
     return href;
-  }
+  };
 
-  function ensureRoot() {
+  const ensureRoot = () => {
     let root = document.querySelector('.video-modal-root');
     if (!root) {
       root = document.createElement('div');
@@ -63,9 +51,9 @@
       document.body.append(root);
     }
     return root;
-  }
+  };
 
-  function openModal(src, trigger) {
+  const openModal = (src, trigger) => {
     const root = ensureRoot();
     const overlay = document.createElement('div');
     overlay.className = 'video-modal-overlay';
@@ -74,57 +62,50 @@
       'aria-label="Video player">',
       '<button class="video-modal-close" type="button" aria-label="Close">×</button>',
       '<div class="video-modal-frame">',
-      `<iframe src="${src}" title="Video" allow="autoplay; fullscreen; `,
-      'picture-in-picture" allowfullscreen loading="eager"></iframe>',
+      '<iframe title="Video" allow="autoplay; fullscreen; picture-in-picture" ',
+      'allowfullscreen loading="eager" src="', src, '"></iframe>',
       '</div>',
       '</div>',
     ].join('');
     root.append(overlay);
 
-    // scroll lock + focus
+    // lock scroll + focus
     const prevOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = 'hidden';
     const closeBtn = overlay.querySelector('.video-modal-close');
     closeBtn.focus();
 
-    function close() {
+    const close = () => {
       overlay.remove();
       document.documentElement.style.overflow = prevOverflow;
       if (trigger) trigger.focus();
       document.removeEventListener('keydown', onKey);
-    }
+    };
 
-    // Define before use (satisfies no-use-before-define)
-    function onKey(e) {
+    const onKey = (e) => {
       if (e.key === 'Escape') close();
-    }
+    };
 
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) close();
     });
     closeBtn.addEventListener('click', close);
     document.addEventListener('keydown', onKey);
-  }
+  };
 
-  // Event delegation: activate only inside opted-in sections
+  // Delegate clicks only inside opted-in sections
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a');
     if (!a || !a.matches(LINK_SELECTOR)) return;
 
-    // Only intercept left-click without modifier keys
+    // Only intercept plain left-clicks
     if (
-      e.defaultPrevented ||
-      e.button !== 0 ||
-      e.metaKey ||
-      e.ctrlKey ||
-      e.shiftKey ||
-      e.altKey
-    ) {
-      return;
-    }
+      e.defaultPrevented || e.button !== 0 ||
+      e.metaKey || e.ctrlKey || e.shiftKey || e.altKey
+    ) return;
 
     const src = buildPlayerSrc(a.href);
-    if (!src) return; // fallback to normal nav
+    if (!src) return;
 
     e.preventDefault();
     openModal(src, a);
