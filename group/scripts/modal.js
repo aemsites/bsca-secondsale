@@ -75,16 +75,16 @@
     const closeBtn = overlay.querySelector('.video-modal-close');
     closeBtn.focus();
 
-    // define onKey BEFORE any use (so eslint is happy)
-    const onKey = (e) => {
-      if (e.key === 'Escape') close();
-    };
-
+    // define close FIRST so eslint is happy
     const close = () => {
       overlay.remove();
       document.documentElement.style.overflow = prevOverflow;
       if (trigger) trigger.focus();
       document.removeEventListener('keydown', onKey);
+    };
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') close();
     };
 
     overlay.addEventListener('click', (e) => {
@@ -99,7 +99,7 @@
     const a = e.target.closest('a');
     if (!a || !a.matches(LINK_SELECTOR)) return;
 
-    // Only intercept plain left-clicks (operators at line start per lint rule)
+    // Only intercept plain left-clicks
     if (
       e.defaultPrevented || e.button !== 0
       || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey
