@@ -10,7 +10,7 @@
     `${SECTION_SELECTOR} a[href*="youtu.be"]`,
   ].join(', ');
 
-  const buildPlayerSrc = (href) => {
+  function buildPlayerSrc(href) {
     try {
       const u = new URL(href);
 
@@ -41,9 +41,9 @@
       }
     } catch (e) { /* ignore bad URLs */ }
     return href;
-  };
+  }
 
-  const ensureRoot = () => {
+  function ensureRoot() {
     let root = document.querySelector('.video-modal-root');
     if (!root) {
       root = document.createElement('div');
@@ -51,9 +51,9 @@
       document.body.append(root);
     }
     return root;
-  };
+  }
 
-  const openModal = (src, trigger) => {
+  function openModal(src, trigger) {
     const root = ensureRoot();
     const overlay = document.createElement('div');
     overlay.className = 'video-modal-overlay';
@@ -75,24 +75,25 @@
     const closeBtn = overlay.querySelector('.video-modal-close');
     closeBtn.focus();
 
-    // define onKey first
-    const onKey = (e) => {
-      if (e.key === 'Escape') close();
-    };
-
-    const close = () => {
+    // --- define functions as declarations (hoisted) ---
+    function close() {
       overlay.remove();
       document.documentElement.style.overflow = prevOverflow;
       if (trigger) trigger.focus();
       document.removeEventListener('keydown', onKey);
-    };
+    }
+
+    function onKey(e) {
+      if (e.key === 'Escape') close();
+    }
+    // --------------------------------------------------
 
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) close();
     });
     closeBtn.addEventListener('click', close);
     document.addEventListener('keydown', onKey);
-  };
+  }
 
   // Delegate clicks only inside opted-in sections
   document.addEventListener('click', (e) => {
