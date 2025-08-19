@@ -10,6 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
+ @import './modal.css';
+
+
 :root {
   /* colors */
   --background-color: white;
