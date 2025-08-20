@@ -426,5 +426,10 @@ main > .section.border-top > .default-content-wrapper {
   --body-font-size-s:  var(--body-font-size-m);
   --body-font-size-l:  var(--body-font-size-m);
   --body-font-size-xl: var(--body-font-size-m);
+
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height, 1.6);
 }
+
+
 
