@@ -420,9 +420,16 @@ main > .section.border-top > .default-content-wrapper {
   padding-top: var(--spacing-xl);
 }
 
-/* Scope to Newfront page only */
-.section.newfront-page :where(p, li, span, a, td, th, figcaption, small) {
+/* Newfront body copy override for Newfront page (headings untouched) */
+.section.newfront-page p,
+.section.newfront-page li,
+.section.newfront-page span,
+.section.newfront-page a,
+.section.newfront-page td,
+.section.newfront-page th,
+.section.newfront-page figcaption,
+.section.newfront-page small {
   font-size: var(--body-font-size-m);
-  line-height: var(--body-line-height, 1.6); /* optional, for readability */
+  line-height: var(--body-line-height, 1.6);
 }
 
