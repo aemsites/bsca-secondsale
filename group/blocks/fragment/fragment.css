@@ -180,3 +180,10 @@
     margin-right: 0;
   }
 }
+
+/* Scope to Newfront page only */
+.section.newfront-page :where(p, li, span, a, td, th, figcaption, small) {
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height, 1.6); /* optional, for readability */
+}
+
