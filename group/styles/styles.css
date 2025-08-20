@@ -419,3 +419,10 @@ main > .section.border-top > .default-content-wrapper {
   border-top: 1px solid var(--dark-color);
   padding-top: var(--spacing-xl);
 }
+
+/* Scope to Newfront page only */
+.section.newfront-page :where(p, li, span, a, td, th, figcaption, small) {
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height, 1.6); /* optional, for readability */
+}
+
