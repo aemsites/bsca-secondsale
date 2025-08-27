@@ -21,7 +21,10 @@ export default function decorate(block) {
         .map((n) => n.textContent.trim())
         .join(' ');
 
+      // Replace only the text, then re-append the chevron
       selected.textContent = visibleText;
+      selected.append(icon);
+
       dropdown.classList.remove('open');
     });
   });
