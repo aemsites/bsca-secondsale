@@ -1,6 +1,13 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { wrapTextInLinks } from '../../scripts/utils.js';
+import enableRowLinks from '../../scripts/row-link.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  enableRowLinks({
+    rows: 'header nav .nav-sections ul > li > ul > li',
+  });
+});
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');

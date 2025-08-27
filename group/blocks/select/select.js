@@ -1,4 +1,11 @@
 import { span } from '../../scripts/dom-helpers.js';
+import enableRowLinks from '../../scripts/row-link.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  enableRowLinks({
+    rows: '.select.block ul > li',
+  });
+});
 
 export default function decorate(block) {
   const selected = block.querySelector('p');
