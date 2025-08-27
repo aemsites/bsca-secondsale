@@ -1,12 +1,6 @@
 import { span } from '../../scripts/dom-helpers.js';
 import enableRowLinks from '../../scripts/row-link.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  enableRowLinks({
-    rows: '.select.block ul > li',
-  });
-});
-
 export default function decorate(block) {
   const selected = block.querySelector('p');
   const dropdown = block;
@@ -35,4 +29,8 @@ export default function decorate(block) {
   document.addEventListener('click', () => {
     dropdown.classList.remove('open');
   });
+
+  // Make the entire <li> clickable for this select block
+  // (runs after this block's DOM is ready)
+  enableRowLinks({ root: block, rows: 'ul > li' });
 }
