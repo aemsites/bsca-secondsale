@@ -209,6 +209,7 @@
 
   /* variant for space-evenly layout */
   .two-cards.space-evenly .cards ul {
+    flex-wrap: wrap;
     justify-content: space-evenly;
   }
 
