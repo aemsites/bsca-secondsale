@@ -208,9 +208,9 @@
   }
 
   /* variant for space-evenly layout */
-  .two-cards.space-evenly .cards ul {
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+  .section.two-cards.space-evenly .cards > ul {
+  flex-wrap: wrap; 
+  justify-content: space-evenly;
   }
 
   .two-cards .cards.list > ul {
