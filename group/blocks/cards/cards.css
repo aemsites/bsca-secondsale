@@ -207,6 +207,11 @@
     justify-content: center;
   }
 
+  /* variant for space-evenly layout */
+  .two-cards.space-evenly .cards ul {
+    justify-content: space-evenly;
+  }
+
   .two-cards .cards.list > ul {
     justify-content: flex-start;
   }
