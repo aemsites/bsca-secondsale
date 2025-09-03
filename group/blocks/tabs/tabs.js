@@ -78,10 +78,12 @@ export default async function decorate(block) {
   const tablist = document.createElement('div');
   tablist.className = 'tabs-list';
   tablist.setAttribute('role', 'tablist');
+
   // decorate tabs and tabpanels
   const tabs = [...block.children].map((child) => child.firstElementChild);
   tabs.forEach((tab, i) => {
     const id = toClassName(tab.textContent);
+
     // decorate tabpanel
     const tabpanel = block.children[i];
     tabpanel.className = 'tabs-panel';
@@ -89,6 +91,7 @@ export default async function decorate(block) {
     tabpanel.setAttribute('aria-hidden', !!i);
     tabpanel.setAttribute('aria-labelledby', `tab-${id}`);
     tabpanel.setAttribute('role', 'tabpanel');
+
     // build tab button
     const button = document.createElement('button');
     button.className = 'tabs-tab';
@@ -108,13 +111,16 @@ export default async function decorate(block) {
       tabpanel.setAttribute('aria-hidden', false);
       button.setAttribute('aria-selected', true);
     });
+
     tablist.append(button);
     tab.remove();
   });
+
   block.prepend(tablist);
+
   // ✅ After the block is initialized, apply deep-link selection
   tryActivateFromURL();
   setTimeout(tryActivateFromURL, 0);
   // If your tab lib sometimes re-selects #1 a bit later, you can uncomment:
-  // settimeout(tryactivatefromurl, 200);Ifyourtablibsometimesre-selects#1abitlater,youcanuncomment
-}// JavaScript Document
+  // setTimeout(tryActivateFromURL, 200);
+}
