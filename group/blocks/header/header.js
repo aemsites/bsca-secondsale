@@ -1,6 +1,7 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { wrapTextInLinks } from '../../scripts/utils.js';
+import enableRowLinks from '../../scripts/row-link.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -171,4 +172,10 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // ⬇️ Make entire submenu <li> rows clickable (runs after header DOM is ready)
+  enableRowLinks({
+    root: block,
+    rows: '.nav-sections ul > li > ul > li',
+  });
 }

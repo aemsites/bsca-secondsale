@@ -215,4 +215,11 @@
     max-width: 300px;
     margin: var(--spacing-xl);
   }
+
+  /* variant for space-evenly layout */
+  .section.two-cards.space-evenly .cards > ul {
+  flex-wrap: wrap; 
+  justify-content: space-evenly;
+  }
+
 }
