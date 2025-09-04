@@ -1,3 +1,37 @@
+<!-- OneTrust Cookies Consent Notice start for blueshieldca.com -->
+<script>
+  (function () {
+    // Treat .aem.live and your production domain as "prod"
+    var isProd =
+      location.hostname.endsWith('.aem.live') ||
+      /(^|\.)blueshieldca\.com$/i.test(location.hostname);
+
+    var baseId = '019878d6-0d4b-7b81-b399-94a1c6d2e133';
+    var domainScript = isProd ? baseId : baseId + '-test';
+
+    // Synchronous, order-preserving insertion in <head>
+    var otAutoBlockSrc = 'https://cdn.cookielaw.org/consent/' + domainScript + '/OtAutoBlock.js';
+    var otStubSrc = 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js';
+
+    // Use document.write in <head> to guarantee blocking order (per OneTrust guidance)
+    document.write('<script type="text/javascript" src="' + otAutoBlockSrc + '"><\/script>');
+    document.write('<script type="text/javascript" src="' + otStubSrc + '" charset="UTF-8" data-domain-script="' + domainScript + '"><\/script>');
+
+    // Runs after OneTrust applies consent; init consent-dependent scripts here
+    window.OptanonWrapper = function () {
+      // Example:
+      // if (window.OneTrustActiveGroups && OneTrustActiveGroups.indexOf('C0002') > -1) {
+      //   initAdobeAnalyticsOrTarget();
+      // }
+    };
+  })();
+</script>
+<!-- OneTrust Cookies Consent Notice end -->
+
+<!-- Custom OneTrust overrides -->
+<link rel="stylesheet" href="/group/styles/onetrust.css">
+<script src="/group/scripts/onetrust.js" type="module"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <script src="/group/scripts/aem.js" type="module"></script>
 <script src="/group/scripts/scripts.js" type="module"></script>
