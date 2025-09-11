@@ -1,4 +1,4 @@
-footer {
+.footer {
 max-width:1440px;
 margin:auto;
 }
@@ -8,7 +8,6 @@ footer .footer > div {
   padding: 40px 16px 16px;
   font-size: 32px;
   line-height: 38px;
-  width: 300px;
 }
 
 footer .footer p {
