@@ -6,13 +6,13 @@ margin:auto;
 footer .footer > div {
   margin: auto;
   padding: 40px 16px 16px;
-  font-size: 32px;
-  line-height: 38px;
 }
 
 footer .footer p {
   margin: 0;
   color: var(--color-chicago-black);
+  font-size: 32px;
+  line-height: 38px;
   width:300px;
 }
 
@@ -39,9 +39,19 @@ footer .footer-links-sections ul{
   margin: 0;
 }
 
+/* Nested links */
+.footer-links-sections > li ul li a {
+  color: var(--color-chicago-black);
+  text-decoration: none;
+}
+
 footer .footer .default-content-wrapper li a {
   text-decoration: none;
   font-size: var(--body-font-size-xs);
+}
+
+.footer-links-sections > li ul li a:hover {
+  font-weight: 600;
 }
 
 /* Add arrows to top-level <li> elements */
@@ -49,6 +59,7 @@ footer .footer .default-content-wrapper li a {
   padding: 0.5rem 0 1rem;
   position: relative;
   cursor: pointer;
+  color: var(--dallas);
 }
 
 .footer-links-sections > li::after {
@@ -79,7 +90,7 @@ footer .footer .default-content-wrapper li a {
 }
 
 .footer-links-sections > li > ul > li {
-  padding-top: 0.75rem;
+  padding-top: 24px;
 }
 
 .footer .footer-top-section {
