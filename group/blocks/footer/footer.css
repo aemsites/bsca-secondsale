@@ -1,10 +1,6 @@
-footer {
-  font-size: var(--body-font-size-xxs);
-}
-
 footer .footer > div {
   margin: auto;
-  padding: 40px 24px 24px;
+  padding: 40px 16px 16px;
 }
 
 footer .footer p {
@@ -12,15 +8,27 @@ footer .footer p {
   color: var(--grey-color);
 }
 
-footer .footer .default-content-wrapper ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--spacing-s) var(--spacing-l);
-  max-width: 400px;
-  padding: var(--spacing-s);
+footer > .section {
+  padding: 0 var(--spacing-l);
+}
+
+footer .section h5 {
+  font-size: var(--body-font-size-l);
+  font-weight: var(--font-weight-regular);
+  padding-bottom: var(--spacing-s);
+}
+
+footer .footer-links-sections {
   list-style: none;
-  margin: 0 auto;
+  font-size: var(--body-font-size-xs);
+  padding-left: 0;
+  margin: 0;
+}
+
+footer .footer-links-sections ul{
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
 }
 
 footer .footer .default-content-wrapper li a {
@@ -28,8 +36,150 @@ footer .footer .default-content-wrapper li a {
   font-size: var(--body-font-size-xs);
 }
 
+/* Add arrows to top-level <li> elements */
+.footer-links-sections > li {
+  padding: 0.5rem 0 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.footer-links-sections > li::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 0.5rem;
+  transform: translateY(-50%) rotate(45deg);
+  border: solid #000;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 5px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate arrow when expanded */
+.footer-links-sections > li[aria-expanded="true"]::after {
+  transform: translateY(-50%) rotate(-135deg);
+  top: 1rem;
+}
+
+.footer-links-sections > li[aria-expanded="true"] > ul {
+  display: block;
+}
+
+.footer-links-sections > li[aria-expanded="false"] > ul {
+  display: none;
+}
+
+.footer-links-sections > li > ul > li {
+  padding-top: 0.75rem;
+}
+
+.footer .footer-top-section {
+  position: relative;
+  z-index: 1;
+  padding: var(--spacing-l) var(--spacing-xl);
+  background-color: var(--shade-color);
+  border-top-left-radius: 42px;
+  border-top-right-radius: 42px;
+  margin: 64px 0 0;
+}
+
+.footer .footer-bottom-section .footer-disclaimer-section {
+  padding: var(--spacing-l) var(--spacing-l) 0;
+}
+
+.footer .footer-bottom-section .footer-disclaimer-section p {
+  padding: var(--spacing-m) 0;
+  font-size: var(--body-font-size-xxs);
+}
+
+.footer .footer-bottom-section .footer-trust-image-section {
+ padding: 0 var(--spacing-l);
+}
+
+.footer .footer-bottom-section .footer-disclaimer-section .icon {
+  padding: 0 var(--spacing-xxl) 0 0;
+}
+
+.footer .footer-bottom-section .footer-disclaimer-section img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (width >= 600px) {
+  footer .footer .footer-top-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-links-sections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-s) var(--spacing-l);
+  }
+
+  .footer-top-section > h5 {
+    flex: 1;
+  }
+
+  .footer-top-section > .footer-links-sections {
+    flex: 3;
+    justify-content: space-between;
+  }
+
+  .footer-links-sections > li::after {
+    display: none;
+  }
+
+  .footer .footer-links-sections > li > ul {
+    display: block;
+  }
+
+  .footer .footer-bottom-section .footer-disclaimer-section {
+    display: flex;
+    justify-content: space-around;
+    padding: var(--spacing-xxl) var(--spacing-xxl) 0;
+  }
+
+  .footer .footer-bottom-section .footer-disclaimer-section > p:first-child {
+    flex: 1;
+  }
+
+  .footer .footer-bottom-section .footer-disclaimer-section > p:nth-child(2) {
+    flex: 3;
+  }
+
+  .footer .footer-bottom-section .footer-trust-image-section {
+    margin-top: -24px;
+    padding: 0 var(--spacing-xxl);
+  }
+
+  .footer .footer-bottom-section .footer-disclaimer-section .icon {
+    padding: 0 var(--spacing-l) 0 0;
+  }
+
+}
+
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 24px 32px;
+    padding: 24px 16px;
+  }
+
+  footer .footer .footer-top-section {
+    flex-direction: row;
+    margin-top: 96px;
+  }
+
+  .footer-top-section > h5 {
+    text-align: center;
+  }
+
+  .footer-top-section > .footer-links-sections {
+    justify-content: space-around;
+  }
+
+  .footer .footer-bottom-section .footer-disclaimer-section .icon {
+    padding: 0 var(--spacing-xl) 0 0;
   }
 }
