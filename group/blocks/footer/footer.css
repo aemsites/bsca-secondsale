@@ -1,11 +1,19 @@
+footer {
+max-width:1440px;
+margin:auto;
+}
+
 footer .footer > div {
   margin: auto;
   padding: 40px 16px 16px;
+  font-size: 32px;
+  line-height: 38px;
+  width: 300px;
 }
 
 footer .footer p {
   margin: 0;
-  color: var(--grey-color);
+  color: var(--color-chicago-black);
 }
 
 footer > .section {
@@ -77,7 +85,7 @@ footer .footer .default-content-wrapper li a {
 .footer .footer-top-section {
   position: relative;
   z-index: 1;
-  padding: var(--spacing-l) var(--spacing-xl);
+  padding: 40px 40px 48px;
   background-color: var(--shade-color);
   border-top-left-radius: 42px;
   border-top-right-radius: 42px;
