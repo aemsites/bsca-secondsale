@@ -10,9 +10,7 @@ footer .footer > div {
 
 footer .footer p {
   margin: 0;
-  color: var(--color-chicago-black);
-  font-size: 32px;
-  line-height: 38px;
+  line-spacing:1.5px;
   width:300px;
 }
 
@@ -104,6 +102,12 @@ footer .footer .default-content-wrapper li a {
   margin: 64px 0 0;
 }
 
+.footer .footer-top-section p {
+  color: var(--color-chicago-black);
+  font-size: 32px;
+  line-height: 38px;
+}
+
 .footer .footer-bottom-section .footer-disclaimer-section {
   padding: var(--spacing-l) var(--spacing-l) 0;
 }
@@ -111,6 +115,7 @@ footer .footer .default-content-wrapper li a {
 .footer .footer-bottom-section .footer-disclaimer-section p {
   padding: var(--spacing-m) 0;
   font-size: var(--body-font-size-xxs);
+  color: var(--color-grey-700);
 }
 
 .footer .footer-bottom-section .footer-trust-image-section {
@@ -159,7 +164,7 @@ footer .footer .default-content-wrapper li a {
   .footer .footer-bottom-section .footer-disclaimer-section {
     display: flex;
     justify-content: space-around;
-    padding: var(--spacing-xxl) var(--spacing-xxl) 0;
+    padding: 24px 40px;
   }
 
   .footer .footer-bottom-section .footer-disclaimer-section > p:first-child {
