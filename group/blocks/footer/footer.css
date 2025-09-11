@@ -41,7 +41,7 @@ footer .footer-links-sections ul{
 
 /* Nested links */
 .footer-links-sections > li ul li a {
-  color: var(--color-chicago-black);
+  color: var(--dallas);
   text-decoration: none;
 }
 
@@ -51,6 +51,7 @@ footer .footer .default-content-wrapper li a {
 }
 
 .footer-links-sections > li ul li a:hover {
+  color: var(--color-chicago-black);
   font-weight: 600;
 }
 
