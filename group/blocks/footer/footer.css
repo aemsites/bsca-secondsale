@@ -10,7 +10,7 @@ footer .footer > div {
 
 footer .footer p {
   margin: 0;
-  line-spacing:1.5px;
+  letter-spacing: 1.5px;
   width:300px;
 }
 
