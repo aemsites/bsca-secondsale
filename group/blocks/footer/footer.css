@@ -114,7 +114,8 @@ footer .footer .default-content-wrapper li a {
 
 .footer .footer-bottom-section .footer-disclaimer-section p {
   padding: var(--spacing-m) 0;
-  font-size: var(--body-font-size-xxs);
+  font-size: 13px;
+  line-height:20px;
   color: var(--color-grey-700);
 }
 
