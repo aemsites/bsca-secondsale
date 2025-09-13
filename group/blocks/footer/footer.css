@@ -11,6 +11,7 @@ footer .footer > div {
 footer .footer p {
   margin: 0;
   letter-spacing: 1.5px;
+  /* removed width here */
 }
 
 footer > .section {
@@ -105,7 +106,7 @@ footer .footer .default-content-wrapper li a {
   color: var(--color-chicago-black);
   font-size: 32px;
   line-height: 38px;
-  width:300px;
+  width: 300px; /* keep the headline constrained */
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section {
@@ -162,36 +163,37 @@ footer .footer .default-content-wrapper li a {
     display: block;
   }
 
-  /* ----- NEW: grid layout to place TrustArc badge under icons ----- */
+  /* Grid layout for bottom footer */
   footer .footer-bottom-section {
     display: grid;
-    grid-template-columns: 300px 1fr;       /* left: icons/badge, right: long text */
-    gap: var(--spacing-m) var(--spacing-m);
+    grid-template-columns: 300px 1fr;   /* left: icons + badge, right: legal text */
+    column-gap: var(--spacing-m);
+    row-gap: var(--spacing-m);
     align-items: start;
   }
 
-  /* Left column = social icons block */
+  /* Left column: social icons */
   footer .footer-bottom-section .footer-disclaimer-section {
     grid-column: 1;
     display: flex;
     justify-content: space-around;
-    padding: 24px 40px;                      /* keep your spacing */
+    padding: 24px 40px;
   }
 
-  /* Right column = the long paragraph(s) (direct <p> children) */
+  /* Right column: legal paragraphs */
   footer .footer-bottom-section > p {
     grid-column: 2;
+    width: auto;
+    max-width: none;
   }
 
-  /* TrustArc badge goes under the icons in the same left column */
+  /* TrustArc badge under icons */
   footer .footer-bottom-section .footer-trust-image-section {
     grid-column: 1;
-    margin-top: var(--spacing-s);            /* replaces previous negative margin */
-    padding: 0 var(--spacing-xxl);           /* keep your desktop padding */
+    margin-top: var(--spacing-s);
+    padding: 0 var(--spacing-xxl);
     text-align: left;
   }
-
-  /* ----- END NEW ----- */
 
   .footer .footer-bottom-section .footer-disclaimer-section .icon {
     padding: 0 var(--spacing-l) 0 0;
