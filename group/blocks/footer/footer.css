@@ -1,6 +1,6 @@
 .footer {
-max-width:1440px;
-margin:auto;
+  max-width:1440px;
+  margin:auto;
 }
 
 footer .footer > div {
@@ -106,7 +106,6 @@ footer .footer .default-content-wrapper li a {
   color: var(--color-chicago-black);
   font-size: 32px;
   line-height: 38px;
-  
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section {
@@ -121,7 +120,7 @@ footer .footer .default-content-wrapper li a {
 }
 
 .footer .footer-bottom-section .footer-trust-image-section {
- padding: 0 var(--spacing-l);
+  padding: 0 var(--spacing-l);
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section .icon {
@@ -163,24 +162,36 @@ footer .footer .default-content-wrapper li a {
     display: block;
   }
 
-  .footer .footer-bottom-section .footer-disclaimer-section {
+  /* ----- NEW: grid layout to place TrustArc badge under icons ----- */
+  footer .footer-bottom-section {
+    display: grid;
+    grid-template-columns: 300px 1fr;       /* left: icons/badge, right: long text */
+    gap: var(--spacing-m) var(--spacing-m);
+    align-items: start;
+  }
+
+  /* Left column = social icons block */
+  footer .footer-bottom-section .footer-disclaimer-section {
+    grid-column: 1;
     display: flex;
     justify-content: space-around;
-    padding: 24px 40px;
+    padding: 24px 40px;                      /* keep your spacing */
   }
 
-  .footer .footer-bottom-section .footer-disclaimer-section > p:first-child {
-    flex: 1;
+  /* Right column = the long paragraph(s) (direct <p> children) */
+  footer .footer-bottom-section > p {
+    grid-column: 2;
   }
 
-  .footer .footer-bottom-section .footer-disclaimer-section > p:nth-child(2) {
-    flex: 3;
+  /* TrustArc badge goes under the icons in the same left column */
+  footer .footer-bottom-section .footer-trust-image-section {
+    grid-column: 1;
+    margin-top: var(--spacing-s);            /* replaces previous negative margin */
+    padding: 0 var(--spacing-xxl);           /* keep your desktop padding */
+    text-align: left;
   }
 
-  .footer .footer-bottom-section .footer-trust-image-section {
-    margin-top: -24px;
-    padding: 0 var(--spacing-xxl);
-  }
+  /* ----- END NEW ----- */
 
   .footer .footer-bottom-section .footer-disclaimer-section .icon {
     padding: 0 var(--spacing-l) 0 0;
