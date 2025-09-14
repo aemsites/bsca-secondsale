@@ -56,6 +56,51 @@ const structureFooter = (footer) => {
   footer.append(footerBottom);
 };
 
+// --- Social linking helpers ---
+const SOCIAL_LINKS = {
+  facebook: 'https://www.facebook.com/BlueShieldCA',
+  instagram: 'https://www.instagram.com/blueshieldofca',
+  linkedin: 'https://www.linkedin.com/company/blue-shield-of-california',
+  // Add others if needed: twitter, youtube, etc.
+};
+
+function wrapIconWithLink(iconEl, href, label) {
+  if (iconEl.closest('a')) return;
+
+  const wrapTarget = iconEl.closest('.icon') || iconEl;
+  if (wrapTarget.dataset.linked === 'true') return;
+
+  const a = document.createElement('a');
+  a.href = href;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.setAttribute('aria-label', label);
+
+  while (wrapTarget.firstChild) a.appendChild(wrapTarget.firstChild);
+  wrapTarget.appendChild(a);
+  wrapTarget.dataset.linked = 'true';
+}
+
+function linkFooterSocialIcons(footerRoot) {
+  const container = footerRoot.querySelector('.footer-bottom-section .footer-disclaimer-section');
+  if (!container) return;
+
+  const iconNodes = container.querySelectorAll('.icon');
+  iconNodes.forEach((node) => {
+    const classMatch = Array.from(node.classList).find(
+      (cls) => cls.startsWith('icon-') && cls !== 'icon',
+    );
+    if (!classMatch) return;
+
+    const key = classMatch.replace('icon-', '').toLowerCase();
+    const href = SOCIAL_LINKS[key];
+    if (!href) return;
+
+    const graphic = node.querySelector('img, svg') || node;
+    wrapIconWithLink(graphic, href, `Open ${key} in a new tab`);
+  });
+}
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
@@ -72,6 +117,9 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
   structureFooter(footer);
+
+  // Make social icons clickable
+  linkFooterSocialIcons(footer);
 
   block.append(footer);
 }
