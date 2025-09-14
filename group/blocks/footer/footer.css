@@ -235,4 +235,13 @@ footer .footer .default-content-wrapper li a {
     width: 100%;
     padding-bottom: 32px;
   }
+
+  .footer .footer-bottom-section  {
+  position: absolute;
+  }
+
+  .footer .footer-bottom-section .footer-trust-image-section {
+    position:relative;
+    top:0px;
+  }
 }
