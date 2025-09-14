@@ -1,6 +1,6 @@
 .footer {
-  max-width:1440px;
-  margin:auto;
+  max-width: 1440px;
+  margin: auto;
 }
 
 footer .footer > div {
@@ -11,6 +11,8 @@ footer .footer > div {
 footer .footer p {
   margin: 0;
   letter-spacing: 1.5px;
+
+  /* no width here */
 }
 
 footer > .section {
@@ -30,7 +32,7 @@ footer .footer-links-sections {
   margin: 0;
 }
 
-footer .footer-links-sections ul{
+footer .footer-links-sections ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
@@ -105,7 +107,7 @@ footer .footer .default-content-wrapper li a {
   color: var(--color-chicago-black);
   font-size: 32px;
   line-height: 38px;
-  width: 300px; /* keep the headline constrained */
+  width: 300px; /* constrain only the hero headline */
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section {
@@ -115,7 +117,7 @@ footer .footer .default-content-wrapper li a {
 .footer .footer-bottom-section .footer-disclaimer-section p {
   padding: var(--spacing-m) 0;
   font-size: 13px;
-  line-height:20px;
+  line-height: 20px;
   color: var(--color-grey-700);
 }
 
@@ -162,31 +164,39 @@ footer .footer .default-content-wrapper li a {
     display: block;
   }
 
-  /* Grid layout for bottom footer */
+  /* Parent bottom area: two columns (left fixed, right fluid) */
   footer .footer-bottom-section {
     display: grid;
-    grid-template-columns: 300px 1fr;   /* left: icons + badge, right: legal text */
-    column-gap: var(--spacing-m);
-    row-gap: var(--spacing-m);
+    grid-template-columns: 300px 1fr; /* left: icons + badge, right: legal text */
+    gap: var(--spacing-m) var(--spacing-m);
     align-items: start;
   }
 
-  /* Left column: social icons */
+  /* DISCLAIMER SECTION spans both parent columns,
+     and inside becomes a 2-col grid: col 1 = icons, col 2 = legal text */
   footer .footer-bottom-section .footer-disclaimer-section {
-    grid-column: 1;
-    display: flex;
-    justify-content: space-around;
+    grid-column: 1 / -1;              /* span both columns in the parent grid */
+    display: grid;                    /* replace previous flex */
+    grid-template-columns: 300px 1fr; /* left slot for icons, right for legal */
+    column-gap: var(--spacing-m);
     padding: 24px 40px;
   }
 
-  /* Right column: legal paragraphs */
-  footer .footer-bottom-section > p {
+  /* Left cell (icons) = first <p> */
+  footer .footer-bottom-section .footer-disclaimer-section > p:first-child {
+    grid-column: 1;
+    display: flex;
+    gap: var(--spacing-l);
+  }
+
+  /* Right cell (legal paragraph(s)) = second <p> */
+  footer .footer-bottom-section .footer-disclaimer-section > p:nth-child(2) {
     grid-column: 2;
     width: auto;
     max-width: none;
   }
 
-  /* TrustArc badge under icons */
+  /* TrustArc badge under icons in the parent grid (row 2, col 1) */
   footer .footer-bottom-section .footer-trust-image-section {
     grid-column: 1;
     margin-top: var(--spacing-s);
