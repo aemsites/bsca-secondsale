@@ -178,7 +178,7 @@ footer .footer .default-content-wrapper li a {
   }
 
   .footer .footer-bottom-section .footer-trust-image-section {
-    margin-top: -90px;
+    margin-top: 0px;
     padding: 0 var(--spacing-xxl);
   }
 
