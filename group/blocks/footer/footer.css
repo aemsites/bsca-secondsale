@@ -139,7 +139,7 @@ footer .footer .default-content-wrapper li a {
   height: 1.5rem;
 }
 
-@media (width >= 600px) {
+@media (width >= 1023px) {
   footer .footer .footer-top-section {
     display: flex;
     flex-direction: column;
