@@ -139,6 +139,21 @@ footer .footer .default-content-wrapper li a {
   height: 1.5rem;
 }
 
+/* Default clickable area */
+.footer .footer-bottom-section .footer-disclaimer-section .icon a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* Hover/focus: recolor PNG icons to Blue Shield blue (#0071bc) */
+.footer .footer-bottom-section .footer-disclaimer-section .icon a:hover img,
+.footer .footer-bottom-section .footer-disclaimer-section .icon a:focus-visible img {
+  filter: brightness(0) saturate(100%) invert(26%) sepia(99%) saturate(2129%) hue-rotate(189deg) brightness(94%) contrast(101%);
+  transition: filter 0.3s ease;
+}
+
 @media (width >= 1023px) {
   footer .footer .footer-top-section {
     display: flex;
