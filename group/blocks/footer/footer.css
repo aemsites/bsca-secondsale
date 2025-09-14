@@ -109,6 +109,10 @@ footer .footer .default-content-wrapper li a {
   
 }
 
+.footer .footer-bottom-section  {
+  position: relative;
+}
+
 .footer .footer-bottom-section .footer-disclaimer-section {
   padding: var(--spacing-l) var(--spacing-l) 0;
 }
@@ -122,6 +126,8 @@ footer .footer .default-content-wrapper li a {
 
 .footer .footer-bottom-section .footer-trust-image-section {
  padding: 0 var(--spacing-l);
+ position: absolute;
+ top: 80px;
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section .icon {
@@ -178,7 +184,7 @@ footer .footer .default-content-wrapper li a {
   }
 
   .footer .footer-bottom-section .footer-trust-image-section {
-    margin-top: 0px;
+    margin-top: 0;
     padding: 0 var(--spacing-xxl);
   }
 
