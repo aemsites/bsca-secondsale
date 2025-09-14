@@ -125,9 +125,9 @@ footer .footer .default-content-wrapper li a {
 }
 
 .footer .footer-bottom-section .footer-trust-image-section {
- padding: 0 var(--spacing-l);
  position: absolute;
  top: 80px;
+ left: 40px;
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section .icon {
@@ -185,7 +185,6 @@ footer .footer .default-content-wrapper li a {
 
   .footer .footer-bottom-section .footer-trust-image-section {
     margin-top: 0;
-    padding: 0 var(--spacing-xxl);
   }
 
   .footer .footer-bottom-section .footer-disclaimer-section .icon {
