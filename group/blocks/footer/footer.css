@@ -229,3 +229,10 @@ footer .footer .default-content-wrapper li a {
     padding: 0 var(--spacing-xl) 0 0;
   }
 }
+
+@media (width <= 1023px) {
+  .footer .footer-top-section p {
+    width: 100%;
+    padding-bottom: 32px;
+  }
+}
