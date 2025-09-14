@@ -110,6 +110,7 @@ footer .footer .default-content-wrapper li a {
   width: 300px; /* constrain only the hero headline */
 }
 
+/* --- Bottom section base styles --- */
 .footer .footer-bottom-section .footer-disclaimer-section {
   padding: var(--spacing-l) var(--spacing-l) 0;
 }
@@ -134,6 +135,7 @@ footer .footer .default-content-wrapper li a {
   height: 1.5rem;
 }
 
+/* -------------------- Desktop layout -------------------- */
 @media (width >= 600px) {
   footer .footer .footer-top-section {
     display: flex;
@@ -167,17 +169,18 @@ footer .footer .default-content-wrapper li a {
   /* Parent bottom area: two columns (left fixed, right fluid) */
   footer .footer-bottom-section {
     display: grid;
-    grid-template-columns: 300px 1fr; /* left: icons + badge, right: legal text */
+    grid-template-columns: 300px 1fr; /* left: icons/badge; right: legal text */
     gap: var(--spacing-m) var(--spacing-m);
     align-items: start;
   }
 
-  /* DISCLAIMER SECTION spans both parent columns,
-     and inside becomes a 2-col grid: col 1 = icons, col 2 = legal text */
+  /* DISCLAIMER spans both columns, then creates its own 2-col grid:
+     col 1 = icons, col 2 = legal text */
   footer .footer-bottom-section .footer-disclaimer-section {
-    grid-column: 1 / -1;              /* span both columns in the parent grid */
-    display: grid;                    /* replace previous flex */
-    grid-template-columns: 300px 1fr; /* left slot for icons, right for legal */
+    grid-column: 1 / -1;      /* row 1 across both columns */
+    grid-row: 1;
+    display: grid;            /* replace previous flex */
+    grid-template-columns: 300px 1fr;
     column-gap: var(--spacing-m);
     padding: 24px 40px;
   }
@@ -196,11 +199,12 @@ footer .footer .default-content-wrapper li a {
     max-width: none;
   }
 
-  /* TrustArc badge under icons in the parent grid (row 2, col 1) */
+  /* TrustArc badge directly under the icons (row 2, col 1 of parent) */
   footer .footer-bottom-section .footer-trust-image-section {
     grid-column: 1;
+    grid-row: 2;
     margin-top: var(--spacing-s);
-    padding: 0 var(--spacing-xxl);
+    padding: 0 40px; /* align with icons padding */
     text-align: left;
   }
 
