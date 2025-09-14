@@ -114,7 +114,7 @@ footer .footer .default-content-wrapper li a {
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section {
-  padding: var(--spacing-l) var(--spacing-l) 0;
+  padding: 24px 40px;
 }
 
 .footer .footer-bottom-section .footer-disclaimer-section p {
