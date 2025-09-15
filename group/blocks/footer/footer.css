@@ -10,7 +10,6 @@ footer .footer > div {
 
 footer .footer p {
   margin: 0;
-  letter-spacing: 1.5px;
 }
 
 footer > .section {
@@ -58,6 +57,12 @@ footer .footer .default-content-wrapper li a {
   position: relative;
   cursor: pointer;
   color: var(--dallas);
+  letter-spacing: 1.5px;
+}
+
+/* Reset spacing for the nested links list */
+.footer-links-sections > li > ul {
+  letter-spacing: normal;
 }
 
 .footer-links-sections > li::after {
@@ -242,6 +247,6 @@ footer .footer .default-content-wrapper li a {
 
   .footer .footer-bottom-section .footer-trust-image-section {
     position:relative;
-    top: 0px;
+    top: 0;
   }
 }
