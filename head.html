@@ -16,14 +16,6 @@
     // Use document.write in <head> to guarantee blocking order (per OneTrust guidance)
     document.write('<script type="text/javascript" src="' + otAutoBlockSrc + '"><\/script>');
     document.write('<script type="text/javascript" src="' + otStubSrc + '" charset="UTF-8" data-domain-script="' + domainScript + '"><\/script>');
-
-    // Runs after OneTrust applies consent; init consent-dependent scripts here
-    window.OptanonWrapper = function () {
-      // Example:
-      // if (window.OneTrustActiveGroups && OneTrustActiveGroups.indexOf('C0002') > -1) {
-      //   initAdobeAnalyticsOrTarget();
-      // }
-    };
   })();
 </script>
 <!-- OneTrust Cookies Consent Notice end -->
