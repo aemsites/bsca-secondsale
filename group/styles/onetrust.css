@@ -54,7 +54,7 @@
 }
 
 .onetrust-btn {
-    padding: 0px 24px !important;
+    padding: 6px 24px 10px!important;
     border-radius: 32px !important;
     border: none;
     cursor: pointer;
@@ -94,3 +94,4 @@
     }
 
 }
+
