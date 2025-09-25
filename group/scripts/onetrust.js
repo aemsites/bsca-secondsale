@@ -38,7 +38,7 @@ function hideOTCustomBanner() {
         domain = ".bscal.com";
     } 
  
-    document.cookie = "bannerCustShown=true; path=/; domain=" + domain + "; SameSite=Lax"; // session cookie
+    document.cookie = "bannerCustShown=true; path=/; domain= "+domain+"; SameSite=Lax" // session cookie
 }
 
 function openPreferenceCenter() {
@@ -80,4 +80,5 @@ function showOTCustomBanner() {
     document.addEventListener('keydown',trapCustomBannerFocus);
 
 }
+
 
