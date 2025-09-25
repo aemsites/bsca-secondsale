@@ -100,6 +100,7 @@
 #onetrust-banner-sdk button#onetrust-accept-btn-handler,
 #onetrust-banner-sdk .ot-sdk-button {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+  padding: 6px 24px 10px !important;
 }
 
 @media only screen and (min-width: 375px) and (max-width: 767.5px) {
@@ -112,6 +113,7 @@
     }
 
 }
+
 
 
 
