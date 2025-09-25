@@ -95,9 +95,10 @@
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
-/* Buttons */
-#onetrust-banner-sdk .onetrust-btn,
-#onetrust-banner-sdk .onetrust-continue-btn {
+/* Banner (first banner) */
+#onetrust-banner-sdk button#onetrust-pc-btn-handler,
+#onetrust-banner-sdk button#onetrust-accept-btn-handler,
+#onetrust-banner-sdk .ot-sdk-button {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
@@ -111,6 +112,7 @@
     }
 
 }
+
 
 
 
