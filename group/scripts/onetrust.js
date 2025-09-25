@@ -7,9 +7,10 @@ function OptanonWrapper() {
     }
 }
 window.addEventListener('OTConsentApplied', function () {
-    //hideOTCustomBanner();
+    hideOTCustomBanner();
 });
-
+ 
+ 
 function checkOTCookie(cookieName) {
     const value = document.cookie.split('; ').find(row => row.startsWith(cookieName + '='));
     return value ? value.split('=')[1] : null;
@@ -37,7 +38,7 @@ function hideOTCustomBanner() {
         domain = ".bscal.com";
     } 
  
-    document.cookie = "bannerCustShown=true; path=/; domain=" + domain + "; SameSite=Lax";
+    document.cookie = "bannerCustShown=true; path=/; domain= "+domain+"; SameSite=Lax" // session cookie
 }
 
 function openPreferenceCenter() {
@@ -77,9 +78,4 @@ function showOTCustomBanner() {
     const continueBtn = document.getElementById("continueBtn");
     continueBtn.focus();
     document.addEventListener('keydown',trapCustomBannerFocus);
-
 }
-
-
-
-
