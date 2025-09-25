@@ -75,9 +75,18 @@
     background: #003b5c !important;
 }
 
+.onetrust-continue-btn:focus {
+    outline: 2px solid #000 !important;
+    outline-offset: 1px !important;
+}
+
+.custom-privacy-label {
+    font-weight: 600 !important;
+}
+
 @media only screen and (min-width: 375px) and (max-width: 767.5px) {
     #onetrust-banner {
-        width: 90%;
+       width: 340px !important;
     }
 
     .onetrust-btn {
