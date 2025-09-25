@@ -6,9 +6,9 @@ function OptanonWrapper() {
         showOTCustomBanner();
     }
 }
-/* window.addEventListener('OTConsentApplied', function () {
+window.addEventListener('OTConsentApplied', function () {
     //hideOTCustomBanner();
-}); */
+});
 
 function checkOTCookie(cookieName) {
     const value = document.cookie.split('; ').find(row => row.startsWith(cookieName + '='));
@@ -79,6 +79,7 @@ function showOTCustomBanner() {
     document.addEventListener('keydown',trapCustomBannerFocus);
 
 }
+
 
 
 
