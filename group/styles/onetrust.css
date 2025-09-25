@@ -84,16 +84,14 @@
     font-weight: 600 !important;
 }
 
-/* Override OneTrust SDK injected styles */
+/* Override OneTrust SDK injected styles - paragraphs */
 #onetrust-banner-sdk .first-para,
-#onetrust-banner-sdk .second-para,
-#onetrust-banner-sdk #onetrust-policy-title {
+#onetrust-banner-sdk .second-para {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
-/* Buttons */
-#onetrust-banner-sdk .onetrust-btn,
-#onetrust-banner-sdk .onetrust-continue-btn {
+/* H2 title – add the element to beat the SDK rule */
+#onetrust-banner-sdk h2#onetrust-policy-title {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
@@ -107,6 +105,7 @@
     }
 
 }
+
 
 
 
