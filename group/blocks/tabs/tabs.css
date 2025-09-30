@@ -7,7 +7,7 @@
   display: flex;
   font-size: var(--body-font-size-xs);
   overflow-x: auto;
-  border-bottom: 2px solid var(--grey-color);
+  border-bottom: 2px solid var(--detroit-color);
   justify-content: start;
   margin: 24px;
 }
