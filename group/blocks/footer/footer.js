@@ -13,6 +13,17 @@ const structureFooter = (footer) => {
   // remove default content wrapper
   defaultContainer.remove();
 
+  // --- NEW CODE: Hide footer-top-section if it contains an <h5> ---
+  // This ensures that if an <h5> is present inside the top section, the entire section is hidden.
+  const trustImageSection = footer.querySelector('.footer-trust-image-section');
+  if (topSection.querySelector('h5')) {
+    topSection.style.display = 'none';
+    if (trustImageSection) {
+      trustImageSection.style.display = 'none';
+    }
+  }
+  // --- END NEW CODE ---
+
   const footerLinksSections = topSection.querySelector('ul');
   if (footerLinksSections) {
     footerLinksSections.classList.add('footer-links-sections');
@@ -52,17 +63,6 @@ const structureFooter = (footer) => {
     footerTrustImage.classList.add('footer-trust-image-section');
     footerBottom.append(footerTrustImage);
   }
-
-  // --- NEW CODE: Hide footer-top-section if it contains an <h5> ---
-  // This ensures that if an <h5> is present inside the top section, the entire section is hidden.
-  const trustImageSection = footer.querySelector('.footer-trust-image-section');
-  if (topSection.querySelector('h5')) {
-    topSection.style.display = 'none';
-    if (trustImageSection) {
-      trustImageSection.style.display = 'none';
-    }
-  }
-  // --- END NEW CODE ---
 
   footer.append(footerBottom);
 };
