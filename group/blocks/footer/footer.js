@@ -15,9 +15,13 @@ const structureFooter = (footer) => {
 
   // --- NEW CODE: Hide footer-top-section if it contains an <h5> ---
   // This ensures that if an <h5> is present inside the top section, the entire section is hidden.
-  if (topSection.querySelector('h5')) {
-    topSection.style.display = 'none';
+const trustImageSection = footer.querySelector('.footer-trust-image-section');
+if (topSection.querySelector('h5')) {
+  topSection.style.display = 'none';
+  if (trustImageSection) {
+    trustImageSection.style.display = 'none';
   }
+}
   // --- END NEW CODE ---
 
   const footerLinksSections = topSection.querySelector('ul');
