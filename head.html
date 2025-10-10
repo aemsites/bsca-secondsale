@@ -1,11 +1,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- OneTrust Cookies Consent Notice start for blueshieldca.com -->
-<script type="text/javascript"
-    src="https://cdn.cookielaw.org/consent/01985d06-7fc8-764f-8c5b-e9ecfe30a4f2-test/OtAutoBlock.js"></script>
+<script>
+  (function () {
+    // Treat .aem.live and your production domain as "prod"
+    var isProd =
+      location.hostname.endsWith('.aem.live') ||
+      /(^|\.)blueshieldca\.com$/i.test(location.hostname);
 
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true"
-    type="text/javascript" charset="UTF-8" data-domain-script="01985d06-7fc8-764f-8c5b-e9ecfe30a4f2-test"></script>
+    var baseId = '01985d06-7fc8-764f-8c5b-e9ecfe30a4f2';
+    var domainScript = isProd ? baseId : baseId + '-test';
+
+    // Synchronous, order-preserving insertion in <head>
+    var otAutoBlockSrc = 'https://cdn.cookielaw.org/consent/' + domainScript + '/OtAutoBlock.js';
+    var otStubSrc = 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js';
+
+    // Use document.write in <head> to guarantee blocking order (per OneTrust guidance)
+    document.write('<script type="text/javascript" src="' + otAutoBlockSrc + '"><\/script>');
+    document.write('<script type="text/javascript" src="' + otStubSrc + '" charset="UTF-8" data-domain-script="' + domainScript + '"><\/script>');
+  })();
+</script>
 
 <!-- OneTrust Cookies Consent Notice end for blueshieldca.com -->
 
