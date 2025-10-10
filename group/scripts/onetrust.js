@@ -57,11 +57,17 @@ function hideOTCustomBanner() {
 	let domain = ".blueshieldca.com";
 	if (location.host.includes("localhost")) {
 		domain = "localhost";
-	} else if (!location.host.endsWith('.blueshieldca.com')) {
+	} 
+	else if (!location.host.endsWith('.aem.page')) {
+		domain = ".aem.page";
+		console.log(".aem.page domain:",domain);
+	} 
+	else if (!location.host.endsWith('.blueshieldca.com')) {
 		domain = ".bscal.com";
 	}
 	// Set session cookie to mark banner as shown
 	document.cookie = "bannerCustShown=true; path=/; domain=" + domain + "; SameSite=Lax";
+	document.cookie = "bannerCustShown=true; path=/; SameSite=Lax" // session cookie
 }
 
 // Setting the analytics consent cookie for CJA
@@ -69,7 +75,8 @@ function setAnalyticsConsentCookie() {
 	let domain = ".blueshieldca.com";
 	if (location.host.includes("localhost")) {
 		domain = "localhost";
-	} else if (!location.host.endsWith('.blueshieldca.com')) {
+	} 
+	else if (!location.host.endsWith('.blueshieldca.com')) {
 		domain = ".bscal.com";
 	}
 	window.dispatchEvent(analyticsCustEvent);
