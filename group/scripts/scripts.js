@@ -316,29 +316,18 @@ async function loadPage() {
 loadPage();
 
 /**
- * Injects a "Cookie preferences" link directly below the "Privacy" link in the footer.
- * This ensures users can access OneTrust settings from the footer UI.
- * Runs after DOM is fully loaded to guarantee footer elements are present.
+ * Enhances the authored "Cookie preferences" link in the footer
+ * by adding OneTrust-specific attributes required to trigger the UI.
+ * This assumes the link text is authored as "Cookie preferences" in the Word doc.
  */
 document.addEventListener("DOMContentLoaded", function () {
-  const privacyLink = Array.from(document.querySelectorAll("footer a"))
-    .find(a => a.textContent.trim().toLowerCase() === "privacy");
+  const cookieLink = Array.from(document.querySelectorAll("footer a"))
+    .find(a => a.textContent.trim().toLowerCase() === "cookie preferences");
 
-  if (privacyLink) {
-    const cookieLink = document.createElement("a");
+  if (cookieLink) {
     cookieLink.id = "ot-sdk-link";
     cookieLink.href = "#";
-    cookieLink.className = "small-print-1 ot-sdk-show-settings";
+    cookieLink.classList.add("small-print-1", "ot-sdk-show-settings");
     cookieLink.setAttribute("data-text", "Cookie preferences");
-    cookieLink.textContent = "Cookie preferences";
-
-    const li = document.createElement("li");
-    li.appendChild(cookieLink);
-
-    const parentList = privacyLink.closest("ul");
-    if (parentList) {
-      const privacyItem = privacyLink.closest("li");
-      parentList.insertBefore(li, privacyItem.nextSibling);
-    }
   }
 });
