@@ -5,7 +5,6 @@ let analyticsCustEvent = new CustomEvent("analyticsConsentReady", {
 	}
 });
 
-
 // Entry point triggered by OneTrust when consent logic is ready
 function OptanonWrapper() {
 	// If banner has already been shown in this session or consent was previously closed, hide it
@@ -20,9 +19,7 @@ function OptanonWrapper() {
 		OneTrust.OnConsentChanged(function () {
 			setAnalyticsConsentCookie();
 		});
-
 	}
-
 }
 
 // Hide banner when consent is applied (e.g., user clicks Continue or saves preferences)
@@ -91,7 +88,6 @@ function setAnalyticsConsentCookie() {
 		console.log('Dynatrace not available');
 	}
 }
-
 
 const translations = {
     en: {
@@ -181,5 +177,4 @@ function showOTCustomBanner() {
 	// Set focus and enable focus trap
 	banner.focus();
 	document.addEventListener('keydown',trapCustomBannerFocus);
-
 }
