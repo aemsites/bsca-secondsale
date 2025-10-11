@@ -315,19 +315,3 @@ async function loadPage() {
 
 loadPage();
 
-/**
- * Enhances the authored "Cookie preferences" link in the footer
- * by adding OneTrust-specific attributes required to trigger the UI.
- * This assumes the link text is authored as "Cookie preferences" in the Word doc.
- */
-document.addEventListener("DOMContentLoaded", function () {
-  const cookieLink = Array.from(document.querySelectorAll("footer a"))
-    .find(a => a.textContent.trim().toLowerCase() === "cookie preferences");
-
-  if (cookieLink) {
-    cookieLink.id = "ot-sdk-link";
-    cookieLink.href = "#";
-    cookieLink.classList.add("small-print-1", "ot-sdk-show-settings");
-    cookieLink.setAttribute("data-text", "Cookie preferences");
-  }
-});
