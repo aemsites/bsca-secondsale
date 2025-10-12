@@ -477,7 +477,7 @@ main>.section.border-top>.default-content-wrapper {
 
 /* Pop-Up Banner */
 #onetrust-pc-sdk h2#ot-pc-title { 
-    font-family: "Fieldwork Geo Light", "Fieldwork", sans-serif !important;
+    font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
 @media only screen and (width >=375px) and (width <=767.5px) {
