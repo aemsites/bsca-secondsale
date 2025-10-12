@@ -475,7 +475,7 @@ main>.section.border-top>.default-content-wrapper {
   padding: 6px 24px 10px !important;
 }
 
-@media only screen and (min-width: 375px) and (max-width: 767.5px) {
+@media only screen and (width >= 375px) and (width <= 767.5px) {
   #onetrust-banner {
     width: 340px !important;
   }
