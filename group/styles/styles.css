@@ -481,7 +481,7 @@ main>.section.border-top>.default-content-wrapper {
 #onetrust-pc-sdk div#ot-pc-desc,
 #onetrust-pc-sdk .ot-acc-hdr h4.ot-cat-header,
 #onetrust-pc-sdk .ot-tgl .ot-label-status,
-#onetrust-pc-sdk .save-preference-btn-handler {
+#onetrust-pc-sdk .ot-btn-container button.save-preference-btn-handler.onetrust-close-btn-handler {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
