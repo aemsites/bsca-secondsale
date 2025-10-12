@@ -480,7 +480,8 @@ main>.section.border-top>.default-content-wrapper {
 #onetrust-pc-sdk h2#ot-pc-title,
 #onetrust-pc-sdk div#ot-pc-desc,
 #onetrust-pc-sdk .ot-acc-hdr h4.ot-cat-header,
-#onetrust-pc-sdk .ot-tgl .ot-label-status {
+#onetrust-pc-sdk .ot-tgl .ot-label-status,
+#onetrust-pc-sdk .save-preference-btn-handler {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
