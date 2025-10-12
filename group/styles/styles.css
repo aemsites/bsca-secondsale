@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
- @import url('./modal.css');
+@import url('./modal.css');
 
 
 :root {
@@ -79,7 +79,7 @@
   src: local('Arial');
 }
 
-@media (width >= 900px) {
+@media (width >=900px) {
   :root {
     /* body sizes */
     --body-font-size-m: 18px;
@@ -142,12 +142,29 @@ h6 {
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+}
+
+h3 {
+  font-size: var(--heading-font-size-l);
+}
+
+h4 {
+  font-size: var(--heading-font-size-m);
+}
+
+h5 {
+  font-size: var(--heading-font-size-s);
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs);
+}
 
 p,
 dl,
@@ -172,7 +189,7 @@ pre {
   white-space: pre;
 }
 
-main > div {
+main>div {
   margin: 24px 16px;
 }
 
@@ -268,21 +285,21 @@ main img {
 }
 
 /* sections */
-main > .section {
+main>.section {
   margin: 24px 0;
 }
 
-main > .section > div {
+main>.section>div {
   max-width: 1360px;
   margin: auto;
   padding: 0 0.5rem;
 }
 
-main > .section:first-of-type {
+main>.section:first-of-type {
   margin-top: 0;
 }
 
-main > .section .default-content-wrapper:has(h2) {
+main>.section .default-content-wrapper:has(h2) {
   width: 100%;
   background-color: var(--dark-color);
   text-align: center;
@@ -290,31 +307,31 @@ main > .section .default-content-wrapper:has(h2) {
   max-width: none;
 }
 
-main > .section .default-content-wrapper > h2 {
+main>.section .default-content-wrapper>h2 {
   color: var(--background-color);
   font-weight: var(--font-weight-medium);
   padding: 0;
   margin: 0;
 }
 
-main > .section:first-of-type .default-content-wrapper > h1 {
+main>.section:first-of-type .default-content-wrapper>h1 {
   margin-top: 0;
 }
 
-.section.two-col.width-60-40 > div:first-child ul,
-.section.two-col.width-70-30 > div:first-child ul {
+.section.two-col.width-60-40>div:first-child ul,
+.section.two-col.width-70-30>div:first-child ul {
   margin: var(--spacing-m) 0;
 }
 
-.section.two-col.width-60-40 > div > div.section,
-.section.two-col.width-70-30 > div > div.section {
+.section.two-col.width-60-40>div>div.section,
+.section.two-col.width-70-30>div>div.section {
   margin-top: var(--spacing-xxl);
   margin-bottom: var(--spacing-xxl);
   width: auto;
 }
 
-.section.two-col.width-60-40 > div > div,
-.section.two-col.width-70-30 > div > div {
+.section.two-col.width-60-40>div>div,
+.section.two-col.width-70-30>div>div {
   margin: 0;
 }
 
@@ -328,22 +345,26 @@ main > .section:first-of-type .default-content-wrapper > h1 {
   vertical-align: unset;
 }
 
-.section.two-col.width-70-30 > div img {
+.section.two-col.width-70-30>div img {
   border-radius: var(--border-radius-xl);
 }
 
-@media (width >= 600px) {
-  h1 { font-size: var(--heading-font-size-l); }
+@media (width >=600px) {
+  h1 {
+    font-size: var(--heading-font-size-l);
+  }
 
-  main > .section > .default-content-wrapper > p:has(sub) {
+  main>.section>.default-content-wrapper>p:has(sub) {
     padding: 0;
   }
 }
 
-@media (width >= 900px) {
-  h1 { font-size: var(--heading-font-size-xxl); }
+@media (width >=900px) {
+  h1 {
+    font-size: var(--heading-font-size-xxl);
+  }
 
-  main > .section > div {
+  main>.section>div {
     padding: 0 2.5rem;
   }
 
@@ -362,30 +383,30 @@ main > .section:first-of-type .default-content-wrapper > h1 {
   }
 
   /* list-wrapper */
-  .section.two-col.width-60-40 > div:first-child {
+  .section.two-col.width-60-40>div:first-child {
     flex: 0 0 60%;
     margin: 0 auto;
     padding: 0;
   }
 
-  .section.two-col.width-70-30 > div:first-child {
+  .section.two-col.width-70-30>div:first-child {
     flex: 0 0 70%;
     margin: 0 auto;
     padding: 0;
   }
 
   /* glossary */
-  .section.two-col.width-60-40 > div:nth-child(2),
-  .section.two-col.width-70-30 > div:nth-child(2) {
+  .section.two-col.width-60-40>div:nth-child(2),
+  .section.two-col.width-70-30>div:nth-child(2) {
     margin: 0 auto;
     padding: 0;
   }
 
-  .section.two-col.width-70-30 > div:nth-child(2) > p {
+  .section.two-col.width-70-30>div:nth-child(2)>p {
     margin: 0;
   }
 
-  .section.two-col.width-60-40 > div:nth-child(2) > div.section {
+  .section.two-col.width-60-40>div:nth-child(2)>div.section {
     max-width: none;
     width: auto;
     margin: 0;
@@ -418,7 +439,7 @@ a .icon-new-tab {
   border: 0;
 }
 
-main > .section.border-top > .default-content-wrapper {
+main>.section.border-top>.default-content-wrapper {
   border-top: 1px solid var(--dark-color);
   padding-top: var(--spacing-xl);
 }
@@ -426,8 +447,8 @@ main > .section.border-top > .default-content-wrapper {
 /* Make all body-copy sizes equal on Newfront page (headings untouched) */
 .section.newfront-page {
   --body-font-size-xs: var(--body-font-size-m);
-  --body-font-size-s:  var(--body-font-size-m);
-  --body-font-size-l:  var(--body-font-size-m);
+  --body-font-size-s: var(--body-font-size-m);
+  --body-font-size-l: var(--body-font-size-m);
   --body-font-size-xl: var(--body-font-size-m);
 
   font-size: var(--body-font-size-m);
@@ -435,4 +456,32 @@ main > .section.border-top > .default-content-wrapper {
 }
 
 
+/* Override OneTrust SDK injected styles - paragraphs */
+#onetrust-banner-sdk .first-para,
+#onetrust-banner-sdk .second-para {
+  font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+}
 
+/* H2 title – add the element to beat the SDK rule */
+#onetrust-banner-sdk h2#onetrust-policy-title {
+  font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+}
+
+/* Banner (first banner) */
+#onetrust-banner-sdk button#onetrust-pc-btn-handler,
+#onetrust-banner-sdk button#onetrust-accept-btn-handler,
+#onetrust-banner-sdk .ot-sdk-button {
+  font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+  padding: 6px 24px 10px !important;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 767.5px) {
+  #onetrust-banner {
+    width: 340px !important;
+  }
+
+  .onetrust-btn {
+    width: 100%;
+  }
+
+}
