@@ -475,7 +475,12 @@ main>.section.border-top>.default-content-wrapper {
   padding: 6px 24px 10px !important;
 }
 
-@media only screen and (width >= 375px) and (width <= 767.5px) {
+/* Pop-Up Banner */
+#ot-pc-title {
+  font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+}
+
+@media only screen and (width >=375px) and (width <=767.5px) {
   #onetrust-banner {
     width: 340px !important;
   }
