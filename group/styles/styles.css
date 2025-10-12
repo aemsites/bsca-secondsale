@@ -476,7 +476,8 @@ main>.section.border-top>.default-content-wrapper {
 }
 
 /* Pop-Up Banner */
-#ot-pc-title {
+#ot-pc-title,
+#ot-pc-desk {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
