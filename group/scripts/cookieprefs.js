@@ -5,17 +5,11 @@
   function openPrefs() {
     if (window.Optanon?.ToggleInfoDisplay) {
       window.Optanon.ToggleInfoDisplay();
-      return;
-    }
-    if (window.OneTrust?.ToggleInfoDisplay) {
+    } else if (window.OneTrust?.ToggleInfoDisplay) {
       window.OneTrust.ToggleInfoDisplay();
-      return;
-    }
-    if (window.Onetrust?.ToggleInfoDisplay) {
+    } else if (window.Onetrust?.ToggleInfoDisplay) {
       window.Onetrust.ToggleInfoDisplay();
-      return;
     }
-    return null;
   }
 
   function enhanceAnchor(a) {
@@ -62,7 +56,7 @@
     return true;
   }
 
-  let bound = bind(document);
+  const bound = bind(document);
 
   if (!bound) {
     const mo = new MutationObserver(() => {
