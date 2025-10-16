@@ -209,3 +209,7 @@ function OptanonWrapper() {
 window.addEventListener('OTConsentApplied', () => {
   hideOTCustomBanner();
 });
+
+// Expose for external use
+window.OptanonWrapper = OptanonWrapper;
+window.openPreferenceCenter = openPreferenceCenter;
