@@ -5,31 +5,16 @@ const analyticsCustEvent = new CustomEvent('analyticsConsentReady', {
   },
 });
 
-// Entry point triggered by OneTrust when consent logic is ready
-function OptanonWrapper() {
-  if (checkOTCookie('bannerCustShown') || !checkOTCookie('OptanonAlertBoxClosed')) {
-    hideOTCustomBanner();
-  } else {
-    showOTCustomBanner();
-  }
-
-  if (window.OneTrust?.OnConsentChanged) {
-    OneTrust.OnConsentChanged(() => {
-      setAnalyticsConsentCookie();
-    });
-  }
+// Utility to read a specific cookie value
+function checkOTCookie(cookieName) {
+  const value = document.cookie.split('; ').find((row) => row.startsWith(`${cookieName}=`));
+  return value ? value.split('=')[1] : null;
 }
 
 // Hide banner when consent is applied
 window.addEventListener('OTConsentApplied', () => {
   hideOTCustomBanner();
 });
-
-// Utility to read a specific cookie value
-function checkOTCookie(cookieName) {
-  const value = document.cookie.split('; ').find((row) => row.startsWith(`${cookieName}=`));
-  return value ? value.split('=')[1] : null;
-}
 
 // Trap Tab key navigation within the banner
 function trapCustomBannerFocus(targetBtn) {
@@ -49,7 +34,7 @@ function hideOTCustomBanner() {
   if (overlay) overlay.style.display = 'none';
 
   let domain = '.blueshieldca.com';
-  const host = window.location.host;
+  const { host } = window.location;
 
   if (host.includes('localhost')) {
     domain = 'localhost';
@@ -65,7 +50,7 @@ function hideOTCustomBanner() {
 // Set the analytics consent cookie for CJA
 function setAnalyticsConsentCookie() {
   let domain = '.blueshieldca.com';
-  const host = window.location.host;
+  const { host } = window.location;
 
   if (host.includes('localhost')) {
     domain = 'localhost';
@@ -84,10 +69,8 @@ function setAnalyticsConsentCookie() {
     if (process.env.NODE_ENV !== 'production') {
       console.log('analyticsConsentReady :: dtrum enabled');
     }
-  } else {
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('Dynatrace not available');
-    }
+  } else if (process.env.NODE_ENV !== 'production') {
+    console.log('Dynatrace not available');
   }
 }
 
