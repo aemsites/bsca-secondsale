@@ -56,7 +56,7 @@
     return true;
   }
 
-  const bound = bind(document);
+  const bound = bind(document); // ✅ changed from let → const
 
   if (!bound) {
     const mo = new MutationObserver(() => {
