@@ -229,7 +229,6 @@ button {
   text-decoration: none;
   background-color: var(--link-color);
   color: var(--background-color);
-  cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
