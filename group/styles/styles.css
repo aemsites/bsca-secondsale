@@ -457,8 +457,8 @@ main>.section.border-top>.default-content-wrapper {
 
 
 /* Override OneTrust SDK injected styles - paragraphs */
-#onetrust-banner-sdk .first-para,
-#onetrust-banner-sdk .second-para {
+#onetrust-banner-sdk .onetrust-first-para ,
+#onetrust-banner-sdk .onetrust-second-para {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
 
