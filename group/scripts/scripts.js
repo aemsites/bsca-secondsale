@@ -305,19 +305,7 @@ function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
-
-  window.addEventListener('load', () => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://www.blueshieldca.com/vendor/onetrust/onetrust.css';
-    document.head.appendChild(link);
-
-    const script = document.createElement('script');
-    script.src = 'https://www.blueshieldca.com/vendor/onetrust/onetrust.js';
-    script.type = 'text/javascript';
-    script.defer = true;
-    document.head.appendChild(script);
-  });
+  
 }
 
 async function loadPage() {
