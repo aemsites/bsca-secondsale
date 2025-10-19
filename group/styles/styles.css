@@ -456,6 +456,22 @@ main>.section.border-top>.default-content-wrapper {
   line-height: var(--body-line-height, 1.6);
 }
 
+/* OneTrust pre-LCP: keep the SDK banner hidden until the page is ready */
+html.ot-preload #onetrust-consent-sdk,
+html.ot-preload #onetrust-banner-sdk,
+html.ot-preload .onetrust-pc-dark-filter {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Optional: smooth reveal */
+#onetrust-consent-sdk,
+#onetrust-banner-sdk,
+.onetrust-pc-dark-filter {
+  transition: opacity 0.25s ease;
+}
+
 /* Override OneTrust SDK injected styles - paragraphs */
 #onetrust-banner-sdk .onetrust-first-para ,
 #onetrust-banner-sdk .onetrust-second-para {
