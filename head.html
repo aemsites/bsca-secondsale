@@ -1,5 +1,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<script>
+  // Hide OT banner during page paint to avoid being the LCP element
+  document.documentElement.classList.add('ot-preload');
+  // Reveal as soon as the page is ready
+  (function revealOT() {
+    var show = function () { document.documentElement.classList.remove('ot-preload'); };
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(show, { timeout: 1200 });
+    } else {
+      window.addEventListener('load', show, { once: true });
+    }
+  }());
+</script>
+
 <!-- Adobe Launch (CJA) tracking script -->
 <script src="https://assets.adobedtm.com/4292fae30116/d60ed27415b5/launch-93c4e2f28128.min.js" async></script>
 
