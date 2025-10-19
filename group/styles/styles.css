@@ -12,7 +12,6 @@
 
 @import url('./modal.css');
 
-
 :root {
   /* colors */
   --background-color: white;
@@ -456,7 +455,17 @@ main>.section.border-top>.default-content-wrapper {
   line-height: var(--body-line-height, 1.6);
 }
 
-/* OneTrust pre-LCP: keep the SDK banner hidden until the page is ready */
+/* ---------- OneTrust visibility & transitions ---------- */
+
+/* Optional: smooth reveal (LESS specific — must come first) */
+#onetrust-consent-sdk,
+#onetrust-banner-sdk,
+.onetrust-pc-dark-filter {
+  transition: opacity 0.25s ease;
+}
+
+/* OneTrust pre-LCP: keep the SDK banner hidden until the page is ready
+   (MORE specific — must come after the base selectors) */
 html.ot-preload #onetrust-consent-sdk,
 html.ot-preload #onetrust-banner-sdk,
 html.ot-preload .onetrust-pc-dark-filter {
@@ -465,15 +474,8 @@ html.ot-preload .onetrust-pc-dark-filter {
   pointer-events: none !important;
 }
 
-/* Optional: smooth reveal */
-#onetrust-consent-sdk,
-#onetrust-banner-sdk,
-.onetrust-pc-dark-filter {
-  transition: opacity 0.25s ease;
-}
-
 /* Override OneTrust SDK injected styles - paragraphs */
-#onetrust-banner-sdk .onetrust-first-para ,
+#onetrust-banner-sdk .onetrust-first-para,
 #onetrust-banner-sdk .onetrust-second-para {
   font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
 }
@@ -510,5 +512,4 @@ html.ot-preload .onetrust-pc-dark-filter {
   .onetrust-btn {
     width: 100%;
   }
-
 }
