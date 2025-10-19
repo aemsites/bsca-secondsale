@@ -456,13 +456,6 @@ main>.section.border-top>.default-content-wrapper {
   line-height: var(--body-line-height, 1.6);
 }
 
-/* OneTrust pre-LCP fix: keep overlay hidden until page load */
-#onetrust-overlay.preload-hide {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-}
-
 /* Override OneTrust SDK injected styles - paragraphs */
 #onetrust-banner-sdk .onetrust-first-para ,
 #onetrust-banner-sdk .onetrust-second-para {
