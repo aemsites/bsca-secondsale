@@ -460,19 +460,19 @@ main>.section.border-top>.default-content-wrapper {
 /* Override OneTrust SDK injected styles - paragraphs */
 #onetrust-banner-sdk .onetrust-first-para ,
 #onetrust-banner-sdk .onetrust-second-para {
-  font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+  font-family: var(--body-font-family) !important;
 }
 
 /* H2 title – add the element to beat the SDK rule */
 #onetrust-banner-sdk h2#onetrust-policy-title {
-  font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+  font-family: var(--body-font-family) !important;
 }
 
 /* Banner (first banner) */
 #onetrust-banner-sdk button#onetrust-pc-btn-handler,
 #onetrust-banner-sdk button#onetrust-accept-btn-handler,
 #onetrust-banner-sdk .ot-sdk-button {
-  font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+  font-family: var(--body-font-family) !important;
   padding: 6px 24px 10px !important;
 }
 
@@ -484,7 +484,7 @@ main>.section.border-top>.default-content-wrapper {
 #onetrust-pc-sdk .ot-acc-hdr h4.ot-cat-header,
 #onetrust-pc-sdk .ot-tgl .ot-label-status,
 #onetrust-pc-sdk .ot-btn-container button.save-preference-btn-handler.onetrust-close-btn-handler {
-  font-family: fieldwork-geo-light, fieldwork-geo-light-fallback, sans-serif !important;
+  font-family: var(--body-font-family) !important;
 }
 
 @media only screen and (width >=375px) and (width <=767.5px) {
