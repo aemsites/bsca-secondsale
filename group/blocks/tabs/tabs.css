@@ -51,7 +51,8 @@
   background-color: var(--background-color);
   cursor: initial;
   padding: 24px 32px 23px;
-  font-weight: var(--font-weight-bold);
+  font-family: Fieldwork-Geo-Demibold, fieldwork-geo-light-fallback, sans-serif;
+  font-weight: 600;
 }
 
 .tabs .tabs-panel {
