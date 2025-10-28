@@ -7,8 +7,8 @@
   display: flex;
   font-size: var(--body-font-size-xs);
   overflow-x: auto;
-  border-bottom: 1px solid var(--secondary-color);
-  justify-content: space-between;
+  border-bottom: 2px solid var(--detroit-color);
+  justify-content: start;
   margin: 24px;
 }
 
@@ -28,28 +28,31 @@
   flex: 0 0 max-content;
   margin: 0;
   border-radius: 0;
-  padding: 0.5em;
+  padding: 24px 32px;
   background-color: var(--background-color);
-  color: var(--link-color);
-  font-weight: bold;
-  line-height: unset;
+  color: var(--dallas-color);
+  font-weight: 300;
+  line-height: 24px;
   text-align: initial;
   text-overflow: unset;
   overflow: unset;
   white-space: unset;
   transition: background-color 0.2s;
-  max-width: 300px;
+
+  /* max-width: 300px; */
 }
 
 .tabs .tabs-list button p {
   margin: 0;
 }
 
-
 .tabs .tabs-list button[aria-selected='true'] {
-  border-bottom: 3px solid var(--dark-color);
+  border-bottom: 4px solid var(--boulder-color);
   background-color: var(--background-color);
   cursor: initial;
+  padding: 24px 32px 23px;
+  font-family: Fieldwork-Geo-Demibold, fieldwork-geo-light-fallback, sans-serif;
+  font-weight: 600;
 }
 
 .tabs .tabs-panel {
