@@ -13,8 +13,6 @@ import {
   loadCSS,
 } from './aem.js';
 
-import './modal.js';
-
 /**
  * Returns the current timestamp used for scheduling content.
  */
