@@ -39,11 +39,7 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   const toAbsURL = (href) => {
-    try {
-      return new URL(href, window.location.href);
-    } catch {
-      return null;
-    }
+    try { return new URL(href, window.location.href); } catch { return null; }
   };
 
   const isHttp = (u) => u && (u.protocol === 'http:' || u.protocol === 'https:');
@@ -68,19 +64,36 @@
     return $$(`meta[name="${name}"]`, document.head).map((m) => m.getAttribute('content'));
   }
 
-  // Decide activation + variant via metadata
+  // Fallback: infer variant from <meta name="footer" content="/group/footer-...">
+  function variantFromFooterPath() {
+    const m = document.head.querySelector('meta[name="footer"]');
+    if (!m) return null;
+    const p = String(m.getAttribute('content') || '').toLowerCase();
+    if (!p) return null;
+    if (p.includes('medicare')) return 'medicare';
+    return 'commercial';
+  }
+
+  // Decide activation + variant via metadata (with footer-path fallback)
   function decideVariant() {
     const showFlags = getMetaAll('show-exit-modal');
-    if (showFlags.some(isFalsy)) return { on: false, variant: null }; // page hard-off
 
+    // Page-level hard OFF wins
+    if (showFlags.some(isFalsy)) return { on: false, variant: null };
+
+    // Preferred: explicit footer-variant meta
     const variants = getMetaAll('footer-variant').map(norm);
     let variant = null;
     if (variants.includes('medicare')) variant = 'medicare';
     else if (variants.includes('commercial')) variant = 'commercial';
 
+    // Fallback: infer from footer path if variant meta missing
+    if (!variant) variant = variantFromFooterPath();
+
+    // Still nothing → feature off
     if (!variant) return { on: false, variant: null };
 
-    // If any explicit true provided we honor it; otherwise variant alone enables
+    // If any explicit true is present we honor it; otherwise variant alone enables
     const explicitOn = showFlags.some(isTruthy);
     return { on: explicitOn || true, variant };
   }
@@ -98,23 +111,18 @@
     const modal = document.getElementById(CFG.modalId);
     if (!modal) return undefined;
 
-    const focusables = Array.from(modal.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
-      (el) => !el.disabled && el.offsetParent !== null,
-    );
+    const focusables = Array.from(modal.querySelectorAll(FOCUSABLE_SELECTOR))
+      .filter((el) => !el.disabled && el.offsetParent !== null);
     if (focusables.length < 2) return undefined;
 
     const first = focusables[0];
     const last = focusables[focusables.length - 1];
 
     if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-      return undefined;
+      e.preventDefault(); last.focus(); return undefined;
     }
     if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-      return undefined;
+      e.preventDefault(); first.focus(); return undefined;
     }
     return undefined;
   }
