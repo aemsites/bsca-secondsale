@@ -213,12 +213,18 @@
     const copy = CFG.copies[det.variant] || CFG.copies.commercial;
     const modal = ensureModal();
 
-    // Wire modal clicks
+    // Wire modal clicks (allow continue; close where intended)
     modal.addEventListener(
       'click',
       (e) => {
         const t = e.target;
-        if (t && t.closest('[data-exit-close]')) {
+        if (!t) return;
+
+        // Let "Continue" navigate normally
+        if (t.closest('[data-exit-continue]')) return;
+
+        // Handle any close action (backdrop, cancel button, X)
+        if (t.closest('[data-exit-close]')) {
           e.preventDefault();
           closeModal(modal);
         }
@@ -226,11 +232,15 @@
       true,
     );
 
-    // Click (left)
+    // Click (left) — ignore events that originate inside the modal
     document.addEventListener(
       'click',
       (e) => {
         if (e.defaultPrevented || e.button !== 0) return;
+
+        // NEW: If clicking inside the modal, do nothing (avoid re-intercepting Continue)
+        if (e.target && e.target.closest && e.target.closest(`#${CFG.modalId}`)) return;
+
         if (CFG.respectModifierClicks && hasMods(e)) return;
         const a = e.target.closest && e.target.closest('a[href]');
         if (!a) return;
@@ -246,11 +256,21 @@
       true,
     );
 
-    // Keyboard (Enter/Space)
+    // Keyboard (Enter/Space) — ignore when focus is inside the modal
     document.addEventListener(
       'keydown',
       (e) => {
         if (e.key !== 'Enter' && e.key !== ' ') return;
+
+        // NEW: If focus is inside the modal, don't re-intercept
+        if (
+          document.activeElement &&
+          document.activeElement.closest &&
+          document.activeElement.closest(`#${CFG.modalId}`)
+        ) {
+          return;
+        }
+
         const a =
           document.activeElement && document.activeElement.tagName === 'A'
             ? document.activeElement
