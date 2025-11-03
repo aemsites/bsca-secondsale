@@ -20,11 +20,9 @@
         cont: 'Continue',
       },
       medicare: {
-        title: "You’re leaving our Medicare site",
+        title: "You are now leaving the blueshieldca.com website",
         body:
-          'You’re about to visit <strong>{host}</strong>. ' +
-          'The site may follow different privacy and security practices than ' +
-          'Blue Shield’s Medicare pages.',
+           'Blueshield of California has neither reviewed nor endorsed nor endoresed this information',
         stay: 'Cancel',
         cont: 'Continue',
       },
