@@ -52,7 +52,7 @@
 
 /* Text-style Cancel link */
 .bsc-exit-cancel {
-  color: #000000;
+  color: #000000 !important;
   text-decoration: none;
   font: inherit;
   cursor: pointer;
@@ -65,16 +65,13 @@
   color: #fff;
   font: inherit;
   cursor: pointer;
-  font-weight: 500;
-  min-width: 6.25rem;
-  padding: .5rem 1.25rem;
-  border-radius: 1.25rem;
+  padding: 8px 24px 10px;
   transition: background 0.2s ease-in-out;
 }
 
 .bsc-exit-continue:hover,
 .bsc-exit-continue:focus {
-  background: #00448f;
+  background: #003b5c;
   outline: none;
 }
 
