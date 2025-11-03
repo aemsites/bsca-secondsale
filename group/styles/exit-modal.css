@@ -25,7 +25,7 @@
   box-shadow: 0 10px 30px rgb(0 0 0 / 18%);
   outline: none;
   font-family: inherit;
-  color: #111;
+  olor: var(--color-chicago-black);
 }
 
 .bsc-exit-title {
