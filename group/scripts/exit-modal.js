@@ -13,11 +13,10 @@
     interceptTargetBlank: true,  // normal click on target=_blank still warns
     copies: {
       commercial: {
-        title: "You’re leaving our website",
+        title: "You are now leaving the blueshieldca.com website",
         body:
-          'You’re about to visit <strong>{host}</strong>. ' +
-          'This third-party site has its own privacy and security policies.',
-        stay: 'Stay on this page',
+          'Blueshield of California has neither reviewed nor endorsed nor endoresed this information',
+        stay: 'Cancel',
         cont: 'Continue',
       },
       medicare: {
@@ -26,7 +25,7 @@
           'You’re about to visit <strong>{host}</strong>. ' +
           'The site may follow different privacy and security practices than ' +
           'Blue Shield’s Medicare pages.',
-        stay: 'Stay on this page',
+        stay: 'Cancel',
         cont: 'Continue',
       },
     },
