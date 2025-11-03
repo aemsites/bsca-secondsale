@@ -15,20 +15,20 @@
       commercial: {
         title: "You are now leaving the blueshieldca.com website",
         body:
-          'Blueshield of California has neither reviewed nor endorsed nor endoresed this information',
-        stay: 'Cancel',
-        cont: 'Continue',
+          "Blueshield of California has neither reviewed nor endorsed nor endoresed this information",
+        stay: "Cancel",
+        cont: "Continue",
       },
       medicare: {
         title: "You are now leaving the blueshieldca.com website",
         body:
-           'Blueshield of California has neither reviewed nor endorsed nor endoresed this information',
-        stay: 'Cancel',
-        cont: 'Continue',
+          "Blueshield of California has neither reviewed nor endorsed nor endoresed this information",
+        stay: "Cancel",
+        cont: "Continue",
       },
     },
-    modalId: 'bsc-exit-modal',
-    openClass: 'is-open',
+    modalId: "bsc-exit-modal",
+    openClass: "is-open",
   };
 
   // ---------- Utils ----------
@@ -39,7 +39,7 @@
     try { return new URL(href, window.location.href); } catch { return null; }
   };
 
-  const isHttp = (u) => u && (u.protocol === 'http:' || u.protocol === 'https:');
+  const isHttp = (u) => u && (u.protocol === "http:" || u.protocol === "https:");
   const endsWithRoot = (host, root) => host === root || host.endsWith(`.${root}`);
   const isFirstParty = (host) => CFG.firstPartyRoots.some((r) => endsWithRoot(host, r));
   const isAllowlisted = (host) => CFG.allowlist.some((r) => endsWithRoot(host, r));
@@ -50,39 +50,39 @@
     u.pathname === window.location.pathname &&
     !!u.hash;
 
-  const norm = (v) => String(v ?? '').trim().toLowerCase();
-  const isTruthy = (v) => ['true', 'yes', '1'].includes(norm(v));
-  const isFalsy = (v) => ['false', 'no', '0'].includes(norm(v));
+  const norm = (v) => String(v ?? "").trim().toLowerCase();
+  const isTruthy = (v) => ["true", "yes", "1"].includes(norm(v));
+  const isFalsy = (v) => ["false", "no", "0"].includes(norm(v));
 
   const FOCUSABLE_SELECTOR = 'a,button,[tabindex]:not([tabindex="-1"])';
 
   // Read ALL metas by name (page + fragments)
   function getMetaAll(name) {
-    return $$(`meta[name="${name}"]`, document.head).map((m) => m.getAttribute('content'));
+    return $$(`meta[name="${name}"]`, document.head).map((m) => m.getAttribute("content"));
   }
 
   // Fallback: infer variant from <meta name="footer" content="/group/footer-...">
   function variantFromFooterPath() {
     const m = document.head.querySelector('meta[name="footer"]');
     if (!m) return null;
-    const p = String(m.getAttribute('content') || '').toLowerCase();
+    const p = String(m.getAttribute("content") || "").toLowerCase();
     if (!p) return null;
-    if (p.includes('medicare')) return 'medicare';
-    return 'commercial';
+    if (p.includes("medicare")) return "medicare";
+    return "commercial";
   }
 
   // Decide activation + variant via metadata (with footer-path fallback)
   function decideVariant() {
-    const showFlags = getMetaAll('show-exit-modal');
+    const showFlags = getMetaAll("show-exit-modal");
 
     // Page-level hard OFF wins
     if (showFlags.some(isFalsy)) return { on: false, variant: null };
 
     // Preferred: explicit footer-variant meta
-    const variants = getMetaAll('footer-variant').map(norm);
+    const variants = getMetaAll("footer-variant").map(norm);
     let variant = null;
-    if (variants.includes('medicare')) variant = 'medicare';
-    else if (variants.includes('commercial')) variant = 'commercial';
+    if (variants.includes("medicare")) variant = "medicare";
+    else if (variants.includes("commercial")) variant = "commercial";
 
     // Fallback: infer from footer path if variant meta missing
     if (!variant) variant = variantFromFooterPath();
@@ -97,13 +97,13 @@
 
   // Key trap (declare before use to satisfy no-use-before-define)
   function onKeyTrap(e) {
-    if (e.key === 'Escape') {
+    if (e.key === "Escape") {
       e.preventDefault();
       const modal = document.getElementById(CFG.modalId);
       if (modal) closeModal(modal);
       return undefined;
     }
-    if (e.key !== 'Tab') return undefined;
+    if (e.key !== "Tab") return undefined;
 
     const modal = document.getElementById(CFG.modalId);
     if (!modal) return undefined;
@@ -125,9 +125,9 @@
   }
 
   function shouldIntercept(a) {
-    if (!a || !a.hasAttribute('href')) return false;
+    if (!a || !a.hasAttribute("href")) return false;
 
-    const url = toAbsURL(a.getAttribute('href'));
+    const url = toAbsURL(a.getAttribute("href"));
     if (!url || !isHttp(url)) return false;
     if (sameDocHash(url)) return false;
 
@@ -135,7 +135,7 @@
     if (isFirstParty(host)) return false;
     if (isAllowlisted(host)) return false;
 
-    if (a.getAttribute('target') === '_blank' && CFG.interceptTargetBlank === false) {
+    if (a.getAttribute("target") === "_blank" && CFG.interceptTargetBlank === false) {
       return false;
     }
     return true;
@@ -159,7 +159,7 @@
           <button type="button" class="bsc-exit-x" aria-label="Close" data-exit-close>&times;</button>
         </div>
       </div>`;
-    document.body.insertAdjacentHTML('beforeend', html);
+    document.body.insertAdjacentHTML("beforeend", html);
     m = document.getElementById(CFG.modalId);
     return m;
   }
@@ -173,33 +173,38 @@
     $('#bsc-exit-desc', m).textContent = copy.body;
 
     // Set cancel label (2nd close element is the cancel link)
-    const closeBtns = m.querySelectorAll('[data-exit-close]');
+    const closeBtns = m.querySelectorAll("[data-exit-close]");
     if (closeBtns[1]) closeBtns[1].textContent = copy.stay;
 
     // Wire Continue to always open in a new tab, then close modal
     const contBtn = $('[data-exit-continue]', m);
     contBtn.textContent = copy.cont;
     contBtn.onclick = (ev) => {
+      // prevent any default or bubbled handlers from firing
       ev.preventDefault();
-      const win = window.open(href, '_blank', 'noopener');
-      if (!win) window.location.assign(href); // popup blocked fallback
+      ev.stopPropagation();
+      if (ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+
+      const win = window.open(href, "_blank"); // no features string to avoid blank tabs
+      if (!win) window.location.assign(href); // popup-blocker fallback
+
       closeModal(m);
     };
 
     m.hidden = false;
     m.classList.add(CFG.openClass);
-    document.body.style.overflow = 'hidden';
-    $('.bsc-exit-content', m).focus();
+    document.body.style.overflow = "hidden";
+    $(".bsc-exit-content", m).focus();
 
-    document.addEventListener('keydown', onKeyTrap, true);
+    document.addEventListener("keydown", onKeyTrap, true);
   }
 
   function closeModal(m) {
     if (!m) return;
     m.classList.remove(CFG.openClass);
     m.hidden = true;
-    document.body.style.overflow = '';
-    document.removeEventListener('keydown', onKeyTrap, true);
+    document.body.style.overflow = "";
+    document.removeEventListener("keydown", onKeyTrap, true);
 
     if (PENDING.anchor && document.body.contains(PENDING.anchor)) {
       PENDING.anchor.focus();
@@ -217,16 +222,16 @@
 
     // Wire modal clicks (allow Continue; close where intended)
     modal.addEventListener(
-      'click',
+      "click",
       (e) => {
         const t = e.target;
         if (!t) return;
 
         // Let "Continue" button act via its own handler
-        if (t.closest('[data-exit-continue]')) return;
+        if (t.closest("[data-exit-continue]")) return;
 
         // Handle any close action (backdrop, cancel text-link, X)
-        if (t.closest('[data-exit-close]')) {
+        if (t.closest("[data-exit-close]")) {
           e.preventDefault();
           closeModal(modal);
         }
@@ -236,7 +241,7 @@
 
     // Click (left) — ignore events that originate inside the modal
     document.addEventListener(
-      'click',
+      "click",
       (e) => {
         if (e.defaultPrevented || e.button !== 0) return;
 
@@ -244,14 +249,14 @@
         if (e.target && e.target.closest && e.target.closest(`#${CFG.modalId}`)) return;
 
         if (CFG.respectModifierClicks && hasMods(e)) return;
-        const a = e.target.closest && e.target.closest('a[href]');
+        const a = e.target.closest && e.target.closest("a[href]");
         if (!a) return;
 
         if (shouldIntercept(a)) {
           e.preventDefault();
           PENDING.anchor = a;
           PENDING.href = a.href;
-          PENDING.target = a.getAttribute('target');
+          PENDING.target = a.getAttribute("target");
           openModal(modal, copy, PENDING.href, PENDING.target);
         }
       },
@@ -260,9 +265,9 @@
 
     // Keyboard (Enter/Space) — ignore when focus is inside the modal
     document.addEventListener(
-      'keydown',
+      "keydown",
       (e) => {
-        if (e.key !== 'Enter' && e.key !== ' ') return;
+        if (e.key !== "Enter" && e.key !== " ") return;
 
         // If focus is inside the modal, don't re-intercept
         if (
@@ -274,7 +279,7 @@
         }
 
         const a =
-          document.activeElement && document.activeElement.tagName === 'A'
+          document.activeElement && document.activeElement.tagName === "A"
             ? document.activeElement
             : null;
         if (!a) return;
@@ -283,7 +288,7 @@
           e.preventDefault();
           PENDING.anchor = a;
           PENDING.href = a.href;
-          PENDING.target = a.getAttribute('target');
+          PENDING.target = a.getAttribute("target");
           openModal(modal, copy, PENDING.href, PENDING.target);
         }
       },
@@ -291,8 +296,8 @@
     );
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
   } else {
     boot();
   }
