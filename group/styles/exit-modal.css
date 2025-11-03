@@ -17,9 +17,9 @@
 
 .bsc-exit-content {
   position: relative;
-  max-width: 560px;
+  width: 21.4375rem;
   margin: 8vh auto;
-  padding: 24px;
+  padding: 24px 40px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgb(0 0 0 / 18%);
@@ -29,13 +29,17 @@
 }
 
 .bsc-exit-title {
-  margin: 0 0 8px;
-  font-size: 22px;
-  line-height: 1.25;
+  margin-bottom: 30px;
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .02rem !important;
+  text-align: center;
 }
 
 .bsc-exit-desc {
   margin: 0 0 16px;
+  text-align: center;
 }
 
 .bsc-exit-actions {
