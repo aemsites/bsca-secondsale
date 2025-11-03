@@ -45,32 +45,30 @@
 
 .bsc-exit-actions {
   display: flex;
+  align-items: center;
   gap: 12px;
   justify-content: center;
 }
 
 /* Text-style Cancel link */
 .bsc-exit-cancel {
-  background: none;
-  border: none;
-  color: #0057B8;
-  text-decoration: underline;
+  color: #000000;
+  text-decoration: none;
   font: inherit;
   cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 8px;
 }
 
 /* Primary Continue button */
 .bsc-exit-continue {
-  background: #0057B8;
+  background: #0071bc;
   border: none;
   color: #fff;
   font: inherit;
-  padding: 10px 24px;
-  border-radius: 999px; /* pill shape */
   cursor: pointer;
   font-weight: 500;
+  min-width: 6.25rem;
+  padding: .5rem 1.25rem;
+  border-radius: 1.25rem;
   transition: background 0.2s ease-in-out;
 }
 
