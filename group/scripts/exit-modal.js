@@ -153,8 +153,8 @@
           <h2 id="bsc-exit-title" class="bsc-exit-title"></h2>
           <p id="bsc-exit-desc" class="bsc-exit-desc"></p>
           <div class="bsc-exit-actions">
-            <button type="button" class="bsc-exit-cancel" data-exit-close></button>
-            <a class="bsc-exit-continue" rel="noopener" data-exit-continue></a>
+            <a href="#" class="bsc-exit-cancel" data-exit-close>Cancel</a>
+            <button type="button" class="bsc-exit-continue" data-exit-continue>Continue</button>
           </div>
           <button type="button" class="bsc-exit-x" aria-label="Close" data-exit-close>&times;</button>
         </div>
@@ -166,20 +166,25 @@
 
   let PENDING = { anchor: null, href: null, target: null };
 
-  function openModal(m, copy, href, target) {
+  function openModal(m, copy, href /* target unused now that continue is a button */) {
     const host = toAbsURL(href).hostname;
 
-    $('#bsc-exit-title', m).innerHTML = copy.title;
-    $('#bsc-exit-desc', m).innerHTML = copy.body.replace('{host}', host);
+    $('#bsc-exit-title', m).textContent = copy.title;
+    $('#bsc-exit-desc', m).textContent = copy.body;
 
+    // Set cancel label (2nd close element is the cancel link)
     const closeBtns = m.querySelectorAll('[data-exit-close]');
     if (closeBtns[1]) closeBtns[1].textContent = copy.stay;
 
-    const cont = $('[data-exit-continue]', m);
-    cont.textContent = copy.cont;
-    cont.setAttribute('href', href);
-    if (target) cont.setAttribute('target', target);
-    else cont.removeAttribute('target');
+    // Wire Continue to always open in a new tab, then close modal
+    const contBtn = $('[data-exit-continue]', m);
+    contBtn.textContent = copy.cont;
+    contBtn.onclick = (ev) => {
+      ev.preventDefault();
+      const win = window.open(href, '_blank', 'noopener');
+      if (!win) window.location.assign(href); // popup blocked fallback
+      closeModal(m);
+    };
 
     m.hidden = false;
     m.classList.add(CFG.openClass);
@@ -210,17 +215,17 @@
     const copy = CFG.copies[det.variant] || CFG.copies.commercial;
     const modal = ensureModal();
 
-    // Wire modal clicks (allow continue; close where intended)
+    // Wire modal clicks (allow Continue; close where intended)
     modal.addEventListener(
       'click',
       (e) => {
         const t = e.target;
         if (!t) return;
 
-        // Let "Continue" navigate normally
+        // Let "Continue" button act via its own handler
         if (t.closest('[data-exit-continue]')) return;
 
-        // Handle any close action (backdrop, cancel button, X)
+        // Handle any close action (backdrop, cancel text-link, X)
         if (t.closest('[data-exit-close]')) {
           e.preventDefault();
           closeModal(modal);
@@ -235,7 +240,7 @@
       (e) => {
         if (e.defaultPrevented || e.button !== 0) return;
 
-        // NEW: If clicking inside the modal, do nothing (avoid re-intercepting Continue)
+        // If clicking inside the modal, do nothing (avoid re-intercepting Continue)
         if (e.target && e.target.closest && e.target.closest(`#${CFG.modalId}`)) return;
 
         if (CFG.respectModifierClicks && hasMods(e)) return;
@@ -259,7 +264,7 @@
       (e) => {
         if (e.key !== 'Enter' && e.key !== ' ') return;
 
-        // NEW: If focus is inside the modal, don't re-intercept
+        // If focus is inside the modal, don't re-intercept
         if (
           document.activeElement &&
           document.activeElement.closest &&
