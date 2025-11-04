@@ -52,7 +52,7 @@
 
 /* Text-style Cancel link */
 .bsc-exit-cancel {
-  color: #000000 !important;
+  color: var(--color-chicago-black);
   text-decoration: none;
   font: inherit;
   cursor: pointer;
