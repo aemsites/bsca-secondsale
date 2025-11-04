@@ -52,7 +52,8 @@
 
 /* Text-style Cancel link */
 .bsc-exit-cancel {
-  color: var(--color-chicago-black);
+  color: var(--color-chicago-black) !important;
+  font-size: 1.125rem;
   text-decoration: none;
   font: inherit;
   cursor: pointer;
@@ -73,6 +74,11 @@
 .bsc-exit-continue:focus {
   background: #003b5c;
   outline: none;
+}
+
+.bsc-exit-cancel:hover,
+.bsc-exit-cancel:focus {
+  text-decoration: none;
 }
 
 .bsc-exit-x {
