@@ -94,6 +94,11 @@
   color: var(--detroit-color);
 }
 
+.bsc-exit-x:hover {
+  background: transparent;
+  color: var(--detroit-color);
+}
+
 /* Small screens */
 @media (width <= 480px) {
   .bsc-exit-content {
