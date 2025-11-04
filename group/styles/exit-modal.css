@@ -83,13 +83,15 @@
 
 .bsc-exit-x {
   position: absolute;
-  top: 8px;
+  top: 0px;
   right: 10px;
   border: 0;
   background: transparent;
   font-size: 28px;
-  line-height: 1;
   cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+  color: #e0e0e0;
 }
 
 /* Small screens */
