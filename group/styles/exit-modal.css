@@ -91,7 +91,7 @@
   cursor: pointer;
   margin: 0px;
   padding: 0px;
-  color: #e0e0e0;
+  color: var(--detroit-color) !important;
 }
 
 /* Small screens */
