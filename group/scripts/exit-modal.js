@@ -15,14 +15,14 @@
       commercial: {
         title: "You are now leaving the blueshieldca.com website",
         body:
-          "Blueshield of California has neither reviewed nor endoresed this information",
+          "Blue Shield of California has neither reviewed nor endorsed this information.",
         stay: "Cancel",
         cont: "Continue",
       },
       medicare: {
         title: "You are now leaving the blueshieldca.com website",
         body:
-          "Medicare Blueshield of California has neither reviewed nor endoresed this information",
+          "Blue Shield of California is an HMO, HMO D-SNP, PPO, and PDP plan with a Medicare contract and a contract with the California State Medicaid Program. Enrollment in Blue Shield of California depends on contract renewal.",
         stay: "Cancel",
         cont: "Continue",
       },
