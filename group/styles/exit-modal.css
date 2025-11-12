@@ -12,7 +12,7 @@
 .bsc-exit-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgb(0 0 0 / 60%);
 }
 
 .bsc-exit-content {
@@ -29,7 +29,7 @@
 }
 
 .bsc-exit-title {
-  margin: 0px 0px 30px;
+  margin: 0 0 30px;
   font-size: 1.5rem !important;
   line-height: 2rem !important;
   font-weight: 600 !important;
@@ -38,7 +38,7 @@
 }
 
 .bsc-exit-desc {
-  margin: 0px 0px 30px;
+  margin: 0 0 30px;
   text-align: center;
   font-size: 1.125rem;
 }
@@ -55,7 +55,6 @@
   color: var(--color-chicago-black) !important;
   font-size: 1.125rem !important;
   text-decoration: none;
-  font: inherit;
   cursor: pointer;
 }
 
@@ -83,14 +82,14 @@
 
 .bsc-exit-x {
   position: absolute;
-  top: 0px;
+  top: 0;
   right: 10px;
   border: 0;
   background: transparent;
   font-size: 28px;
   cursor: pointer;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   color: var(--detroit-color);
 }
 
