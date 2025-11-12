@@ -1,0 +1,112 @@
+/* BSC Exit Modal - namespaced to avoid conflicts */
+.bsc-exit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2147480000;
+}
+
+.bsc-exit-modal[hidden] {
+  display: none !important;
+}
+
+.bsc-exit-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 60%);
+}
+
+.bsc-exit-content {
+  position: relative;
+  width: 280px;
+  margin: 6.25rem auto;
+  padding: 24px 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 18%);
+  outline: none;
+  font-family: inherit;
+  color: var(--color-chicago-black);
+}
+
+.bsc-exit-title {
+  margin: 0 0 30px;
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .02rem !important;
+  text-align: center;
+}
+
+.bsc-exit-desc {
+  margin: 0 0 30px;
+  text-align: center;
+  font-size: 1.125rem;
+}
+
+.bsc-exit-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Text-style Cancel link */
+.bsc-exit-cancel {
+  color: var(--color-chicago-black) !important;
+  font-size: 1.125rem !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Primary Continue button */
+.bsc-exit-continue {
+  background: #0071bc;
+  border: none;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+  padding: 8px 24px 10px;
+  transition: background 0.2s ease-in-out;
+}
+
+.bsc-exit-continue:hover,
+.bsc-exit-continue:focus {
+  background: #003b5c;
+  outline: none;
+}
+
+.bsc-exit-cancel:hover,
+.bsc-exit-cancel:focus {
+  text-decoration: none;
+}
+
+.bsc-exit-x {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  color: var(--detroit-color);
+}
+
+.bsc-exit-x:hover {
+  background: transparent;
+  color: var(--detroit-color);
+}
+
+/* Small screens */
+@media (width <= 480px) {
+  .bsc-exit-content {
+    margin: 12vh 16px;
+    padding: 20px;
+  }
+
+  .bsc-exit-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}
