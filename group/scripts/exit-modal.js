@@ -106,8 +106,11 @@
       variant = 'commercial';
     }
 
+    // Try footer path if no explicit footer-variant meta
     if (!variant) variant = variantFromFooterPath();
-    if (!variant) return { on: false, variant: null };
+
+    // NEW: default to commercial when we still have no signal
+    if (!variant) variant = 'commercial';
 
     const explicitOn = showFlags.some(isTruthy);
     return { on: explicitOn || true, variant };
