@@ -147,29 +147,12 @@
     };
   }
 
-  // ---------- Video modal opt-out ----------
-  function isVideoModalLink(a) {
-    if (!a) return false;
-
-    // Links inside the video modal wrapper
-    if (a.closest && a.closest('.video-modal-root')) return true;
-
-    // Explicit hooks if you use them
-    if (a.matches && a.matches('[data-video-modal], .video-modal-link')) return true;
-
-    // Hash links like #video-modal-123
-    const href = a.getAttribute('href') || '';
-    if (href.charAt(0) === '#' && href.toLowerCase().includes('video')) return true;
-
-    return false;
-  }
-
   // ---------- Intercept logic ----------
   function shouldIntercept(a) {
     if (!a || !a.hasAttribute('href')) return false;
 
-    // Do NOT intercept video modal triggers
-    if (isVideoModalLink(a)) return false;
+    // NEW: ignore links inside video-modal sections
+    if (a.closest('.use-video-modal')) return false;
 
     const url = toAbsURL(a.getAttribute('href'));
     if (!url || !isHttp(url)) return false;
@@ -179,9 +162,7 @@
     if (isFirstParty(host)) return false;
     if (isAllowlisted(host)) return false;
 
-    if (a.getAttribute('target') === '_blank' && CFG.interceptTargetBlank === false) {
-      return false;
-    }
+    if (a.getAttribute('target') === '_blank' && CFG.interceptTargetBlank === false) return false;
     return true;
   }
 
