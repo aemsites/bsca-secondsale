@@ -109,7 +109,7 @@
     // Try footer path if no explicit footer-variant meta
     if (!variant) variant = variantFromFooterPath();
 
-    // NEW: default to commercial when we still have no signal
+    // Default to commercial when we still have no signal
     if (!variant) variant = 'commercial';
 
     const explicitOn = showFlags.some(isTruthy);
@@ -150,9 +150,19 @@
   // ---------- Intercept logic ----------
   function shouldIntercept(a) {
     if (!a || !a.hasAttribute('href')) return false;
+
+    // Ignore links inside video-modal sections
+    if (a.closest('.use-video-modal')) return false;
+
     const url = toAbsURL(a.getAttribute('href'));
     if (!url || !isHttp(url)) return false;
+
+    // Ignore same-document hash navigation
     if (sameDocHash(url)) return false;
+
+    // Ignore PDF links (no exit modal for .pdf files)
+    const path = url.pathname.toLowerCase();
+    if (path.endsWith('.pdf')) return false;
 
     const host = url.hostname.toLowerCase();
     if (isFirstParty(host)) return false;
