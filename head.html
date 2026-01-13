@@ -3,27 +3,6 @@
 <!-- Adobe Launch (CJA) tracking script -->
 <script src="https://assets.adobedtm.com/4292fae30116/d60ed27415b5/launch-93c4e2f28128.min.js" async></script>
 
-<!-- OneTrust Cookies Consent Notice start for blueshieldca.com -->
-<script>
-    (function () {
-        // Treat .aem.live and your production domain as "prod"
-        var isProd =
-            location.hostname.endsWith('.aem.live') ||
-            /(^|\.)blueshieldca\.com$/i.test(location.hostname);
-
-        var baseId = '019878d6-0d4b-7b81-b399-94a1c6d2e133';
-        var domainScript = isProd ? baseId : baseId + '-test';
-
-        // Synchronous, order-preserving insertion in <head>
-        var otAutoBlockSrc = 'https://cdn.cookielaw.org/consent/' + domainScript + '/OtAutoBlock.js';
-        var otStubSrc = 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js';
-
-        // Use document.write in <head> to guarantee blocking order (per OneTrust guidance)
-        document.write('<script type="text/javascript" src="' + otAutoBlockSrc + '"><\/script>');
-        document.write('<script type="text/javascript" src="' + otStubSrc + '" charset="UTF-8" data-domain-script="' + domainScript + '"><\/script>');
-    })();
-</script>
-
 <!-- OneTrust Cookies Consent Notice end for blueshieldca.com -->
 
 <link rel="stylesheet" href="https://www.blueshieldca.com/vendor/onetrust/onetrust.css">
