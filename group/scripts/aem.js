@@ -320,6 +320,16 @@ function createOptimizedPicture(
     } else {
       const img = document.createElement('img');
       img.setAttribute('loading', eager ? 'eager' : 'lazy');
+      // ========================================
+      // MODIFICATION START: Add fetchpriority for LCP optimization
+      // This improves Largest Contentful Paint by prioritizing eager-loaded images
+      // ========================================
+      if (eager) {
+        img.setAttribute('fetchpriority', 'high');
+      }
+      // ========================================
+      // MODIFICATION END
+      // ========================================
       img.setAttribute('alt', alt);
       picture.appendChild(img);
       img.setAttribute('src', `${pathname}?width=${br.width}&format=${ext}&optimize=medium`);
