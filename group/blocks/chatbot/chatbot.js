@@ -84,10 +84,8 @@ export default async function decorate(block) {
   });
   let path = window.location.pathname;
 
-  // Check if path ends with "/" or "index"
-  if (path.endsWith('/') || path.endsWith('index')) {
+  // Always strip the last segment to get the parent directory
     path = path.replace(/\/[^/]*$/, '');
-  }
   fetch(`${path}/chatbot.json`)
     .then((response) => response.json())
     .then((config) => {
