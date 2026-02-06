@@ -85,7 +85,7 @@ export default async function decorate(block) {
   let path = window.location.pathname;
 
   // Always strip the last segment to get the parent directory
-    path = path.replace(/\/[^/]*$/, '');
+  path = path.replace(/\/[^/]*$/, '');
   fetch(`${path}/chatbot.json`)
     .then((response) => response.json())
     .then((config) => {
