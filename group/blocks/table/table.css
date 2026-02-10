@@ -126,7 +126,7 @@
   border-right: none;
 }
 
-table.equalwidth table th {
+.table.equalwidth table th {
   height: 3rem;
 }
 
