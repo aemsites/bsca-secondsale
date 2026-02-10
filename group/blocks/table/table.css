@@ -98,6 +98,10 @@
   border-bottom: 1px solid #d8d8d8;
 }
 
+.table.equalwidth table td {
+  border: none;
+}
+
 .table.equalwidth table tbody tr td{
   border-bottom: 1px solid #d8d8d8;
   border-top: 1px solid #d8d8d8;
