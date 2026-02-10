@@ -82,7 +82,8 @@
 .table.equalwidth table {
   width: 100%;
   table-layout: fixed;
-  border-collapse: collapse; /* keep simple unless you need radius later */
+  border-collapse: separate;
+  border-spacing: 0;
   border: 1px solid #d8d8d8; /* outer border only */
 }
 
@@ -129,3 +130,13 @@ table.bordered table th {
 .table.equalwidth table tbody td p {
   margin: 16px 0;
 }
+
+/* equalwidth – rounded top corners */
+.table.equalwidth table thead th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.table.equalwidth table thead th:last-child {
+  border-top-right-radius: 10px;
+}
+
