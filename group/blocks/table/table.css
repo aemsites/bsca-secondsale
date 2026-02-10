@@ -78,44 +78,41 @@
   border: 1px solid var(--grey-color);
 }
 
-/* table equal columns variant */
+/* table equalwidth variant */
 .table.equalwidth table {
   width: 100%;
   table-layout: fixed;
+  border-collapse: collapse; /* keep simple unless you need radius later */
+  border: 1px solid #d8d8d8; /* outer border only */
 }
 
-/* Center checkmarks in equalwidth table */
-.table.equalwidth table td {
+/* Keep first column readable */
+.table.equalwidth table th:first-child,
+.table.equalwidth table td:first-child {
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Center plan columns (all columns except the first) */
+.table.equalwidth table th:not(:first-child),
+.table.equalwidth table td:not(:first-child) {
   text-align: center;
   vertical-align: middle;
 }
 
-.table.equalwidth table td p{
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-
+/* Highlight 2nd column (body only, per your preference) */
 .table.equalwidth table td:nth-child(2) {
   background-color: #f4f4f4;
 }
 
-.table.equalwidth table tbody {
-  border: 1px solid #d8d8d8;
-}
-
-.table.equalwidth table tbody tr {
-  border-bottom: 1px solid #d8d8d8;
-}
-
-.table.equalwidth table td {
-  border: none;
-}
-
-.table.equalwidth table tbody tr td{
-  border-bottom: 1px solid #d8d8d8;
+/* Row dividers (no vertical column borders) */
+.table.equalwidth table tbody td {
   border-top: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
 }
 
-.table.bordered table th {
-  height: 3rem;
+/* Optional: remove doubled line at very bottom */
+.table.equalwidth table tbody tr:last-child td {
+  border-bottom: none;
 }
+
