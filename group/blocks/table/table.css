@@ -116,3 +116,13 @@
   border-bottom: none;
 }
 
+.table.bordered.equalwidth table th,
+.table.bordered.equalwidth table td {
+  border-left: none;
+  border-right: none;
+}
+
+table.bordered table th {
+  height: 3rem;
+}
+
