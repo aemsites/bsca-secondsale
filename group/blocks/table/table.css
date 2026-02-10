@@ -85,6 +85,8 @@
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid #d8d8d8; /* outer border only */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
 /* Keep first column readable */
@@ -124,7 +126,7 @@
 }
 
 table.bordered table th {
-  height: 3rem;
+  height: 4rem;
 }
 
 .table.equalwidth table tbody td p {
@@ -133,10 +135,9 @@ table.bordered table th {
 
 /* equalwidth – rounded top corners */
 .table.equalwidth table thead th:first-child {
-  border-top-left-radius: 10px;
+  border-top-left-radius: 16px;
 }
 
 .table.equalwidth table thead th:last-child {
-  border-top-right-radius: 10px;
+  border-top-right-radius: 16px;
 }
-
