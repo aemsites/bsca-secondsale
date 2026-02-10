@@ -77,3 +77,9 @@
 .table.bordered table td {
   border: 1px solid var(--grey-color);
 }
+
+/* table equal columns variant */
+.table.equalwidth table {
+width: 100%;
+table-layout: fixed;
+}
