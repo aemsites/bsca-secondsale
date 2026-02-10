@@ -119,14 +119,14 @@
   border-bottom: none;
 }
 
-.table.bordered.equalwidth table th,
-.table.bordered.equalwidth table td {
+.table.equalwidth table th,
+.table.equalwidth table td {
   border-left: none;
   border-right: none;
 }
 
-table.bordered table th {
-  height: 4rem;
+table.equalwidth table th {
+  height: 3rem;
 }
 
 .table.equalwidth table tbody td p {
