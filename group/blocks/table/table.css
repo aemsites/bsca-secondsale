@@ -126,3 +126,6 @@ table.bordered table th {
   height: 3rem;
 }
 
+.table.equalwidth table tbody td p {
+  margin: 16px 0;
+}
