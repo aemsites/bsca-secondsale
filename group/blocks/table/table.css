@@ -94,4 +94,6 @@ table-layout: fixed;
   background-color: #f4f4f4;
 }
 
-
+.table.equalwidth table tbody tr {
+  border-bottom: 1px solid #d8d8d8;
+}
