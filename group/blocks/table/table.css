@@ -80,8 +80,8 @@
 
 /* table equal columns variant */
 .table.equalwidth table {
-width: 100%;
-table-layout: fixed;
+  width: 100%;
+  table-layout: fixed;
 }
 
 /* Center checkmarks in equalwidth table */
@@ -96,4 +96,9 @@ table-layout: fixed;
 
 .table.equalwidth table tbody tr {
   border-bottom: 1px solid #d8d8d8;
+}
+
+.table.equalwidth table tbody tr td{
+  border-bottom: 1px solid #d8d8d8;
+  border-top: 1px solid #d8d8d8;
 }
