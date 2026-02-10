@@ -90,3 +90,8 @@ table-layout: fixed;
   vertical-align: middle;
 }
 
+.table.equalwidth table td:nth-child(2) {
+  background-color: #f4f4f4;
+}
+
+
