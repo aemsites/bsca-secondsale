@@ -90,6 +90,11 @@
   vertical-align: middle;
 }
 
+.table.equalwidth table td p{
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
 .table.equalwidth table td:nth-child(2) {
   background-color: #f4f4f4;
 }
