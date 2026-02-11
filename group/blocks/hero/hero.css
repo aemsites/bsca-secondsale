@@ -93,3 +93,51 @@
     margin-left: auto;
   }
 }
+
+/* ===================================================
+   Hero Variant: Cutout Image
+   Standard reusable header with right-aligned cutout image
+   =================================================== */
+
+.hero.block.cutout-image > div {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+/* Two-column layout on tablet+ */
+@media (width >= 600px) {
+  .hero.block.cutout-image > div {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Left column: vertically centered text */
+.hero.block.cutout-image > div > div:first-of-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Right column: image pinned bottom-right */
+.hero.block.cutout-image > div > div:last-of-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+/* Reset inherited base hero picture sizing */
+.hero.block.cutout-image picture {
+  width: auto;
+  max-width: 420px; /* adjust depending on design system */
+}
+
+/* Ensure predictable image scaling */
+.hero.block.cutout-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
