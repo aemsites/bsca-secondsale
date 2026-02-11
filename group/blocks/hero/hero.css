@@ -126,6 +126,7 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  margin-left: 0;  /* cancel base hero push */
 }
 
 /* Reset inherited base hero picture sizing */
@@ -163,4 +164,3 @@
   height: auto;
   display: block;
 }
-
