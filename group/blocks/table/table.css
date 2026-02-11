@@ -112,7 +112,7 @@
 .table.equalwidth table tbody td {
   border-top: 1px solid #d8d8d8;
   border-bottom: 1px solid #d8d8d8;
-  padding: 8px 20px;
+  padding: 0px 20px;
 }
 
 /* Optional: remove doubled line at very bottom */
