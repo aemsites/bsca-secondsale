@@ -164,3 +164,7 @@
   height: auto;
   display: block;
 }
+
+.section.hero-container:has(.hero.cutout-image) {
+  margin-bottom: 0;
+}
