@@ -141,3 +141,26 @@
   height: auto;
 }
 
+/* --- Logo (first column) stays small --- */
+.hero.block.cutout-image > div > div:first-of-type picture {
+  width: auto;
+  max-width: none;
+}
+
+.hero.block.cutout-image > div > div:first-of-type img {
+  width: auto;
+  max-height: 50px; /* match your original intent */
+}
+
+/* --- Cutout image (right column) sizing --- */
+.hero.block.cutout-image > div > div:last-of-type picture {
+  width: 100%;
+  max-width: 420px; /* adjust if needed */
+}
+
+.hero.block.cutout-image > div > div:last-of-type img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
