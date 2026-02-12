@@ -98,21 +98,26 @@
    NEW CSS STARTS HERE
    Hero Variant: Cutout Image (standard reusable header across microsites)
    ====================================================================== */
-
-/* Optional: variant-specific wrapper padding for tighter “Cerulean-like” feel */
-.section.hero-container:has(.hero.cutout-image) .hero-wrapper {
-  padding: 0 32px; /* mobile default */
+/* Inner container spacing for cutout-image variant */
+/* Mobile */
+.hero.block.cutout-image > div {
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
+/* Medium */
 @media (width >= 600px) {
-  .section.hero-container:has(.hero.cutout-image) .hero-wrapper {
-    padding: 0 56px;
+  .hero.block.cutout-image > div {
+    padding-left: 56px;
+    padding-right: 56px;
   }
 }
 
+/* Desktop */
 @media (width >= 1200px) {
-  .section.hero-container:has(.hero.cutout-image) .hero-wrapper {
-    padding: 0 149px; /* premium desktop spacing */
+  .hero.block.cutout-image > div {
+    padding-left: 149px;
+    padding-right: 149px;
   }
 }
 
