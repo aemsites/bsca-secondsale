@@ -168,7 +168,7 @@
 
 @media (width < 600px) {
   .hero.block.cutout-image > div > div:last-of-type picture {
-    max-width: 340px; /* mobile cap */
+    max-width: 520px; /* mobile cap */
   }
 }
 
