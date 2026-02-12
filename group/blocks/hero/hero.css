@@ -94,15 +94,35 @@
   }
 }
 
-/* ===================================================
-   Hero Variant: Cutout Image
-   Standard reusable header with right-aligned cutout image
-   =================================================== */
+/* ======================================================================
+   NEW CSS STARTS HERE
+   Hero Variant: Cutout Image (standard reusable header across microsites)
+   ====================================================================== */
 
+/* Optional: variant-specific wrapper padding for tighter “Cerulean-like” feel */
+.section.hero-container:has(.hero.cutout-image) .hero-wrapper {
+  padding: 0 1rem; /* mobile default */
+}
+
+@media (width >= 600px) {
+  .section.hero-container:has(.hero.cutout-image) .hero-wrapper {
+    padding: 0 2rem;
+  }
+}
+
+@media (width >= 1200px) {
+  .section.hero-container:has(.hero.cutout-image) .hero-wrapper {
+    padding: 0 4rem; /* premium desktop spacing */
+  }
+}
+
+/* Variant layout */
 .hero.block.cutout-image > div {
+  /* base hero already sets display:grid, gap, and 1-col default
+     but we restate the contract here for clarity and isolation */
   display: grid;
-  gap: 2rem;
   grid-template-columns: 1fr;
+  gap: 2rem;
   align-items: stretch;
 }
 
@@ -113,36 +133,23 @@
   }
 }
 
-/* Left column: vertically centered text */
+/* Left column: vertically centered content */
 .hero.block.cutout-image > div > div:first-of-type {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* Right column: image pinned bottom-right */
+/* Right column: image pinned to bottom + centered horizontally */
 .hero.block.cutout-image > div > div:last-of-type {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  margin-left: 0;  /* cancel base hero push */
+  margin-left: 0; /* cancel base hero push-right behavior */
 }
 
-/* Reset inherited base hero picture sizing */
-.hero.block.cutout-image picture {
-  width: auto;
-  max-width: 420px; /* adjust depending on design system */
-}
-
-/* Ensure predictable image scaling */
-.hero.block.cutout-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* --- Logo (first column) stays small --- */
+/* LOGO sizing (first column) */
 .hero.block.cutout-image > div > div:first-of-type picture {
   width: auto;
   max-width: none;
@@ -150,27 +157,32 @@
 
 .hero.block.cutout-image > div > div:first-of-type img {
   width: auto;
-  max-height: 50px; /* match your original intent */
+  max-height: 50px;
 }
 
-/* --- Cutout image (right column) sizing --- */
+/* CUTOUT image sizing (right column) */
 .hero.block.cutout-image > div > div:last-of-type picture {
   width: 100%;
-  max-width: 420px; /* adjust if needed */
+  max-width: 520px; /* desktop cap */
+}
+
+@media (width < 600px) {
+  .hero.block.cutout-image > div > div:last-of-type picture {
+    max-width: 340px; /* mobile cap */
+  }
 }
 
 .hero.block.cutout-image > div > div:last-of-type img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
 }
 
-/* If you also want to remove the hero section bottom margin (optional) */
+/* Tighten spacing between cutout hero and the next section */
 .section.hero-container:has(.hero.cutout-image) {
   margin-bottom: 0;
 }
 
-/* THIS is the important one: pull the next section up */
 .section.hero-container:has(.hero.cutout-image) + .section {
   margin-top: 0;
 }
