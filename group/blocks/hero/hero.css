@@ -168,12 +168,12 @@
 /* CUTOUT image sizing (right column) */
 .hero.block.cutout-image > div > div:last-of-type picture {
   width: 100%;
-  max-width: 520px; /* desktop cap */
+  max-width: 450px; /* desktop cap */
 }
 
 @media (width < 600px) {
   .hero.block.cutout-image > div > div:last-of-type picture {
-    max-width: 520px; /* mobile cap */
+    max-width: 450px; /* mobile cap */
   }
 }
 
