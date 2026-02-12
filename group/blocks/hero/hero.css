@@ -101,18 +101,18 @@
 
 /* Optional: variant-specific wrapper padding for tighter “Cerulean-like” feel */
 .section.hero-container:has(.hero.cutout-image) .hero-wrapper {
-  padding: 0 1rem; /* mobile default */
+  padding: 0 32px; /* mobile default */
 }
 
 @media (width >= 600px) {
   .section.hero-container:has(.hero.cutout-image) .hero-wrapper {
-    padding: 0 2rem;
+    padding: 0 56px;
   }
 }
 
 @media (width >= 1200px) {
   .section.hero-container:has(.hero.cutout-image) .hero-wrapper {
-    padding: 0 4rem; /* premium desktop spacing */
+    padding: 0 149px; /* premium desktop spacing */
   }
 }
 
