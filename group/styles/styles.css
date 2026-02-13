@@ -513,7 +513,8 @@ main .section.h2-divider > .default-content-wrapper:has(> h2):not(:has(> *:not(h
 
 @media (width >= 900px) {
   main .section.h2-divider > .default-content-wrapper:has(> h2):not(:has(> *:not(h2))) {
-    padding: 56px 24px;
+    padding: 12px 0px;
+    max-width:none;
   }
 }
 
