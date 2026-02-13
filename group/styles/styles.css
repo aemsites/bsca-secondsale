@@ -508,14 +508,8 @@ main .section.h2-divider > .default-content-wrapper:has(> h2):not(:has(> *:not(h
   background: var(--dark-color);
   color: #fff;
   text-align: center;
-  padding: 32px 16px;
-}
-
-@media (width >= 900px) {
-  main .section.h2-divider > .default-content-wrapper:has(> h2):not(:has(> *:not(h2))) {
-    padding: 12px 0px;
-    max-width:none;
-  }
+  padding: 12px 0px;
+  max-width: none;
 }
 
 main .section.h2-divider > .default-content-wrapper > h2 {
