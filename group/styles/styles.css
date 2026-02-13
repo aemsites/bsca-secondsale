@@ -303,13 +303,13 @@ main>.section:first-of-type {
   margin-top: 0;
 }
 
-main>.section .default-content-wrapper:has(h2) {
+/*main>.section .default-content-wrapper:has(h2) {
   width: 100%;
   background-color: var(--dark-color);
   text-align: center;
   padding: 0;
   max-width: none;
-}
+}*/
 
 main>.section .default-content-wrapper>h2 {
   color: var(--background-color);
