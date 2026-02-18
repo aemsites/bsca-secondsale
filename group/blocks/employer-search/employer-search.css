@@ -6,9 +6,15 @@
    - GO button sits inside the input field
    ========================================================= */
 
+.employer-search-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .employer-search {
   position: relative;
-  max-width: 40rem; /* wider, closer to Cerulean examples */
+  width: 100%;
+  max-width: 40rem;
 }
 
 .employer-search__label {
