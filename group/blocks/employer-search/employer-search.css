@@ -90,11 +90,6 @@
   transform: translateY(-50%) scale(0.98);
 }
 
-/*.employer-search__go:focus {
-  outline: 2px solid rgba(0, 0, 0, 0.2);
-  outline-offset: 2px;
-}*/
-
 /* =========================================================
    Results dropdown
    ========================================================= */
