@@ -157,6 +157,18 @@
   border-radius: 4px;
 }
 
+.employer-search__list {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.employer-search__list.is-open {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* =========================================================
    Responsive tweaks
    - keep GO inside input, but reduce right padding
