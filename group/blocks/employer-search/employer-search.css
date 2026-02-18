@@ -27,10 +27,10 @@
   border-radius: 32px;
 
   /* Field sizing + "space reservation" for GO button on the right */
-  padding: 1.15rem 10.5rem 1.15rem 1.5rem;
+  padding: 1.15rem 10.5rem 1.25rem 1.5rem;
 
-  font-size: 1rem;
-  line-height: 1;
+  font-size: 1.1rem;
+  line-height: 1.2;
 
   background: #fff;
 }
