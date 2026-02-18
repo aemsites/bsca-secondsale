@@ -22,13 +22,15 @@ function norm(str = '') {
 }
 
 function highlightMatch(label, query) {
-  // basic safe-ish highlight: only highlight if we can find the normalized query in label (case-insensitive)
+  // basic safe-ish highlight: only highlight if we can find the query in label (case-insensitive)
   if (!query) return label;
   const idx = label.toLowerCase().indexOf(query.toLowerCase());
   if (idx < 0) return label;
+
   const before = label.slice(0, idx);
   const match = label.slice(idx, idx + query.length);
   const after = label.slice(idx + query.length);
+
   return `${before}<mark>${match}</mark>${after}`;
 }
 
@@ -55,7 +57,7 @@ export default async function decorate(block) {
   const label = document.createElement('label');
   label.className = 'employer-search__label';
   label.setAttribute('for', 'employer-search-input');
-  label.textContent = 'Search for your employer';
+  label.textContent = "Search for your employer";
 
   const inputWrap = document.createElement('div');
   inputWrap.className = 'employer-search__inputwrap';
@@ -68,6 +70,12 @@ export default async function decorate(block) {
   input.spellcheck = false;
   input.placeholder = 'Start typing…';
 
+  // GO button (new)
+  const goBtn = document.createElement('button');
+  goBtn.type = 'button';
+  goBtn.className = 'employer-search__go';
+  goBtn.textContent = 'GO';
+
   const status = document.createElement('div');
   status.className = 'employer-search__status';
   status.setAttribute('aria-live', 'polite');
@@ -76,13 +84,16 @@ export default async function decorate(block) {
   list.className = 'employer-search__list';
   list.setAttribute('role', 'listbox');
 
-  inputWrap.append(input);
+  inputWrap.append(input, goBtn);
   wrapper.append(label, inputWrap, status, list);
   block.append(wrapper);
 
   // Data cache
   let employers = [];
   let loaded = false;
+
+  // Selection state (new)
+  let selectedEmployer = null;
 
   async function loadData() {
     if (loaded) return;
@@ -164,7 +175,14 @@ export default async function decorate(block) {
       const title = item.title || '';
       btn.innerHTML = `<span class="employer-search__itemtitle">${highlightMatch(title, query)}</span>`;
 
-      btn.addEventListener('click', () => navigateTo(item));
+      // NEW: clicking a result selects it (no redirect)
+      btn.addEventListener('click', () => {
+        input.value = title;
+        selectedEmployer = item;
+        clearResults();
+        status.textContent = `Selected: ${title}`;
+      });
+
       btn.addEventListener('mousemove', () => setActive(idx));
 
       list.append(btn);
@@ -202,6 +220,12 @@ export default async function decorate(block) {
   const onInput = debounce(async () => {
     await loadData();
     const q = input.value.trim();
+
+    // If user types after selecting, clear selection until they choose again
+    if (selectedEmployer && q !== selectedEmployer.title) {
+      selectedEmployer = null;
+    }
+
     const results = search(q);
     renderResults(q, results);
   }, 150);
@@ -209,6 +233,24 @@ export default async function decorate(block) {
   // Events
   input.addEventListener('focus', onInput);
   input.addEventListener('input', onInput);
+
+  // GO button (new): navigate only when user clicks GO
+  goBtn.addEventListener('click', () => {
+    if (selectedEmployer?.url) {
+      navigateTo(selectedEmployer);
+      return;
+    }
+
+    // If user didn't click a result, but typed something:
+    // try navigating to the top match if it exists
+    const q = input.value.trim();
+    const results = search(q);
+    if (results.length) {
+      navigateTo(results[0]);
+    } else {
+      status.textContent = 'Please select an employer from the list.';
+    }
+  });
 
   input.addEventListener('keydown', (e) => {
     const isOpen = list.classList.contains('is-open');
@@ -230,9 +272,15 @@ export default async function decorate(block) {
     }
 
     if (e.key === 'Enter') {
+      // Enter should select an active item (no redirect),
+      // and user must press GO to navigate
       if (activeIndex >= 0 && currentResults[activeIndex]) {
         e.preventDefault();
-        navigateTo(currentResults[activeIndex]);
+        const it = currentResults[activeIndex];
+        input.value = it.title || input.value;
+        selectedEmployer = it;
+        clearResults();
+        status.textContent = `Selected: ${it.title}`;
       }
       return;
     }
