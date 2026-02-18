@@ -1,8 +1,14 @@
 /* blocks/employer-search/employer-search.css */
 
+/* =========================================================
+   Employer Search (Cerulean-ish)
+   - Single source of truth (no duplicate selectors)
+   - GO button sits inside the input field
+   ========================================================= */
+
 .employer-search {
   position: relative;
-  max-width: 44rem;
+  max-width: 56rem; /* wider, closer to Cerulean examples */
 }
 
 .employer-search__label {
@@ -12,15 +18,21 @@
 }
 
 .employer-search__inputwrap {
-  position: relative;
+  position: relative; /* required for absolutely-positioned GO */
 }
 
 .employer-search__input {
   width: 100%;
-  padding: 0.85rem 1rem;
   border: 1px solid #cfcfcf;
-  border-radius: 0.5rem;
-  font-size: 1rem;
+  border-radius: 32px;
+
+  /* Field sizing + "space reservation" for GO button on the right */
+  padding: 1.15rem 10.5rem 1.15rem 1.5rem;
+
+  font-size: 1.1rem;
+  line-height: 1.2;
+
+  background: #fff;
 }
 
 .employer-search__input:focus {
@@ -33,20 +45,72 @@
   font-size: 0.875rem;
 }
 
+/* =========================================================
+   GO button (inside the input)
+   ========================================================= */
+
+.employer-search__go {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  height: 60px;
+  padding: 0 40px;
+
+  border-radius: 32px;
+  border: 0;
+  appearance: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0071bc;
+  color: #fff;
+
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+
+  /* subtle hover/focus transitions (no abrupt change) */
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+
+.employer-search__go:hover {
+  filter: brightness(0.95);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+.employer-search__go:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.employer-search__go:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.2);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Results dropdown
+   ========================================================= */
+
 .employer-search__list {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 0.75rem);
   left: 0;
   right: 0;
+
   display: none;
+
   background: #fff;
   border: 1px solid #cfcfcf;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  border-radius: 1rem;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   max-height: 18rem;
   overflow-y: auto;
-  z-index: 10;
+  z-index: 50;
 }
 
 .employer-search__list.is-open {
@@ -57,8 +121,10 @@
   width: 100%;
   display: block;
   text-align: left;
+
   border: 0;
   background: transparent;
+
   padding: 0.85rem 1rem;
   cursor: pointer;
   font-size: 1rem;
@@ -69,82 +135,39 @@
   background: #f4f4f4;
 }
 
+/* Highlight behavior (kept subtle and readable) */
 .employer-search__itemtitle mark {
-  background: transparent;
+  background: rgba(0, 113, 188, 0.12);
   font-weight: 700;
-  padding: 0;
+  padding: 0 0.1em;
+  border-radius: 4px;
 }
 
+/* If your JS uses a class like .es-highlight, keep it compatible */
 .employer-search__itemtitle mark.es-highlight {
-  background: transparent;
+  background: rgba(0, 113, 188, 0.12);
   font-weight: 700;
   color: inherit;
-  padding: 0;
+  padding: 0 0.1em;
+  border-radius: 4px;
 }
 
-/* --- Cerulean-style input + GO-in-field --- */
+/* =========================================================
+   Responsive tweaks
+   - keep GO inside input, but reduce right padding
+   ========================================================= */
 
-.employer-search {
-  max-width: 56rem; /* optional: wider like your example */
-}
-
-.employer-search__inputwrap {
-  position: relative; /* needed so GO can be absolutely positioned */
-}
-
-.employer-search__input {
-  width: 100%;
-  border-radius: 32px;
-  padding: 1.15rem 10.5rem 1.15rem 1.5rem; /* RIGHT padding makes room for GO */
-  border: 1px solid #cfcfcf;
-  font-size: 1.1rem;
-  line-height: 1.2;
-}
-
-/* GO sits inside the input area */
-.employer-search__go {
-  position: absolute;
-  right: 0rem;
-  height: 60px; /* keeps button inside input */
-  padding: 0 40px;
-  border-radius: 32px;
-  background: #0071bc;
-  color: #fff;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  margin: 0;
-  /* display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  border: 0;
-  transform: translateY(-50%);
-  /* top: 50%; */
-}
-
-.employer-search__go:hover {
-  filter: brightness(0.95);
-}
-
-.employer-search__go:focus {
-  outline: 2px solid rgba(0, 0, 0, 0.2);
-  outline-offset: 2px;
-}
-
-/* Optional: make dropdown align with rounded input nicely */
-.employer-search__list {
-  top: calc(100% + 0.75rem);
-  border-radius: 1rem;
-}
-
-/* Mobile: stack GO below if you want (optional). If you want it always inside, delete this. */
 @media (max-width: 600px) {
-  .employer-search__input {
-    padding-right: 8.5rem;
+  .employer-search {
+    max-width: 100%;
   }
+
+  .employer-search__input {
+    padding-right: 8.75rem;
+  }
+
   .employer-search__go {
-    padding: 0 2.25rem;
+    height: 56px;
+    padding: 0 28px;
   }
 }
-
-
