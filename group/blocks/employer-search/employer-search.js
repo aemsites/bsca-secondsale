@@ -1,3 +1,6 @@
+Here is the entore JS file
+
+
 // blocks/employer-search/employer-search.js
 
 const DATA_URL = '/group/drafts/matt-sorensen/employers.json';
@@ -21,41 +24,20 @@ function norm(str = '') {
     .replace(/\s+/g, ' ');
 }
 
-/**
- * Render a label with an optional highlighted match using DOM nodes (no innerHTML).
- * This avoids styling/visibility issues where the "rest" of the label can appear missing.
- */
-function renderLabel(el, label, query) {
-  el.textContent = '';
-
-  if (!label) return;
-
-  if (!query) {
-    el.textContent = label;
-    return;
-  }
-
-  const l = label.toLowerCase();
-  const q = query.toLowerCase();
-  const idx = l.indexOf(q);
-
-  if (idx === -1) {
-    el.textContent = label;
-    return;
-  }
-
-  const before = document.createTextNode(label.slice(0, idx));
-  const mark = document.createElement('mark');
-  mark.className = 'es-highlight';
-  mark.textContent = label.slice(idx, idx + query.length);
-  const after = document.createTextNode(label.slice(idx + query.length));
-
-  el.append(before, mark, after);
+function highlightMatch(label, query) {
+  // basic safe-ish highlight: only highlight if we can find the normalized query in label (case-insensitive)
+  if (!query) return label;
+  const idx = label.toLowerCase().indexOf(query.toLowerCase());
+  if (idx < 0) return label;
+  const before = label.slice(0, idx);
+  const match = label.slice(idx, idx + query.length);
+  const after = label.slice(idx + query.length);
+  return `${before}<mark>${match}</mark>${after}`;
 }
 
 export default async function decorate(block) {
-  // Allow authors to override the data URL by putting it in the first row:
-  // e.g. "data" | "/path/to/employers.json"
+  // Allow authors to override the data URL by putting it in the first cell (optional)
+  // e.g. a table row with "data" | "/path/to/employers.json"
   let dataUrl = DATA_URL;
 
   const rows = [...block.querySelectorAll(':scope > div')];
@@ -183,12 +165,7 @@ export default async function decorate(block) {
       btn.dataset.index = String(idx);
 
       const title = item.title || '';
-
-      // ✅ DOM-safe title rendering (no innerHTML)
-      const span = document.createElement('span');
-      span.className = 'employer-search__itemtitle';
-      renderLabel(span, title, query);
-      btn.append(span);
+      btn.innerHTML = `<span class="employer-search__itemtitle">${highlightMatch(title, query)}</span>`;
 
       btn.addEventListener('click', () => navigateTo(item));
       btn.addEventListener('mousemove', () => setActive(idx));
