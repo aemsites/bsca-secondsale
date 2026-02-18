@@ -81,3 +81,37 @@
   color: inherit;
   padding: 0;
 }
+
+/* Make input + GO sit side-by-side */
+.employer-search__inputwrap {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Keep input flexible */
+.employer-search__input {
+  flex: 1 1 auto;
+}
+
+/* GO button styling */
+.employer-search__go {
+  flex: 0 0 auto;
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
+  border: 0;
+  background: #3b6ea8; /* adjust to brand later */
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.employer-search__go:hover {
+  background: #2f5b8a;
+}
+
+.employer-search__go:focus {
+  outline: 2px solid rgba(0,0,0,0.2);
+  outline-offset: 2px;
+}
+
