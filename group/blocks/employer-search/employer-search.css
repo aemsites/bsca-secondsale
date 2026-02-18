@@ -69,17 +69,6 @@
   background: #f4f4f4;
 }
 
-/* Visibility safety:
-   Some global styles can affect <mark> and nested inline elements.
-   These rules ensure the full company name is always readable. */
-.employer-search__itemtitle {
-  color: inherit;
-}
-
-.employer-search__itemtitle * {
-  color: inherit;
-}
-
 .employer-search__itemtitle mark {
   background: transparent;
   font-weight: 700;
