@@ -1,6 +1,3 @@
-Here is the entore JS file
-
-
 // blocks/employer-search/employer-search.js
 
 const DATA_URL = '/group/drafts/matt-sorensen/employers.json';
