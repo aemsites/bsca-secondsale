@@ -1,0 +1,76 @@
+/* blocks/employer-search/employer-search.css */
+
+.employer-search {
+  position: relative;
+  max-width: 44rem;
+}
+
+.employer-search__label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.employer-search__inputwrap {
+  position: relative;
+}
+
+.employer-search__input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #cfcfcf;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.employer-search__input:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.2);
+  outline-offset: 2px;
+}
+
+.employer-search__status {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.employer-search__list {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  display: none;
+  background: #fff;
+  border: 1px solid #cfcfcf;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  max-height: 18rem;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.employer-search__list.is-open {
+  display: block;
+}
+
+.employer-search__item {
+  width: 100%;
+  display: block;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.employer-search__item:hover,
+.employer-search__item.is-active {
+  background: #f4f4f4;
+}
+
+.employer-search__itemtitle mark {
+  background: transparent;
+  font-weight: 700;
+  padding: 0;
+}
