@@ -51,9 +51,10 @@
 
 .employer-search__go {
   position: absolute;
-  right: 8px;
+  right: 0px;
   top: 50%;
   transform: translateY(-50%);
+  margin:0;
 
   height: 60px;
   padding: 0 40px;
@@ -73,12 +74,15 @@
   letter-spacing: 0.04em;
   cursor: pointer;
 
-  /* subtle hover/focus transitions (no abrupt change) */
-  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+  /* Slower fade on background-color (what you requested) */
+  transition:
+    background-color 420ms ease,
+    box-shadow 200ms ease,
+    transform 120ms ease;
 }
 
 .employer-search__go:hover {
-  filter: brightness(0.95);
+  background-color: #005fa3; /* darker Cerulean-ish hover */
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
 }
 
