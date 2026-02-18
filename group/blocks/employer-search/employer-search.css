@@ -8,7 +8,7 @@
 
 .employer-search {
   position: relative;
-  max-width: 56rem; /* wider, closer to Cerulean examples */
+  max-width: 40rem; /* wider, closer to Cerulean examples */
 }
 
 .employer-search__label {
@@ -57,7 +57,7 @@
   margin:0;
 
   height: 60px;
-  padding: 0 40px;
+  padding: 0 48px;
 
   border-radius: 32px;
   border: 0;
