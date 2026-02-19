@@ -141,7 +141,7 @@
 }
 
 employer-search__itemtitle {
-  color:red;
+  color:#000000 !important;
 }
 
 /* Highlight behavior (kept subtle and readable) */
