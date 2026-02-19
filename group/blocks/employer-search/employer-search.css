@@ -158,6 +158,21 @@
   font-size: 1rem;
 }
 
+/* Ensure result text stays readable (override global button styles) */
+.employer-search__item {
+  color: #000; /* or your body text color */
+  -webkit-text-fill-color: currentColor;
+}
+
+.employer-search__itemtitle {
+  color: inherit;
+}
+
+.employer-search__itemtitle mark,
+.employer-search__itemtitle mark.es-highlight {
+  color: inherit;
+}
+
 .employer-search__item:hover,
 .employer-search__item.is-active {
   background: #f4f4f4;
