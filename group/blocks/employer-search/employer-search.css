@@ -138,6 +138,7 @@
 .employer-search__item:hover,
 .employer-search__item.is-active {
   background: #f4f4f4;
+  color: #0071bc;
 }
 
 /* Highlight behavior (kept subtle and readable) */
