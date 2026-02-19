@@ -60,7 +60,7 @@
   right: 0px;
   top: 50%;
   transform: translateY(-50%);
-  margin:0;
+  margin: 0;
 
   height: 60px;
   padding: 0 48px;
@@ -97,7 +97,8 @@
 }
 
 /* =========================================================
-   Results dropdown
+   Results dropdown (Option A: animatable entrance)
+   - IMPORTANT: no display:none, so transitions can run
    ========================================================= */
 
 .employer-search__list {
@@ -106,7 +107,8 @@
   left: 0;
   right: 0;
 
-  display: none;
+  /* keep rendered so transitions work */
+  display: block;
 
   background: #fff;
   border: 1px solid #cfcfcf;
@@ -116,10 +118,31 @@
   max-height: 18rem;
   overflow-y: auto;
   z-index: 50;
+
+  /* closed state */
+  opacity: 0;
+  transform: translateY(6px);
+  visibility: hidden;
+  pointer-events: none;
+
+  /* fade/slide in */
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    visibility 0s linear 160ms;
 }
 
 .employer-search__list.is-open {
-  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+
+  /* make visibility immediate when opening */
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    visibility 0s;
 }
 
 .employer-search__item {
@@ -155,18 +178,6 @@
   color: inherit;
   padding: 0 0.1em;
   border-radius: 4px;
-}
-
-.employer-search__list {
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 160ms ease, transform 160ms ease;
-}
-
-.employer-search__list.is-open {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* =========================================================
