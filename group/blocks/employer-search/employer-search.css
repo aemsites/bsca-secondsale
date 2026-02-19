@@ -140,10 +140,6 @@
   background: #f4f4f4;
 }
 
-employer-search__itemtitle {
-  color:#000000 !important;
-}
-
 /* Highlight behavior (kept subtle and readable) */
 .employer-search__itemtitle mark {
   background: rgba(0, 113, 188, 0.12);
