@@ -16,8 +16,8 @@ function norm(str = '') {
   return str
     .toLowerCase()
     .trim()
-    .replace(/[\u2019']/g, '')     // remove apostrophes
-    .replace(/[^a-z0-9\s-]/g, '')  // strip punctuation
+    .replace(/[\u2019']/g, '') // remove apostrophes
+    .replace(/[^a-z0-9\s-]/g, '') // strip punctuation
     .replace(/\s+/g, ' ');
 }
 
@@ -57,7 +57,7 @@ export default async function decorate(block) {
   const label = document.createElement('label');
   label.className = 'employer-search__label';
   label.setAttribute('for', 'employer-search-input');
-  label.textContent = "Search for your employer";
+  label.textContent = 'Search for your employer';
 
   const inputWrap = document.createElement('div');
   inputWrap.className = 'employer-search__inputwrap';
@@ -70,7 +70,7 @@ export default async function decorate(block) {
   input.spellcheck = false;
   input.placeholder = 'Start typing…';
 
-  // GO button (new)
+  // GO button
   const goBtn = document.createElement('button');
   goBtn.type = 'button';
   goBtn.className = 'employer-search__go';
@@ -92,8 +92,12 @@ export default async function decorate(block) {
   let employers = [];
   let loaded = false;
 
-  // Selection state (new)
+  // Selection state
   let selectedEmployer = null;
+
+  function clearSelection() {
+    selectedEmployer = null;
+  }
 
   async function loadData() {
     if (loaded) return;
@@ -136,7 +140,6 @@ export default async function decorate(block) {
     if (index >= 0 && index < items.length) {
       items[index].classList.add('is-active');
       activeIndex = index;
-      // ensure visible
       items[index].scrollIntoView({ block: 'nearest' });
     } else {
       activeIndex = -1;
@@ -145,6 +148,25 @@ export default async function decorate(block) {
 
   function navigateTo(item) {
     if (item?.url) window.location.href = item.url;
+  }
+
+  // Only allow navigation when user has *selected* an item
+  // AND the input matches the selected title (prevents "Company" -> GO)
+  function canNavigate() {
+    if (!selectedEmployer?.url) return false;
+    const typed = norm(input.value);
+    const selected = norm(selectedEmployer.title || '');
+    return typed && typed === selected;
+  }
+
+  function onGo() {
+    if (canNavigate()) {
+      status.textContent = '';
+      navigateTo(selectedEmployer);
+      return;
+    }
+
+    status.textContent = 'Please select an employer from the list before clicking GO.';
   }
 
   function renderResults(query, results) {
@@ -175,12 +197,12 @@ export default async function decorate(block) {
       const title = item.title || '';
       btn.innerHTML = `<span class="employer-search__itemtitle">${highlightMatch(title, query)}</span>`;
 
-      // NEW: clicking a result selects it (no redirect)
+      // Clicking a result selects it (fills input) but does NOT redirect
       btn.addEventListener('click', () => {
-        input.value = title;
         selectedEmployer = item;
+        input.value = title;
+        status.textContent = '';
         clearResults();
-        status.textContent = `Selected: ${title}`;
       });
 
       btn.addEventListener('mousemove', () => setActive(idx));
@@ -221,10 +243,8 @@ export default async function decorate(block) {
     await loadData();
     const q = input.value.trim();
 
-    // If user types after selecting, clear selection until they choose again
-    if (selectedEmployer && q !== selectedEmployer.title) {
-      selectedEmployer = null;
-    }
+    // If user types, selection is no longer valid until they pick again
+    clearSelection();
 
     const results = search(q);
     renderResults(q, results);
@@ -234,23 +254,8 @@ export default async function decorate(block) {
   input.addEventListener('focus', onInput);
   input.addEventListener('input', onInput);
 
-  // GO button (new): navigate only when user clicks GO
-  goBtn.addEventListener('click', () => {
-    if (selectedEmployer?.url) {
-      navigateTo(selectedEmployer);
-      return;
-    }
-
-    // If user didn't click a result, but typed something:
-    // try navigating to the top match if it exists
-    const q = input.value.trim();
-    const results = search(q);
-    if (results.length) {
-      navigateTo(results[0]);
-    } else {
-      status.textContent = 'Please select an employer from the list.';
-    }
-  });
+  // GO button: navigate only if selected + exact match
+  goBtn.addEventListener('click', onGo);
 
   input.addEventListener('keydown', (e) => {
     const isOpen = list.classList.contains('is-open');
@@ -272,16 +277,20 @@ export default async function decorate(block) {
     }
 
     if (e.key === 'Enter') {
-      // Enter should select an active item (no redirect),
-      // and user must press GO to navigate
+      // If a list option is highlighted, select it (don’t navigate yet)
       if (activeIndex >= 0 && currentResults[activeIndex]) {
         e.preventDefault();
         const it = currentResults[activeIndex];
-        input.value = it.title || input.value;
         selectedEmployer = it;
+        input.value = it.title || input.value;
+        status.textContent = '';
         clearResults();
-        status.textContent = `Selected: ${it.title}`;
+        return;
       }
+
+      // Otherwise, treat Enter like GO
+      e.preventDefault();
+      onGo();
       return;
     }
 
@@ -291,7 +300,7 @@ export default async function decorate(block) {
     }
   });
 
-  // Click outside to close
+  // Click outside to close results (keep selection)
   document.addEventListener('click', (e) => {
     if (!block.contains(e.target)) clearResults();
   });
