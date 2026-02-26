@@ -521,3 +521,9 @@ main .section.h2-divider.light > .default-content-wrapper {
   background: #fff;
   color: #000; /* or var(--dark-color) if you prefer */
 }
+
+/* Remove default h2 margin */
+main .section.h2-divider > .default-content-wrapper > h2 {
+  margin: 0;
+}
+
