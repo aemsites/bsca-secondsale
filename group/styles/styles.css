@@ -503,25 +503,21 @@ main>.section.border-top>.default-content-wrapper {
 
 /* New Banner Style Variant */
 
-/* H2 divider base (only sections explicitly marked) */
-main .section.h2-divider > .default-content-wrapper:has(> h2):not(:has(> *:not(h2))) {
-  background: var(--dark-color);
-  color: #fff;
+/* Base divider styles */
+main .section.h2-divider > .default-content-wrapper {
   text-align: center;
-  padding: 12px 0px;
+  padding: 12px 0;
   max-width: none;
 }
 
-main .section.h2-divider > .default-content-wrapper > h2 {
-  margin: 0;
+/* Dark variant (default) */
+main .section.h2-divider:not(.light) > .default-content-wrapper {
+  background: var(--dark-color);
+  color: #fff;
 }
 
 /* Light variant */
 main .section.h2-divider.light > .default-content-wrapper {
   background: #fff;
-  color: #000;
-  text-align: center;
-  padding: 12px 0px;
-  max-width: none;
+  color: #000; /* or var(--dark-color) if you prefer */
 }
-
