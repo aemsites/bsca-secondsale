@@ -520,5 +520,8 @@ main .section.h2-divider > .default-content-wrapper > h2 {
 main .section.h2-divider.light > .default-content-wrapper {
   background: #fff;
   color: #000;
+  text-align: center;
+  padding: 12px 0px;
+  max-width: none;
 }
 
