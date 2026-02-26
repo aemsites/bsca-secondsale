@@ -507,7 +507,7 @@ main>.section.border-top>.default-content-wrapper {
 main .section.h2-divider > .default-content-wrapper,
 main .section.h2-divider-light > .default-content-wrapper {
   text-align: center;
-  padding: 12px 0;
+  /*padding: 12px 0;*/
   max-width: none;
 }
 
