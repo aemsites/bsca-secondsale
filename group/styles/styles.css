@@ -528,3 +528,12 @@ main .section.h2-divider > .default-content-wrapper > h2,
 main .section.h2-divider-light > .default-content-wrapper > h2 {
   margin: 0;
 }
+
+/* Shared H2 styles for both divider variants */
+main .section.h2-divider > .default-content-wrapper > h2,
+main .section.h2-divider-light > .default-content-wrapper > h2 {
+  padding-bottom: 8px;
+  font-size: 30px;
+  font-weight: 100;
+}
+
