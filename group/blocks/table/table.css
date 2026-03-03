@@ -166,3 +166,9 @@
   background-color: var(--dark-color);
   color: var(--background-color);
 }
+
+.table.equalwidth {
+  border-radius: 10px;
+  overflow: hidden; /* clips the sticky header to rounded corners */
+  border: 1px solid #d8d8d8;
+}
