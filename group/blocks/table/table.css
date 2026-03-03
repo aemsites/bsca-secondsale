@@ -169,3 +169,15 @@
   background-color: var(--dark-color);
   color: var(--background-color);
 }
+
+/* first column 50% */
+.table.equalwidth.first-50 table th:first-child,
+.table.equalwidth.first-50 table td:first-child {
+  width: 50%;
+}
+
+/* first column 75% */
+.table.equalwidth.first-75 table th:first-child,
+.table.equalwidth.first-75 table td:first-child {
+  width: 75%;
+}
