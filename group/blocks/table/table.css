@@ -78,6 +78,11 @@
   border: 1px solid var(--grey-color);
 }
 
+/* equalwidth – make first body row fully white */
+.table.equalwidth table tbody tr:first-child td {
+  background-color: #ffffff;
+}
+
 /* table equalwidth variant */
 .table.equalwidth table {
   width: 100%;
