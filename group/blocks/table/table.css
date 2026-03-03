@@ -78,20 +78,27 @@
   border: 1px solid var(--grey-color);
 }
 
-/* equalwidth – make first body row fully white */
-.table.equalwidth table tbody tr:first-child td {
-  background-color: #ffffff;
+/* =========================
+   equalwidth variant
+   (scoped, future-proof, and keeps scrollbar INSIDE the “card”)
+   ========================= */
+
+/* equalwidth “card” wrapper: border + rounded corners + internal scroll */
+.table.equalwidth {
+  max-height: 520px;          /* adjust to taste */
+  overflow: auto;             /* vertical + horizontal as needed */
+  border: 1px solid #d8d8d8;  /* outer border only */
+  border-radius: 16px;
+  background: #fff;
 }
 
-/* table equalwidth variant */
+/* equalwidth table layout */
 .table.equalwidth table {
   width: 100%;
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid #d8d8d8; /* outer border only */
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border: 0;                  /* avoid double border (wrapper handles it) */
 }
 
 /* Keep first column readable */
@@ -108,16 +115,28 @@
   vertical-align: middle;
 }
 
-/* Highlight 2nd column (body only, per your preference) */
+/* Make first body row fully white (override column shading/striping) */
+.table.equalwidth table tbody tr:first-child td {
+  background-color: #ffffff;
+}
+
+/* Highlight 2nd column (body only) */
 .table.equalwidth table td:nth-child(2) {
   background-color: #f4f4f4;
 }
 
-/* Row dividers (no vertical column borders) */
+/* Remove vertical borders between columns (even if “bordered” is present) */
+.table.equalwidth table th,
+.table.equalwidth table td {
+  border-left: none;
+  border-right: none;
+}
+
+/* Row dividers + spacing */
 .table.equalwidth table tbody td {
   border-top: 1px solid #d8d8d8;
   border-bottom: 1px solid #d8d8d8;
-  padding: 0px 20px;
+  padding: 0 20px;
 }
 
 /* Optional: remove doubled line at very bottom */
@@ -125,44 +144,21 @@
   border-bottom: none;
 }
 
-.table.equalwidth table th,
-.table.equalwidth table td {
-  border-left: none;
-  border-right: none;
-}
-
-.table.equalwidth table th {
-  height: 3rem;
-}
-
+/* Paragraph spacing inside cells */
 .table.equalwidth table tbody td p {
   margin: 16px 0;
 }
 
-/* equalwidth – rounded top corners */
-.table.equalwidth table thead th:first-child {
-  border-top-left-radius: 16px;
+/* Header height (acts like a minimum; row can grow if text wraps) */
+.table.equalwidth table th {
+  height: 3rem;
 }
 
-.table.equalwidth table thead th:last-child {
-  border-top-right-radius: 16px;
-}
-
-/* equalwidth table: enable vertical scrolling */
-.table.equalwidth {
-  max-height: 520px;          /* adjust to taste */
-  overflow-y: auto;
-  overflow-x: auto;           /* keep horizontal scroll safety */
-}
-
-/* equalwidth table: sticky header */
+/* Sticky header (blue bar stays visible while tbody scrolls) */
 .table.equalwidth table thead th {
   position: sticky;
   top: 0;
   z-index: 2;
-}
-
-.table.equalwidth table thead th {
   background-color: var(--dark-color);
   color: var(--background-color);
 }
