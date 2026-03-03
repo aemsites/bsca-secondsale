@@ -119,6 +119,12 @@
   background-color: #ffffff;
 }
 
+.table.equalwidth table tbody td:first-child h3 {
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  margin: 16px 0;
+}
+
 /* Highlight 2nd column (body only) */
 .table.equalwidth table td:nth-child(2) {
   background-color: #f4f4f4;
