@@ -115,8 +115,7 @@
   vertical-align: middle;
 }
 
-/* Make first body row fully white (override column shading/striping) */
-.table.equalwidth table tbody tr:first-child td {
+.table.equalwidth table tbody tr:has(td:first-child h3) td {
   background-color: #ffffff;
 }
 
