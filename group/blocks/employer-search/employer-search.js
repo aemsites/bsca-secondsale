@@ -13,7 +13,7 @@ function debounce(fn, wait = 150) {
 
 // normalize for matching
 function norm(str = '') {
-  return str
+  return String(str)
     .toLowerCase()
     .trim()
     .replace(/[\u2019']/g, '') // remove apostrophes
@@ -24,7 +24,7 @@ function norm(str = '') {
 function highlightMatch(label, query) {
   // basic safe-ish highlight: only highlight if we can find the query in label (case-insensitive)
   if (!query) return label;
-  const idx = label.toLowerCase().indexOf(query.toLowerCase());
+  const idx = String(label).toLowerCase().indexOf(String(query).toLowerCase());
   if (idx < 0) return label;
 
   const before = label.slice(0, idx);
@@ -32,6 +32,47 @@ function highlightMatch(label, query) {
   const after = label.slice(idx + query.length);
 
   return `${before}<mark>${match}</mark>${after}`;
+}
+
+/**
+ * Defensive getters because EDS/Excel->JSON can alter header casing/spacing.
+ */
+function getEmployer(item) {
+  // Your Excel header is "Employer"
+  return (
+    item?.Employer ||
+    item?.employer ||
+    item?.EMPLOYER ||
+    item?.title || // fallback (old data)
+    ''
+  );
+}
+
+function getUrl(item) {
+  // Your Excel header is "url"
+  return item?.url || item?.URL || '';
+}
+
+function getSearchTermsRaw(item) {
+  // Your Excel header is "Search Terms"
+  return (
+    item?.['Search Terms'] ||
+    item?.['search terms'] ||
+    item?.['SEARCH TERMS'] ||
+    item?.searchTerms ||
+    item?.searchterms ||
+    item?.search_terms ||
+    ''
+  );
+}
+
+function parseSearchTerms(item) {
+  const raw = getSearchTermsRaw(item);
+  if (!raw) return [];
+  return String(raw)
+    .split(';')
+    .map((t) => t.trim())
+    .filter(Boolean);
 }
 
 export default async function decorate(block) {
@@ -147,16 +188,19 @@ export default async function decorate(block) {
   }
 
   function navigateTo(item) {
-    if (item?.url) window.location.href = item.url;
+    const url = getUrl(item);
+    if (url) window.location.href = url;
   }
 
   // Only allow navigation when user has *selected* an item
-  // AND the input matches the selected title (prevents "Company" -> GO)
+  // AND the input matches the selected Employer (prevents "Company" -> GO)
   function canNavigate() {
-    if (!selectedEmployer?.url) return false;
+    const url = getUrl(selectedEmployer);
+    if (!url) return false;
+
     const typed = norm(input.value);
-    const selected = norm(selectedEmployer.title || '');
-    return typed && typed === selected;
+    const selected = norm(getEmployer(selectedEmployer));
+    return typed && selected && typed === selected;
   }
 
   function onGo() {
@@ -194,13 +238,13 @@ export default async function decorate(block) {
       btn.setAttribute('aria-selected', 'false');
       btn.dataset.index = String(idx);
 
-      const title = item.title || '';
-      btn.innerHTML = `<span class="employer-search__itemtitle">${highlightMatch(title, query)}</span>`;
+      const employer = getEmployer(item);
+      btn.innerHTML = `<span class="employer-search__itemtitle">${highlightMatch(employer, query)}</span>`;
 
       // Clicking a result selects it (fills input) but does NOT redirect
       btn.addEventListener('click', () => {
         selectedEmployer = item;
-        input.value = title;
+        input.value = employer;
         status.textContent = '';
         clearResults();
       });
@@ -215,25 +259,40 @@ export default async function decorate(block) {
     setActive(-1);
   }
 
+  /**
+   * Search scoring:
+   * - Employer exact match: 110
+   * - SearchTerm exact match: 100
+   * - Employer startsWith: 80
+   * - SearchTerm startsWith: 70
+   * - Employer includes: 50
+   * - SearchTerm includes: 40
+   */
   function search(queryRaw) {
     const qn = norm(queryRaw);
     if (!qn || qn.length < 2) return [];
 
-    // basic scoring: startsWith beats includes
     const scored = employers
       .map((it) => {
-        const title = it?.title || '';
-        const tn = norm(title);
+        const employer = getEmployer(it);
+        const employerNorm = norm(employer);
+
+        const terms = parseSearchTerms(it);
+        const termNorms = terms.map((t) => norm(t)).filter(Boolean);
+
         let score = 0;
 
-        if (tn === qn) score = 100;
-        else if (tn.startsWith(qn)) score = 80;
-        else if (tn.includes(qn)) score = 50;
+        if (employerNorm && employerNorm === qn) score = 110;
+        else if (termNorms.includes(qn)) score = 100;
+        else if (employerNorm && employerNorm.startsWith(qn)) score = 80;
+        else if (termNorms.some((t) => t.startsWith(qn))) score = 70;
+        else if (employerNorm && employerNorm.includes(qn)) score = 50;
+        else if (termNorms.some((t) => t.includes(qn))) score = 40;
 
-        return { it, score, title };
+        return { it, score, employer };
       })
       .filter((x) => x.score > 0)
-      .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
+      .sort((a, b) => b.score - a.score || a.employer.localeCompare(b.employer))
       .map((x) => x.it);
 
     return scored;
@@ -282,7 +341,7 @@ export default async function decorate(block) {
         e.preventDefault();
         const it = currentResults[activeIndex];
         selectedEmployer = it;
-        input.value = it.title || input.value;
+        input.value = getEmployer(it) || input.value;
         status.textContent = '';
         clearResults();
         return;
