@@ -181,3 +181,15 @@
 .table.equalwidth.first-75 table td:first-child {
   width: 75%;
 }
+
+/* Row dividers + spacing */
+.table.equalwidth table tbody td {
+  padding: 0 12px;
+}
+
+@media (width >= 600px) {
+  .table.equalwidth table tbody td {
+  padding: 0 12px;
+  }
+}
+
