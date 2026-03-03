@@ -85,11 +85,13 @@
 
 /* equalwidth “card” wrapper: border + rounded corners + internal scroll */
 .table.equalwidth {
-  max-height: 520px;          /* adjust to taste */
+  max-height: 720px;          /* adjust to taste */
   overflow: auto;             /* vertical + horizontal as needed */
   border: 1px solid #d8d8d8;  /* outer border only */
   border-radius: 16px;
   background: #fff;
+  margin-top:100px;
+  margin-bottom:100px;
 }
 
 /* equalwidth table layout */
