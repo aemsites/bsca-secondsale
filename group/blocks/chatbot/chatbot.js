@@ -43,6 +43,54 @@ function transformJson(response) {
   return result;
 }
 
+/**
+ * NEW:
+ * Try to load chatbot config from the page-level path first,
+ * then fall back to the parent-level path.
+ *
+ * Example for /group/calpers/active-members:
+ * 1. /group/calpers/active-members/chatbot.json
+ * 2. /group/calpers/chatbot.json
+ *
+ * This supports both:
+ * - page-specific chatbot configs
+ * - shared section-level chatbot configs
+ *
+ * @return {Promise<Object>} - The chatbot config JSON
+ */
+async function loadChatbotConfig() {
+  // NEW: normalize the current path by removing any trailing slash
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+
+  // NEW: derive the parent path
+  const parentPath = currentPath.replace(/\/[^/]*$/, '');
+
+  // NEW: try page-level config first, then parent-level config
+  const configPaths = [
+    `${currentPath}/chatbot.json`,
+    `${parentPath}/chatbot.json`,
+  ];
+
+  for (let i = 0; i < configPaths.length; i += 1) {
+    const configPath = configPaths[i];
+    try {
+      const response = await fetch(configPath);
+
+      // NEW: only use the response if the file actually exists
+      if (response.ok) {
+        // eslint-disable-next-line no-console
+        console.log(`Loaded chatbot configuration from: ${configPath}`);
+        return response.json();
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.warn(`Failed to load chatbot config from: ${configPath}`, error);
+    }
+  }
+
+  throw new Error('Failed to load chatbot configuration from both page-level and parent-level paths.');
+}
+
 export default async function decorate(block) {
   const textRow = block.querySelector('div');
 
@@ -82,26 +130,25 @@ export default async function decorate(block) {
       });
     }
   });
-  let path = window.location.pathname;
 
-  // Always strip the last segment to get the parent directory
-  path = path.replace(/\/[^/]*$/, '');
-  fetch(`${path}/chatbot.json`)
-    .then((response) => response.json())
-    .then((config) => {
-      const qparam = JSON.stringify(transformJson(config));
-      const evaURL = 'https://eva-us.app2check.com/app/chat2check/bots/chatbotWebClient-v5-bs.html';
-      const encodedParams = btoa(qparam.toString());
-      const iframe = document.createElement('iframe');
-      iframe.src = `${evaURL}?params=${encodedParams}`;
-      iframe.width = '100%';
-      iframe.height = '400';
-      iframe.style = 'border: none;';
-      iframe.title = 'Chatbot';
-      col1.append(iframe);
-    })
-    .catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error('Failed to load chatbot configuration', error);
-    });
+  try {
+    // NEW: load config using page-level first, then parent-level fallback
+    const config = await loadChatbotConfig();
+
+    const qparam = JSON.stringify(transformJson(config));
+    const evaURL = 'https://eva-us.app2check.com/app/chat2check/bots/chatbotWebClient-v5-bs.html';
+    const encodedParams = btoa(qparam.toString());
+    const iframe = document.createElement('iframe');
+
+    iframe.src = `${evaURL}?params=${encodedParams}`;
+    iframe.width = '100%';
+    iframe.height = '400';
+    iframe.style = 'border: none;';
+    iframe.title = 'Chatbot';
+
+    col1.append(iframe);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Failed to load chatbot configuration', error);
+  }
 }
