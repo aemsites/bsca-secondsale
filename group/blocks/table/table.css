@@ -38,9 +38,9 @@
 }
 
 .table table th {
+  padding: var(--spacing-s);
   font-weight: var(--font-weight-bold);
   text-align: center;
-  padding: var(--spacing-s);
 }
 
 .table table th:first-of-type {
@@ -76,4 +76,110 @@
 .table.bordered table th,
 .table.bordered table td {
   border: 1px solid var(--grey-color);
+}
+
+/* =========================
+   equalwidth variant
+   ========================= */
+
+.table.equalwidth {
+  max-height: 720px;
+  overflow: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  border: 1px solid #d8d8d8;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.table.equalwidth table {
+  width: 100%;
+  table-layout: fixed;
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Base rules FIRST */
+.table.equalwidth table th,
+.table.equalwidth table td {
+  border-right: none;
+  border-left: none;
+}
+
+.table.equalwidth table th {
+  height: 3rem;
+}
+
+.table.equalwidth table td {
+  padding: 0 12px;
+}
+
+.table.equalwidth table tbody td {
+  border-top: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.table.equalwidth table tbody td p {
+  margin: 16px 0;
+}
+
+/* Mid-level specificity */
+.table.equalwidth table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--dark-color);
+  color: var(--background-color);
+}
+
+.table.equalwidth table td:nth-child(2) {
+  background-color: #f4f4f4;
+}
+
+/* alignment rules */
+.table.equalwidth table th:first-child,
+.table.equalwidth table td:first-child {
+  text-align: left;
+  vertical-align: top;
+}
+
+.table.equalwidth table th:not(:first-child),
+.table.equalwidth table td:not(:first-child) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* 👇 FIXED ORDER: less specific FIRST */
+.table.equalwidth table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* more specific AFTER */
+.table.equalwidth table tbody tr:has(td:first-child h3) td {
+  background-color: #fff;
+}
+
+.table.equalwidth table tbody td:first-child h3 {
+  margin: 16px 0;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+}
+
+/* width modifiers */
+.table.equalwidth.first-50 table th:first-child,
+.table.equalwidth.first-50 table td:first-child {
+  width: 50%;
+}
+
+.table.equalwidth.first-75 table th:first-child,
+.table.equalwidth.first-75 table td:first-child {
+  width: 75%;
+}
+
+/* responsive */
+@media (width >= 600px) {
+  .table.equalwidth table tbody td {
+    padding: 0 12px;
+  }
 }
