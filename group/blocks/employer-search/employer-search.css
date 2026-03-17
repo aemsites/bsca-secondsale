@@ -12,12 +12,11 @@
 }
 
 .employer-search.block {
-  background: #fff;
-  border-radius: 24px;
-  padding: 3rem 8rem;
-  -webkit-box-shadow: 0px 10px 32px -8px rgba(0, 0, 0, 0.16);
-  box-shadow: 0px 10px 32px -8px rgba(0, 0, 0, 0.16);
   margin: 2rem auto;
+  padding: 3rem 8rem;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 10px 32px -8px rgb(0 0 0 / 16%);
 }
 
 .employer-search {
@@ -26,37 +25,33 @@
   max-width: 40rem;
 }
 
-.employer-search__label {
+.employer-search-label {
   display: block;
-  font-weight: 600;
   margin-bottom: 0.5rem;
-  text-align:center;
+  font-weight: 600;
+  text-align: center;
 }
 
-.employer-search__inputwrap {
+.employer-search-input-wrap {
   position: relative; /* required for absolutely-positioned GO */
 }
 
-.employer-search__input {
+.employer-search-input {
   width: 100%;
+  padding: 1.15rem 9rem 1.25rem 1.5rem;
   border: 1px solid #cfcfcf;
   border-radius: 32px;
-
-  /* Field sizing + "space reservation" for GO button on the right */
-  padding: 1.15rem 9rem 1.25rem 1.5rem;
-
+  background: #fff;
   font-size: 1.1rem;
   line-height: 1.2;
-
-  background: #fff;
 }
 
-.employer-search__input:focus {
-  outline: 2px solid rgba(0, 113, 188, 0.2);
+.employer-search-input:focus {
+  outline: 2px solid rgb(0 113 188 / 20%);
   outline-offset: 2px;
 }
 
-.employer-search__status {
+.employer-search-status {
   margin-top: 0.5rem;
   font-size: 0.875rem;
 }
@@ -65,44 +60,37 @@
    GO button (inside the input)
    ========================================================= */
 
-.employer-search__go {
+.employer-search-go {
   position: absolute;
-  right: 0px;
   top: 50%;
-  transform: translateY(-50%);
-  margin: 0;
-
-  height: 60px;
-  padding: 0 48px;
-
-  border-radius: 32px;
-  border: 0;
-  appearance: none;
-
+  right: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
+  height: 60px;
+  margin: 0;
+  padding: 0 48px;
+  border: 0;
+  border-radius: 32px;
+  appearance: none;
+  transform: translateY(-50%);
+  cursor: pointer;
   background: #0071bc;
   color: #fff;
-
   font-weight: 700;
   letter-spacing: 0.04em;
-  cursor: pointer;
-
-  /* Slower fade on background-color (what you requested) */
   transition:
     background-color 420ms ease,
     box-shadow 200ms ease,
     transform 120ms ease;
 }
 
-.employer-search__go:hover {
-  background-color: #1a2c52; /* darker Cerulean-ish hover */
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+.employer-search-go:hover {
+  background-color: #1a2c52;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 14%);
 }
 
-.employer-search__go:active {
+.employer-search-go:active {
   transform: translateY(-50%) scale(0.98);
 }
 
@@ -111,98 +99,80 @@
    - IMPORTANT: no display:none, so transitions can run
    ========================================================= */
 
-.employer-search__list {
+.employer-search-list {
   position: absolute;
   top: calc(100% + 0.75rem);
-  left: 0;
   right: 0;
-
-  /* keep rendered so transitions work */
+  left: 0;
+  z-index: 50;
   display: block;
-
-  background: #fff;
-  border: 1px solid #cfcfcf;
-  border-radius: 1rem;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   max-height: 18rem;
   overflow-y: auto;
-  z-index: 50;
-
-  /* closed state */
+  border: 1px solid #cfcfcf;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 12%);
   opacity: 0;
   transform: translateY(6px);
   visibility: hidden;
   pointer-events: none;
-
-  /* fade/slide in */
   transition:
     opacity 280ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
     visibility 0s linear 280ms;
 }
 
-.employer-search__list.is-open {
+.employer-search-list.is-open {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
   pointer-events: auto;
-
-  /* make visibility immediate when opening */
   transition:
     opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
     visibility 0s;
 }
 
-.employer-search__item {
-  width: 100%;
+.employer-search-item {
   display: block;
-  text-align: left;
-
-  border: 0;
-  background: transparent;
-
+  width: 100%;
   padding: 0.85rem 1rem;
+  border: 0;
   cursor: pointer;
+  background: transparent;
+  color: #000;
+  text-align: left;
   font-size: 1rem;
+  -webkit-text-fill-color: currentcolor;
 }
 
-/* Ensure result text stays readable (override global button styles) */
-.employer-search__item {
-  color: #000; /* or your body text color */
-  -webkit-text-fill-color: currentColor;
-}
-
-.employer-search__itemtitle {
-  color: inherit;
-}
-
-.employer-search__itemtitle mark,
-.employer-search__itemtitle mark.es-highlight {
-  color: inherit;
-}
-
-.employer-search__item:hover,
-.employer-search__item.is-active {
+.employer-search-item:hover,
+.employer-search-item.is-active {
   background: #f4f4f4;
 }
 
-/* Highlight behavior (kept subtle and readable) */
-.employer-search__itemtitle mark {
-  background: rgba(0, 113, 188, 0.12);
-  font-weight: 700;
-  padding: 0 0.1em;
-  border-radius: 4px;
+.employer-search-item-title {
+  color: inherit;
 }
 
-/* If your JS uses a class like .es-highlight, keep it compatible */
-.employer-search__itemtitle mark.es-highlight {
-  background: rgba(0, 113, 188, 0.12);
-  font-weight: 700;
+.employer-search-item-title mark,
+.employer-search-item-title mark.es-highlight {
   color: inherit;
+}
+
+.employer-search-item-title mark {
   padding: 0 0.1em;
   border-radius: 4px;
+  background: rgb(0 113 188 / 12%);
+  font-weight: 700;
+}
+
+.employer-search-item-title mark.es-highlight {
+  padding: 0 0.1em;
+  border-radius: 4px;
+  background: rgb(0 113 188 / 12%);
+  color: inherit;
+  font-weight: 700;
 }
 
 /* =========================================================
@@ -210,23 +180,23 @@
    - keep GO inside input, but reduce right padding
    ========================================================= */
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .employer-search {
     max-width: 100%;
   }
 
   .employer-search.block {
-    background: #fff;
-    border-radius: 24px;
-    padding: 3rem 2rem;
     margin: 2rem 1rem;
+    padding: 3rem 2rem;
+    border-radius: 24px;
+    background: #fff;
   }
 
-  .employer-search__input {
+  .employer-search-input {
     padding-right: 6rem;
   }
 
-  .employer-search__go {
+  .employer-search-go {
     height: 60px;
     padding: 0 28px;
   }
