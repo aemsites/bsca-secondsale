@@ -96,15 +96,15 @@ export default async function decorate(block) {
   wrapper.className = 'employer-search';
 
   const label = document.createElement('label');
-  label.className = 'employer-search__label';
+  label.className = 'employer-search-label';
   label.setAttribute('for', 'employer-search-input');
   label.textContent = 'Search for your employer';
 
   const inputWrap = document.createElement('div');
-  inputWrap.className = 'employer-search__inputwrap';
+  inputWrap.className = 'employer-search-input-wrap';
 
   const input = document.createElement('input');
-  input.className = 'employer-search__input';
+  input.className = 'employer-search-input';
   input.id = 'employer-search-input';
   input.type = 'search';
   input.autocomplete = 'off';
@@ -114,15 +114,15 @@ export default async function decorate(block) {
   // GO button
   const goBtn = document.createElement('button');
   goBtn.type = 'button';
-  goBtn.className = 'employer-search__go';
+  goBtn.className = 'employer-search-go';
   goBtn.textContent = 'GO';
 
   const status = document.createElement('div');
-  status.className = 'employer-search__status';
+  status.className = 'employer-search-status';
   status.setAttribute('aria-live', 'polite');
 
   const list = document.createElement('div');
-  list.className = 'employer-search__list';
+  list.className = 'employer-search-list';
   list.setAttribute('role', 'listbox');
 
   inputWrap.append(input, goBtn);
@@ -176,7 +176,7 @@ export default async function decorate(block) {
   }
 
   function setActive(index) {
-    const items = [...list.querySelectorAll('.employer-search__item')];
+    const items = [...list.querySelectorAll('.employer-search-item')];
     items.forEach((el) => el.classList.remove('is-active'));
     if (index >= 0 && index < items.length) {
       items[index].classList.add('is-active');
@@ -233,13 +233,13 @@ export default async function decorate(block) {
     results.slice(0, 8).forEach((item, idx) => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'employer-search__item';
+      btn.className = 'employer-search-item';
       btn.setAttribute('role', 'option');
       btn.setAttribute('aria-selected', 'false');
       btn.dataset.index = String(idx);
 
       const employer = getEmployer(item);
-      btn.innerHTML = `<span class="employer-search__itemtitle">${highlightMatch(employer, query)}</span>`;
+      btn.innerHTML = `<span class="employer-search-item-title">${highlightMatch(employer, query)}</span>`;
 
       // Clicking a result selects it (fills input) but does NOT redirect
       btn.addEventListener('click', () => {
@@ -318,7 +318,7 @@ export default async function decorate(block) {
 
   input.addEventListener('keydown', (e) => {
     const isOpen = list.classList.contains('is-open');
-    const items = [...list.querySelectorAll('.employer-search__item')];
+    const items = [...list.querySelectorAll('.employer-search-item')];
 
     if (e.key === 'ArrowDown') {
       if (!isOpen && items.length) list.classList.add('is-open');
