@@ -1,0 +1,203 @@
+/* blocks/employer-search/employer-search.css */
+
+/* =========================================================
+   Employer Search (Cerulean-ish)
+   - Single source of truth (no duplicate selectors)
+   - GO button sits inside the input field
+   ========================================================= */
+
+.employer-search-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.employer-search.block {
+  margin: 2rem auto;
+  padding: 3rem 8rem;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 10px 32px -8px rgb(0 0 0 / 16%);
+}
+
+.employer-search {
+  position: relative;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.employer-search-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.employer-search-input-wrap {
+  position: relative; /* required for absolutely-positioned GO */
+}
+
+.employer-search-input {
+  width: 100%;
+  padding: 1.15rem 9rem 1.25rem 1.5rem;
+  border: 1px solid #cfcfcf;
+  border-radius: 32px;
+  background: #fff;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.employer-search-input:focus {
+  outline: 2px solid rgb(0 113 188 / 20%);
+  outline-offset: 2px;
+}
+
+.employer-search-status {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* =========================================================
+   GO button (inside the input)
+   ========================================================= */
+
+.employer-search-go {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin: 0;
+  padding: 0 48px;
+  border: 0;
+  border-radius: 32px;
+  appearance: none;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background: #0071bc;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition:
+    background-color 420ms ease,
+    box-shadow 200ms ease,
+    transform 120ms ease;
+}
+
+.employer-search-go:hover {
+  background-color: #1a2c52;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 14%);
+}
+
+.employer-search-go:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+/* =========================================================
+   Results dropdown (Option A: animatable entrance)
+   - IMPORTANT: no display:none, so transitions can run
+   ========================================================= */
+
+.employer-search-list {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  left: 0;
+  z-index: 50;
+  display: block;
+  max-height: 18rem;
+  overflow-y: auto;
+  border: 1px solid #cfcfcf;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 12%);
+  opacity: 0;
+  transform: translateY(6px);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 280ms;
+}
+
+.employer-search-list.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+.employer-search-item {
+  display: block;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  color: #000;
+  text-align: left;
+  font-size: 1rem;
+  -webkit-text-fill-color: currentcolor;
+}
+
+.employer-search-item:hover,
+.employer-search-item.is-active {
+  background: #f4f4f4;
+}
+
+.employer-search-item-title {
+  color: inherit;
+}
+
+.employer-search-item-title mark,
+.employer-search-item-title mark.es-highlight {
+  color: inherit;
+}
+
+.employer-search-item-title mark {
+  padding: 0 0.1em;
+  border-radius: 4px;
+  background: rgb(0 113 188 / 12%);
+  font-weight: 700;
+}
+
+.employer-search-item-title mark.es-highlight {
+  padding: 0 0.1em;
+  border-radius: 4px;
+  background: rgb(0 113 188 / 12%);
+  color: inherit;
+  font-weight: 700;
+}
+
+/* =========================================================
+   Responsive tweaks
+   - keep GO inside input, but reduce right padding
+   ========================================================= */
+
+@media (width <= 600px) {
+  .employer-search {
+    max-width: 100%;
+  }
+
+  .employer-search.block {
+    margin: 2rem 1rem;
+    padding: 3rem 2rem;
+    border-radius: 24px;
+    background: #fff;
+  }
+
+  .employer-search-input {
+    padding-right: 6rem;
+  }
+
+  .employer-search-go {
+    height: 60px;
+    padding: 0 28px;
+  }
+}

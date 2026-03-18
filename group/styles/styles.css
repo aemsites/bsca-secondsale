@@ -459,6 +459,9 @@ main>.section.border-top>.default-content-wrapper {
   line-height: var(--body-line-height, 1.6);
 }
 
+p sup {
+  font-size: 0.7em;
+}
 
 /* Override OneTrust SDK injected styles - paragraphs */
 #onetrust-banner-sdk .onetrust-first-para ,

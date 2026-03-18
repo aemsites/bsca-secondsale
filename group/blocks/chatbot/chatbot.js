@@ -43,6 +43,42 @@ function transformJson(response) {
   return result;
 }
 
+/**
+ * Load chatbot config:
+ * 1. Try page-level path
+ * 2. Fallback to parent-level path
+ *
+ * @return {Promise<Object>} - The chatbot config JSON
+ */
+async function loadChatbotConfig() {
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+  const parentPath = currentPath.replace(/\/[^/]*$/, '');
+
+  const configPaths = [
+    `${currentPath}/chatbot.json`,
+    `${parentPath}/chatbot.json`,
+  ];
+
+  for (let i = 0; i < configPaths.length; i += 1) {
+    const configPath = configPaths[i];
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      const response = await fetch(configPath);
+
+      if (response.ok) {
+        // eslint-disable-next-line no-console
+        console.log(`Loaded chatbot configuration from: ${configPath}`);
+        return response.json();
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.warn(`Failed to load chatbot config from: ${configPath}`, error);
+    }
+  }
+
+  throw new Error('Failed to load chatbot configuration from both page-level and parent-level paths.');
+}
+
 export default async function decorate(block) {
   const textRow = block.querySelector('div');
 
@@ -57,7 +93,7 @@ export default async function decorate(block) {
     }
   }
 
-  // Split <p> tags based on two or more <br> tags
+  // Merge consecutive <p> tags
   let paragraphs = block.querySelectorAll('p');
   paragraphs.forEach((p) => {
     if (p.nextElementSibling && p.nextElementSibling.tagName === 'P') {
@@ -65,11 +101,12 @@ export default async function decorate(block) {
       p.nextElementSibling.remove();
     }
   });
+
   paragraphs = block.querySelectorAll('p');
 
+  // Split paragraphs on multiple <br>
   paragraphs.forEach((p) => {
     if (p.innerHTML.includes('<br>')) {
-      // Use a regular expression to split on two or more <br> tags
       const parts = p.innerHTML.split(/(?:<br\s*\/?>\s*){2,}/gi);
       parts.forEach((part, index) => {
         if (index === 0) {
@@ -82,26 +119,24 @@ export default async function decorate(block) {
       });
     }
   });
-  let path = window.location.pathname;
 
-  // Always strip the last segment to get the parent directory
-  path = path.replace(/\/[^/]*$/, '');
-  fetch(`${path}/chatbot.json`)
-    .then((response) => response.json())
-    .then((config) => {
-      const qparam = JSON.stringify(transformJson(config));
-      const evaURL = 'https://eva-us.app2check.com/app/chat2check/bots/chatbotWebClient-v5-bs.html';
-      const encodedParams = btoa(qparam.toString());
-      const iframe = document.createElement('iframe');
-      iframe.src = `${evaURL}?params=${encodedParams}`;
-      iframe.width = '100%';
-      iframe.height = '400';
-      iframe.style = 'border: none;';
-      iframe.title = 'Chatbot';
-      col1.append(iframe);
-    })
-    .catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error('Failed to load chatbot configuration', error);
-    });
+  try {
+    const config = await loadChatbotConfig();
+
+    const qparam = JSON.stringify(transformJson(config));
+    const evaURL = 'https://eva-us.app2check.com/app/chat2check/bots/chatbotWebClient-v5-bs.html';
+    const encodedParams = btoa(qparam.toString());
+
+    const iframe = document.createElement('iframe');
+    iframe.src = `${evaURL}?params=${encodedParams}`;
+    iframe.width = '100%';
+    iframe.height = '400';
+    iframe.style = 'border: none;';
+    iframe.title = 'Chatbot';
+
+    col1.append(iframe);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Failed to load chatbot configuration', error);
+  }
 }
