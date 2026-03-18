@@ -460,7 +460,7 @@ main>.section.border-top>.default-content-wrapper {
 }
 
 p sup {
-  font-size: 0.7em;
+  font-size: 10px;
 }
 
 /* Override OneTrust SDK injected styles - paragraphs */
