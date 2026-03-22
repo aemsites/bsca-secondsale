@@ -98,7 +98,7 @@ export default async function decorate(block) {
   const label = document.createElement('label');
   label.className = 'employer-search-label';
   label.setAttribute('for', 'employer-search-input');
-  label.textContent = 'Search for your employer';
+  label.textContent = 'Search for your employer, union group, or benefit trust';
 
   const inputWrap = document.createElement('div');
   inputWrap.className = 'employer-search-input-wrap';
