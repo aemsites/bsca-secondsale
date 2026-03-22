@@ -1,6 +1,6 @@
 // blocks/employer-search/employer-search.js
 
-const DATA_URL = '/group/drafts/matt-sorensen/employers.json';
+const DATA_URL = '/group/0-content-management/groups-search.json';
 
 // simple debounce helper
 function debounce(fn, wait = 150) {
