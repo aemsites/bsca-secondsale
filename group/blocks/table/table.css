@@ -129,6 +129,8 @@
   max-width: 32px;
   width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Mid-level specificity */
