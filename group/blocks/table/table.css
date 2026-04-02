@@ -126,8 +126,7 @@
 
 /* equalwidth – constrain checkmark icons */
 .table.equalwidth table td picture img {
-  max-width: 40px;
-  max-height: 40px;
+  max-width: 32px;
   width: 100%;
   height: auto;
 }
