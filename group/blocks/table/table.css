@@ -124,6 +124,14 @@
   margin: 16px 0;
 }
 
+/* equalwidth – constrain checkmark icons */
+.table.equalwidth table td picture img {
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  height: auto;
+}
+
 /* Mid-level specificity */
 .table.equalwidth table thead th {
   position: sticky;
