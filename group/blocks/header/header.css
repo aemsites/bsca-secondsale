@@ -71,10 +71,10 @@ header .nav-new-login-icon {
   flex: 0 0 auto;
 }
 
-.nav-new-brand img {
+header .nav-new-brand-image {
+  display: block;
   width: 110px;
   height: auto;
-  display: block;
 }
 
 header .nav-new-login-icon::before {
