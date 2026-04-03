@@ -9,6 +9,7 @@ header .nav-new-wrapper {
   width: 100%;
   box-sizing: border-box;
   padding: 0px 16px;
+  margin: 0 auto;
   max-width:1440px;
   font-family: var(--body-font-family, sans-serif);
   color: #17316b;
