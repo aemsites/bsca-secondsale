@@ -2,10 +2,11 @@ header .header.block {
   padding: 0;
 }
 
+/* =========================
+   WRAPPER
+========================= */
 header .nav-new-wrapper {
   width: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
   box-sizing: border-box;
   padding: 16px 24px 0;
   font-family: var(--body-font-family, sans-serif);
@@ -21,6 +22,8 @@ header .nav-new-utility {
   justify-content: space-between;
   gap: 24px;
   min-height: 32px;
+  max-width: 1440px;
+  margin: 0 auto;
   padding: 0 8px 12px;
   font-size: 16px;
   line-height: 1.2;
@@ -123,7 +126,7 @@ header .nav-new-shell {
   border-radius: 104px;
   padding-left: 40px;
   padding-right: 32px;
-  max-width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
   position: relative;
 }
@@ -156,13 +159,15 @@ header .nav-new-brand-image {
 header .nav-new-main {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 32px;
   flex: 1 1 auto;
   min-width: 0;
 }
 
 header .nav-new-primary {
+  display: flex;
+  justify-content: flex-end;
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -171,10 +176,12 @@ header .nav-new-list {
   list-style: none;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 28px;
   margin: 0;
   padding: 0;
+  min-width: 0;
+  width: fit-content;
 }
 
 header .nav-new-item {
@@ -494,6 +501,7 @@ header .nav-new-contact:focus-visible {
     align-items: stretch;
     justify-content: flex-start;
     gap: 0;
+    width: 100%;
   }
 
   header .nav-new-item {
