@@ -7,18 +7,21 @@ header .nav-new-wrapper {
   max-width: 1920px;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 18px 48px 0;
+  padding: 16px 24px 0;
   font-family: var(--body-font-family, sans-serif);
   color: #17316b;
 }
 
+/* =========================
+   UTILITY ROW
+========================= */
 header .nav-new-utility {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  min-height: 40px;
-  padding: 0 18px 12px;
+  min-height: 32px;
+  padding: 0 8px 12px;
   font-size: 16px;
   line-height: 1.2;
 }
@@ -41,6 +44,12 @@ header .nav-new-language-toggle {
   color: #17316b;
   text-decoration: none;
   font-weight: 500;
+}
+
+header .nav-new-utility-link:hover,
+header .nav-new-login:hover,
+header .nav-new-language-toggle:hover {
+  text-decoration: none;
 }
 
 header .nav-new-language-toggle {
@@ -69,12 +78,6 @@ header .nav-new-login-icon {
   border-radius: 50%;
   display: inline-block;
   flex: 0 0 auto;
-}
-
-header .nav-new-brand-image {
-  display: block;
-  width: 110px;
-  height: auto;
 }
 
 header .nav-new-login-icon::before {
@@ -106,66 +109,55 @@ header .nav-new-login-icon::after {
   box-sizing: border-box;
 }
 
+/* =========================
+   MAIN PILL SHELL
+========================= */
 header .nav-new-shell {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  align-self: stretch;
   gap: 32px;
-  min-height: 112px;
-  padding: 0 18px;
-  background: #f6f3f1;
-  border-radius: 999px;
+  height: 88px;
+  background: #fbf9f7;
+  border-radius: 104px;
+  padding-left: 40px;
+  padding-right: 32px;
+  max-width: 100%;
+  margin: 0 auto;
   position: relative;
 }
 
+/* =========================
+   BRAND
+========================= */
 header .nav-new-brand {
+  display: flex;
+  align-items: center;
   flex: 0 0 auto;
-  min-width: 210px;
 }
 
 header .nav-new-brand-link {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  color: #111;
   text-decoration: none;
+  color: inherit;
 }
 
-header .nav-new-brand-logo {
-  position: relative;
-  width: 38px;
-  height: 52px;
-  background: #009cde;
-  border-radius: 16px 16px 20px 20px / 12px 12px 28px 28px;
-  transform: translateY(-1px);
-  flex: 0 0 auto;
+header .nav-new-brand-image {
+  display: block;
+  width: 110px;
+  height: auto;
 }
 
-header .nav-new-brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 0.86;
-  text-transform: lowercase;
-}
-
-header .nav-new-brand-line-1 {
-  font-size: 48px;
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  color: #111;
-}
-
-header .nav-new-brand-line-2 {
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  color: #111;
-}
-
+/* =========================
+   MAIN NAV AREA
+========================= */
 header .nav-new-main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 32px;
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -179,8 +171,8 @@ header .nav-new-list {
   list-style: none;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 18px;
+  justify-content: flex-start;
+  gap: 28px;
   margin: 0;
   padding: 0;
 }
@@ -195,14 +187,14 @@ header .nav-new-dropdown-toggle {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-height: 48px;
-  padding: 6px 10px;
+  min-height: 44px;
+  padding: 6px 0;
   border: 0;
   background: transparent;
   color: #17316b;
   text-decoration: none;
   font: inherit;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.2;
   font-weight: 500;
   cursor: pointer;
@@ -232,6 +224,9 @@ header .nav-new-language.is-open .nav-new-chevron {
   margin-top: 4px;
 }
 
+/* =========================
+   ACTIONS
+========================= */
 header .nav-new-actions {
   display: flex;
   align-items: center;
@@ -263,24 +258,27 @@ header .nav-new-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 26px;
+  min-height: 48px;
+  padding: 0 24px;
   border-radius: 999px;
   background: #0066cc;
   color: #fff;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.1;
   font-weight: 700;
   white-space: nowrap;
 }
 
+/* =========================
+   DROPDOWNS
+========================= */
 header .nav-new-dropdown,
 header .nav-new-language-panel {
   position: absolute;
   top: calc(100% + 14px);
   left: 0;
-  min-width: 340px;
+  min-width: 238px;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0 16px 36px rgb(23 49 107 / 14%);
@@ -303,10 +301,10 @@ header .nav-new-language-list li {
 header .nav-new-dropdown-link,
 header .nav-new-language-link {
   display: block;
-  padding: 22px 30px;
+  padding: 22px 20px;
   color: #17316b;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.25;
   font-weight: 500;
 }
@@ -328,6 +326,9 @@ header .nav-new-language-panel {
   min-width: 180px;
 }
 
+/* =========================
+   HAMBURGER
+========================= */
 header .nav-new-hamburger {
   display: none;
   margin-left: auto;
@@ -384,6 +385,9 @@ header .header.block.nav-new-mobile-open .nav-new-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
+/* =========================
+   FOCUS STATES
+========================= */
 header .nav-new-link:focus-visible,
 header .nav-new-dropdown-toggle:focus-visible,
 header .nav-new-language-toggle:focus-visible,
@@ -396,32 +400,33 @@ header .nav-new-contact:focus-visible {
   border-radius: 10px;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 1200px) {
   header .nav-new-wrapper {
-    padding-left: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  header .nav-new-shell {
+    padding-left: 28px;
     padding-right: 24px;
+    gap: 24px;
   }
 
-  header .nav-new-brand {
-    min-width: 170px;
-  }
-
-  header .nav-new-brand-line-1 {
-    font-size: 40px;
-  }
-
-  header .nav-new-brand-line-2 {
-    font-size: 15px;
+  header .nav-new-list {
+    gap: 22px;
   }
 
   header .nav-new-link,
   header .nav-new-dropdown-toggle {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   header .nav-new-dropdown-link,
   header .nav-new-language-link {
-    font-size: 18px;
+    font-size: 15px;
   }
 }
 
@@ -442,32 +447,20 @@ header .nav-new-contact:focus-visible {
   }
 
   header .nav-new-shell {
-    min-height: 84px;
-    padding: 0 20px;
+    height: 76px;
+    padding-left: 20px;
+    padding-right: 20px;
     gap: 16px;
     border-radius: 28px;
   }
 
-  header .nav-new-brand {
-    min-width: 0;
-  }
-
-  header .nav-new-brand-line-1 {
-    font-size: 34px;
-  }
-
-  header .nav-new-brand-line-2 {
-    font-size: 13px;
-  }
-
-  header .nav-new-brand-logo {
-    width: 30px;
-    height: 42px;
+  header .nav-new-brand-image {
+    width: 96px;
   }
 
   header .nav-new-main {
     position: fixed;
-    top: 132px;
+    top: 126px;
     left: 0;
     right: 0;
     width: 100%;
@@ -517,7 +510,7 @@ header .nav-new-contact:focus-visible {
     min-height: 60px;
     justify-content: space-between;
     padding: 0 22px;
-    font-size: 19px;
+    font-size: 18px;
   }
 
   header .nav-new-dropdown,
@@ -532,7 +525,7 @@ header .nav-new-contact:focus-visible {
   header .nav-new-dropdown-link,
   header .nav-new-language-link {
     padding: 18px 30px 18px 40px;
-    font-size: 17px;
+    font-size: 16px;
   }
 
   header .nav-new-dropdown-link.is-featured {
@@ -577,23 +570,16 @@ header .nav-new-contact:focus-visible {
   }
 
   header .nav-new-shell {
-    min-height: 76px;
-    padding: 0 16px;
+    height: 72px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
-  header .nav-new-brand-link {
-    gap: 10px;
-  }
-
-  header .nav-new-brand-line-1 {
-    font-size: 29px;
-  }
-
-  header .nav-new-brand-line-2 {
-    font-size: 11px;
+  header .nav-new-brand-image {
+    width: 88px;
   }
 
   header .nav-new-main {
-    top: 126px;
+    top: 118px;
   }
 }
