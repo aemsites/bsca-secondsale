@@ -210,6 +210,7 @@ header .nav-new-dropdown-toggle {
   font-weight: 300;
   cursor: pointer;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 header .nav-new-item.is-current > .nav-new-link,
