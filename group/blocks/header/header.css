@@ -10,7 +10,7 @@ header .nav-new-wrapper {
   box-sizing: border-box;
   padding: 0px 16px;
   margin: 0 auto;
-  max-width:1440px;
+  max-width: 1440px;
   font-family: var(--body-font-family, sans-serif);
   color: #17316b;
 }
@@ -188,19 +188,25 @@ header .nav-new-item {
   list-style: none;
 }
 
+/* =========================
+   NAV ITEMS
+   Updated to visually match Cerulean anchor styling
+========================= */
 header .nav-new-link,
 header .nav-new-dropdown-toggle {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  padding: 6px 0;
+  gap: 8px;
+  height: 88px;
+  padding: 10px 8px;
   border: 0;
   background: transparent;
-  color: #162C55;
+  color: #162c55;
   text-decoration: none;
   font: inherit;
   font-size: 16px;
+  line-height: 1;
+  font-weight: 300;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -208,7 +214,7 @@ header .nav-new-dropdown-toggle {
 header .nav-new-item.is-current > .nav-new-link,
 header .nav-new-item.is-active > .nav-new-dropdown-toggle,
 header .nav-new-item.is-open > .nav-new-dropdown-toggle {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 header .nav-new-chevron {
@@ -219,13 +225,13 @@ header .nav-new-chevron {
   border-bottom: 2px solid currentcolor;
   transform: rotate(45deg) translateY(-1px);
   transition: transform 0.2s ease;
-  margin-top: -4px;
+  margin-top: -2px;
 }
 
 header .nav-new-item.is-open .nav-new-chevron,
 header .nav-new-language.is-open .nav-new-chevron {
   transform: rotate(-135deg) translateY(-1px);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* =========================
@@ -512,10 +518,12 @@ header .nav-new-contact:focus-visible {
   header .nav-new-link,
   header .nav-new-dropdown-toggle {
     width: 100%;
+    height: auto;
     min-height: 60px;
     justify-content: space-between;
     padding: 0 22px;
     font-size: 18px;
+    font-weight: 400;
   }
 
   header .nav-new-dropdown,
