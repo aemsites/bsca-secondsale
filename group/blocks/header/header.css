@@ -282,18 +282,18 @@ header .nav-new-cta {
 
 header .nav-new-link:hover,
 header .nav-new-dropdown-toggle:hover {
-  color: #0066cc;
+  font-weight: 600;
 }
 
 header .nav-new-link::after,
 header .nav-new-dropdown-toggle::after {
   content: '';
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   left: 0;
   width: 0;
-  height: 2px;
-  background: #0066cc;
+  height: 4px;
+  background: #B3F8FF;
   transition: width 0.25s ease;
 }
 
