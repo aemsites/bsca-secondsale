@@ -33,7 +33,7 @@ header .nav-new-utility-left,
 header .nav-new-utility-right {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
 }
 
 header .nav-new-language {
@@ -278,6 +278,28 @@ header .nav-new-cta {
   line-height: 1.1;
   font-weight: 700;
   white-space: nowrap;
+}
+
+header .nav-new-link:hover,
+header .nav-new-dropdown-toggle:hover {
+  color: #0066cc;
+}
+
+header .nav-new-link::after,
+header .nav-new-dropdown-toggle::after {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #0066cc;
+  transition: width 0.25s ease;
+}
+
+header .nav-new-item:hover .nav-new-link::after,
+header .nav-new-item:hover .nav-new-dropdown-toggle::after {
+  width: 100%;
 }
 
 /* =========================
