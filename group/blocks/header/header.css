@@ -55,17 +55,46 @@ header .nav-new-language-toggle:hover {
   text-decoration: none;
 }
 
+/* =========================
+   LANGUAGE TOGGLE
+========================= */
 header .nav-new-language-toggle {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   border: 0;
   background: transparent;
-  padding: 0;
+  padding: 0 0 6px;
   cursor: pointer;
   font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  color: #162c55;
+  border-bottom: 4px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
+header .nav-new-language.is-open .nav-new-language-toggle,
+header .nav-new-language-toggle:hover,
+header .nav-new-language-toggle:focus-visible {
+  border-bottom-color: #b3f8ff;
+}
+
+header .nav-new-language-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  color: #162c55;
+}
+
+/* =========================
+   LOGIN
+========================= */
 header .nav-new-login {
   display: inline-flex;
   align-items: center;
@@ -394,8 +423,34 @@ header .nav-new-language-link:focus-visible {
   outline: none;
 }
 
+/* =========================
+   LANGUAGE PANEL
+========================= */
 header .nav-new-language-panel {
-  min-width: 180px;
+  min-width: 220px;
+  border-radius: 24px;
+  box-shadow: 0 15px 25px 0 rgb(34 10 51 / 15%), 0 0 10px 0 rgb(34 10 51 / 5%);
+  margin-top: 12px;
+  margin-left: -52px;
+  overflow: hidden;
+}
+
+header .nav-new-language-list li + li {
+  border-top: 1px solid #e3e7ef;
+}
+
+header .nav-new-language-link {
+  padding: 24px 34px;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: #162c55;
+  text-align: left;
+}
+
+header .nav-new-language-link:hover,
+header .nav-new-language-link:focus-visible {
+  background: #c9edf4;
 }
 
 /* =========================
@@ -499,6 +554,10 @@ header .nav-new-contact:focus-visible {
   header .nav-new-dropdown-link,
   header .nav-new-language-link {
     font-size: 15px;
+  }
+
+  header .nav-new-language-link {
+    font-size: 16px;
   }
 }
 
@@ -616,6 +675,15 @@ header .nav-new-contact:focus-visible {
   header .nav-new-language-link:hover,
   header .nav-new-language-link:focus-visible {
     background: #eef8fb;
+  }
+
+  header .nav-new-language-toggle {
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  header .nav-new-language-link {
+    font-size: 16px;
   }
 
   header .nav-new-actions {
