@@ -449,14 +449,13 @@ header .nav-new-language-link:focus-visible {
    LANGUAGE PANEL
 ========================= */
 header .nav-new-language-panel {
-  min-width: 220px;
+  min-width: 148px;
   border-radius: 16px;
   box-shadow: 0 15px 25px 0 rgb(34 10 51 / 15%), 0 0 10px 0 rgb(34 10 51 / 5%);
   margin-top: -10px;
   margin-left: -16px;
   overflow: hidden;
   border: 1px solid #eceded;
-  max-width: 148px;
 }
 
 header .nav-new-language-list li + li {
