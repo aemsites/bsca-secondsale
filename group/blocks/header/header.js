@@ -109,13 +109,24 @@ function pathsMatch(a = '', b = '') {
   return normalize(a) === normalize(b);
 }
 
+function isEnglishLabel(label = '') {
+  return /^english$/i.test(normalizeText(label));
+}
+
+function isSpanishLabel(label = '') {
+  return /^(español|spanish)$/i.test(normalizeText(label));
+}
+
 /**
  * Parse utility section.
- * Intended for simple authored content like:
- * - English
- *   - English
- *   - Spanish
- * - Login/Register
+ * Supports:
+ * 1. Nested list pattern:
+ *    - English
+ *      - Español
+ * 2. Flat fallback pattern:
+ *    English
+ *    Español
+ * 3. Login/Register utility link
  */
 function parseUtilitySection(section) {
   const result = {
@@ -168,18 +179,66 @@ function parseUtilitySection(section) {
       }
     });
   } else {
-    const lines = [...section.querySelectorAll('p')]
-      .map((p) => normalizeText(p.textContent))
-      .filter(Boolean);
+    // Fallback: utility content authored as flat links/paragraphs
+    const anchors = [...section.querySelectorAll('a')].map((anchor) => ({
+      label: normalizeText(anchor.textContent),
+      href: getHrefOrFallback(anchor, '#'),
+    })).filter((item) => item.label);
 
-    lines.forEach((line) => {
-      if (/login\/register/i.test(line)) {
-        result.login = {
-          label: 'Log in/Register',
-          href: LOGIN_FALLBACK_URL,
-        };
-      }
-    });
+    if (anchors.length) {
+      anchors.forEach((item) => {
+        if (/login\/register/i.test(item.label)) {
+          result.login = {
+            label: 'Log in/Register',
+            href: item.href === '#' ? LOGIN_FALLBACK_URL : item.href,
+          };
+        } else {
+          result.links.push(item);
+        }
+      });
+    } else {
+      const lines = [...section.querySelectorAll('p')]
+        .map((p) => normalizeText(p.textContent))
+        .filter(Boolean);
+
+      lines.forEach((line) => {
+        if (/login\/register/i.test(line)) {
+          result.login = {
+            label: 'Log in/Register',
+            href: LOGIN_FALLBACK_URL,
+          };
+        } else {
+          result.links.push({ label: line, href: '#' });
+        }
+      });
+    }
+  }
+
+  /**
+   * Flat language fallback:
+   * If utility links contain English + Español/Spanish as siblings,
+   * convert them into one dropdown control.
+   */
+  if (!result.language && result.links.length) {
+    const englishIndex = result.links.findIndex((item) => isEnglishLabel(item.label));
+    const spanishIndex = result.links.findIndex((item) => isSpanishLabel(item.label));
+
+    if (englishIndex > -1 && spanishIndex > -1) {
+      const englishItem = result.links[englishIndex];
+      const spanishItem = result.links[spanishIndex];
+
+      result.language = {
+        label: englishItem.label || 'English',
+        options: [
+          {
+            label: spanishItem.label,
+            href: spanishItem.href,
+          },
+        ],
+      };
+
+      result.links = result.links.filter((_, index) => index !== englishIndex && index !== spanishIndex);
+    }
   }
 
   return result;
