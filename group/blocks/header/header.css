@@ -309,7 +309,7 @@ header .nav-new-item:hover .nav-new-dropdown-toggle::after {
 @keyframes animateOpenDropdown {
   0% {
     opacity: 0;
-    transform: translateY(-8px) scale(0.98);
+    transform: translateY(0px) scale(1);
   }
 
   100% {
@@ -326,7 +326,7 @@ header .nav-new-item:hover .nav-new-dropdown-toggle::after {
 
   100% {
     opacity: 0;
-    transform: translateY(-6px) scale(0.98);
+    transform: translateY(0px) scale(1);
   }
 }
 
@@ -344,14 +344,14 @@ header .nav-new-language-panel {
   box-shadow: 0 15px 25px 0 rgb(34 10 51 / 15%), 0 0 10px 0 rgb(34 10 51 / 5%);
   overflow: hidden;
   z-index: 10;
-  margin-top: -36px;
+  margin-top: -30px;
   margin-left: -15px;
   transform-origin: top left;
 }
 
 header .nav-new-item.is-open .nav-new-dropdown,
 header .nav-new-language.is-open .nav-new-language-panel {
-  animation: animateOpenDropdown 0.7s ease;
+  animation: animateOpenDropdown 0.7s;
 }
 
 header .nav-new-dropdown-list,
@@ -425,7 +425,7 @@ header .nav-new-hamburger-icon::after {
   border-radius: 2px;
   position: relative;
   margin: 0 auto;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s;
 }
 
 header .nav-new-hamburger-icon::before,
