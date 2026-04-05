@@ -190,7 +190,6 @@ header .nav-new-item {
 
 /* =========================
    NAV ITEMS
-   Updated to visually match Cerulean anchor styling
 ========================= */
 header .nav-new-link,
 header .nav-new-dropdown-toggle {
@@ -295,7 +294,7 @@ header .nav-new-dropdown-toggle::after {
   left: 0;
   width: 0;
   height: 4px;
-  background: #B3F8FF;
+  background: #b3f8ff;
   transition: width 0.25s ease;
 }
 
@@ -305,20 +304,54 @@ header .nav-new-item:hover .nav-new-dropdown-toggle::after {
 }
 
 /* =========================
+   DROPDOWN ANIMATIONS
+========================= */
+@keyframes animateOpenDropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes animateCloseDropdown {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
+
+/* =========================
    DROPDOWNS
 ========================= */
 header .nav-new-dropdown,
 header .nav-new-language-panel {
   position: absolute;
   top: calc(100% + 14px);
+  left: 0;
   min-width: 238px;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 15px 25px 0 rgba(34,10,51,0.15),0 0 10px 0 rgba(34,10,51,0.05);
+  box-shadow: 0 15px 25px 0 rgb(34 10 51 / 15%), 0 0 10px 0 rgb(34 10 51 / 5%);
   overflow: hidden;
   z-index: 10;
   margin-top: -36px;
-  margin-left: -15px
+  margin-left: -15px;
+  transform-origin: top left;
+}
+
+header .nav-new-item.is-open .nav-new-dropdown,
+header .nav-new-language.is-open .nav-new-language-panel {
+  animation: animateOpenDropdown 0.7s ease;
 }
 
 header .nav-new-dropdown-list,
@@ -342,18 +375,22 @@ header .nav-new-language-link {
   font-size: 16px;
   line-height: 1.25;
   font-weight: 500;
+  background: transparent;
+  transition: background-color 0.2s ease;
 }
 
+/* remove default always-on featured state */
 header .nav-new-dropdown-link.is-featured {
-  background: #c9edf4;
-  font-weight: 700;
+  background: transparent;
+  font-weight: 500;
 }
 
+/* blue only on hover/focus */
 header .nav-new-dropdown-link:hover,
 header .nav-new-dropdown-link:focus-visible,
 header .nav-new-language-link:hover,
 header .nav-new-language-link:focus-visible {
-  background: #eef8fb;
+  background: #c9edf4;
   outline: none;
 }
 
@@ -558,6 +595,9 @@ header .nav-new-contact:focus-visible {
     border-radius: 0;
     box-shadow: none;
     border-top: 1px solid #e6ebf2;
+    margin-top: 0;
+    margin-left: 0;
+    animation: none;
   }
 
   header .nav-new-dropdown-link,
@@ -567,6 +607,14 @@ header .nav-new-contact:focus-visible {
   }
 
   header .nav-new-dropdown-link.is-featured {
+    background: transparent;
+    font-weight: 500;
+  }
+
+  header .nav-new-dropdown-link:hover,
+  header .nav-new-dropdown-link:focus-visible,
+  header .nav-new-language-link:hover,
+  header .nav-new-language-link:focus-visible {
     background: #eef8fb;
   }
 
