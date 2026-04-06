@@ -890,8 +890,8 @@ header .nav-new-contact:focus-visible {
 
   header .nav-new-shell {
     height: 72px;
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 40px;
+    padding-right: 32px;
   }
 
   header .nav-new-wrapper.has-sticky-shell {
@@ -900,8 +900,8 @@ header .nav-new-contact:focus-visible {
 
   header .nav-new-shell.is-sticky {
     top: 8px;
-    left: 12px;
-    right: 12px;
+    left: 40px;
+    right: 32px;
     width: auto;
   }
 
