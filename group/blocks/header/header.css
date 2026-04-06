@@ -641,8 +641,8 @@ header .nav-new-contact:focus-visible {
 
   header .nav-new-shell {
     height: 76px;
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-left: 40px;
+    padding-right: 30px;
     gap: 16px;
     border-radius: 999px;
   }
