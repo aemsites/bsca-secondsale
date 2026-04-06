@@ -56,7 +56,6 @@ header .nav-new-language-toggle:hover {
 
 /* =========================
    LANGUAGE TOGGLE
-   Styled to match main nav item feel
 ========================= */
 header .nav-new-language-toggle {
   display: flex;
@@ -180,6 +179,25 @@ header .nav-new-shell {
   max-width: 1440px;
   margin: 0 auto;
   position: relative;
+}
+
+/* =========================
+   STICKY NAV SHELL (NEW)
+   Prevent layout jump and make only the shell sticky
+========================= */
+header .nav-new-wrapper.has-sticky-shell {
+  padding-top: 88px;
+}
+
+header .nav-new-shell.is-sticky {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 1440px;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgb(23 49 107 / 10%);
 }
 
 /* =========================
@@ -430,13 +448,11 @@ header .nav-new-language-link {
   transition: background-color 0.2s ease;
 }
 
-/* remove default always-on featured state */
 header .nav-new-dropdown-link.is-featured {
   background: transparent;
   font-weight: 500;
 }
 
-/* blue only on hover/focus */
 header .nav-new-dropdown-link:hover,
 header .nav-new-dropdown-link:focus-visible,
 header .nav-new-language-link:hover,
@@ -611,6 +627,26 @@ header .nav-new-contact:focus-visible {
     border-radius: 28px;
   }
 
+  /* =========================
+     STICKY NAV - MOBILE (NEW)
+  ========================= */
+  header .nav-new-wrapper.has-sticky-shell {
+    padding-top: 76px;
+  }
+
+  header .nav-new-shell.is-sticky {
+    position: fixed;
+    top: 0;
+    left: 16px;
+    right: 16px;
+    transform: none;
+    width: auto;
+    max-width: none;
+    border-radius: 28px;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgb(23 49 107 / 10%);
+  }
+
   header .nav-new-brand-image {
     width: 96px;
   }
@@ -759,6 +795,19 @@ header .nav-new-contact:focus-visible {
     height: 72px;
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  /* =========================
+     STICKY NAV - SMALL MOBILE (NEW)
+  ========================= */
+  header .nav-new-wrapper.has-sticky-shell {
+    padding-top: 72px;
+  }
+
+  header .nav-new-shell.is-sticky {
+    left: 16px;
+    right: 16px;
+    width: auto;
   }
 
   header .nav-new-brand-image {
