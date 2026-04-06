@@ -605,9 +605,13 @@ header .nav-new-contact:focus-visible {
 }
 
 @media (max-width: 899px) {
+  header .nav-new-wrapper {
+    padding: 14px 16px 0;
+  }
+
   header .nav-new-utility {
     min-height: auto;
-    padding: 8px 16px;
+    padding: 0 4px 12px;
     gap: 14px;
   }
 
@@ -621,7 +625,7 @@ header .nav-new-contact:focus-visible {
     padding-left: 20px;
     padding-right: 20px;
     gap: 16px;
-    border-radius: 104px;
+    border-radius: 28px;
   }
 
   /* =========================
@@ -666,7 +670,8 @@ header .nav-new-contact:focus-visible {
   header .nav-new-main {
     position: fixed;
     top: 126px;
-    right: 25px;
+    left: 0;
+    right: 0;
     width: 100%;
     display: none;
     flex-direction: column;
@@ -684,9 +689,9 @@ header .nav-new-contact:focus-visible {
   header .nav-new-primary,
   header .nav-new-actions {
     width: 100%;
-    background: #fbf9f7;
+    background: #fff;
     border-radius: 24px;
-    box-shadow: rgba(34, 10, 51, 0.15) 0px 15px 25px, rgba(34, 10, 51, 0.05) 0px 0px 10px;
+    box-shadow: 0 16px 36px rgb(23 49 107 / 12%);
   }
 
   header .nav-new-primary {
