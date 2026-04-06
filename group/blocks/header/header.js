@@ -179,7 +179,6 @@ function parseUtilitySection(section) {
       }
     });
   } else {
-    // Fallback: utility content authored as flat links/paragraphs
     const anchors = [...section.querySelectorAll('a')].map((anchor) => ({
       label: normalizeText(anchor.textContent),
       href: getHrefOrFallback(anchor, '#'),
@@ -214,11 +213,6 @@ function parseUtilitySection(section) {
     }
   }
 
-  /**
-   * Flat language fallback:
-   * If utility links contain English + Español/Spanish as siblings,
-   * convert them into one dropdown control.
-   */
   if (!result.language && result.links.length) {
     const englishIndex = result.links.findIndex((item) => isEnglishLabel(item.label));
     const spanishIndex = result.links.findIndex((item) => isSpanishLabel(item.label));
@@ -726,6 +720,32 @@ function toggleMobileMenu(block) {
   }
 }
 
+/* =========================
+   STICKY NAV SHELL (NEW)
+   Makes only .nav-new-shell sticky after 36px scroll
+   Works on desktop and mobile
+========================= */
+function bindStickyShell(block) {
+  const wrapper = block.querySelector('.nav-new-wrapper');
+  const shell = block.querySelector('.nav-new-shell');
+
+  if (!wrapper || !shell) return;
+
+  const toggleSticky = () => {
+    if (window.scrollY > 36) {
+      shell.classList.add('is-sticky');
+      wrapper.classList.add('has-sticky-shell');
+    } else {
+      shell.classList.remove('is-sticky');
+      wrapper.classList.remove('has-sticky-shell');
+    }
+  };
+
+  window.addEventListener('scroll', toggleSticky, { passive: true });
+  window.addEventListener('resize', toggleSticky);
+  toggleSticky();
+}
+
 function bindEvents(block) {
   block.querySelectorAll('.nav-new-item.has-dropdown').forEach((item) => {
     const button = item.querySelector('.nav-new-dropdown-toggle');
@@ -821,6 +841,11 @@ export default async function decorate(block) {
   buildHeader(block, data);
   setCurrentState(block);
   bindEvents(block);
+
+  /* =========================
+     STICKY NAV INIT (NEW)
+  ========================= */
+  bindStickyShell(block);
 
   if (!DESKTOP.matches) {
     closeMobileMenu(block);
