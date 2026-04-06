@@ -906,7 +906,7 @@ header .nav-new-contact:focus-visible {
   }
 
   header .nav-new-brand-image {
-    width: 104px;
+    width: 91px;
   }
 
   header .nav-new-main {
@@ -924,6 +924,6 @@ header .nav-new-contact:focus-visible {
   }
 
   header .nav-new-dropdown-link {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
