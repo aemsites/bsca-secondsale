@@ -706,7 +706,7 @@ header .nav-new-contact:focus-visible {
   /* floating menu card */
   header .nav-new-main {
     position: absolute;
-    top: 118px;
+    top: 90px;
     right: 25px;
     left: auto;
     width: 320px;
