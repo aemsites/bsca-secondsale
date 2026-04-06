@@ -176,9 +176,10 @@ header .nav-new-shell {
   border-radius: 104px;
   padding-left: 40px;
   padding-right: 32px;
-  max-width: 1440px;
+  max-width: 1408px;
   margin: 0 auto;
   position: relative;
+  box-sizing: border-box;
 }
 
 /* =========================
@@ -191,13 +192,13 @@ header .nav-new-wrapper.has-sticky-shell {
 
 header .nav-new-shell.is-sticky {
   position: fixed;
-  top: 0;
+  top: 6px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
-  max-width: 1440px;
+  max-width: 1408px;
   z-index: 1000;
-  box-shadow: 0 8px 24px rgb(23 49 107 / 10%);
+  box-shadow: 0 15px 25px 0 rgba(34,10,51,0.05),0 0 10px 0 rgba(34,10,51,0.05);
 }
 
 /* =========================
