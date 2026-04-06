@@ -743,7 +743,7 @@ header .nav-new-contact:focus-visible {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    gap: 24px;
+    gap: 16px;
     width: 100%;
   }
 
