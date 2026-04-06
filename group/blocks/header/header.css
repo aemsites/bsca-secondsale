@@ -758,7 +758,7 @@ header .nav-new-contact:focus-visible {
     height: auto;
     justify-content: space-between;
     padding: 0;
-    font-size: 26px;
+    font-size: 16px;
     line-height: 1.15;
     font-weight: 400;
   }
@@ -775,11 +775,12 @@ header .nav-new-contact:focus-visible {
 
   /* keep mobile chevrons downward by default */
   header .nav-new-chevron {
-    width: 10px;
-    height: 10px;
-    border-right: 2px solid currentcolor;
-    border-bottom: 2px solid currentcolor;
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid currentcolor;
+    border-bottom: 1px solid currentcolor;
     margin-top: 0;
+    margin-right:4px;
     transform: rotate(45deg);
   }
 
@@ -792,7 +793,7 @@ header .nav-new-contact:focus-visible {
     position: static;
     min-width: 100%;
     margin: 0;
-    padding: 16px 0px 16px 24px;
+    padding: 16px 0px 16px 8px;
     background: transparent;
     border-radius: 0;
     box-shadow: none;
@@ -810,7 +811,7 @@ header .nav-new-contact:focus-visible {
   header .nav-new-dropdown-link {
     padding: 0;
     background: transparent;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.4;
     font-weight: 400;
     color: #162c55;
