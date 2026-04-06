@@ -792,7 +792,7 @@ header .nav-new-contact:focus-visible {
     position: static;
     min-width: 100%;
     margin: 0;
-    padding-top: 8px;
+    padding: 16px 0px 16px 24px;
     background: transparent;
     border-radius: 0;
     box-shadow: none;
@@ -808,12 +808,13 @@ header .nav-new-contact:focus-visible {
   }
 
   header .nav-new-dropdown-link {
-    padding: 0 0 0 18px;
+    padding: 0;
     background: transparent;
-    font-size: 20px;
-    line-height: 1.35;
+    font-size: 14px;
+    line-height: 1.4;
     font-weight: 400;
     color: #162c55;
+    text-decoration: none;
   }
 
   header .nav-new-dropdown-link.is-featured {
@@ -824,6 +825,7 @@ header .nav-new-contact:focus-visible {
   header .nav-new-dropdown-link:hover,
   header .nav-new-dropdown-link:focus-visible {
     background: transparent;
+    text-decoration: underline;
   }
 
   /* open section accent */
@@ -921,6 +923,6 @@ header .nav-new-contact:focus-visible {
   }
 
   header .nav-new-dropdown-link {
-    font-size: 18px;
+    font-size: 14px;
   }
 }
