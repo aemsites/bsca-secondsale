@@ -183,11 +183,24 @@ header .nav-new-shell {
 }
 
 /* =========================
-   STICKY NAV SHELL (NEW)
+   STICKY NAV SHELL
    Prevent layout jump and make only the shell sticky
 ========================= */
 header .nav-new-wrapper.has-sticky-shell {
   padding-top: 88px;
+}
+
+/* NEW: subtle sticky animation */
+@keyframes stickyShellIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 header .nav-new-shell.is-sticky {
@@ -198,7 +211,9 @@ header .nav-new-shell.is-sticky {
   width: calc(100% - 32px);
   max-width: 1408px;
   z-index: 1000;
-  box-shadow: 0 15px 25px 0 rgba(34,10,51,0.05),0 0 10px 0 rgba(34,10,51,0.05);
+  box-shadow: 0 15px 25px 0 rgba(34, 10, 51, 0.05), 0 0 10px 0 rgba(34, 10, 51, 0.05);
+  animation: stickyShellIn 0.24s ease;
+  will-change: transform, opacity;
 }
 
 /* =========================
@@ -629,10 +644,23 @@ header .nav-new-contact:focus-visible {
   }
 
   /* =========================
-     STICKY NAV - MOBILE (NEW)
+     STICKY NAV - MOBILE
   ========================= */
   header .nav-new-wrapper.has-sticky-shell {
     padding-top: 76px;
+  }
+
+  /* NEW: subtle sticky animation for mobile */
+  @keyframes stickyShellInMobile {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   header .nav-new-shell.is-sticky {
@@ -646,6 +674,8 @@ header .nav-new-contact:focus-visible {
     border-radius: 28px;
     z-index: 1000;
     box-shadow: 0 8px 24px rgb(23 49 107 / 10%);
+    animation: stickyShellInMobile 0.24s ease;
+    will-change: transform, opacity;
   }
 
   header .nav-new-brand-image {
@@ -799,7 +829,7 @@ header .nav-new-contact:focus-visible {
   }
 
   /* =========================
-     STICKY NAV - SMALL MOBILE (NEW)
+     STICKY NAV - SMALL MOBILE
   ========================= */
   header .nav-new-wrapper.has-sticky-shell {
     padding-top: 72px;
