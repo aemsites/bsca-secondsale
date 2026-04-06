@@ -828,35 +828,3 @@ export default async function decorate(block) {
     closeAllDropdowns(block);
   }
 }
-
-/**
- * =========================
- * STICKY NAV SHELL (NEW)
- * Makes ONLY the pill nav sticky after scroll
- * Works on desktop + mobile
-========================= */
-function bindStickyShell(block) {
-  const wrapper = block.querySelector('.nav-new-wrapper');
-  const shell = block.querySelector('.nav-new-shell');
-
-  if (!wrapper || !shell) return;
-
-  const toggleSticky = () => {
-    if (window.scrollY > 36) {
-      // add sticky state
-      shell.classList.add('is-sticky');
-      wrapper.classList.add('has-sticky-shell');
-    } else {
-      // remove sticky state
-      shell.classList.remove('is-sticky');
-      wrapper.classList.remove('has-sticky-shell');
-    }
-  };
-
-  window.addEventListener('scroll', toggleSticky, { passive: true });
-  window.addEventListener('resize', toggleSticky);
-
-  // run on load
-  toggleSticky();
-}
-
