@@ -605,13 +605,9 @@ header .nav-new-contact:focus-visible {
 }
 
 @media (max-width: 899px) {
-  header .nav-new-wrapper {
-    padding: 14px 16px 0;
-  }
-
   header .nav-new-utility {
     min-height: auto;
-    padding: 0 4px 12px;
+    padding: 8px 16px;
     gap: 14px;
   }
 
