@@ -641,8 +641,8 @@ header .nav-new-contact:focus-visible {
 
   header .nav-new-shell {
     height: 76px;
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-left: 40px;
+    padding-right: 30px;
     gap: 16px;
     border-radius: 999px;
   }
@@ -780,7 +780,7 @@ header .nav-new-contact:focus-visible {
     border-right: 1px solid currentcolor;
     border-bottom: 1px solid currentcolor;
     margin-top: 0;
-    margin-right: 4px;
+    margin-right:4px;
     transform: rotate(45deg);
   }
 
@@ -816,9 +816,6 @@ header .nav-new-contact:focus-visible {
     font-weight: 400;
     color: #162c55;
     text-decoration: none;
-    border-bottom: 2px solid transparent;
-    display: inline-block;
-    width: fit-content;
   }
 
   header .nav-new-dropdown-link.is-featured {
@@ -829,23 +826,23 @@ header .nav-new-contact:focus-visible {
   header .nav-new-dropdown-link:hover,
   header .nav-new-dropdown-link:focus-visible {
     background: transparent;
-    text-decoration: none;
-    border-bottom-color: #b3f8ff;
+    text-decoration: underline;
   }
 
-  /* open section accent - text only underline */
-  header .nav-new-item.is-open > .nav-new-dropdown-toggle,
-  header .nav-new-item.is-active > .nav-new-dropdown-toggle {
+  /* open section accent */
+  header .nav-new-item.is-open > .nav-new-dropdown-toggle {
     position: relative;
-    text-decoration: none;
-    border-bottom: 2px solid #b3f8ff;
-    width: fit-content;
-    max-width: 100%;
   }
 
-  header .nav-new-item.is-open > .nav-new-dropdown-toggle::after,
-  header .nav-new-item.is-active > .nav-new-dropdown-toggle::after {
-    display: none;
+  header .nav-new-item.is-open > .nav-new-dropdown-toggle::after {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    width: 140px;
+    height: 4px;
+    background: #b3f8ff;
   }
 
   /* language dropdown stays utility-like */
@@ -893,8 +890,8 @@ header .nav-new-contact:focus-visible {
 
   header .nav-new-shell {
     height: 72px;
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 40px;
+    padding-right: 32px;
   }
 
   header .nav-new-wrapper.has-sticky-shell {
@@ -903,8 +900,8 @@ header .nav-new-contact:focus-visible {
 
   header .nav-new-shell.is-sticky {
     top: 8px;
-    left: 12px;
-    right: 12px;
+    left: 40px;
+    right: 32px;
     width: auto;
   }
 
