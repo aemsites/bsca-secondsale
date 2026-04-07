@@ -137,6 +137,23 @@ function parseUtilitySection(section) {
 
   if (!section) return result;
 
+  const addUtilityItem = (label, href) => {
+    if (!label) return;
+
+    if (/login\/register/i.test(label)) {
+      result.login = {
+        label: 'Log in/Register',
+        href: href === '#' ? LOGIN_FALLBACK_URL : href,
+      };
+      return;
+    }
+
+    const exists = result.links.some((item) => item.label === label && item.href === href);
+    if (!exists) {
+      result.links.push({ label, href });
+    }
+  };
+
   const list = getFirstList(section);
 
   if (list) {
@@ -147,14 +164,6 @@ function parseUtilitySection(section) {
       const label = normalizeText(labelAnchor?.textContent || getDirectTextWithoutNestedList(li));
       const href = getHrefOrFallback(labelAnchor, '#');
       const nestedList = getDirectNestedList(li);
-
-      if (/login\/register/i.test(label)) {
-        result.login = {
-          label: 'Log in/Register',
-          href: href === '#' ? LOGIN_FALLBACK_URL : href,
-        };
-        return;
-      }
 
       if (nestedList && /english|language/i.test(label)) {
         const options = getDirectListItems(nestedList)
@@ -174,10 +183,33 @@ function parseUtilitySection(section) {
         return;
       }
 
-      if (label) {
-        result.links.push({ label, href });
-      }
+      addUtilityItem(label, href);
     });
+
+    // NEW: also scan for standalone anchors outside lists.
+    // This catches authored links like :profile:Login/Register
+    // that appear below the language list in the same utility section.
+    [...section.querySelectorAll('a')]
+      .filter((anchor) => !anchor.closest('ul, ol'))
+      .forEach((anchor) => {
+        const label = normalizeText(anchor.textContent);
+        const href = getHrefOrFallback(anchor, '#');
+        addUtilityItem(label, href);
+      });
+
+    // NEW: fallback for standalone text-only paragraphs outside lists.
+    // Useful if Login/Register is authored as plain text before it becomes a link.
+    [...section.querySelectorAll('p')]
+      .filter((p) => !p.closest('ul, ol') && !p.querySelector('a'))
+      .forEach((p) => {
+        const label = normalizeText(p.textContent);
+        if (/login\/register/i.test(label) && !result.login) {
+          result.login = {
+            label: 'Log in/Register',
+            href: LOGIN_FALLBACK_URL,
+          };
+        }
+      });
   } else {
     const anchors = [...section.querySelectorAll('a')].map((anchor) => ({
       label: normalizeText(anchor.textContent),
