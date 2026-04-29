@@ -117,6 +117,16 @@ function isSpanishLabel(label = '') {
   return /^(español|spanish)$/i.test(normalizeText(label));
 }
 
+function getBooleanMetadata(name) {
+  const value = normalizeText(getMetadata(name) || '');
+
+  if (!value) return null;
+  if (/^(yes|true|1|on)$/i.test(value)) return true;
+  if (/^(no|false|0|off)$/i.test(value)) return false;
+
+  return null;
+}
+
 /**
  * Parse utility section.
  * Supports:
@@ -186,7 +196,7 @@ function parseUtilitySection(section) {
       addUtilityItem(label, href);
     });
 
-    // NEW: also scan for standalone anchors outside lists.
+    // Also scan for standalone anchors outside lists.
     // This catches authored links like :profile:Login/Register
     // that appear below the language list in the same utility section.
     [...section.querySelectorAll('a')]
@@ -197,8 +207,7 @@ function parseUtilitySection(section) {
         addUtilityItem(label, href);
       });
 
-    // NEW: fallback for standalone text-only paragraphs outside lists.
-    // Useful if Login/Register is authored as plain text before it becomes a link.
+    // Fallback for standalone text-only paragraphs outside lists.
     [...section.querySelectorAll('p')]
       .filter((p) => !p.closest('ul, ol') && !p.querySelector('a'))
       .forEach((p) => {
@@ -388,6 +397,32 @@ function parseNavFragment(fragment) {
   };
 }
 
+function applyUtilityMetadataToggles(data) {
+  const nextData = {
+    ...data,
+    utility: {
+      ...(data.utility || {}),
+      links: [...(data.utility?.links || [])],
+    },
+  };
+
+  const showLanguage = getBooleanMetadata('nav-show-language');
+  const showLogin = getBooleanMetadata('nav-show-login');
+
+  if (showLanguage === false) {
+    nextData.utility.language = null;
+    nextData.utility.links = nextData.utility.links.filter(
+      (item) => !isEnglishLabel(item.label) && !isSpanishLabel(item.label),
+    );
+  }
+
+  if (showLogin === false) {
+    nextData.utility.login = null;
+  }
+
+  return nextData;
+}
+
 function buildLanguageControl(languageData) {
   if (!languageData?.label) return null;
 
@@ -453,10 +488,16 @@ function buildUtilityRow(data) {
   const left = createTag('div', { class: 'nav-new-utility-left' });
   const right = createTag('div', { class: 'nav-new-utility-right' });
 
-  const languageControl = buildLanguageControl(data.utility.language);
+  const utilityData = data.utility || {
+    language: null,
+    login: null,
+    links: [],
+  };
+
+  const languageControl = buildLanguageControl(utilityData.language);
   if (languageControl) left.append(languageControl);
 
-  data.utility.links.forEach((item) => {
+  utilityData.links.forEach((item) => {
     const link = createTag(
       'a',
       {
@@ -468,16 +509,20 @@ function buildUtilityRow(data) {
     left.append(link);
   });
 
-  if (data.utility.login) {
+  if (utilityData.login) {
     const login = createTag(
       'a',
       {
-        href: data.utility.login.href || LOGIN_FALLBACK_URL,
+        href: utilityData.login.href || LOGIN_FALLBACK_URL,
         class: 'nav-new-login',
       },
       '<span class="nav-new-login-icon" aria-hidden="true"></span><span>Log in/Register</span>',
     );
     right.append(login);
+  }
+
+  if (!left.childElementCount && !right.childElementCount) {
+    return null;
   }
 
   row.append(left, right);
@@ -853,7 +898,12 @@ function buildHeader(block, data) {
   const hamburger = buildHamburger();
 
   shell.append(brand, main, hamburger);
-  wrapper.append(utility, shell);
+
+  if (utility) {
+    wrapper.append(utility);
+  }
+
+  wrapper.append(shell);
 
   block.textContent = '';
   block.append(wrapper);
@@ -868,7 +918,8 @@ export default async function decorate(block) {
     return;
   }
 
-  const data = parseNavFragment(fragment);
+  const parsedData = parseNavFragment(fragment);
+  const data = applyUtilityMetadataToggles(parsedData);
 
   buildHeader(block, data);
   setCurrentState(block);
