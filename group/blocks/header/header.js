@@ -427,11 +427,11 @@ function applyUtilityMetadataToggles(data) {
   return nextData;
 }
 
-function shouldEnableStickyShell(data) {
+function shouldForceStickyShell(data) {
   const showLanguage = data.utilitySettings?.showLanguage;
   const showLogin = data.utilitySettings?.showLogin;
 
-  return !(showLanguage === false && showLogin === false);
+  return showLanguage === false && showLogin === false;
 }
 
 function buildLanguageControl(languageData) {
@@ -813,11 +813,17 @@ function toggleMobileMenu(block) {
    Makes only .nav-new-shell sticky after 36px scroll
    Works on desktop and mobile
 ========================= */
-function bindStickyShell(block) {
+function bindStickyShell(block, forceSticky = false) {
   const wrapper = block.querySelector('.nav-new-wrapper');
   const shell = block.querySelector('.nav-new-shell');
 
   if (!wrapper || !shell) return;
+
+  if (forceSticky) {
+    shell.classList.add('is-sticky');
+    wrapper.classList.add('has-sticky-shell');
+    return;
+  }
 
   const toggleSticky = () => {
     if (window.scrollY > 36) {
@@ -936,9 +942,7 @@ export default async function decorate(block) {
   setCurrentState(block);
   bindEvents(block);
 
-  if (shouldEnableStickyShell(data)) {
-    bindStickyShell(block);
-  }
+  bindStickyShell(block, shouldForceStickyShell(data));
 
   if (!DESKTOP.matches) {
     closeMobileMenu(block);
