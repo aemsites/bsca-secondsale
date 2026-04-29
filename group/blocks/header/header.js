@@ -398,16 +398,20 @@ function parseNavFragment(fragment) {
 }
 
 function applyUtilityMetadataToggles(data) {
+  const showLanguage = getBooleanMetadata('nav-show-language');
+  const showLogin = getBooleanMetadata('nav-show-login');
+
   const nextData = {
     ...data,
     utility: {
       ...(data.utility || {}),
       links: [...(data.utility?.links || [])],
     },
+    utilitySettings: {
+      showLanguage,
+      showLogin,
+    },
   };
-
-  const showLanguage = getBooleanMetadata('nav-show-language');
-  const showLogin = getBooleanMetadata('nav-show-login');
 
   if (showLanguage === false) {
     nextData.utility.language = null;
@@ -421,6 +425,13 @@ function applyUtilityMetadataToggles(data) {
   }
 
   return nextData;
+}
+
+function shouldEnableStickyShell(data) {
+  const showLanguage = data.utilitySettings?.showLanguage;
+  const showLogin = data.utilitySettings?.showLogin;
+
+  return !(showLanguage === false && showLogin === false);
 }
 
 function buildLanguageControl(languageData) {
@@ -798,7 +809,7 @@ function toggleMobileMenu(block) {
 }
 
 /* =========================
-   STICKY NAV SHELL (NEW)
+   STICKY NAV SHELL
    Makes only .nav-new-shell sticky after 36px scroll
    Works on desktop and mobile
 ========================= */
@@ -925,10 +936,9 @@ export default async function decorate(block) {
   setCurrentState(block);
   bindEvents(block);
 
-  /* =========================
-     STICKY NAV INIT (NEW)
-  ========================= */
-  bindStickyShell(block);
+  if (shouldEnableStickyShell(data)) {
+    bindStickyShell(block);
+  }
 
   if (!DESKTOP.matches) {
     closeMobileMenu(block);
