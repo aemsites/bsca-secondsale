@@ -223,3 +223,54 @@
   }
 
 }
+
+/* Two-card size variants
+   Use in Section Metadata:
+   Style | two-cards-med
+   Style | two-cards-lg
+*/
+
+/* Keep the medium and large two-card variants stacked below desktop */
+@media (width >= 600px) {
+  .section.two-cards-med .cards > ul,
+  .section.two-cards-lg .cards > ul {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .section.two-cards-med .cards > ul > li,
+  .section.two-cards-lg .cards > ul > li {
+    width: 100%;
+  }
+}
+
+/* Desktop layouts */
+@media (width >= 900px) {
+  .section.two-cards-med .cards > ul,
+  .section.two-cards-lg .cards > ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  /* Medium: wider than default cards, but still capped */
+  .section.two-cards-med .cards > ul {
+    justify-content: center;
+  }
+
+  .section.two-cards-med .cards > ul > li {
+    width: calc(45% - 12px);
+    max-width: 560px;
+  }
+
+  /* Large: full two-column layout */
+  .section.two-cards-lg .cards > ul {
+    justify-content: space-between;
+  }
+
+  .section.two-cards-lg .cards > ul > li {
+    width: calc(50% - 12px);
+    max-width: none;
+  }
+}
+
