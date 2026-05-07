@@ -229,15 +229,16 @@
    Style | two-cards-lg
 */
 
-/* Keep medium and large two-card variants stacked below desktop */
+/* Keep medium and large variants stacked below desktop */
 @media (width < 900px) {
-  .two-cards-med.cards-container .cards > ul,
-  .two-cards-lg.cards-container .cards > ul {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul,
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul {
     flex-direction: column;
+    align-items: stretch;
   }
 
-  .two-cards-med.cards-container .cards > ul > li,
-  .two-cards-lg.cards-container .cards > ul > li {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul > li,
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul > li {
     width: 100%;
     flex: 0 1 100%;
     max-width: none;
@@ -245,30 +246,42 @@
   }
 }
 
-/* Desktop two-card variants */
+/* Desktop layouts */
 @media (width >= 900px) {
-  .two-cards-med.cards-container .cards > ul,
-  .two-cards-lg.cards-container .cards > ul {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul,
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul {
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
   }
 
-  .two-cards-med.cards-container .cards > ul > li,
-  .two-cards-lg.cards-container .cards > ul > li {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul > li,
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul > li {
     box-sizing: border-box;
   }
 
   /* Medium: wider than default, but capped */
-  .two-cards-med.cards-container .cards > ul > li {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul {
+    justify-content: center;
+  }
+
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul > li {
     width: calc((100% - 24px) / 2);
-    flex: 0 1 560px;
+    flex: 0 1 calc((100% - 24px) / 2);
     max-width: 560px;
   }
 
   /* Large: true 50/50 two-column cards */
-  .two-cards-lg.cards-container .cards > ul > li {
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul {
+    justify-content: space-between;
+  }
+
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul > li {
     width: calc((100% - 24px) / 2);
     flex: 0 1 calc((100% - 24px) / 2);
     max-width: none;
   }
 }
+
