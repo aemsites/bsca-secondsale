@@ -218,8 +218,57 @@
 
   /* variant for space-evenly layout */
   .section.two-cards.space-evenly .cards > ul {
-  flex-wrap: wrap; 
-  justify-content: space-evenly;
+    flex-wrap: wrap; 
+    justify-content: space-evenly;
+  }
+}
+
+/* Two-card size variants
+   Use in Section Metadata:
+   Style | two-cards-med
+   Style | two-cards-lg
+*/
+
+/* Keep medium and large two-card variants stacked below desktop */
+@media (width < 900px) {
+  .two-cards-med.cards-container .cards > ul,
+  .two-cards-lg.cards-container .cards > ul {
+    flex-direction: column;
   }
 
+  .two-cards-med.cards-container .cards > ul > li,
+  .two-cards-lg.cards-container .cards > ul > li {
+    width: 100%;
+    flex: 0 1 100%;
+    max-width: none;
+    box-sizing: border-box;
+  }
+}
+
+/* Desktop two-card variants */
+@media (width >= 900px) {
+  .two-cards-med.cards-container .cards > ul,
+  .two-cards-lg.cards-container .cards > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .two-cards-med.cards-container .cards > ul > li,
+  .two-cards-lg.cards-container .cards > ul > li {
+    box-sizing: border-box;
+  }
+
+  /* Medium: wider than default, but capped */
+  .two-cards-med.cards-container .cards > ul > li {
+    width: calc((100% - 24px) / 2);
+    flex: 0 1 560px;
+    max-width: 560px;
+  }
+
+  /* Large: true 50/50 two-column cards */
+  .two-cards-lg.cards-container .cards > ul > li {
+    width: calc((100% - 24px) / 2);
+    flex: 0 1 calc((100% - 24px) / 2);
+    max-width: none;
+  }
 }
