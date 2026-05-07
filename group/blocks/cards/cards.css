@@ -230,46 +230,51 @@
    Style | two-cards-lg
 */
 
-/* Keep the medium and large two-card variants stacked below desktop */
-@media (width >= 600px) {
-  .section.two-cards-med .cards > ul,
-  .section.two-cards-lg .cards > ul {
+/* Keep medium and large variants stacked below desktop */
+@media (width < 900px) {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul,
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .section.two-cards-med .cards > ul > li,
-  .section.two-cards-lg .cards > ul > li {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul > li,
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul > li {
     width: 100%;
+    flex-basis: 100%;
+    max-width: none;
   }
 }
 
 /* Desktop layouts */
 @media (width >= 900px) {
-  .section.two-cards-med .cards > ul,
-  .section.two-cards-lg .cards > ul {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul,
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: stretch;
   }
 
-  /* Medium: wider than default cards, but still capped */
-  .section.two-cards-med .cards > ul {
+  /* Medium: wider than default, but not full-width */
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul {
     justify-content: center;
   }
 
-  .section.two-cards-med .cards > ul > li {
+  .two-cards-med.cards-container .cards-wrapper > .cards > ul > li {
     width: calc(45% - 12px);
+    flex: 0 1 calc(45% - 12px);
     max-width: 560px;
   }
 
-  /* Large: full two-column layout */
-  .section.two-cards-lg .cards > ul {
+  /* Large: true 50/50 two-column cards */
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul {
     justify-content: space-between;
   }
 
-  .section.two-cards-lg .cards > ul > li {
+  .two-cards-lg.cards-container .cards-wrapper > .cards > ul > li {
     width: calc(50% - 12px);
+    flex: 0 1 calc(50% - 12px);
     max-width: none;
   }
 }
