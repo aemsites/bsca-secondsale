@@ -106,7 +106,7 @@
 .cards:not(.no-border) > ul > li:not(.no-border) {
   border: 1px solid #dadada;
   background-color: var(--background-color);
-  border-radius: .5rem;
+  border-radius: 1rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   overflow: hidden;
 }
