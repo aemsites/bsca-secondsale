@@ -16,7 +16,7 @@
 }
 
 .cards .cards-card-body {
-  margin: var(--spacing-l);
+  margin: var(--spacing-xl);
 }
 
 .cards.list .cards-card-body {
