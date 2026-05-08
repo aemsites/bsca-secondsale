@@ -218,7 +218,7 @@
 
   /* variant for space-evenly layout */
   .section.two-cards.space-evenly .cards > ul {
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: space-evenly;
   }
 }
@@ -253,13 +253,19 @@
 .two-cards-lg.cards-container .cards .cards-card-body > p:last-child:has(.icon):has(a) {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--spacing-xs);
   min-height: 70px;
   margin: auto calc(var(--spacing-xl) * -1) calc(var(--spacing-xl) * -1);
   padding: 0 var(--spacing-xl);
   background-color: #fbf9f7;
   box-sizing: border-box;
+}
+
+/* Adds minimum spacing above the bottom CTA row */
+.two-cards-med.cards-container .cards .cards-card-body > :has(+ p:last-child:has(.icon):has(a)),
+.two-cards-lg.cards-container .cards .cards-card-body > :has(+ p:last-child:has(.icon):has(a)) {
+  margin-bottom: 32px;
 }
 
 /* Keep medium and large two-card variants stacked below desktop */
