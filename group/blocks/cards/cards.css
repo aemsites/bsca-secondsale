@@ -254,7 +254,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-l);
   min-height: 102px;
   margin: auto calc(var(--spacing-xl) * -1) calc(var(--spacing-xl) * -1);
   padding: 32px var(--spacing-xl) 0;
