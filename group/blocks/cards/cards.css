@@ -229,6 +229,39 @@
    Style | two-cards-lg
 */
 
+/* Shared card structure for medium and large two-card variants */
+.two-cards-med.cards-container .cards > ul > li,
+.two-cards-lg.cards-container .cards > ul > li {
+  display: flex;
+  flex-direction: column;
+}
+
+.two-cards-med.cards-container .cards .cards-card-body,
+.two-cards-lg.cards-container .cards .cards-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+/* Bottom CTA row
+   Author as the last item in the card with an icon and a link.
+   Example:
+   :video-camera:
+   See how an HMO plan works
+*/
+.two-cards-med.cards-container .cards .cards-card-body > p:last-child:has(.icon):has(a),
+.two-cards-lg.cards-container .cards .cards-card-body > p:last-child:has(.icon):has(a) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-height: 70px;
+  margin: auto calc(var(--spacing-xl) * -1) calc(var(--spacing-xl) * -1);
+  padding: 0 var(--spacing-xl);
+  background-color: #fbf9f7;
+  box-sizing: border-box;
+}
+
 /* Keep medium and large two-card variants stacked below desktop */
 @media (width < 900px) {
   .two-cards-med.cards-container .cards > ul,
