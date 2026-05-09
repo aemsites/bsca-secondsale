@@ -322,3 +322,10 @@
   margin: 0 0 6px;
   line-height: 0;
 }
+
+/* Remove top margin from first paragraph after h2 */
+.cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
+  .cards-card-body h2 + p {
+  margin-top: 0;
+}
+
