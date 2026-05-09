@@ -329,3 +329,11 @@
   margin-top: 0;
 }
 
+
+/* Remove top margin from paragraph after h4 */
+.cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
+  .cards-card-body h4 + p {
+  margin-top: 0;
+}
+
+
