@@ -305,3 +305,20 @@
     max-width: none;
   }
 }
+
+/* ==========================================================================
+   Two-card variants – compact spacing system
+   ========================================================================== */
+
+/* Remove default h2 spacing inside card bodies */
+.cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
+  .cards-card-body h2 {
+  margin: 0;
+}
+
+/* Tighten spacing between icon and heading */
+.cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
+  .cards-card-body p:first-child {
+  margin: 0 0 6px;
+  line-height: 0;
+}
