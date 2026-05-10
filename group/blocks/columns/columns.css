@@ -278,6 +278,7 @@
   border-radius: 1rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   overflow: hidden; /* IMPORTANT: enables clean rounded header */
+  padding-top:0;
 }
 
 /* Force single-column layout on desktop */
@@ -286,7 +287,7 @@
     flex-direction: column;
     align-items: stretch;
     margin: 0;
-    padding: 16px 32px;
+    padding: 0px 32px;
   }
 
   .columns.single-coo > div > div {
@@ -319,10 +320,6 @@
 }
 
 /* ===== BODY SPACING ===== */
-
-.columns.single-coo > div > div {
-  padding-top: 24px; /* creates breathing room below header */
-}
 
 .columns.single-coo p {
   margin-top: 0rem;
