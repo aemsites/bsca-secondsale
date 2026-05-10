@@ -287,3 +287,13 @@
     width: 100%;              /* each item takes full width */
   }
 }
+
+.columns.single-coo p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.columns.single-coo h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
