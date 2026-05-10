@@ -285,6 +285,8 @@
   .columns.single-coo > div {
     flex-direction: column;   /* stack items vertically */
     align-items: stretch;     /* make them full width */
+    margin: 0;
+    padding: 16px 32px;
   }
 
   .columns.single-coo > div > div {
