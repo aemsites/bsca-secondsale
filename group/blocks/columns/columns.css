@@ -271,28 +271,57 @@
 
 /* Constrain width + center the block */
 .columns.single-coo {
-  max-width: 1100px;   /* adjust this to your preferred width */
+  max-width: 1100px;
   margin: 6rem auto;
   border: 1px solid #dadada;
   background-color: var(--background-color);
   border-radius: 1rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
-  overflow: hidden;
+  overflow: hidden; /* IMPORTANT: enables clean rounded header */
 }
 
 /* Force single-column layout on desktop */
 @media (width >= 900px) {
   .columns.single-coo > div {
-    flex-direction: column;   /* stack items vertically */
-    align-items: stretch;     /* make them full width */
+    flex-direction: column;
+    align-items: stretch;
     margin: 0;
     padding: 16px 32px;
   }
 
   .columns.single-coo > div > div {
-    flex: unset;              /* remove column sizing behavior */
-    width: 100%;              /* each item takes full width */
+    flex: unset;
+    width: 100%;
   }
+}
+
+/* ===== HEADER BAR (NEW) ===== */
+
+/* Turn H1 into full-width card header */
+.columns.single-coo h1 {
+  background-color: #0071bc;
+  color: #ffffff;
+
+  padding: 32px;
+  margin: 0;
+
+  width: 100%;
+  display: block;
+
+  /* Break out of parent padding (32px) */
+  margin-left: -32px;
+  margin-right: -32px;
+
+  /* Optional polish */
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ===== BODY SPACING ===== */
+
+.columns.single-coo > div > div {
+  padding-top: 24px; /* creates breathing room below header */
 }
 
 .columns.single-coo p {
@@ -310,6 +339,7 @@
   margin-bottom: 0rem;
 }
 
-.columns.single-coo > div > div h3{
+.columns.single-coo > div > div h3 {
   margin-top: 0rem;
 }
+
