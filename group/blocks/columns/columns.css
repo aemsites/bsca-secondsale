@@ -266,3 +266,24 @@
     margin-bottom: 0;
   }
 }
+
+/* CUSTOM CSS FOR COUNTY OF ORANGE */
+
+/* Constrain width + center the block */
+.columns.single-coo {
+  max-width: 1100px;   /* adjust this to your preferred width */
+  margin: 0 auto;
+}
+
+/* Force single-column layout on desktop */
+@media (width >= 900px) {
+  .columns.single-coo > div {
+    flex-direction: column;   /* stack items vertically */
+    align-items: stretch;     /* make them full width */
+  }
+
+  .columns.single-coo > div > div {
+    flex: unset;              /* remove column sizing behavior */
+    width: 100%;              /* each item takes full width */
+  }
+}
