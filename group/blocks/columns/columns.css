@@ -272,7 +272,12 @@
 /* Constrain width + center the block */
 .columns.single-coo {
   max-width: 1100px;   /* adjust this to your preferred width */
-  margin: 0 auto;
+  margin: 6rem auto;
+  border: 1px solid #dadada;
+  background-color: var(--background-color);
+  border-radius: 1rem;
+  box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
+  overflow: hidden;
 }
 
 /* Force single-column layout on desktop */
