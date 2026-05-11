@@ -500,30 +500,3 @@ p sup {
     width: 100%;
   }
 }
-
-/* Ensure flex container can push items to edges */
-/* Override base nav layout to push logos apart */
-header .nav-brand div:first-of-type {
-  justify-content: space-between;
-}
-
-/* Add COO logo as a flex item (scoped to COO pages only) */
-body:has(.columns.single-coo) header .nav-brand div:first-of-type::after {
-  content: "";
-  width: 48px;
-  height: 48px;
-
-  background-image: url('https://form--bsca-secondsale--aemsites.aem.page/group/icons/coo_logo.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  flex-shrink: 0;
-}
-
-/* Responsive size adjustment */
-@media (max-width: 768px) {
-  body:has(.columns.single-coo) header .nav-brand div:first-of-type::after {
-    width: 32px;
-    height: 32px;
-  }
-}
