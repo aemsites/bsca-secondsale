@@ -502,13 +502,13 @@ p sup {
 }
 
 /* STYLES FOR COO PAGE */
-/* Make sure header-block can position elements */
-.header-block {
+/* Ensure header can anchor positioned elements */
+header {
   position: relative;
 }
 
-/* Add COO logo ONLY on COO pages */
-body:has(.columns.single-coo) .header-block::after {
+/* Add COO logo ONLY on pages with single-coo */
+body:has(.columns.single-coo) header::after {
   content: "";
   position: absolute;
 
@@ -526,9 +526,10 @@ body:has(.columns.single-coo) .header-block::after {
 }
 
 @media (max-width: 768px) {
-  body:has(.columns.single-coo) .header-block::after {
+  body:has(.columns.single-coo) header::after {
     width: 32px;
     height: 32px;
     right: 16px;
   }
 }
+
