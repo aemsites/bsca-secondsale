@@ -501,20 +501,14 @@ p sup {
   }
 }
 
-/* STYLES FOR COO PAGE */
-/* Ensure header can anchor positioned elements */
-header {
-  position: relative;
+/* Ensure flex container can push items to edges */
+header .nav-brand .default-content-wrapper {
+  justify-content: space-between;
 }
 
-/* Add COO logo ONLY on pages with single-coo */
-body:has(.columns.single-coo) header::after {
+/* Add COO logo as a flex item */
+body:has(.columns.single-coo) header .nav-brand .default-content-wrapper::after {
   content: "";
-  position: absolute;
-
-  top: 50%;
-  right: 24px;
-  transform: translateY(-50%);
 
   width: 48px;
   height: 48px;
@@ -523,13 +517,12 @@ body:has(.columns.single-coo) header::after {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
-  body:has(.columns.single-coo) header::after {
+  body:has(.columns.single-coo) header .nav-brand .default-content-wrapper::after {
     width: 32px;
     height: 32px;
-    right: 16px;
   }
 }
-
