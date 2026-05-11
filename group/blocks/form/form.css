@@ -8,6 +8,10 @@
   max-width: 540px;
 }
 
+.form-wrapper {
+  max-width: 1100px;
+}
+
 .form-block {
   display: flex;
   flex-direction: column;
