@@ -40,7 +40,7 @@ main > .section.form-container > .form-wrapper {
   line-height: 1.4;
 }
 
-.form-field input[type='text'] {
+.form-field input[type='text'], .form-field input[type='email'] {
   display: flex;
   width: 100%;
   height: 64px;
