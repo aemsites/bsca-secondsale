@@ -3,6 +3,9 @@ export default function decorate(block) {
   const endpointLink = block.querySelector('a');
   const endpoint = endpointLink?.href || block.textContent.trim();
 
+  // TODO: Update this URL once the confirmation page is live in EDS
+  const confirmationPageUrl = '/non-smoker-attestation-confirmation';
+
   // Clear authored content once we have what we need
   block.textContent = '';
 
@@ -17,52 +20,64 @@ export default function decorate(block) {
       <label class="form-checkbox-label">
         <input
           type="checkbox"
-          name="nonSmokerDeclaration"
-          id="nonSmokerDeclaration"
+          name="Declaration"
+          id="Declaration"
           required
         />
         <span>I hereby declare under the penalty of perjury that I meet the Non-Smoker criteria above. <span class="required">*</span></span>
       </label>
-      <div class="field-error" id="error-nonSmokerDeclaration"></div>
+      <div class="field-error" id="error-Declaration"></div>
     </div>
 
     <div class="form-field">
-      <label for="lastName">Subscriber Last Name <span class="required">*</span></label>
+      <label for="EmailAddress">Email Address <span class="required">*</span></label>
+      <input
+        type="email"
+        id="EmailAddress"
+        name="EmailAddress"
+        required
+        autocomplete="email"
+      />
+      <div class="field-error" id="error-EmailAddress"></div>
+    </div>
+
+    <div class="form-field">
+      <label for="SubscriberLastName">Subscriber Last Name <span class="required">*</span></label>
       <input
         type="text"
-        id="lastName"
-        name="lastName"
+        id="SubscriberLastName"
+        name="SubscriberLastName"
         required
         autocomplete="family-name"
       />
-      <div class="field-error" id="error-lastName"></div>
+      <div class="field-error" id="error-SubscriberLastName"></div>
     </div>
 
     <div class="form-field">
-      <label for="birthYear">Subscriber Year of Birth <span class="required">*</span></label>
+      <label for="SubscriberYearofBirth">Subscriber Year of Birth <span class="required">*</span></label>
       <input
         type="text"
-        id="birthYear"
-        name="birthYear"
+        id="SubscriberYearofBirth"
+        name="SubscriberYearofBirth"
         inputmode="numeric"
         maxlength="4"
         required
       />
-      <div class="field-error" id="error-birthYear"></div>
+      <div class="field-error" id="error-SubscriberYearofBirth"></div>
     </div>
 
     <div class="form-field">
-      <label for="referenceNumber">
+      <label for="ref_number">
         Reference Number: (Example: RN1234; this is not case sensitive)
         <span class="required">*</span>
       </label>
       <input
         type="text"
-        id="referenceNumber"
-        name="referenceNumber"
+        id="ref_number"
+        name="ref_number"
         required
       />
-      <div class="field-error" id="error-referenceNumber"></div>
+      <div class="field-error" id="error-ref_number"></div>
     </div>
 
     <!-- Honeypot -->
@@ -96,46 +111,67 @@ export default function decorate(block) {
   }
 
   function clearErrors() {
-    ['nonSmokerDeclaration', 'lastName', 'birthYear', 'referenceNumber'].forEach((field) => {
+    ['Declaration', 'EmailAddress', 'SubscriberLastName', 'SubscriberYearofBirth', 'ref_number'].forEach((field) => {
       setFieldError(field, '');
     });
     messageEl.textContent = '';
     messageEl.classList.remove('is-error', 'is-success');
   }
 
+  function formatSubmissionDate(date) {
+    return date.toLocaleString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+  }
+
   function validateForm() {
     clearErrors();
     let isValid = true;
 
-    const nonSmokerDeclaration = form.nonSmokerDeclaration.checked;
-    const lastName = form.lastName.value.trim();
-    const birthYear = form.birthYear.value.trim();
-    const referenceNumber = form.referenceNumber.value.trim();
+    const declaration = form.Declaration.checked;
+    const emailAddress = form.EmailAddress.value.trim();
+    const subscriberLastName = form.SubscriberLastName.value.trim();
+    const subscriberYearofBirth = form.SubscriberYearofBirth.value.trim();
+    const refNumber = form.ref_number.value.trim();
 
-    if (!nonSmokerDeclaration) {
-      setFieldError('nonSmokerDeclaration', 'Please confirm the declaration.');
+    if (!declaration) {
+      setFieldError('Declaration', 'Please confirm the declaration.');
       isValid = false;
     }
 
-    if (!lastName) {
-      setFieldError('lastName', 'Last name is required.');
+    if (!emailAddress) {
+      setFieldError('EmailAddress', 'Email address is required.');
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress)) {
+      setFieldError('EmailAddress', 'Please enter a valid email address.');
       isValid = false;
     }
 
-    if (!/^\d{4}$/.test(birthYear)) {
-      setFieldError('birthYear', 'Enter a valid 4-digit birth year.');
+    if (!subscriberLastName) {
+      setFieldError('SubscriberLastName', 'Last name is required.');
+      isValid = false;
+    }
+
+    if (!/^\d{4}$/.test(subscriberYearofBirth)) {
+      setFieldError('SubscriberYearofBirth', 'Enter a valid 4-digit birth year.');
       isValid = false;
     } else {
-      const year = Number(birthYear);
+      const year = Number(subscriberYearofBirth);
       const currentYear = new Date().getFullYear();
       if (year < 1900 || year > currentYear) {
-        setFieldError('birthYear', 'Enter a reasonable birth year.');
+        setFieldError('SubscriberYearofBirth', 'Enter a reasonable birth year.');
         isValid = false;
       }
     }
 
-    if (!referenceNumber) {
-      setFieldError('referenceNumber', 'Reference number is required.');
+    if (!refNumber) {
+      setFieldError('ref_number', 'Reference number is required.');
       isValid = false;
     }
 
@@ -164,13 +200,12 @@ export default function decorate(block) {
     submitButton.textContent = 'Submitting...';
 
     const payload = {
-      formName: 'non-smoker-attestation',
-      submittedAt: new Date().toISOString(),
-      pageUrl: window.location.href,
-      nonSmokerDeclaration: form.nonSmokerDeclaration.checked,
-      lastName: form.lastName.value.trim(),
-      birthYear: form.birthYear.value.trim(),
-      referenceNumber: form.referenceNumber.value.trim().toUpperCase(),
+      Declaration: form.Declaration.checked,
+      EmailAddress: form.EmailAddress.value.trim(),
+      'Subscriber Last Name': form.SubscriberLastName.value.trim(),
+      'Subscriber Year of Birth': form.SubscriberYearofBirth.value.trim(),
+      ref_number: form.ref_number.value.trim().toUpperCase(),
+      'Submission Date': formatSubmissionDate(new Date()),
     };
 
     try {
@@ -186,21 +221,16 @@ export default function decorate(block) {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      form.reset();
-      clearErrors();
-      messageEl.textContent = 'Thank you. Your form has been submitted.';
-      messageEl.classList.add('is-success');
+      window.location.href = confirmationPageUrl;
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Form submission error:', error);
       messageEl.textContent = 'Sorry, something went wrong. Please try again.';
       messageEl.classList.add('is-error');
-    } finally {
       submitButton.disabled = false;
       submitButton.textContent = 'Submit';
     }
   }
 
   form.addEventListener('submit', handleSubmit);
-}
-
+}// JavaScript Document
