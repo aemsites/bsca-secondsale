@@ -502,14 +502,14 @@ p sup {
 }
 
 /* Ensure flex container can push items to edges */
-header .nav-brand .default-content-wrapper {
+/* Override base nav layout to push logos apart */
+header .nav-brand div:first-of-type {
   justify-content: space-between;
 }
 
-/* Add COO logo as a flex item */
-body:has(.columns.single-coo) header .nav-brand .default-content-wrapper::after {
+/* Add COO logo as a flex item (scoped to COO pages only) */
+body:has(.columns.single-coo) header .nav-brand div:first-of-type::after {
   content: "";
-
   width: 48px;
   height: 48px;
 
@@ -520,8 +520,9 @@ body:has(.columns.single-coo) header .nav-brand .default-content-wrapper::after 
   flex-shrink: 0;
 }
 
+/* Responsive size adjustment */
 @media (max-width: 768px) {
-  body:has(.columns.single-coo) header .nav-brand .default-content-wrapper::after {
+  body:has(.columns.single-coo) header .nav-brand div:first-of-type::after {
     width: 32px;
     height: 32px;
   }
