@@ -273,12 +273,12 @@
 .columns.single-coo {
   max-width: 1100px;
   margin: 6rem auto;
-  border: 1px solid #dadada;
   background-color: var(--background-color);
   border-radius: 1rem;
-  box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   overflow: hidden; /* IMPORTANT: enables clean rounded header */
   padding-top:0;
+  border: 1px solid #F7F7F7;
+  box-shadow: 0 2px 10px 0 rgba(34, 10, 51, 0.04), 0 8px 20px 0 rgba(34, 10, 51, 0.04);
 }
 
 /* Force single-column layout on desktop */
