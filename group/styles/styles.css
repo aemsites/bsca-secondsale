@@ -482,8 +482,6 @@ p sup {
   padding: 6px 24px 10px !important;
 }
 
-/* Pop-Up Banner */
-
 /* OneTrust Preferences Center typography overrides */
 #onetrust-pc-sdk h2#ot-pc-title,
 #onetrust-pc-sdk div#ot-pc-desc,
@@ -501,5 +499,36 @@ p sup {
   .onetrust-btn {
     width: 100%;
   }
+}
 
+/* STYLES FOR COO PAGE */
+/* Ensure header can position the COO logo */
+header {
+  position: relative;
+}
+
+/* Add COO logo ONLY on pages with single-coo */
+body:has(.columns.single-coo) header::after {
+  content: "";
+  position: absolute;
+
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+
+  width: 48px;
+  height: 48px;
+
+  background-image: url('https://form--bsca-secondsale--aemsites.aem.page/group/icons/coo_logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  body:has(.columns.single-coo) header::after {
+    width: 32px;
+    height: 32px;
+    right: 16px;
+  }
 }
