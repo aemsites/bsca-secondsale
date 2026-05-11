@@ -118,6 +118,7 @@ main > .section.form-container > .form-wrapper {
   font-weight: 500;
   border-radius: 8px;
   padding: 0;
+  display:none;
 }
 
 .form-message.is-success {
