@@ -307,7 +307,10 @@
   margin: 0;
 
   width: 100%;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 
   /* Break out of parent padding (32px) */
   margin-left: -32px;
@@ -317,6 +320,22 @@
   text-align: center;
   font-weight: 700;
   letter-spacing: 0.5px;
+}
+
+/* Add secondary logo to the left of the H1 text */
+.columns.single-coo h1::before {
+  content: "";
+  display: inline-block;
+
+  width: 56px;
+  height: 56px;
+
+  background-image: url("/group/icons/coo_logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  flex: 0 0 auto;
 }
 
 /* ===== BODY SPACING ===== */
@@ -335,3 +354,4 @@
   margin-top: 2rem;
   margin-bottom: 0rem;
 }
+
