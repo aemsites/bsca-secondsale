@@ -15,7 +15,7 @@ main > .section.form-container > .form-wrapper {
 .form-block {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   width: 100%;
   padding: 32px;
   border-radius: 16px;
