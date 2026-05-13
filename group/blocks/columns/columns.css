@@ -273,12 +273,12 @@
 .columns.single-coo {
   max-width: 1100px;
   margin: 6rem auto;
-  border: 1px solid #dadada;
   background-color: var(--background-color);
   border-radius: 1rem;
-  box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   overflow: hidden; /* IMPORTANT: enables clean rounded header */
   padding-top:0;
+  border: 1px solid #F7F7F7;
+  box-shadow: 0 2px 10px 0 rgba(34, 10, 51, 0.04), 0 8px 20px 0 rgba(34, 10, 51, 0.04);
 }
 
 /* Force single-column layout on desktop */
@@ -307,7 +307,10 @@
   margin: 0;
 
   width: 100%;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 
   /* Break out of parent padding (32px) */
   margin-left: -32px;
@@ -317,6 +320,22 @@
   text-align: center;
   font-weight: 700;
   letter-spacing: 0.5px;
+}
+
+/* Add secondary logo to the left of the H1 text */
+.columns.single-coo h1::before {
+  content: "";
+  display: inline-block;
+
+  width: 56px;
+  height: 56px;
+
+  background-image: url("/group/icons/coo_logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  flex: 0 0 auto;
 }
 
 /* ===== BODY SPACING ===== */
@@ -329,6 +348,7 @@
 .columns.single-coo h1 {
   margin-top: 0rem;
   margin-bottom: 3.5rem;
+  font-size:32px;
 }
 
 .columns.single-coo h3 {
