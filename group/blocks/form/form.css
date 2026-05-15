@@ -20,8 +20,8 @@ main > .section.form-container > .form-wrapper {
   padding: 32px;
   border-radius: 16px;
   border: 1px solid #F7F7F7;
-  background: #FFFFFF;
-  box-shadow: 0 2px 10px 0 rgba(34, 10, 51, 0.04), 0 8px 20px 0 rgba(34, 10, 51, 0.04);
+  background: #FFF;
+  box-shadow: 0 2px 10px 0 rgb(34 10 51 / 4%), 0 8px 20px 0 rgb(34 10 51 / 4%);
   box-sizing: border-box;
 }
 
@@ -50,7 +50,7 @@ main > .section.form-container > .form-wrapper {
   align-self: stretch;
   border-radius: 16px;
   border: 1px solid #B8B9BB;
-  background: #FFFFFF;
+  background: #FFF;
   font: inherit;
   font-size: 1rem;
   color: #1a1a1a;
@@ -62,12 +62,12 @@ main > .section.form-container > .form-wrapper {
 .form-field input[type='text']:focus {
   outline: none;
   border-color: #0071BC;
-  box-shadow: 0 0 0 3px rgba(0, 113, 188, 0.15);
+  box-shadow: 0 0 0 3px rgb(0 113 188 / 15%);
 }
 
 .form-field input[aria-invalid='true'] {
   border-color: #b00020;
-  box-shadow: 0 0 0 3px rgba(176, 0, 32, 0.1);
+  box-shadow: 0 0 0 3px rgb(176 0 32 / 10%);
 }
 
 /* Checkbox field */
@@ -167,17 +167,17 @@ main > .section.form-container > .form-wrapper {
   letter-spacing: 0.01em;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 113, 188, 0.25);
+  box-shadow: 0 2px 8px rgb(0 113 188 / 25%);
 }
 
 .form-actions button:hover {
   background: #005fa3;
-  box-shadow: 0 4px 14px rgba(0, 113, 188, 0.35);
+  box-shadow: 0 4px 14px rgb(0 113 188 / 35%);
 }
 
 .form-actions button:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 4px rgba(0, 113, 188, 0.2);
+  box-shadow: 0 1px 4px rgb(0 113 188 / 20%);
 }
 
 .form-actions button:disabled {
