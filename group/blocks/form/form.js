@@ -30,53 +30,62 @@ export default function decorate(block) {
     </div>
 
     <div class="form-field">
-      <label for="EmailAddress">Email Address <span class="required">*</span></label>
-      <input
-        type="email"
-        id="EmailAddress"
-        name="EmailAddress"
-        required
-        autocomplete="email"
-      />
+      <div class="form-field-floating">
+        <input
+          type="email"
+          id="EmailAddress"
+          name="EmailAddress"
+          placeholder=" "
+          required
+          autocomplete="email"
+        />
+        <label for="EmailAddress">Email Address <span class="required">*</span></label>
+      </div>
       <div class="field-error" id="error-EmailAddress"></div>
     </div>
 
     <div class="form-field">
-      <label for="SubscriberLastName">Subscriber Last Name <span class="required">*</span></label>
-      <input
-        type="text"
-        id="SubscriberLastName"
-        name="SubscriberLastName"
-        required
-        autocomplete="family-name"
-      />
+      <div class="form-field-floating">
+        <input
+          type="text"
+          id="SubscriberLastName"
+          name="SubscriberLastName"
+          placeholder=" "
+          required
+          autocomplete="family-name"
+        />
+        <label for="SubscriberLastName">Subscriber Last Name <span class="required">*</span></label>
+      </div>
       <div class="field-error" id="error-SubscriberLastName"></div>
     </div>
 
     <div class="form-field">
-      <label for="SubscriberYearofBirth">Subscriber Year of Birth <span class="required">*</span></label>
-      <input
-        type="text"
-        id="SubscriberYearofBirth"
-        name="SubscriberYearofBirth"
-        inputmode="numeric"
-        maxlength="4"
-        required
-      />
+      <div class="form-field-floating">
+        <input
+          type="text"
+          id="SubscriberYearofBirth"
+          name="SubscriberYearofBirth"
+          placeholder=" "
+          inputmode="numeric"
+          maxlength="4"
+          required
+        />
+        <label for="SubscriberYearofBirth">Subscriber Year of Birth <span class="required">*</span></label>
+      </div>
       <div class="field-error" id="error-SubscriberYearofBirth"></div>
     </div>
 
     <div class="form-field">
-      <label for="ref_number">
-        Reference Number: (Example: RN1234; this is not case sensitive)
-        <span class="required">*</span>
-      </label>
-      <input
-        type="text"
-        id="ref_number"
-        name="ref_number"
-        required
-      />
+      <div class="form-field-floating">
+        <input
+          type="text"
+          id="ref_number"
+          name="ref_number"
+          placeholder=" "
+          required
+        />
+        <label for="ref_number">Reference Number: (Example: RN1234; this is not case sensitive) <span class="required">*</span></label>
+      </div>
       <div class="field-error" id="error-ref_number"></div>
     </div>
 
@@ -233,4 +242,4 @@ export default function decorate(block) {
   }
 
   form.addEventListener('submit', handleSubmit);
-}
+}// JavaScript Document
