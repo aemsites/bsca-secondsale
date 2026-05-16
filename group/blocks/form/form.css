@@ -33,6 +33,38 @@ main > .section.form-container > .form-wrapper {
   width: 100%;
 }
 
+/* Floating label wrapper */
+.form-field-floating {
+  position: relative;
+  width: 100%;
+}
+
+.form-field-floating label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b6b6b;
+  pointer-events: none;
+  transition: top 0.2s ease, font-size 0.2s ease, font-weight 0.2s ease, color 0.2s ease;
+  background: #FFF;
+  padding: 0 4px;
+}
+
+.form-field-floating input:focus + label,
+.form-field-floating input:not(:placeholder-shown) + label {
+  top: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0071BC;
+}
+
+.form-field-floating input[aria-invalid='true'] + label {
+  color: #b00020;
+}
+
 .form-field label {
   font-size: 1rem;
   font-weight: 600;
@@ -40,11 +72,12 @@ main > .section.form-container > .form-wrapper {
   line-height: 1.4;
 }
 
-.form-field input[type='text'], .form-field input[type='email'] {
+.form-field input[type='text'],
+.form-field input[type='email'] {
   display: flex;
   width: 100%;
   height: 64px;
-  padding: 0 16px;
+  padding: 20px 16px 8px;
   align-items: center;
   gap: 16px;
   align-self: stretch;
@@ -59,7 +92,8 @@ main > .section.form-container > .form-wrapper {
   appearance: none;
 }
 
-.form-field input[type='text']:focus {
+.form-field input[type='text']:focus,
+.form-field input[type='email']:focus {
   outline: none;
   border-color: #0071BC;
   box-shadow: 0 0 0 3px rgb(0 113 188 / 15%);
@@ -118,7 +152,7 @@ main > .section.form-container > .form-wrapper {
   font-weight: 500;
   border-radius: 8px;
   padding: 0;
-  display:none;
+  display: none;
 }
 
 .form-message.is-success {
