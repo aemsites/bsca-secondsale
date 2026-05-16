@@ -84,7 +84,7 @@ export default function decorate(block) {
           placeholder=" "
           required
         />
-        <label for="ref_number">Reference Number: (Example: RN1234; this is not case sensitive) <span class="required">*</span></label>
+        <label for="ref_number">Reference Number: (Example: RN1234; not case sensitive) <span class="required">*</span></label>
       </div>
       <div class="field-error" id="error-ref_number"></div>
     </div>
