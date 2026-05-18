@@ -54,7 +54,7 @@ export default function decorate(block) {
     </div>
 
     <div class="form-field">
-      <label for="SubscriberYearofBirth">Subscriber Year of Birth <span class="required">*</span></label>
+      <label for="SubscriberYearofBirth">Enter a valid 4-digit birth year (Example: 19XX)<span class="required">*</span></label>
       <input
         type="text"
         id="SubscriberYearofBirth"
@@ -75,6 +75,7 @@ export default function decorate(block) {
         type="text"
         id="ref_number"
         name="ref_number"
+        maxlength="6"
         required
       />
       <div class="field-error" id="error-ref_number"></div>
