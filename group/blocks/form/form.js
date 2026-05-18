@@ -4,7 +4,7 @@ export default function decorate(block) {
   const endpoint = endpointLink?.href || block.textContent.trim();
 
   // TODO: Update this URL once the confirmation page is live in EDS
-  const confirmationPageUrl = '/county-of-orange-confirmation-2024';
+  const confirmationPageUrl = '/county-of-orange-confirmation-2025';
 
   // Clear authored content once we have what we need
   block.textContent = '';
