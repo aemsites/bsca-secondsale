@@ -231,7 +231,7 @@ export default async function decorate(block) {
       return;
     }
 
-    status.textContent = 'Please select an employer from the list before clicking GO.';
+    status.textContent = 'Please select a group from the list before clicking GO.';
   }
 
   function renderResults(query, results) {
