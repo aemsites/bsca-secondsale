@@ -5,7 +5,7 @@
 
 /* Card wrapper */
 .form {
-  max-width: 540px;
+  max-width: 548px;
 }
 
 main > .section.form-container > .form-wrapper {
@@ -25,6 +25,38 @@ main > .section.form-container > .form-wrapper {
   box-sizing: border-box;
 }
 
+/* Form header */
+.form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #F7F7F7;
+}
+
+.form-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.form-description {
+  font-size: 1rem;
+  color: #1a1a1a;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.5;
+  margin: 0;
+}
+
 /* Fields */
 .form-field {
   display: flex;
@@ -40,7 +72,8 @@ main > .section.form-container > .form-wrapper {
   line-height: 1.4;
 }
 
-.form-field input[type='text'], .form-field input[type='email'] {
+.form-field input[type='text'],
+.form-field input[type='email'] {
   display: flex;
   width: 100%;
   height: 64px;
@@ -59,7 +92,8 @@ main > .section.form-container > .form-wrapper {
   appearance: none;
 }
 
-.form-field input[type='text']:focus {
+.form-field input[type='text']:focus,
+.form-field input[type='email']:focus {
   outline: none;
   border-color: #0071BC;
   box-shadow: 0 0 0 3px rgb(0 113 188 / 15%);
@@ -118,7 +152,7 @@ main > .section.form-container > .form-wrapper {
   font-weight: 500;
   border-radius: 8px;
   padding: 0;
-  display:none;
+  display: none;
 }
 
 .form-message.is-success {
