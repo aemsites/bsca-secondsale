@@ -14,6 +14,12 @@ export default function decorate(block) {
   form.noValidate = true;
 
   form.innerHTML = `
+    <div class="form-header">
+      <h2 class="form-title">Non-Smoker Incentive Affidavit Form</h2>
+      <p class="form-description">Confirm your eligibility for the Non-Smoker incentive by completing and submitting the form below.</p>
+      <p class="form-subtitle">Affidavit for Non-Smoker Incentive (for subscriber only):</p>
+    </div>
+
     <div class="form-message" aria-live="polite"></div>
 
     <div class="form-field form-field-checkbox">
