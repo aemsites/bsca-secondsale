@@ -313,7 +313,7 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin: 0 -32px 0;
+  margin: 0 -32px;
   font-size: 32px;
 
   /* Break out of parent padding (32px) */
