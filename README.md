@@ -2,7 +2,7 @@
 Second Sale Microsites for BSCA
 
 ## Environments
-- Preview: https://main--bsca-secondsale--aemsites.aem.page/group/
+- Preview: https://cardnew16--bsca-secondsale--aemsites.aem.page
 - Live: https://main--bsca-secondsale--aemsites.aem.live/group/
 
 ## Documentation
