@@ -128,6 +128,69 @@ function getBooleanMetadata(name) {
 }
 
 /**
+ * Identify the optional utility section.
+ * This lets older nav docs work without requiring the utility table.
+ * If the utility table exists, we parse it. If not, we skip it.
+ */
+function isUtilitySection(section) {
+  if (!section) return false;
+
+  const text = normalizeText(section.textContent).toLowerCase();
+
+  return (
+    text.includes('select')
+    || text.includes('login/register')
+    || text.includes(':profile:')
+    || (
+      text.includes('english')
+      && (text.includes('spanish') || text.includes('español'))
+    )
+  );
+}
+
+/**
+ * Identify the optional brand section.
+ * Brand can be authored with a :logo: token, but if older docs do not
+ * include a brand section, buildBrand() still falls back to the default logo.
+ */
+function isBrandSection(section) {
+  if (!section) return false;
+
+  const text = normalizeText(section.textContent);
+  const list = getFirstList(section);
+
+  return text.includes(':logo:') || (!list && text.length > 0);
+}
+
+/**
+ * Score sections to find the best candidate for the main nav.
+ * This avoids relying on fixed section positions like:
+ * section[0] = utility, section[1] = brand, section[2] = nav.
+ */
+function getMainNavSectionScore(section) {
+  const list = getFirstList(section);
+  if (!list) return 0;
+
+  const items = getDirectListItems(list);
+  const nestedCount = items.filter((li) => getDirectNestedList(li)).length;
+  const linkCount = section.querySelectorAll('a').length;
+
+  return (items.length * 2) + (nestedCount * 4) + linkCount;
+}
+
+function findBestMainNavSection(sections, excludedSections = []) {
+  const excluded = new Set(excludedSections.filter(Boolean));
+
+  return sections
+    .filter((section) => !excluded.has(section))
+    .map((section) => ({
+      section,
+      score: getMainNavSectionScore(section),
+    }))
+    .sort((a, b) => b.score - a.score)[0]?.section || null;
+}
+
+/**
  * Parse utility section.
  * Supports:
  * 1. Nested list pattern:
@@ -384,9 +447,29 @@ function parseMainNavSection(section) {
 function parseNavFragment(fragment) {
   const sections = getTopLevelSections(fragment);
 
-  const utility = parseUtilitySection(sections[0]);
-  const brand = parseBrandSection(sections[1]);
-  const main = parseMainNavSection(sections[2]);
+  /*
+   * Flexible nav document parsing:
+   * - New docs can include utility + brand + nav sections.
+   * - Older/current docs can omit the utility section.
+   * - Very old/simple docs can omit the brand section and still render
+   *   the default Blue Shield logo.
+   */
+  const utilitySection = sections.find((section) => isUtilitySection(section)) || null;
+  const brandSection = sections.find((section) => (
+    section !== utilitySection && isBrandSection(section)
+  )) || null;
+  const mainSection = findBestMainNavSection(sections, [utilitySection, brandSection]);
+
+  const utility = utilitySection
+    ? parseUtilitySection(utilitySection)
+    : {
+      language: null,
+      login: null,
+      links: [],
+    };
+
+  const brand = parseBrandSection(brandSection);
+  const main = parseMainNavSection(mainSection);
 
   return {
     utility,
