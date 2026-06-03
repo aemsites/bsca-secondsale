@@ -6,6 +6,10 @@ header .header.block {
   margin-bottom: 80px;
 }
 
+.header-wrapper:has(.nav-new-utility) {
+  margin-bottom: 120px;
+}
+
 /* =========================
    WRAPPER
 ========================= */
