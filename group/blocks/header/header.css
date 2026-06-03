@@ -135,39 +135,37 @@ header .nav-new-login-icon {
   position: relative;
   width: 28px;
   height: 28px;
-  border: 2px solid #17316b;
+  border: 3px solid #17316b;
   border-radius: 50%;
   display: inline-block;
-  flex: 0 0 auto;
-  box-sizing: border-box;
 }
 
+/* HEAD */
 header .nav-new-login-icon::before {
   content: '';
   position: absolute;
   top: 6px;
   left: 50%;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border: 2px solid #17316b;
   border-radius: 50%;
   transform: translateX(-50%);
-  background: #fff;
-  box-sizing: border-box;
+  background: transparent;
 }
 
+/* SHOULDERS */
 header .nav-new-login-icon::after {
   content: '';
   position: absolute;
-  left: 50%;
   bottom: 5px;
-  width: 13px;
-  height: 7px;
+  left: 50%;
+  width: 16px;
+  height: 8px;
   border: 2px solid #17316b;
-  border-bottom: 0;
-  border-radius: 13px 13px 0 0;
+  border-top: none;                /* removes top line */
+  border-radius: 0 0 10px 10px;   /* perfect semi-circle */
   transform: translateX(-50%);
-  box-sizing: border-box;
 }
 
 /* =========================
