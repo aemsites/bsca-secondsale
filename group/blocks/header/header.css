@@ -2,6 +2,10 @@ header .header.block {
   padding: 0;
 }
 
+.header-wrapper {
+  margin-bottom: 80px;
+}
+
 /* =========================
    WRAPPER
 ========================= */
