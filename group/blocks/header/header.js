@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+// JavaScriimport { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const DESKTOP = window.matchMedia('(min-width: 900px)');
@@ -610,7 +610,7 @@ function buildUtilityRow(data) {
         href: utilityData.login.href || LOGIN_FALLBACK_URL,
         class: 'nav-new-login',
       },
-      '<span class="nav-new-login-icon" aria-hidden="true"></span><span>Log in/Register</span>',
+      '<span class="nav-new-login-icon" aria-hidden="true"><img src="/group/icons/login.svg" alt=""></span><span>Log in/Register</span>',
     );
     right.append(login);
   }
@@ -1032,4 +1032,4 @@ export default async function decorate(block) {
   } else {
     closeAllDropdowns(block);
   }
-}
+}pt Document
