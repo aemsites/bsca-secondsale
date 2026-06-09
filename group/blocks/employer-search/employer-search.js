@@ -22,7 +22,6 @@ function norm(str = '') {
 }
 
 function highlightMatch(label, query) {
-  // basic safe-ish highlight: only highlight if we can find the query in label (case-insensitive)
   if (!query) return label;
   const idx = String(label).toLowerCase().indexOf(String(query).toLowerCase());
   if (idx < 0) return label;
@@ -38,7 +37,6 @@ function highlightMatch(label, query) {
  * Defensive getters because EDS/Excel->JSON can alter header casing/spacing.
  */
 function getEmployer(item) {
-  // Your Excel header is "Employer"
   return (
     item?.Employer
     || item?.employer
@@ -49,12 +47,10 @@ function getEmployer(item) {
 }
 
 function getUrl(item) {
-  // Your Excel header is "url"
   return item?.url || item?.URL || '';
 }
 
 function getSearchTermsRaw(item) {
-  // Your Excel header is "Search Terms"
   return (
     item?.['Search Terms']
     || item?.['search terms']
@@ -76,18 +72,36 @@ function parseSearchTerms(item) {
 }
 
 export default async function decorate(block) {
-  // Allow authors to override the data URL by putting it in the first cell (optional)
-  // e.g. a table row with "data" | "/path/to/employers.json"
+  // Defaults that can be overridden by authored rows in the Word doc
   let dataUrl = DATA_URL;
+  let titleText = '';
+  let labelText = 'Search for your employer, union group, or benefit trust';
+  let placeholderText = 'Start typing…';
 
   const rows = [...block.querySelectorAll(':scope > div')];
-  if (rows.length) {
-    const maybeKey = rows[0]?.children?.[0]?.textContent?.trim()?.toLowerCase();
-    const maybeVal = rows[0]?.children?.[1]?.textContent?.trim();
-    if (maybeKey === 'data' && maybeVal) {
-      dataUrl = maybeVal;
+
+  rows.forEach((row) => {
+    const key = row?.children?.[0]?.textContent?.trim()?.toLowerCase();
+    const val = row?.children?.[1]?.textContent?.trim();
+
+    if (!key || !val) return;
+
+    if (key === 'data') {
+      dataUrl = val;
     }
-  }
+
+    if (key === 'title') {
+      titleText = val;
+    }
+
+    if (key === 'label') {
+      labelText = val;
+    }
+
+    if (key === 'placeholder') {
+      placeholderText = val;
+    }
+  });
 
   // Replace authored content with component UI
   block.textContent = '';
@@ -95,10 +109,17 @@ export default async function decorate(block) {
   const wrapper = document.createElement('div');
   wrapper.className = 'employer-search';
 
+  if (titleText) {
+    const title = document.createElement('div');
+    title.className = 'employer-search-title';
+    title.textContent = titleText;
+    wrapper.append(title);
+  }
+
   const label = document.createElement('label');
   label.className = 'employer-search-label';
   label.setAttribute('for', 'employer-search-input');
-  label.textContent = 'Search for your employer, union group, or benefit trust';
+  label.textContent = labelText;
 
   const inputWrap = document.createElement('div');
   inputWrap.className = 'employer-search-input-wrap';
@@ -109,7 +130,7 @@ export default async function decorate(block) {
   input.type = 'search';
   input.autocomplete = 'off';
   input.spellcheck = false;
-  input.placeholder = 'Start typing…';
+  input.placeholder = placeholderText;
 
   // GO button
   const goBtn = document.createElement('button');
@@ -193,7 +214,7 @@ export default async function decorate(block) {
   }
 
   // Only allow navigation when user has *selected* an item
-  // AND the input matches the selected Employer (prevents "Company" -> GO)
+  // AND the input matches the selected Employer
   function canNavigate() {
     const url = getUrl(selectedEmployer);
     if (!url) return false;
@@ -210,7 +231,7 @@ export default async function decorate(block) {
       return;
     }
 
-    status.textContent = 'Please select an employer from the list before clicking GO.';
+    status.textContent = 'Please select a group from the list before clicking GO.';
   }
 
   function renderResults(query, results) {

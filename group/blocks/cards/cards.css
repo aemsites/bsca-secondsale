@@ -16,7 +16,7 @@
 }
 
 .cards .cards-card-body {
-  margin: var(--spacing-l);
+  margin: var(--spacing-xl);
 }
 
 .cards.list .cards-card-body {
@@ -46,7 +46,7 @@
 .cards.list > ul > li p:not(:first-child) {
   line-height: 1.5rem;
   margin: 0;
- }
+}
 
 .cards.list .cards-card-body p:not(.button-container,:has( > strong),:has( + h5)) {
   margin: 0 0 var(--spacing-xs);
@@ -106,7 +106,7 @@
 .cards:not(.no-border) > ul > li:not(.no-border) {
   border: 1px solid #dadada;
   background-color: var(--background-color);
-  border-radius: .5rem;
+  border-radius: 1rem;
   box-shadow: 0 0.33rem 1.1rem rgba(0 0 0 / 12%);
   overflow: hidden;
 }
@@ -218,8 +218,123 @@
 
   /* variant for space-evenly layout */
   .section.two-cards.space-evenly .cards > ul {
-  flex-wrap: wrap; 
-  justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+}
+
+/* Two-card size variants
+   Use in Section Metadata:
+   Style | two-cards-med
+   Style | two-cards-lg
+*/
+
+/* Shared card structure for medium and large two-card variants */
+.two-cards-med.cards-container .cards > ul > li,
+.two-cards-lg.cards-container .cards > ul > li {
+  display: flex;
+  flex-direction: column;
+}
+
+.two-cards-med.cards-container .cards .cards-card-body,
+.two-cards-lg.cards-container .cards .cards-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+/* Bottom CTA row
+   Author as the last item in the card with an icon and a link.
+   Example:
+   :video-camera:
+   See how an HMO plan works
+*/
+.two-cards-med.cards-container .cards .cards-card-body > p:last-child:has(.icon):has(a),
+.two-cards-lg.cards-container .cards .cards-card-body > p:last-child:has(.icon):has(a) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-l);
+  min-height: 102px;
+  margin: auto calc(var(--spacing-xl) * -1) calc(var(--spacing-xl) * -1);
+  padding: 32px var(--spacing-xl) 0;
+  background: linear-gradient(to bottom, transparent 0 32px, #fbf9f7 32px);
+  box-sizing: border-box;
+}
+
+/* Keep medium and large two-card variants stacked below desktop */
+@media (width < 900px) {
+  .two-cards-med.cards-container .cards > ul,
+  .two-cards-lg.cards-container .cards > ul {
+    flex-direction: column;
   }
 
+  .two-cards-med.cards-container .cards > ul > li,
+  .two-cards-lg.cards-container .cards > ul > li {
+    width: 100%;
+    flex: 0 1 100%;
+    max-width: none;
+    box-sizing: border-box;
+  }
 }
+
+/* Desktop two-card variants */
+@media (width >= 900px) {
+  .two-cards-med.cards-container .cards > ul,
+  .two-cards-lg.cards-container .cards > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .two-cards-med.cards-container .cards > ul > li,
+  .two-cards-lg.cards-container .cards > ul > li {
+    box-sizing: border-box;
+  }
+
+  /* Medium: wider than default, but capped */
+  .two-cards-med.cards-container .cards > ul > li {
+    width: calc((100% - 24px) / 2);
+    flex: 0 1 560px;
+    max-width: 560px;
+  }
+
+  /* Large: true 50/50 two-column cards */
+  .two-cards-lg.cards-container .cards > ul > li {
+    width: calc((100% - 24px) / 2);
+    flex: 0 1 calc((100% - 24px) / 2);
+    max-width: none;
+  }
+}
+
+/* ==========================================================================
+   Two-card variants – compact spacing system
+   ========================================================================== */
+
+/* stylelint-disable no-descending-specificity */
+
+/* Remove default h2 spacing inside card bodies */
+.cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
+  .cards-card-body h2 {
+  margin: 0;
+}
+
+/* Remove top margin from first paragraph after h2 */
+.cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
+  .cards-card-body h2 + p {
+  margin-top: 0;
+}
+
+/* Remove top margin from paragraph after h4 */
+.cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
+  .cards-card-body h4 + p {
+  margin-top: 0;
+}
+
+/* Tighten spacing between icon and heading */
+.cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
+  .cards-card-body p:first-child {
+  margin: 0 0 6px;
+  line-height: 0;
+}
+
+/* stylelint-enable no-descending-specificity */
