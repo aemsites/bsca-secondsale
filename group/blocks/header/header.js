@@ -1032,4 +1032,4 @@ export default async function decorate(block) {
   } else {
     closeAllDropdowns(block);
   }
-}pt Document
+}
