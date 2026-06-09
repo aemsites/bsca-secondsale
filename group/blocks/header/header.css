@@ -263,7 +263,7 @@ header .nav-new-dropdown-toggle {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 88px;
+  height: 76px;
   padding: 10px 8px;
   margin: 0;
   border: 0;
@@ -452,9 +452,9 @@ header .nav-new-language-link {
   padding: 22px 20px;
   color: #17316b;
   text-decoration: none;
-  font-size: 16px;
-  line-height: 1.25;
-  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 300;
   background: transparent;
   transition: background-color 0.2s ease;
 }
