@@ -2,7 +2,6 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const DESKTOP = window.matchMedia('(min-width: 900px)');
-const LOGIN_FALLBACK_URL = 'https://www.blueshieldca.com';
 const HOME_FALLBACK_URL = '/';
 
 /**
@@ -216,7 +215,7 @@ function parseUtilitySection(section) {
     if (/login\/register/i.test(label)) {
       result.login = {
         label: 'Log in/Register',
-        href: href === '#' ? LOGIN_FALLBACK_URL : href,
+        href,
       };
       return;
     }
@@ -278,7 +277,7 @@ function parseUtilitySection(section) {
         if (/login\/register/i.test(label) && !result.login) {
           result.login = {
             label: 'Log in/Register',
-            href: LOGIN_FALLBACK_URL,
+            href: '#',
           };
         }
       });
@@ -293,7 +292,7 @@ function parseUtilitySection(section) {
         if (/login\/register/i.test(item.label)) {
           result.login = {
             label: 'Log in/Register',
-            href: item.href === '#' ? LOGIN_FALLBACK_URL : item.href,
+            href: item.href,
           };
         } else {
           result.links.push(item);
@@ -308,7 +307,7 @@ function parseUtilitySection(section) {
         if (/login\/register/i.test(line)) {
           result.login = {
             label: 'Log in/Register',
-            href: LOGIN_FALLBACK_URL,
+            href: '#',
           };
         } else {
           result.links.push({ label: line, href: '#' });
@@ -607,7 +606,7 @@ function buildUtilityRow(data) {
     const login = createTag(
       'a',
       {
-        href: utilityData.login.href || LOGIN_FALLBACK_URL,
+        href: utilityData.login.href || '#',
         class: 'nav-new-login',
       },
       '<span class="nav-new-login-icon" aria-hidden="true"><img src="/group/icons/login.svg" alt=""></span><span>Log in/Register</span>',
