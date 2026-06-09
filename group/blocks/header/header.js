@@ -101,7 +101,11 @@ function getPagePath() {
 function pathsMatch(a = '', b = '') {
   const normalize = (value) => {
     if (!value) return '';
-    if (isExternalUrl(value) || value.startsWith('mailto:') || value.startsWith('tel:')) return value;
+    if (
+      isExternalUrl(value)
+      || value.startsWith('mailto:')
+      || value.startsWith('tel:')
+    ) return value;
     return value.replace(/\/$/, '') || '/';
   };
 
@@ -242,7 +246,9 @@ function parseUtilitySection(section) {
           .map((childLi) => {
             const childAnchor = getDirectAnchor(childLi);
             return {
-              label: normalizeText(childAnchor?.textContent || getDirectTextWithoutNestedList(childLi)),
+              label: normalizeText(
+                childAnchor?.textContent || getDirectTextWithoutNestedList(childLi),
+              ),
               href: getHrefOrFallback(childAnchor, '#'),
             };
           })
@@ -334,7 +340,11 @@ function parseUtilitySection(section) {
         ],
       };
 
-      result.links = result.links.filter((_, index) => index !== englishIndex && index !== spanishIndex);
+      result.links = result.links.filter(
+
+        (_, index) => index !== englishIndex && index !== spanishIndex,
+
+      );
     }
   }
 
@@ -430,7 +440,9 @@ function parseMainNavSection(section) {
         .map((childLi) => {
           const childAnchor = getDirectAnchor(childLi);
           return {
-            label: normalizeText(childAnchor?.textContent || getDirectTextWithoutNestedList(childLi)),
+            label: normalizeText(
+              childAnchor?.textContent || getDirectTextWithoutNestedList(childLi),
+            ),
             href: getHrefOrFallback(childAnchor, '#'),
           };
         })
@@ -609,7 +621,12 @@ function buildUtilityRow(data) {
         href: utilityData.login.href || '#',
         class: 'nav-new-login',
       },
-      '<span class="nav-new-login-icon" aria-hidden="true"><img src="/group/icons/login.svg" alt=""></span><span>Log in/Register</span>',
+      [
+        '<span class="nav-new-login-icon" aria-hidden="true">',
+        '<img src="/group/icons/login.svg" alt="">',
+        '</span>',
+        '<span>Log in/Register</span>',
+      ].join(''),
     );
     right.append(login);
   }
@@ -749,7 +766,9 @@ function buildPrimaryNav(data) {
       },
       `
         <span class="nav-new-contact-phone">${data.contact.label}</span>
-        ${data.contact.detail ? `<span class="nav-new-contact-detail">${data.contact.detail}</span>` : ''}
+        ${data.contact.detail
+    ? `<span class="nav-new-contact-detail">${data.contact.detail}</span>`
+    : ''}
       `,
     );
     actions.append(contact);
@@ -776,7 +795,12 @@ function buildHamburger() {
     'div',
     { class: 'nav-new-hamburger' },
     `
-      <button type="button" class="nav-new-hamburger-button" aria-label="Open navigation" aria-expanded="false">
+      <button
+        type="button"
+        class="nav-new-hamburger-button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+      >
         <span class="nav-new-hamburger-icon" aria-hidden="true"></span>
       </button>
     `,
@@ -794,7 +818,9 @@ function setCurrentState(block) {
     }
 
     const childLinks = item.querySelectorAll('.nav-new-dropdown-link');
-    const hasCurrentChild = [...childLinks].some((link) => pathsMatch(link.getAttribute('href'), pagePath));
+    const hasCurrentChild = [...childLinks].some((link) => (
+      pathsMatch(link.getAttribute('href'), pagePath)
+    ));
 
     if (hasCurrentChild) {
       item.classList.add('is-active');
