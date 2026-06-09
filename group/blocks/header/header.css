@@ -624,12 +624,12 @@ header .header.block.nav-new-mobile-open .nav-new-hamburger-icon::after {
   header .nav-new-language-toggle,
   header .nav-new-language-label {
     padding: 4px 0;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
   }
 
   header .nav-new-login {
-    font-size: 14px;
+    font-size: 12px;
     gap: 10px;
   }
 
