@@ -35,6 +35,32 @@ function normalizeText(text = '') {
   return text.replace(/\s+/g, ' ').trim();
 }
 
+const NEW_WINDOW_TEXT = 'Open the link in a new window';
+
+/**
+ * Removes accessibility helper text that may have been added to links before
+ * this header parses and rebuilds the navigation.
+ * @param {string} text
+ * @returns {string}
+ */
+function cleanNavText(text = '') {
+  return normalizeText(text.split(NEW_WINDOW_TEXT).join(''));
+}
+
+/**
+ * Gets the visible label text from an element without screen-reader-only copy.
+ * @param {Element} el
+ * @returns {string}
+ */
+function getElementText(el) {
+  if (!el) return '';
+
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll('.sr-only').forEach((srOnly) => srOnly.remove());
+
+  return cleanNavText(clone.textContent);
+}
+
 function slugify(text = '') {
   return normalizeText(text)
     .toLowerCase()
@@ -85,8 +111,8 @@ function getDirectAnchor(li) {
 
 function getDirectTextWithoutNestedList(li) {
   const clone = li.cloneNode(true);
-  [...clone.querySelectorAll('ul, ol')].forEach((nested) => nested.remove());
-  return normalizeText(clone.textContent);
+  [...clone.querySelectorAll('ul, ol, .sr-only')].forEach((nested) => nested.remove());
+  return cleanNavText(clone.textContent);
 }
 
 function getHrefOrFallback(anchor, fallback = '#') {
@@ -138,7 +164,7 @@ function getBooleanMetadata(name) {
 function isUtilitySection(section) {
   if (!section) return false;
 
-  const text = normalizeText(section.textContent).toLowerCase();
+  const text = cleanNavText(section.textContent).toLowerCase();
 
   return (
     text.includes('select')
@@ -159,7 +185,7 @@ function isUtilitySection(section) {
 function isBrandSection(section) {
   if (!section) return false;
 
-  const text = normalizeText(section.textContent);
+  const text = cleanNavText(section.textContent);
   const list = getFirstList(section);
 
   return text.includes(':logo:') || (!list && text.length > 0);
@@ -237,7 +263,7 @@ function parseUtilitySection(section) {
 
     items.forEach((li) => {
       const labelAnchor = getDirectAnchor(li);
-      const label = normalizeText(labelAnchor?.textContent || getDirectTextWithoutNestedList(li));
+      const label = getElementText(labelAnchor) || getDirectTextWithoutNestedList(li);
       const href = getHrefOrFallback(labelAnchor, '#');
       const nestedList = getDirectNestedList(li);
 
@@ -246,9 +272,7 @@ function parseUtilitySection(section) {
           .map((childLi) => {
             const childAnchor = getDirectAnchor(childLi);
             return {
-              label: normalizeText(
-                childAnchor?.textContent || getDirectTextWithoutNestedList(childLi),
-              ),
+              label: getElementText(childAnchor) || getDirectTextWithoutNestedList(childLi),
               href: getHrefOrFallback(childAnchor, '#'),
             };
           })
@@ -270,7 +294,7 @@ function parseUtilitySection(section) {
     [...section.querySelectorAll('a')]
       .filter((anchor) => !anchor.closest('ul, ol'))
       .forEach((anchor) => {
-        const label = normalizeText(anchor.textContent);
+        const label = getElementText(anchor);
         const href = getHrefOrFallback(anchor, '#');
         addUtilityItem(label, href);
       });
@@ -289,7 +313,7 @@ function parseUtilitySection(section) {
       });
   } else {
     const anchors = [...section.querySelectorAll('a')].map((anchor) => ({
-      label: normalizeText(anchor.textContent),
+      label: getElementText(anchor),
       href: getHrefOrFallback(anchor, '#'),
     })).filter((item) => item.label);
 
@@ -306,7 +330,7 @@ function parseUtilitySection(section) {
       });
     } else {
       const lines = [...section.querySelectorAll('p')]
-        .map((p) => normalizeText(p.textContent))
+        .map((p) => cleanNavText(p.textContent))
         .filter(Boolean);
 
       lines.forEach((line) => {
@@ -368,14 +392,14 @@ function parseBrandSection(section) {
 
   const link = getFirstLink(section);
   const textCandidates = [...section.querySelectorAll('p, h1, h2, h3, h4, h5, h6')]
-    .map((el) => normalizeText(el.textContent))
+    .map((el) => cleanNavText(el.textContent))
     .filter((text) => text && !/^:logo:$/i.test(text));
 
   const brandLabel = textCandidates[0];
 
   result.label = brandLabel || result.label;
   result.href = getHrefOrFallback(link, HOME_FALLBACK_URL);
-  result.hasLogoToken = normalizeText(section.textContent).includes(':logo:');
+  result.hasLogoToken = cleanNavText(section.textContent).includes(':logo:');
 
   return result;
 }
@@ -400,7 +424,7 @@ function parseMainNavSection(section) {
   getDirectListItems(list).forEach((li) => {
     const anchor = getDirectAnchor(li);
     const nestedList = getDirectNestedList(li);
-    const label = normalizeText(anchor?.textContent || getDirectTextWithoutNestedList(li));
+    const label = getElementText(anchor) || getDirectTextWithoutNestedList(li);
     const href = getHrefOrFallback(anchor, '#');
 
     if (!label) return;
@@ -408,7 +432,7 @@ function parseMainNavSection(section) {
     if (isPhone(label)) {
       const detailText = nestedList
         ? getDirectListItems(nestedList)
-          .map((childLi) => normalizeText(childLi.textContent))
+          .map((childLi) => cleanNavText(childLi.textContent))
           .filter(Boolean)
           .join(' ')
         : '';
@@ -440,9 +464,7 @@ function parseMainNavSection(section) {
         .map((childLi) => {
           const childAnchor = getDirectAnchor(childLi);
           return {
-            label: normalizeText(
-              childAnchor?.textContent || getDirectTextWithoutNestedList(childLi),
-            ),
+            label: getElementText(childAnchor) || getDirectTextWithoutNestedList(childLi),
             href: getHrefOrFallback(childAnchor, '#'),
           };
         })
