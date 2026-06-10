@@ -1,1060 +1,181 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { wrapTextInLinks } from '../../scripts/utils.js';
+import enableRowLinks from '../../scripts/row-link.js';
 
-const DESKTOP = window.matchMedia('(min-width: 900px)');
-const HOME_FALLBACK_URL = '/';
+// media query match that indicates mobile/tablet width
+const isDesktop = window.matchMedia('(min-width: 900px)');
 
-/**
- * Small DOM helper
- * @param {string} tag
- * @param {Object} attrs
- * @param {string|Node|Array<Node>} content
- * @returns {HTMLElement}
- */
-function createTag(tag, attrs = {}, content = '') {
-  const el = document.createElement(tag);
-
-  Object.entries(attrs).forEach(([key, value]) => {
-    if (value !== null && value !== undefined) {
-      el.setAttribute(key, value);
+function closeOnEscape(e) {
+  if (e.code === 'Escape') {
+    const nav = document.getElementById('nav');
+    const navSections = nav.querySelector('.nav-sections');
+    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
+    if (navSectionExpanded && isDesktop.matches) {
+      // eslint-disable-next-line no-use-before-define
+      toggleAllNavSections(navSections);
+      navSectionExpanded.focus();
+    } else if (!isDesktop.matches) {
+      // eslint-disable-next-line no-use-before-define
+      toggleMenu(nav, navSections);
+      nav.querySelector('button').focus();
     }
-  });
-
-  if (Array.isArray(content)) {
-    el.append(...content);
-  } else if (content instanceof Node) {
-    el.append(content);
-  } else if (content) {
-    el.innerHTML = content;
   }
-
-  return el;
 }
 
-function normalizeText(text = '') {
-  return text.replace(/\s+/g, ' ').trim();
+function closeOnFocusLost(e) {
+  const nav = e.currentTarget;
+  if (!nav.contains(e.relatedTarget)) {
+    const navSections = nav.querySelector('.nav-sections');
+    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
+    if (navSectionExpanded && isDesktop.matches) {
+      // eslint-disable-next-line no-use-before-define
+      toggleAllNavSections(navSections, false);
+    } else if (!isDesktop.matches) {
+      // eslint-disable-next-line no-use-before-define
+      toggleMenu(nav, navSections, false);
+    }
+  }
 }
 
-function slugify(text = '') {
-  return normalizeText(text)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
+function openOnKeydown(e) {
+  const focused = document.activeElement;
+  const isNavDrop = focused.className === 'nav-drop';
+  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
+    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
+    // eslint-disable-next-line no-use-before-define
+    toggleAllNavSections(focused.closest('.nav-sections'));
+    focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
+  }
 }
 
-function isExternalUrl(url = '') {
-  return /^https?:\/\//i.test(url);
-}
-
-function isPhone(text = '') {
-  return /^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/.test(normalizeText(text));
-}
-
-function toTelHref(text = '') {
-  return `tel:${text.replace(/[^\d]/g, '')}`;
-}
-
-function getNavPath() {
-  const navMeta = getMetadata('nav');
-  return navMeta ? new URL(navMeta.toLowerCase(), window.location).pathname : '/nav-new';
-}
-
-function getTopLevelSections(fragment) {
-  return [...fragment.children].filter((child) => child.nodeType === 1);
-}
-
-function getFirstLink(el) {
-  return el?.querySelector('a') || null;
-}
-
-function getFirstList(section) {
-  return section?.querySelector('ul, ol') || null;
-}
-
-function getDirectListItems(list) {
-  return list ? [...list.children].filter((li) => li.matches('li')) : [];
-}
-
-function getDirectNestedList(li) {
-  return [...li.children].find((child) => child.matches?.('ul, ol')) || null;
-}
-
-function getDirectAnchor(li) {
-  return [...li.children].find((child) => child.matches?.('a')) || li.querySelector(':scope > a');
-}
-
-function getDirectTextWithoutNestedList(li) {
-  const clone = li.cloneNode(true);
-  [...clone.querySelectorAll('ul, ol')].forEach((nested) => nested.remove());
-  return normalizeText(clone.textContent);
-}
-
-function getHrefOrFallback(anchor, fallback = '#') {
-  const href = anchor?.getAttribute('href');
-  return href || fallback;
-}
-
-function getPagePath() {
-  return window.location.pathname.replace(/\/$/, '') || '/';
-}
-
-function pathsMatch(a = '', b = '') {
-  const normalize = (value) => {
-    if (!value) return '';
-    if (
-      isExternalUrl(value)
-      || value.startsWith('mailto:')
-      || value.startsWith('tel:')
-    ) return value;
-    return value.replace(/\/$/, '') || '/';
-  };
-
-  return normalize(a) === normalize(b);
-}
-
-function isEnglishLabel(label = '') {
-  return /^english$/i.test(normalizeText(label));
-}
-
-function isSpanishLabel(label = '') {
-  return /^(español|spanish)$/i.test(normalizeText(label));
-}
-
-function getBooleanMetadata(name) {
-  const value = normalizeText(getMetadata(name) || '');
-
-  if (!value) return null;
-  if (/^(yes|true|1|on)$/i.test(value)) return true;
-  if (/^(no|false|0|off)$/i.test(value)) return false;
-
-  return null;
+function focusNavSection() {
+  document.activeElement.addEventListener('keydown', openOnKeydown);
 }
 
 /**
- * Identify the optional utility section.
- * This lets older nav docs work without requiring the utility table.
- * If the utility table exists, we parse it. If not, we skip it.
+ * Toggles all nav sections
+ * @param {Element} sections The container element
+ * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
-function isUtilitySection(section) {
-  if (!section) return false;
-
-  const text = normalizeText(section.textContent).toLowerCase();
-
-  return (
-    text.includes('select')
-    || text.includes('login/register')
-    || text.includes(':profile:')
-    || (
-      text.includes('english')
-      && (text.includes('spanish') || text.includes('español'))
-    )
-  );
+function toggleAllNavSections(sections, expanded = false) {
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
+    section.setAttribute('aria-expanded', expanded);
+  });
 }
 
 /**
- * Identify the optional brand section.
- * Brand can be authored with a :logo: token, but if older docs do not
- * include a brand section, buildBrand() still falls back to the default logo.
+ * Toggles the entire nav
+ * @param {Element} nav The container element
+ * @param {Element} navSections The nav sections within the container element
+ * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
-function isBrandSection(section) {
-  if (!section) return false;
-
-  const text = normalizeText(section.textContent);
-  const list = getFirstList(section);
-
-  return text.includes(':logo:') || (!list && text.length > 0);
-}
-
-/**
- * Score sections to find the best candidate for the main nav.
- * This avoids relying on fixed section positions like:
- * section[0] = utility, section[1] = brand, section[2] = nav.
- */
-function getMainNavSectionScore(section) {
-  const list = getFirstList(section);
-  if (!list) return 0;
-
-  const items = getDirectListItems(list);
-  const nestedCount = items.filter((li) => getDirectNestedList(li)).length;
-  const linkCount = section.querySelectorAll('a').length;
-
-  return (items.length * 2) + (nestedCount * 4) + linkCount;
-}
-
-function findBestMainNavSection(sections, excludedSections = []) {
-  const excluded = new Set(excludedSections.filter(Boolean));
-
-  return sections
-    .filter((section) => !excluded.has(section))
-    .map((section) => ({
-      section,
-      score: getMainNavSectionScore(section),
-    }))
-    .sort((a, b) => b.score - a.score)[0]?.section || null;
-}
-
-/**
- * Parse utility section.
- * Supports:
- * 1. Nested list pattern:
- *    - English
- *      - Español
- * 2. Flat fallback pattern:
- *    English
- *    Español
- * 3. Login/Register utility link
- */
-function parseUtilitySection(section) {
-  const result = {
-    language: null,
-    login: null,
-    links: [],
-  };
-
-  if (!section) return result;
-
-  const addUtilityItem = (label, href) => {
-    if (!label) return;
-
-    if (/login\/register/i.test(label)) {
-      result.login = {
-        label: 'Log in/Register',
-        href,
-      };
-      return;
-    }
-
-    const exists = result.links.some((item) => item.label === label && item.href === href);
-    if (!exists) {
-      result.links.push({ label, href });
-    }
-  };
-
-  const list = getFirstList(section);
-
-  if (list) {
-    const items = getDirectListItems(list);
-
-    items.forEach((li) => {
-      const labelAnchor = getDirectAnchor(li);
-      const label = normalizeText(labelAnchor?.textContent || getDirectTextWithoutNestedList(li));
-      const href = getHrefOrFallback(labelAnchor, '#');
-      const nestedList = getDirectNestedList(li);
-
-      if (nestedList && /english|language/i.test(label)) {
-        const options = getDirectListItems(nestedList)
-          .map((childLi) => {
-            const childAnchor = getDirectAnchor(childLi);
-            return {
-              label: normalizeText(
-                childAnchor?.textContent || getDirectTextWithoutNestedList(childLi),
-              ),
-              href: getHrefOrFallback(childAnchor, '#'),
-            };
-          })
-          .filter((item) => item.label);
-
-        result.language = {
-          label: label || 'English',
-          options,
-        };
-        return;
-      }
-
-      addUtilityItem(label, href);
-    });
-
-    // Also scan for standalone anchors outside lists.
-    // This catches authored links like :profile:Login/Register
-    // that appear below the language list in the same utility section.
-    [...section.querySelectorAll('a')]
-      .filter((anchor) => !anchor.closest('ul, ol'))
-      .forEach((anchor) => {
-        const label = normalizeText(anchor.textContent);
-        const href = getHrefOrFallback(anchor, '#');
-        addUtilityItem(label, href);
-      });
-
-    // Fallback for standalone text-only paragraphs outside lists.
-    [...section.querySelectorAll('p')]
-      .filter((p) => !p.closest('ul, ol') && !p.querySelector('a'))
-      .forEach((p) => {
-        const label = normalizeText(p.textContent);
-        if (/login\/register/i.test(label) && !result.login) {
-          result.login = {
-            label: 'Log in/Register',
-            href: '#',
-          };
-        }
-      });
-  } else {
-    const anchors = [...section.querySelectorAll('a')].map((anchor) => ({
-      label: normalizeText(anchor.textContent),
-      href: getHrefOrFallback(anchor, '#'),
-    })).filter((item) => item.label);
-
-    if (anchors.length) {
-      anchors.forEach((item) => {
-        if (/login\/register/i.test(item.label)) {
-          result.login = {
-            label: 'Log in/Register',
-            href: item.href,
-          };
-        } else {
-          result.links.push(item);
-        }
-      });
-    } else {
-      const lines = [...section.querySelectorAll('p')]
-        .map((p) => normalizeText(p.textContent))
-        .filter(Boolean);
-
-      lines.forEach((line) => {
-        if (/login\/register/i.test(line)) {
-          result.login = {
-            label: 'Log in/Register',
-            href: '#',
-          };
-        } else {
-          result.links.push({ label: line, href: '#' });
-        }
-      });
-    }
-  }
-
-  if (!result.language && result.links.length) {
-    const englishIndex = result.links.findIndex((item) => isEnglishLabel(item.label));
-    const spanishIndex = result.links.findIndex((item) => isSpanishLabel(item.label));
-
-    if (englishIndex > -1 && spanishIndex > -1) {
-      const englishItem = result.links[englishIndex];
-      const spanishItem = result.links[spanishIndex];
-
-      result.language = {
-        label: englishItem.label || 'English',
-        options: [
-          {
-            label: spanishItem.label,
-            href: spanishItem.href,
-          },
-        ],
-      };
-
-      result.links = result.links.filter(
-
-        (_, index) => index !== englishIndex && index !== spanishIndex,
-
-      );
-    }
-  }
-
-  return result;
-}
-
-/**
- * Parse brand section.
- * Intended for simple authored content like:
- * Stanford
- * :logo:
- */
-function parseBrandSection(section) {
-  const result = {
-    label: 'Blue Shield',
-    href: HOME_FALLBACK_URL,
-    hasLogoToken: false,
-  };
-
-  if (!section) return result;
-
-  const link = getFirstLink(section);
-  const textCandidates = [...section.querySelectorAll('p, h1, h2, h3, h4, h5, h6')]
-    .map((el) => normalizeText(el.textContent))
-    .filter((text) => text && !/^:logo:$/i.test(text));
-
-  const brandLabel = textCandidates[0];
-
-  result.label = brandLabel || result.label;
-  result.href = getHrefOrFallback(link, HOME_FALLBACK_URL);
-  result.hasLogoToken = normalizeText(section.textContent).includes(':logo:');
-
-  return result;
-}
-
-/**
- * Parse main nav section from a real nested list.
- * Top-level li = top-level nav item
- * Nested ul/li = dropdown children
- */
-function parseMainNavSection(section) {
-  const result = {
-    items: [],
-    contact: null,
-    cta: null,
-  };
-
-  if (!section) return result;
-
-  const list = getFirstList(section);
-  if (!list) return result;
-
-  getDirectListItems(list).forEach((li) => {
-    const anchor = getDirectAnchor(li);
-    const nestedList = getDirectNestedList(li);
-    const label = normalizeText(anchor?.textContent || getDirectTextWithoutNestedList(li));
-    const href = getHrefOrFallback(anchor, '#');
-
-    if (!label) return;
-
-    if (isPhone(label)) {
-      const detailText = nestedList
-        ? getDirectListItems(nestedList)
-          .map((childLi) => normalizeText(childLi.textContent))
-          .filter(Boolean)
-          .join(' ')
-        : '';
-
-      result.contact = {
-        label,
-        href: toTelHref(label),
-        detail: detailText,
-      };
-      return;
-    }
-
-    if (/^enroll now$/i.test(label)) {
-      result.cta = {
-        label,
-        href,
-      };
-      return;
-    }
-
-    const item = {
-      label,
-      href,
-      children: [],
-    };
-
-    if (nestedList) {
-      item.children = getDirectListItems(nestedList)
-        .map((childLi) => {
-          const childAnchor = getDirectAnchor(childLi);
-          return {
-            label: normalizeText(
-              childAnchor?.textContent || getDirectTextWithoutNestedList(childLi),
-            ),
-            href: getHrefOrFallback(childAnchor, '#'),
-          };
-        })
-        .filter((child) => child.label);
-    }
-
-    result.items.push(item);
-  });
-
-  return result;
-}
-
-function parseNavFragment(fragment) {
-  const sections = getTopLevelSections(fragment);
-
-  /*
-   * Flexible nav document parsing:
-   * - New docs can include utility + brand + nav sections.
-   * - Older/current docs can omit the utility section.
-   * - Very old/simple docs can omit the brand section and still render
-   *   the default Blue Shield logo.
-   */
-  const utilitySection = sections.find((section) => isUtilitySection(section)) || null;
-  const brandSection = sections.find((section) => (
-    section !== utilitySection && isBrandSection(section)
-  )) || null;
-  const mainSection = findBestMainNavSection(sections, [utilitySection, brandSection]);
-
-  const utility = utilitySection
-    ? parseUtilitySection(utilitySection)
-    : {
-      language: null,
-      login: null,
-      links: [],
-    };
-
-  const brand = parseBrandSection(brandSection);
-  const main = parseMainNavSection(mainSection);
-
-  return {
-    utility,
-    brand,
-    navItems: main.items,
-    contact: main.contact,
-    cta: main.cta,
-  };
-}
-
-function applyUtilityMetadataToggles(data) {
-  const showLanguage = getBooleanMetadata('nav-show-language');
-  const showLogin = getBooleanMetadata('nav-show-login');
-
-  const nextData = {
-    ...data,
-    utility: {
-      ...(data.utility || {}),
-      links: [...(data.utility?.links || [])],
-    },
-    utilitySettings: {
-      showLanguage,
-      showLogin,
-    },
-  };
-
-  if (showLanguage === false) {
-    nextData.utility.language = null;
-    nextData.utility.links = nextData.utility.links.filter(
-      (item) => !isEnglishLabel(item.label) && !isSpanishLabel(item.label),
-    );
-  }
-
-  if (showLogin === false) {
-    nextData.utility.login = null;
-  }
-
-  return nextData;
-}
-
-function shouldForceStickyShell(data) {
-  const showLanguage = data.utilitySettings?.showLanguage;
-  const showLogin = data.utilitySettings?.showLogin;
-
-  return showLanguage === false && showLogin === false;
-}
-
-function buildLanguageControl(languageData) {
-  if (!languageData?.label) return null;
-
-  const wrapper = createTag('div', { class: 'nav-new-language' });
-
-  const hasOptions = Array.isArray(languageData.options) && languageData.options.length > 0;
-
-  if (!hasOptions) {
-    wrapper.append(
-      createTag('span', { class: 'nav-new-language-label' }, languageData.label),
-    );
-    return wrapper;
-  }
-
-  const buttonId = `nav-new-language-${slugify(languageData.label)}`;
-  const panelId = `${buttonId}-panel`;
-
-  const button = createTag(
-    'button',
-    {
-      class: 'nav-new-language-toggle',
-      type: 'button',
-      'aria-expanded': 'false',
-      'aria-controls': panelId,
-      id: buttonId,
-    },
-    `${languageData.label}<span class="nav-new-chevron" aria-hidden="true"></span>`,
-  );
-
-  const panel = createTag(
-    'div',
-    {
-      class: 'nav-new-language-panel',
-      id: panelId,
-      hidden: '',
-    },
-  );
-
-  const list = createTag('ul', { class: 'nav-new-language-list' });
-
-  languageData.options.forEach((option) => {
-    const li = createTag('li');
-    const link = createTag(
-      'a',
-      {
-        href: option.href || '#',
-        class: 'nav-new-language-link',
-      },
-      option.label,
-    );
-    li.append(link);
-    list.append(li);
-  });
-
-  panel.append(list);
-  wrapper.append(button, panel);
-
-  return wrapper;
-}
-
-function buildUtilityRow(data) {
-  const row = createTag('div', { class: 'nav-new-utility' });
-  const left = createTag('div', { class: 'nav-new-utility-left' });
-  const right = createTag('div', { class: 'nav-new-utility-right' });
-
-  const utilityData = data.utility || {
-    language: null,
-    login: null,
-    links: [],
-  };
-
-  const languageControl = buildLanguageControl(utilityData.language);
-  if (languageControl) left.append(languageControl);
-
-  utilityData.links.forEach((item) => {
-    const link = createTag(
-      'a',
-      {
-        href: item.href || '#',
-        class: 'nav-new-utility-link',
-      },
-      item.label,
-    );
-    left.append(link);
-  });
-
-  if (utilityData.login) {
-    const login = createTag(
-      'a',
-      {
-        href: utilityData.login.href || '#',
-        class: 'nav-new-login',
-      },
-      [
-        '<span class="nav-new-login-icon" aria-hidden="true">',
-        '<img src="/group/icons/login.svg" alt="">',
-        '</span>',
-        '<span>Log in/Register</span>',
-      ].join(''),
-    );
-    right.append(login);
-  }
-
-  if (!left.childElementCount && !right.childElementCount) {
-    return null;
-  }
-
-  row.append(left, right);
-  return row;
-}
-
-function buildBrand(data) {
-  const brand = createTag('div', { class: 'nav-new-brand' });
-
-  const link = createTag(
-    'a',
-    {
-      href: data.brand.href || HOME_FALLBACK_URL,
-      class: 'nav-new-brand-link',
-      'aria-label': data.brand.label || 'Home',
-    },
-  );
-
-  const logo = createTag('img', {
-    src: '/group/icons/logo.svg',
-    alt: 'Blue Shield of California',
-    width: '110',
-    class: 'nav-new-brand-image',
-  });
-
-  link.append(logo);
-  brand.append(link);
-
-  return brand;
-}
-
-function buildDropdownItem(item) {
-  const li = createTag('li', {
-    class: 'nav-new-item has-dropdown',
-    'data-nav-item': slugify(item.label),
-  });
-
-  const buttonId = `nav-item-${slugify(item.label)}`;
-  const panelId = `${buttonId}-panel`;
-
-  const button = createTag(
-    'button',
-    {
-      class: 'nav-new-link nav-new-dropdown-toggle',
-      type: 'button',
-      'aria-expanded': 'false',
-      'aria-controls': panelId,
-      id: buttonId,
-    },
-    `${item.label}<span class="nav-new-chevron" aria-hidden="true"></span>`,
-  );
-
-  const panel = createTag(
-    'div',
-    {
-      class: 'nav-new-dropdown',
-      id: panelId,
-      hidden: '',
-    },
-  );
-
-  const list = createTag('ul', { class: 'nav-new-dropdown-list' });
-
-  item.children.forEach((child, index) => {
-    const childLi = createTag('li', { class: 'nav-new-dropdown-item' });
-    const childLink = createTag(
-      'a',
-      {
-        href: child.href || '#',
-        class: `nav-new-dropdown-link${index === 0 ? ' is-featured' : ''}`,
-      },
-      child.label,
-    );
-    childLi.append(childLink);
-    list.append(childLi);
-  });
-
-  panel.append(list);
-  li.append(button, panel);
-
-  return li;
-}
-
-function buildSimpleNavItem(item) {
-  const li = createTag('li', {
-    class: 'nav-new-item',
-    'data-nav-item': slugify(item.label),
-  });
-
-  const link = createTag(
-    'a',
-    {
-      href: item.href || '#',
-      class: 'nav-new-link',
-    },
-    item.label,
-  );
-
-  li.append(link);
-  return li;
-}
-
-function buildPrimaryNav(data) {
-  const navWrap = createTag('div', { class: 'nav-new-main' });
-
-  const nav = createTag('nav', {
-    class: 'nav-new-primary',
-    'aria-label': 'Primary navigation',
-  });
-
-  const list = createTag('ul', { class: 'nav-new-list' });
-
-  data.navItems.forEach((item) => {
-    if (item.children?.length) {
-      list.append(buildDropdownItem(item));
-    } else {
-      list.append(buildSimpleNavItem(item));
-    }
-  });
-
-  nav.append(list);
-
-  const actions = createTag('div', { class: 'nav-new-actions' });
-
-  if (data.contact) {
-    const contact = createTag(
-      'a',
-      {
-        href: data.contact.href,
-        class: 'nav-new-contact',
-      },
-      `
-        <span class="nav-new-contact-phone">${data.contact.label}</span>
-        ${data.contact.detail
-    ? `<span class="nav-new-contact-detail">${data.contact.detail}</span>`
-    : ''}
-      `,
-    );
-    actions.append(contact);
-  }
-
-  if (data.cta) {
-    const cta = createTag(
-      'a',
-      {
-        href: data.cta.href || '#',
-        class: 'nav-new-cta',
-      },
-      data.cta.label,
-    );
-    actions.append(cta);
-  }
-
-  navWrap.append(nav, actions);
-  return navWrap;
-}
-
-function buildHamburger() {
-  return createTag(
-    'div',
-    { class: 'nav-new-hamburger' },
-    `
-      <button
-        type="button"
-        class="nav-new-hamburger-button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        <span class="nav-new-hamburger-icon" aria-hidden="true"></span>
-      </button>
-    `,
-  );
-}
-
-function setCurrentState(block) {
-  const pagePath = getPagePath();
-
-  block.querySelectorAll('.nav-new-primary .nav-new-item').forEach((item) => {
-    const directLink = item.querySelector(':scope > a.nav-new-link');
-
-    if (directLink && pathsMatch(directLink.getAttribute('href'), pagePath)) {
-      item.classList.add('is-current');
-    }
-
-    const childLinks = item.querySelectorAll('.nav-new-dropdown-link');
-    const hasCurrentChild = [...childLinks].some((link) => (
-      pathsMatch(link.getAttribute('href'), pagePath)
-    ));
-
-    if (hasCurrentChild) {
-      item.classList.add('is-active');
-    }
-  });
-}
-
-function closeAllDropdowns(block) {
-  block.querySelectorAll('.nav-new-item.has-dropdown').forEach((item) => {
-    item.classList.remove('is-open');
-
-    const button = item.querySelector('.nav-new-dropdown-toggle');
-    const panel = item.querySelector('.nav-new-dropdown');
-
-    if (button) button.setAttribute('aria-expanded', 'false');
-    if (panel) panel.hidden = true;
-  });
-
-  const language = block.querySelector('.nav-new-language');
-  if (language) {
-    language.classList.remove('is-open');
-    const button = language.querySelector('.nav-new-language-toggle');
-    const panel = language.querySelector('.nav-new-language-panel');
-    if (button) button.setAttribute('aria-expanded', 'false');
-    if (panel) panel.hidden = true;
-  }
-}
-
-function toggleDropdown(item, block, forceOpen = null) {
-  const isOpen = item.classList.contains('is-open');
-  const shouldOpen = forceOpen !== null ? forceOpen : !isOpen;
-
-  closeAllDropdowns(block);
-
-  if (shouldOpen) {
-    item.classList.add('is-open');
-    const button = item.querySelector('.nav-new-dropdown-toggle');
-    const panel = item.querySelector('.nav-new-dropdown');
-    if (button) button.setAttribute('aria-expanded', 'true');
-    if (panel) panel.hidden = false;
-  }
-}
-
-function toggleLanguage(block, forceOpen = null) {
-  const language = block.querySelector('.nav-new-language');
-  if (!language) return;
-
-  const button = language.querySelector('.nav-new-language-toggle');
-  const panel = language.querySelector('.nav-new-language-panel');
-
-  const isOpen = language.classList.contains('is-open');
-  const shouldOpen = forceOpen !== null ? forceOpen : !isOpen;
-
-  closeAllDropdowns(block);
-
-  if (shouldOpen) {
-    language.classList.add('is-open');
-    if (button) button.setAttribute('aria-expanded', 'true');
-    if (panel) panel.hidden = false;
-  }
-}
-
-function closeMobileMenu(block) {
-  block.classList.remove('nav-new-mobile-open');
-
-  const button = block.querySelector('.nav-new-hamburger-button');
+function toggleMenu(nav, navSections, forceExpanded = null) {
+  const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
+  const button = nav.querySelector('.nav-hamburger button');
+  document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
+  nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   if (button) {
-    button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-label', 'Open navigation');
+    button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   }
-
-  document.body.style.overflowY = '';
-  closeAllDropdowns(block);
-}
-
-function openMobileMenu(block) {
-  block.classList.add('nav-new-mobile-open');
-
-  const button = block.querySelector('.nav-new-hamburger-button');
-  if (button) {
-    button.setAttribute('aria-expanded', 'true');
-    button.setAttribute('aria-label', 'Close navigation');
-  }
-
-  document.body.style.overflowY = 'hidden';
-}
-
-function toggleMobileMenu(block) {
-  if (block.classList.contains('nav-new-mobile-open')) {
-    closeMobileMenu(block);
-  } else {
-    openMobileMenu(block);
-  }
-}
-
-/* =========================
-   STICKY NAV SHELL
-   Makes only .nav-new-shell sticky after 36px scroll
-   Works on desktop and mobile
-========================= */
-function bindStickyShell(block, forceSticky = false) {
-  const wrapper = block.querySelector('.nav-new-wrapper');
-  const shell = block.querySelector('.nav-new-shell');
-
-  if (!wrapper || !shell) return;
-
-  if (forceSticky) {
-    shell.classList.add('is-sticky');
-    wrapper.classList.add('has-sticky-shell');
-    return;
-  }
-
-  const toggleSticky = () => {
-    if (window.scrollY > 36) {
-      shell.classList.add('is-sticky');
-      wrapper.classList.add('has-sticky-shell');
-    } else {
-      shell.classList.remove('is-sticky');
-      wrapper.classList.remove('has-sticky-shell');
-    }
-  };
-
-  window.addEventListener('scroll', toggleSticky, { passive: true });
-  window.addEventListener('resize', toggleSticky);
-  toggleSticky();
-}
-
-function bindEvents(block) {
-  block.querySelectorAll('.nav-new-item.has-dropdown').forEach((item) => {
-    const button = item.querySelector('.nav-new-dropdown-toggle');
-    if (!button) return;
-
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      if (DESKTOP.matches) {
-        toggleDropdown(item, block);
-      } else {
-        const isOpen = item.classList.contains('is-open');
-        if (isOpen) {
-          item.classList.remove('is-open');
-          button.setAttribute('aria-expanded', 'false');
-          const panel = item.querySelector('.nav-new-dropdown');
-          if (panel) panel.hidden = true;
-        } else {
-          item.classList.add('is-open');
-          button.setAttribute('aria-expanded', 'true');
-          const panel = item.querySelector('.nav-new-dropdown');
-          if (panel) panel.hidden = false;
-        }
+  // enable nav dropdown keyboard accessibility
+  const navDrops = navSections.querySelectorAll('.nav-drop');
+  if (isDesktop.matches) {
+    navDrops.forEach((drop) => {
+      if (!drop.hasAttribute('tabindex')) {
+        drop.setAttribute('tabindex', 0);
+        drop.addEventListener('focus', focusNavSection);
       }
     });
-  });
-
-  const languageButton = block.querySelector('.nav-new-language-toggle');
-  if (languageButton) {
-    languageButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      toggleLanguage(block);
+  } else {
+    navDrops.forEach((drop) => {
+      drop.removeAttribute('tabindex');
+      drop.removeEventListener('focus', focusNavSection);
     });
   }
 
-  const hamburgerButton = block.querySelector('.nav-new-hamburger-button');
-  if (hamburgerButton) {
-    hamburgerButton.addEventListener('click', () => toggleMobileMenu(block));
+  // enable menu collapse on escape keypress
+  if (!expanded || isDesktop.matches) {
+    // collapse menu on escape press
+    window.addEventListener('keydown', closeOnEscape);
+    // collapse menu on focus lost
+    nav.addEventListener('focusout', closeOnFocusLost);
+  } else {
+    window.removeEventListener('keydown', closeOnEscape);
+    nav.removeEventListener('focusout', closeOnFocusLost);
   }
-
-  document.addEventListener('click', (e) => {
-    if (!block.contains(e.target)) {
-      closeAllDropdowns(block);
-      if (!DESKTOP.matches) closeMobileMenu(block);
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeAllDropdowns(block);
-      if (!DESKTOP.matches) closeMobileMenu(block);
-    }
-  });
-
-  DESKTOP.addEventListener('change', (e) => {
-    if (e.matches) {
-      document.body.style.overflowY = '';
-      closeMobileMenu(block);
-    } else {
-      closeAllDropdowns(block);
-    }
-  });
 }
 
-function buildHeader(block, data) {
-  const wrapper = createTag('div', { class: 'nav-new-wrapper' });
-
-  const utility = buildUtilityRow(data);
-
-  const shell = createTag('div', { class: 'nav-new-shell' });
-  const brand = buildBrand(data);
-  const main = buildPrimaryNav(data);
-  const hamburger = buildHamburger();
-
-  shell.append(brand, main, hamburger);
-
-  if (utility) {
-    wrapper.append(utility);
-  }
-
-  wrapper.append(shell);
-
-  block.textContent = '';
-  block.append(wrapper);
-}
-
+/**
+ * loads and decorates the header, mainly the nav
+ * @param {Element} block The header block element
+ */
 export default async function decorate(block) {
-  const navPath = getNavPath();
+  // load nav as fragment
+  const navMeta = getMetadata('nav');
+  const navPath = navMeta ? new URL(navMeta.toLowerCase(), window.location).pathname : '/group/nav';
   const fragment = await loadFragment(navPath);
 
-  if (!fragment) {
-    block.textContent = '';
-    return;
+  // decorate nav DOM
+  block.textContent = '';
+  const nav = document.createElement('nav');
+  nav.id = 'nav';
+  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+
+  const classes = ['brand', 'sections'];
+  classes.forEach((c, i) => {
+    const section = nav.children[i];
+    if (section) section.classList.add(`nav-${c}`);
+  });
+
+  const navBrand = nav.querySelector('.nav-brand');
+  if (navBrand) {
+    wrapTextInLinks(navBrand);
+    const brandLink = navBrand.querySelector('.button');
+    if (brandLink) {
+      brandLink.className = '';
+      brandLink.closest('.button-container').className = '';
+    }
   }
 
-  const parsedData = parseNavFragment(fragment);
-  const data = applyUtilityMetadataToggles(parsedData);
-
-  buildHeader(block, data);
-  setCurrentState(block);
-  bindEvents(block);
-
-  bindStickyShell(block, shouldForceStickyShell(data));
-
-  if (!DESKTOP.matches) {
-    closeMobileMenu(block);
-  } else {
-    closeAllDropdowns(block);
+  const navSections = nav.querySelector('.nav-sections');
+  if (navSections) {
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+      navSection.addEventListener('click', () => {
+        if (isDesktop.matches) {
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        }
+      });
+    });
   }
+
+  // hamburger for mobile
+  const hamburger = document.createElement('div');
+  hamburger.classList.add('nav-hamburger');
+  if (navSections.children.length) {
+    hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+      <span class="nav-hamburger-icon"></span>
+    </button>`;
+  }
+  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
+  nav.append(hamburger);
+  nav.setAttribute('aria-expanded', 'false');
+  // prevent mobile nav behavior on window resize
+  toggleMenu(nav, navSections, isDesktop.matches);
+  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
+  const navWrapper = document.createElement('div');
+  navWrapper.className = 'nav-wrapper';
+  navWrapper.append(nav);
+  block.append(navWrapper);
+
+  // ⬇️ Make entire submenu <li> rows clickable (runs after header DOM is ready)
+  enableRowLinks({
+    root: block,
+    rows: '.nav-sections ul > li > ul > li',
+  });
 }
