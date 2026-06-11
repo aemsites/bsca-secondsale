@@ -115,31 +115,6 @@ function getDirectTextWithoutNestedList(li) {
   return cleanNavText(clone.textContent);
 }
 
-/**
- * Gets a dropdown child label and any sibling detail text that sits next
- * to the authored link in the nav document.
- * Example authored text: "(800) 334-5847 (TTY 711) 7 a.m. - 8 p.m. PT; 7 days a week"
- * The anchor text is used as the label, and the remaining text is used as detail.
- * @param {Element} childLi
- * @returns {{label: string, detail: string, href: string}}
- */
-function getDropdownChildData(childLi) {
-  const childAnchor = getDirectAnchor(childLi);
-  const fullText = getDirectTextWithoutNestedList(childLi);
-  const label = getElementText(childAnchor) || fullText;
-  const href = getHrefOrFallback(childAnchor, '#');
-
-  let detail = '';
-
-  if (label && fullText && fullText !== label) {
-    detail = fullText.startsWith(label)
-      ? cleanNavText(fullText.slice(label.length))
-      : cleanNavText(fullText.replace(label, ''));
-  }
-
-  return { label, detail, href };
-}
-
 function getHrefOrFallback(anchor, fallback = '#') {
   const href = anchor?.getAttribute('href');
   return href || fallback;
@@ -486,7 +461,13 @@ function parseMainNavSection(section) {
 
     if (nestedList) {
       item.children = getDirectListItems(nestedList)
-        .map((childLi) => getDropdownChildData(childLi))
+        .map((childLi) => {
+          const childAnchor = getDirectAnchor(childLi);
+          return {
+            label: getElementText(childAnchor) || getDirectTextWithoutNestedList(childLi),
+            href: getHrefOrFallback(childAnchor, '#'),
+          };
+        })
         .filter((child) => child.label);
     }
 
@@ -745,16 +726,8 @@ function buildDropdownItem(item) {
         href: child.href || '#',
         class: `nav-new-dropdown-link${index === 0 ? ' is-featured' : ''}`,
       },
+      child.label,
     );
-
-    childLink.append(createTag('span', { class: 'nav-new-dropdown-link-label' }, child.label));
-
-    if (child.detail) {
-      childLink.append(
-        createTag('span', { class: 'nav-new-dropdown-link-detail' }, child.detail),
-      );
-    }
-
     childLi.append(childLink);
     list.append(childLi);
   });
