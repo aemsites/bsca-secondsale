@@ -468,6 +468,8 @@ header .nav-new-dropdown-link.is-featured {
   display: block;
   font-size: var(--body-font-size-xs);
   line-height: 2;
+  padding-top: 4px;
+  color: #25282a;
   font-weight: var(--font-weight-regular);
 }
 
