@@ -17,7 +17,7 @@ const LOGOS = {
     selector: '.icon-multi-state-logo, img[src*="multi-state-logo.svg"]',
     src: '/group/icons/multi-state-logo.svg',
     alt: 'Blue Shield California and National Coverage',
-    width: '190',
+    width: '240',
   },
 };
 
