@@ -464,6 +464,12 @@ header .nav-new-dropdown-link.is-featured {
   font-weight: 500;
 }
 
+.nav-new-dropdown-link-detail {
+  display: block;
+  font-size: var(--body-font-size-xs);
+  line-height: 1.3;
+  font-weight: var(--font-weight-regular);
+}
 
 /* =========================
    LANGUAGE PANEL
