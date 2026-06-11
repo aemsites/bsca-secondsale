@@ -7,12 +7,14 @@ const HOME_FALLBACK_URL = '/';
 const LOGOS = {
   default: {
     token: ':logo:',
+    selector: '.icon-logo, img[src*="/logo.svg"]',
     src: '/group/icons/logo.svg',
     alt: 'Blue Shield of California',
     width: '110',
   },
   multiState: {
     token: ':multi-state-logo:',
+    selector: '.icon-multi-state-logo, img[src*="multi-state-logo.svg"]',
     src: '/group/icons/multi-state-logo.svg',
     alt: 'Blue Shield California and National Coverage',
     width: '190',
@@ -78,13 +80,18 @@ function getElementText(el) {
 
 /**
  * Gets the logo data based on the logo token authored in the nav document.
+ * Also supports the case where AEM has already converted :multi-state-logo:
+ * into an icon span/image before this header parses the fragment.
  * @param {Element} section
- * @returns {{token: string, src: string, alt: string, width: string}}
+ * @returns {{token: string, selector: string, src: string, alt: string, width: string}}
  */
 function getLogoData(section) {
   const text = cleanNavText(section?.textContent || '').toLowerCase();
 
-  if (text.includes(LOGOS.multiState.token)) {
+  if (
+    text.includes(LOGOS.multiState.token)
+    || section?.querySelector(LOGOS.multiState.selector)
+  ) {
     return LOGOS.multiState;
   }
 
@@ -246,6 +253,8 @@ function isBrandSection(section) {
   return (
     text.includes(LOGOS.default.token)
     || text.includes(LOGOS.multiState.token)
+    || section.querySelector(LOGOS.default.selector)
+    || section.querySelector(LOGOS.multiState.selector)
     || (!list && text.length > 0)
   );
 }
@@ -465,7 +474,7 @@ function parseBrandSection(section) {
   result.logo = logo;
   result.hasLogoToken = logoTokens.some((token) => (
     cleanNavText(section.textContent).toLowerCase().includes(token)
-  ));
+  )) || !!section.querySelector(logo.selector);
 
   return result;
 }
