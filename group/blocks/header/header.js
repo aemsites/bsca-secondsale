@@ -4,23 +4,6 @@ import { loadFragment } from '../fragment/fragment.js';
 const DESKTOP = window.matchMedia('(min-width: 900px)');
 const HOME_FALLBACK_URL = '/';
 
-const LOGOS = {
-  default: {
-    token: ':logo:',
-    src: '/group/icons/logo.svg',
-    alt: 'Blue Shield of California',
-    width: '110',
-  },
-  multiState: {
-    token: ':multi-state-logo:',
-    src: '/group/icons/multi-state-logo.svg',
-    alt: 'Blue Shield California and National Coverage',
-    width: '190',
-  },
-};
-
-const NEW_WINDOW_TEXT = 'Open the link in a new window';
-
 /**
  * Small DOM helper
  * @param {string} tag
@@ -52,6 +35,8 @@ function normalizeText(text = '') {
   return text.replace(/\s+/g, ' ').trim();
 }
 
+const NEW_WINDOW_TEXT = 'Open the link in a new window';
+
 /**
  * Removes accessibility helper text that may have been added to links before
  * this header parses and rebuilds the navigation.
@@ -74,21 +59,6 @@ function getElementText(el) {
   clone.querySelectorAll('.sr-only').forEach((srOnly) => srOnly.remove());
 
   return cleanNavText(clone.textContent);
-}
-
-/**
- * Gets the logo data based on the logo token authored in the nav document.
- * @param {Element} section
- * @returns {{token: string, src: string, alt: string, width: string}}
- */
-function getLogoData(section) {
-  const text = cleanNavText(section?.textContent || '').toLowerCase();
-
-  if (text.includes(LOGOS.multiState.token)) {
-    return LOGOS.multiState;
-  }
-
-  return LOGOS.default;
 }
 
 function slugify(text = '') {
@@ -240,14 +210,10 @@ function isUtilitySection(section) {
 function isBrandSection(section) {
   if (!section) return false;
 
-  const text = cleanNavText(section.textContent).toLowerCase();
+  const text = cleanNavText(section.textContent);
   const list = getFirstList(section);
 
-  return (
-    text.includes(LOGOS.default.token)
-    || text.includes(LOGOS.multiState.token)
-    || (!list && text.length > 0)
-  );
+  return text.includes(':logo:') || (!list && text.length > 0);
 }
 
 /**
@@ -444,28 +410,21 @@ function parseBrandSection(section) {
   const result = {
     label: 'Blue Shield',
     href: HOME_FALLBACK_URL,
-    logo: LOGOS.default,
     hasLogoToken: false,
   };
 
   if (!section) return result;
 
   const link = getFirstLink(section);
-  const logo = getLogoData(section);
-  const logoTokens = [LOGOS.default.token, LOGOS.multiState.token];
-
   const textCandidates = [...section.querySelectorAll('p, h1, h2, h3, h4, h5, h6')]
     .map((el) => cleanNavText(el.textContent))
-    .filter((text) => text && !logoTokens.includes(text.toLowerCase()));
+    .filter((text) => text && !/^:logo:$/i.test(text));
 
   const brandLabel = textCandidates[0];
 
-  result.label = brandLabel || logo.alt || result.label;
+  result.label = brandLabel || result.label;
   result.href = getHrefOrFallback(link, HOME_FALLBACK_URL);
-  result.logo = logo;
-  result.hasLogoToken = logoTokens.some((token) => (
-    cleanNavText(section.textContent).toLowerCase().includes(token)
-  ));
+  result.hasLogoToken = cleanNavText(section.textContent).includes(':logo:');
 
   return result;
 }
@@ -722,12 +681,7 @@ function buildUtilityRow(data) {
 }
 
 function buildBrand(data) {
-  const logoData = data.brand.logo || LOGOS.default;
-  const isMultiStateLogo = logoData.token === LOGOS.multiState.token;
-
-  const brand = createTag('div', {
-    class: `nav-new-brand${isMultiStateLogo ? ' nav-new-brand-multi-state' : ''}`,
-  });
+  const brand = createTag('div', { class: 'nav-new-brand' });
 
   const link = createTag(
     'a',
@@ -739,10 +693,10 @@ function buildBrand(data) {
   );
 
   const logo = createTag('img', {
-    src: logoData.src || LOGOS.default.src,
-    alt: logoData.alt || LOGOS.default.alt,
-    width: logoData.width || LOGOS.default.width,
-    class: `nav-new-brand-image${isMultiStateLogo ? ' nav-new-brand-image-multi-state' : ''}`,
+    src: '/group/icons/logo.svg',
+    alt: 'Blue Shield of California',
+    width: '110',
+    class: 'nav-new-brand-image',
   });
 
   link.append(logo);
@@ -1152,4 +1106,4 @@ export default async function decorate(block) {
   } else {
     closeAllDropdowns(block);
   }
-}
+}// JavaScript Document
