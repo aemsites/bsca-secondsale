@@ -220,6 +220,12 @@ header .nav-new-brand-image {
   height: auto;
 }
 
+header .nav-new-brand-image-multi-state {
+  display: block;
+  width: 240px;
+  height: auto;
+}
+
 /* =========================
    MAIN NAV AREA
 ========================= */
