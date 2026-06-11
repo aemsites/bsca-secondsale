@@ -152,6 +152,11 @@ function getDirectTextWithoutNestedList(li) {
   return cleanNavText(clone.textContent);
 }
 
+function getHrefOrFallback(anchor, fallback = '#') {
+  const href = anchor?.getAttribute('href');
+  return href || fallback;
+}
+
 /**
  * Gets a dropdown child label and any sibling detail text that sits next
  * to the authored link in the nav document.
@@ -175,11 +180,6 @@ function getDropdownChildData(childLi) {
   }
 
   return { label, detail, href };
-}
-
-function getHrefOrFallback(anchor, fallback = '#') {
-  const href = anchor?.getAttribute('href');
-  return href || fallback;
 }
 
 function getPagePath() {
