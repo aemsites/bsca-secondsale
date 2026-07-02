@@ -334,7 +334,6 @@
 .cards-container:is(.two-cards, .two-cards-med, .two-cards-lg)
   .cards-card-body p:first-child {
   margin: 0 0 6px;
-  line-height: 0;
 }
 
 /* stylelint-enable no-descending-specificity */
