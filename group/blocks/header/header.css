@@ -684,6 +684,11 @@ header .header.block.nav-new-mobile-open .nav-new-hamburger-icon::after {
     width: 110px;
   }
 
+  header .nav-new-brand-image.nav-new-brand-image-multi-state {
+    width: 180px;
+    height: auto;
+  }
+
   /* hide desktop actions inside pill */
   header .nav-new-actions {
     display: none;
@@ -923,6 +928,11 @@ header .header.block.nav-new-mobile-open .nav-new-hamburger-icon::after {
 
   header .nav-new-brand-image {
     width: 91px;
+  }
+
+  header .nav-new-brand-image.nav-new-brand-image-multi-state {
+    width: 160px;
+    height: auto;
   }
 
   header .nav-new-main {
