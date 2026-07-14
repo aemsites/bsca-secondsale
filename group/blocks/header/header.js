@@ -2,7 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const DESKTOP = window.matchMedia('(min-width: 900px)');
-const HOME_FALLBACK_URL = '/';
+const HOME_FALLBACK_URL = 'https://www.blueshieldca.com/group/';
 
 const LOGOS = {
   default: {
