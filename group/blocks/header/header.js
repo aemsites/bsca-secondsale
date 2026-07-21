@@ -19,6 +19,13 @@ const LOGOS = {
     alt: 'Blue Shield California and National Coverage',
     width: '240',
   },
+  nationalAccess: {
+  token: ':national-logo:',
+  selector: '.icon-national-access-logo, img[src*="national-access-logo.svg"]',
+  src: '/group/icons/national-access-logo.svg',
+  alt: 'Blue Shield California and National Coverage',
+  width: '240',
+  },
 };
 
 const NEW_WINDOW_TEXT = 'Open the link in a new window';
