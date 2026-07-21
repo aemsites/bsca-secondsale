@@ -20,11 +20,11 @@ const LOGOS = {
     width: '240',
   },
   nationalAccess: {
-  token: ':national-access-logo:',
-  selector: '.icon-national-access-logo, img[src*="national-access-logo.svg"]',
-  src: '/group/icons/national-access-logo.svg',
-  alt: 'Blue Shield California and National Coverage',
-  width: '240',
+    token: ':national-access-logo:',
+    selector: '.icon-national-access-logo, img[src*="national-access-logo.svg"]',
+    src: '/group/icons/national-access-logo.svg',
+    alt: 'Blue Shield California and National Coverage',
+    width: '240',
   },
 };
 
@@ -87,13 +87,20 @@ function getElementText(el) {
 
 /**
  * Gets the logo data based on the logo token authored in the nav document.
- * Also supports the case where AEM has already converted :multi-state-logo:
+ * Also supports cases where AEM has already converted an alternate logo token
  * into an icon span/image before this header parses the fragment.
  * @param {Element} section
  * @returns {{token: string, selector: string, src: string, alt: string, width: string}}
  */
 function getLogoData(section) {
   const text = cleanNavText(section?.textContent || '').toLowerCase();
+
+  if (
+    text.includes(LOGOS.nationalAccess.token)
+    || section?.querySelector(LOGOS.nationalAccess.selector)
+  ) {
+    return LOGOS.nationalAccess;
+  }
 
   if (
     text.includes(LOGOS.multiState.token)
@@ -260,8 +267,10 @@ function isBrandSection(section) {
   return (
     text.includes(LOGOS.default.token)
     || text.includes(LOGOS.multiState.token)
+    || text.includes(LOGOS.nationalAccess.token)
     || section.querySelector(LOGOS.default.selector)
     || section.querySelector(LOGOS.multiState.selector)
+    || section.querySelector(LOGOS.nationalAccess.selector)
     || (!list && text.length > 0)
   );
 }
@@ -468,7 +477,11 @@ function parseBrandSection(section) {
 
   const link = getFirstLink(section);
   const logo = getLogoData(section);
-  const logoTokens = [LOGOS.default.token, LOGOS.multiState.token];
+  const logoTokens = [
+    LOGOS.default.token,
+    LOGOS.multiState.token,
+    LOGOS.nationalAccess.token,
+  ];
 
   const textCandidates = [...section.querySelectorAll('p, h1, h2, h3, h4, h5, h6')]
     .map((el) => cleanNavText(el.textContent))
@@ -740,9 +753,21 @@ function buildUtilityRow(data) {
 function buildBrand(data) {
   const logoData = data.brand.logo || LOGOS.default;
   const isMultiStateLogo = logoData.token === LOGOS.multiState.token;
+  const isNationalAccessLogo = logoData.token === LOGOS.nationalAccess.token;
+
+  let brandClass = 'nav-new-brand';
+  let imageClass = 'nav-new-brand-image';
+
+  if (isMultiStateLogo) {
+    brandClass += ' nav-new-brand-multi-state';
+    imageClass += ' nav-new-brand-image-multi-state';
+  } else if (isNationalAccessLogo) {
+    brandClass += ' nav-new-brand-national-access';
+    imageClass += ' nav-new-brand-image-national-access';
+  }
 
   const brand = createTag('div', {
-    class: `nav-new-brand${isMultiStateLogo ? ' nav-new-brand-multi-state' : ''}`,
+    class: brandClass,
   });
 
   const link = createTag(
@@ -758,7 +783,7 @@ function buildBrand(data) {
     src: logoData.src || LOGOS.default.src,
     alt: logoData.alt || LOGOS.default.alt,
     width: logoData.width || LOGOS.default.width,
-    class: `nav-new-brand-image${isMultiStateLogo ? ' nav-new-brand-image-multi-state' : ''}`,
+    class: imageClass,
   });
 
   link.append(logo);
