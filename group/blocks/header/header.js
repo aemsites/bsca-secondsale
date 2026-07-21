@@ -20,8 +20,8 @@ const LOGOS = {
     width: '240',
   },
   nationalAccess: {
-  token: ':national-logo:',
-  selector: '.icon-national-logo, img[src*="national-logo.svg"]',
+  token: ':national-access-logo:',
+  selector: '.icon-national-access-logo, img[src*="national-access-logo.svg"]',
   src: '/group/icons/national-access-logo.svg',
   alt: 'Blue Shield California and National Coverage',
   width: '240',
