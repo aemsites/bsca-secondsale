@@ -57,7 +57,7 @@ header .nav-new-utility-link:hover {
 }
 
 header:has(.nav-new-utility) {
-  height: calc(var(--nav-height) + 32px);
+  height: calc(var(--nav-height) + 60px);
 }
 
 /* =========================
