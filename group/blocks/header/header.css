@@ -56,6 +56,9 @@ header .nav-new-utility-link:hover {
   text-decoration: none;
 }
 
+header:has(.nav-new-utility) {
+  height: calc(var(--nav-height) + 60px);
+}
 
 /* =========================
    LANGUAGE TOGGLE
@@ -221,6 +224,12 @@ header .nav-new-brand-image {
 }
 
 header .nav-new-brand-image-multi-state {
+  display: block;
+  width: 240px;
+  height: auto;
+}
+
+header .nav-new-brand-image-national-access {
   display: block;
   width: 240px;
   height: auto;
@@ -930,10 +939,11 @@ header .header.block.nav-new-mobile-open .nav-new-hamburger-icon::after {
     width: 91px;
   }
 
-  header .nav-new-brand-image.nav-new-brand-image-multi-state {
+  header .nav-new-brand-image.nav-new-brand-image-multi-state,
+  header .nav-new-brand-image.nav-new-brand-image-national-access {
     width: 160px;
     height: auto;
-  }
+ }
 
   header .nav-new-main {
     top: 108px;
