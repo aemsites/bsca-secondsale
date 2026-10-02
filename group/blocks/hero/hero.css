@@ -63,7 +63,7 @@
 
   .hero.block h4 {
     font-size: var(--heading-font-size-m);
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-light);
   }
 
   .hero.block > div {
@@ -86,7 +86,7 @@
 
   .hero.block h4 {
     font-size: var(--heading-font-size-m);
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-light);
   }
 
   .hero.block > div > div:last-of-type {
