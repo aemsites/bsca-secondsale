@@ -26,7 +26,7 @@
   margin-top: var(--spacing-s);
   margin-bottom: var(--spacing-xs);
   font-size: var(--body-font-size-l);
-  font-weight: 700;
+  font-weight: 300;
 }
 
 .banner.block p {
