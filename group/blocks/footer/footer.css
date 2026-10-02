@@ -18,7 +18,7 @@ footer > .section {
 
 footer .section h5 {
   font-size: var(--body-font-size-l);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-light);
   padding-bottom: var(--spacing-s);
 }
 
@@ -48,7 +48,7 @@ footer .footer .default-content-wrapper li a {
 
 .footer-links-sections > li ul li a:hover {
   color: var(--color-chicago-black);
-  font-weight: 600;
+  font-weight: 300;
 }
 
 /* Add arrows to top-level <li> elements */
