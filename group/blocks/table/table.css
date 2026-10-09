@@ -39,7 +39,7 @@
 
 .table table th {
   padding: var(--spacing-s);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-demibold);
   text-align: center;
 }
 

@@ -28,7 +28,7 @@
 .employer-search-title {
   font-family: var(--body-font-family);
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: 300;
   text-align: center;
 }
 
@@ -36,7 +36,7 @@
   display: block;
   font-family: var(--body-font-family);
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: 300;
   text-align: center;
 }
 
@@ -86,7 +86,7 @@
   cursor: pointer;
   background: #0071bc;
   color: #fff;
-  font-weight: 700;
+  font-weight: 300;
   letter-spacing: 0.04em;
   transition:
     background-color 420ms ease,
@@ -173,7 +173,7 @@
   padding: 0 0.1em;
   border-radius: 4px;
   background: rgb(0 113 188 / 12%);
-  font-weight: 700;
+  font-weight: 300;
 }
 
 .employer-search-item-title mark.es-highlight {
@@ -181,7 +181,7 @@
   border-radius: 4px;
   background: rgb(0 113 188 / 12%);
   color: inherit;
-  font-weight: 700;
+  font-weight: 300;
 }
 
 /* =========================================================

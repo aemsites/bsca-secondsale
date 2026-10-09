@@ -12,7 +12,6 @@
 
 @import url('./modal.css');
 
-
 :root {
   /* colors */
   --background-color: white;
@@ -54,6 +53,7 @@
 
   /* font weights */
   --font-weight-light: 300;
+  --font-weight-demibold: 600;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
@@ -112,6 +112,7 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);
+  font-weight: 300;
   line-height: 1.6;
 }
 
@@ -142,7 +143,7 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 300;
   scroll-margin: 40px;
 }
 
@@ -227,7 +228,7 @@ button {
   padding: 0.5em 1.2em;
   font-family: var(--body-font-family);
   font-style: normal;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
@@ -313,7 +314,7 @@ main>.section .default-content-wrapper:has(h2) {
 
 main>.section .default-content-wrapper>h2 {
   color: var(--background-color);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-light);
   padding: 0;
   margin: 0;
 }

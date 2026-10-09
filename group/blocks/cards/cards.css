@@ -28,7 +28,7 @@
   align-items: start;
   gap: var(--spacing-m);
   font-size: var(--body-font-size-m);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-light);
   flex-direction: column;
   line-height: 1rem;
 }
